@@ -1,16 +1,14 @@
-import { Button } from "reactstrap";
+import First from '/components/MainPage/First.js';
+import Second from '/components/MainPage/Second.js';
+import Third from '/components/MainPage/Third.js';
 
 function Home() {
   return (
-    <>
-      <Button>
-        요기는메인페이지다 요기는메인페이지다 요기는메인페이지다
-        요기는메인페이지다 요기는메인페이지다 요기는메인페이지다
-        요기는메인페이지다 요기는메인페이지다 요기는메인페이지다
-        요기는메인페이지다 요기는메인페이지다 요기는메인페이지다
-      </Button>
-      <h1>안녕하세요</h1>
-    </>
+    <div>
+        <First />
+        <Second />
+        <Third />
+    </div>
   );
 }
 
