@@ -1,8 +1,16 @@
+import { Container, Navbar, Row, Col } from "reactstrap";
+
 function Footer() {
   return (
-    <>
-      <div>푸터</div>
-    </>
+    <Navbar color="success" fixed="bottom" light>
+      <Container>
+        <Row>
+          <Col style={{ textAlign: "center", color: "white" }}>
+            Copyrightⓒ2022 Campus All rights reserved.
+          </Col>
+        </Row>
+      </Container>
+    </Navbar>
   );
 }
 
