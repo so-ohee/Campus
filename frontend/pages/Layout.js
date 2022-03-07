@@ -1,6 +1,6 @@
-import Navibar from "/components/layout/Navibar";
-import Footer from "/components/layout/Footer";
-import Jumbotron from "/components/layout/Jumbotron";
+import Navibar from "/components/common/Navibar";
+import Footer from "/components/common/Footer";
+import Jumbotron from "/components/common/Jumbotron";
 
 function Layout({ children }) {
   return (
