@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Nav,
   Container,
@@ -7,50 +7,54 @@ import {
   FormControl,
   Navbar,
   Button,
-} from 'react-bootstrap';
-import styles from '/styles/Navibar.module.css';
+} from "react-bootstrap";
+import styles from "/styles/Navibar.module.css";
 
 function Navibar() {
   return (
     <>
-      <Navbar bg="success" expand="lg" >
+      <Navbar bg="success" expand="lg">
         <Container>
           <Navbar.Brand href="#">
-            <img className={styles.navi_pic} src='/logo.png' />
+            <img className={styles.navi_pic} src="/logo.png" />
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
-              navbarScroll
-            >
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">Link</Nav.Link>
-              <NavDropdown title="Link" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  Something else here
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#" disabled>
-                Link
-              </Nav.Link>
-            </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Navbar.Collapse>
+
+          <div>
+            <Navbar.Collapse id="navbarScroll">
+              <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <img className={styles.navi_search_pic} src="/search.png" />
+              </Form>
+              <Nav className={styles.navi_menu} navbarScroll>
+                <Nav.Link href="#action1">
+                  <a style={{ color: "white" }}>ABOUT US</a>
+                </Nav.Link>{" "}
+                /
+                <Nav.Link href="#action2">
+                  <a style={{ color: "white" }}>CAMPING PLACE</a>
+                </Nav.Link>{" "}
+                /
+                <Nav.Link href="#action3">
+                  <a style={{ color: "white" }}>BOARD</a>
+                </Nav.Link>
+                <Nav.Link href="#action3">
+                  <img className={styles.navi_bell_pic} src="/bell.png" />
+                </Nav.Link>
+                <Nav.Link href="#action3" className={styles.navi_menu}>
+                  <img className={styles.navi_profile_pic} src="/profile.png" />
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </div>
         </Container>
-    </Navbar>
+      </Navbar>
     </>
   );
 }
