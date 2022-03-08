@@ -47,7 +47,7 @@ function Navibar() {
                 <Nav.Link href="#action3">
                   <img className={styles.navi_bell_pic} src="/bell.png" />
                 </Nav.Link>
-                <Nav.Link href="#action3" className={styles.navi_menu}>
+                <Nav.Link href="#action3">
                   <img className={styles.navi_profile_pic} src="/profile.png" />
                 </Nav.Link>
               </Nav>
