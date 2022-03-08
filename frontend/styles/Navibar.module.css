@@ -5,23 +5,21 @@
 
 .navi_menu {
     font-weight: bold;
-    align-self: center;
     align-items: center;
 }
 
 .navi_search_pic {
     width: 30px;
     height: 30px;
-    place-self: center;
 }
 
 .navi_bell_pic {
     width: 25px;
     height: 25px;
-    place-self: center;
+    margin-left: 1%;
 }
 
 .navi_profile_pic{
-    width: 5%;
-    place-self: center;
+    width: 4%;
+    margin-left: 2%;
 }
