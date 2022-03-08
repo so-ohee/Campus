@@ -2,11 +2,12 @@ import React from "react";
 import {
   Nav,
   Container,
-  NavDropdown,
   Form,
   FormControl,
   Navbar,
-  Button,
+  Row,
+  Col,
+  NavLink,
 } from "react-bootstrap";
 import styles from "/styles/Navibar.module.css";
 
@@ -19,10 +20,9 @@ function Navibar() {
             <img className={styles.navi_pic} src="/logo.png" />
           </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="navbarScroll" />
-
-          <div>
-            <Navbar.Collapse id="navbarScroll">
+          <Row>
+            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
               <Form className="d-flex">
                 <FormControl
                   type="search"
@@ -32,27 +32,21 @@ function Navibar() {
                 />
                 <img className={styles.navi_search_pic} src="/search.png" />
               </Form>
-              <Nav className={styles.navi_menu} navbarScroll>
-                <Nav.Link href="#action1">
-                  <a style={{ color: "white" }}>ABOUT US</a>
-                </Nav.Link>{" "}
+                <NavLink href="#action1">
+                  <a style={{ color: "white", fontWeight: "bold" }}>ABOUT US</a>
+                </NavLink>{" "}
                 /
-                <Nav.Link href="#action2">
-                  <a style={{ color: "white" }}>CAMPING PLACE</a>
-                </Nav.Link>{" "}
+                <NavLink href="#action2">
+                  <a style={{ color: "white", fontWeight: "bold" }}>CAMPING PLACE</a>
+                </NavLink>{" "}
                 /
-                <Nav.Link href="#action3">
-                  <a style={{ color: "white" }}>BOARD</a>
-                </Nav.Link>
-                <Nav.Link href="#action3">
-                  <img className={styles.navi_bell_pic} src="/bell.png" />
-                </Nav.Link>
-                <Nav.Link href="#action3">
-                  <img className={styles.navi_profile_pic} src="/profile.png" />
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </div>
+                <NavLink href="#action3">
+                  <a style={{ color: "white", fontWeight: "bold" }}>BOARD</a>
+                </NavLink>
+                <img className={styles.navi_bell_pic} src="/bell.png" />
+                <img className={styles.navi_profile_pic} src="/profile.png" />
+            </Navbar.Collapse>  
+          </Row>
         </Container>
       </Navbar>
     </>
