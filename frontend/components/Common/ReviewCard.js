@@ -9,6 +9,7 @@ function ReviewCard(params) {
                 <hr />
                 <Card.Img className={styles.reviewcard_profile} variant="top" src="/profile.png" />
                 <Card.Body>
+                    <Card.Text style={{ fontSize: "24px", fontWeight: "bold" }}>{params.name}</Card.Text>
                     <Card.Title style={{ fontSize: "24px" }}>{params.title}</Card.Title>
                     <Card.Img variant="top" src="/star.png" style={{width: "40%", marginBottom: "3%"}} />
                     <Card.Text style={{ fontSize: "16px" }}>
