@@ -1,10 +1,11 @@
 .third_main {
-    height: 530px;
+    height: 600px;
+    text-align: -webkit-center;
 }
 
 .third_h1 {
     text-align-last: center;
     font-weight: bold;
     padding-top: 2%;
-    margin-bottom: 7%;
+    margin-bottom: 4%;
 }

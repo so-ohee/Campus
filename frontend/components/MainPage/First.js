@@ -38,7 +38,6 @@ function First() {
                         );
                     })}
                 </Row>
-                
             </Container>
         </div>
     );
