@@ -2,6 +2,7 @@ package com.ssafy.camping.controller;
 
 import com.ssafy.camping.dto.User.UserReqDto;
 import com.ssafy.camping.service.UserService;
+import com.ssafy.camping.utils.Message;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,22 +23,43 @@ public class UserController {
 
     private final UserService userService;
 
-    //회원 가입
     @ApiOperation(value = "회원 가입")
     @PostMapping
     public ResponseEntity register(@Valid @RequestBody UserReqDto userReqDto) {
+        log.debug("UserController register call");
+
         Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
         try {
             resultMap = userService.register(userReqDto);
-            HttpStatus status = HttpStatus.ACCEPTED;
-            if(resultMap.containsKey("user"))
+            if(resultMap.get("message").equals(Message.SIGNUP_SUCESS)) //회원가입 성공
                 status = HttpStatus.CREATED;
-
-            return new ResponseEntity(resultMap, status);
         } catch (Exception e) {
-            log.error("회원가입 실패 : {}", e.getMessage());
-            resultMap.put("message","회원가입 실패");
-            return new ResponseEntity(resultMap, HttpStatus.INTERNAL_SERVER_ERROR);
+            log.error(Message.SIGNUP_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.SIGNUP_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
+        return new ResponseEntity(resultMap, status);
+    }
+    
+    @ApiOperation(value = "로그인")
+    @GetMapping("/{userUid}")
+    public ResponseEntity signIn (@PathVariable String userUid) {
+        log.debug("UserController signIn call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = userService.getUser(userUid);
+            if(resultMap.containsKey("user"))
+                status = HttpStatus.OK;
+        } catch (Exception e) {
+            log.error(Message.SIGNIN_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message",Message.SIGNIN_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
     }
 }
