@@ -33,15 +33,15 @@ function Navibar() {
                 <img className={styles.navi_search_pic} src="/search.png" />
               </Form>
                 <NavLink href="#action1">
-                  <h6 style={{ color: "white", fontWeight: "bold" }}>ABOUT US</h6>
-                </NavLink>{" "}
-                /
-                <NavLink href="#action2">
                   <h6 style={{ color: "white", fontWeight: "bold" }}>CAMPING PLACE</h6>
                 </NavLink>{" "}
                 /
-                <NavLink href="#action3">
+                <NavLink href="#action2">
                   <h6 style={{ color: "white", fontWeight: "bold" }}>BOARD</h6>
+                </NavLink>{" "}
+                /
+                <NavLink href="#action3">
+                  <h6 style={{ color: "white", fontWeight: "bold" }}>RENT SITE</h6>
                 </NavLink>
                 <img className={styles.navi_bell_pic} src="/bell.png" />
                 <img className={styles.navi_profile_pic} src="/profile.png" />
