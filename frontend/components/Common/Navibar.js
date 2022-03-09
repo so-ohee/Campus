@@ -9,7 +9,7 @@ import {
   Col,
   NavLink,
 } from "react-bootstrap";
-import styles from "/styles/Navibar.module.css";
+import styles from "/styles/Common/Navibar.module.css";
 
 function Navibar() {
   return (
