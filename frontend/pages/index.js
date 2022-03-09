@@ -1,6 +1,9 @@
 import First from '/components/MainPage/First.js';
 import Second from '/components/MainPage/Second.js';
 import Third from '/components/MainPage/Third.js';
+import firebase from "firebase/app";
+
+console.log(firebase);
 
 function Home() {
   return (

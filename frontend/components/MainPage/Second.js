@@ -1,5 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import styles from '/styles/MainPageSecond.module.css';
+import styles from '/styles/MainPage/MainPageSecond.module.css';
 
 function Second() {
     return (
