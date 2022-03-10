@@ -30,21 +30,41 @@ function Camp() {
                         <img className={styles.capmingplace_main_pic} src="/logo.png" />
                     </div>
                     <div className={styles.capmingplace_explain}>
-                        <Col>
-                            <h2 style={{fontWeight: "bold"}}>{dummy[0].title}</h2>
-                            <h6>{dummy[0].address}</h6>
-                            <h6>{dummy[0].phone}</h6>
-                            <h6 style={{color: "lightgrey"}}>
-                                {dummy[0].hashtag.map((element, index) => {
-                                    return <span key={index}>#{element} </span>;
-                                })}
-                            </h6>
-                        </Col>
-                        <Col>
-                            <BsSuitHeart />
-                        </Col>
+                        <Row>
+                            <Col xs={8}>
+                                <h2 style={{fontWeight: "bold"}}>{dummy[0].title}</h2>
+                                <h6>{dummy[0].address}</h6>
+                                <h6>{dummy[0].phone}</h6>
+                                <h6 style={{color: "lightgrey"}}>
+                                    {dummy[0].hashtag.map((element, index) => {
+                                        return <span key={index}>#{element} </span>;
+                                    })}
+                                </h6>
+                            </Col>
+                            <Col xs={4} >
+                                <Row>
+                                    <Col>
+                                        <div style={{textAlign: "-webkit-center"}}>
+                                            <img className={styles.campingexplain_icon} src="/empty_heart.png" />
+                                            <h6 className={styles.campingexplain_reserve}>찜하기</h6>
+                                        </div>
+                                    </Col>
+                                    <Col>
+                                        <div style={{textAlign: "-webkit-center"}}>
+                                            <img className={styles.campingexplain_icon2} src="/empty_marker.png" />
+                                            <h6 className={styles.campingexplain_visit}>방문여부</h6>
+                                        </div>
+                                    </Col>
+                                    <Col>
+                                        <div style={{textAlign: "-webkit-center"}}>
+                                            <img className={styles.campingexplain_icon} src="/comment.png" />
+                                            <h6 className={styles.campingexplain_rewiew}>리뷰작성</h6>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
                     </div>
-                    
                 </Row>
             </Container>
         </>

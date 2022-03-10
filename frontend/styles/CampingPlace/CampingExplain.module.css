@@ -16,3 +16,45 @@
     width: 1140px;
     height: 200px;
 }
+
+.campingexplain_icon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 10%;
+}
+
+.campingexplain_icon2 {
+    width: 30px;
+    height: 35px;
+    margin-bottom: 10%;
+}
+
+.campingexplain_reserve {
+    width: 80px;
+    height: 30px;
+    background: red;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    padding-top: 4%;
+}
+
+.campingexplain_visit {
+    width: 80px;
+    height: 30px;
+    background: purple;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    padding-top: 4%;
+}
+
+.campingexplain_rewiew {
+    width: 80px;
+    height: 30px;
+    background: #198754;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    padding-top: 4%;
+}
