@@ -20,7 +20,7 @@ const dummy = [
     },
 ];
 
-function Camp() {
+function CampingExplain() {
     return (
         <>
             <Container>
@@ -99,4 +99,4 @@ function Camp() {
     );
 }
 
-export default Camp;
+export default CampingExplain;

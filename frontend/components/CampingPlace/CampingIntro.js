@@ -1,7 +1,7 @@
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "/styles/CampingPlace/CampingIntro.module.css";
 
-function Camp() {
+function CampingIntro() {
     return (
         <>
             <Container>
@@ -98,4 +98,4 @@ function Camp() {
     );
 }
 
-export default Camp;
+export default CampingIntro;

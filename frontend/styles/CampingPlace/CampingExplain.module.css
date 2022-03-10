@@ -61,10 +61,11 @@
 
 .campingexplain_selectbar {
     height: 50px;
+    width:1300px;
 }
 
 .campingexplain_select {
-    width:330px;
+    width:325px;
     height: 50px;
     background: #198754;
     text-align-last: center;
