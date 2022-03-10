@@ -13,14 +13,10 @@ import javax.persistence.Id;
 public class User {
     @Id
     private String userUid;
-    private String userName;
     private int userState;
-    private String userProfile;
 
     @Builder
-    public User(String userUid, String userName, String userProfile) {
+    public User(String userUid) {
         this.userUid = userUid;
-        this.userName = userName;
-        this.userProfile = userProfile;
     }
 }
