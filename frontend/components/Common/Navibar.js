@@ -22,7 +22,7 @@ function Navibar() {
     <>
       <Navbar bg="success" expand="lg">
         <Container>
-          <Navbar.Brand href="#">
+          <Navbar.Brand href="/">
             <img className={styles.navi_pic} src="/logo.png" />
           </Navbar.Brand>
           <di>
@@ -37,15 +37,15 @@ function Navibar() {
                 />
                 <img className={styles.navi_search_pic} src="/search.png" />
               </Form>
-                <NavLink href="#action1">
+                <NavLink href="campingplace">
                   <h6 style={{ color: "white", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</h6>
                 </NavLink>{" "}
                 /
-                <NavLink href="#action2">
+                <NavLink href="board">
                   <h6 style={{ color: "white", fontWeight: "bold", width: "60px"  }}>BOARD</h6>
                 </NavLink>{" "}
                 /
-                <NavLink href="#action3">
+                <NavLink href="rentsite">
                   <h6 style={{ color: "white", fontWeight: "bold", width: "80px"  }}>RENT SITE</h6>
                 </NavLink>
                 <img className={styles.navi_bell_pic} src="/bell.png" />

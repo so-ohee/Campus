@@ -1,0 +1,18 @@
+.capmingplace_main_pic_div{
+    text-align-last: center;
+    width: 1140px;
+    height: 300px;
+    margin-top: 5%;
+    border: 1px solid black;
+}
+
+.capmingplace_main_pic {
+    width: 30%;
+    margin-top: 3%;
+}
+
+.capmingplace_explain{
+    margin-top: 2%;
+    width: 1140px;
+    height: 200px;
+}
