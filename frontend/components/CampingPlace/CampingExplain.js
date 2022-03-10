@@ -1,5 +1,4 @@
 import { Container, Col, Row } from "react-bootstrap";
-import { BsSuitHeart } from "react-icons/bs";
 import styles from "/styles/CampingPlace/CampingExplain.module.css";
 
 const dummy = [
@@ -26,9 +25,12 @@ function Camp() {
         <>
             <Container>
                 <Row>
+                    {/* 사진 */}
                     <div className={styles.capmingplace_main_pic_div}>
                         <img className={styles.capmingplace_main_pic} src="/logo.png" />
                     </div>
+
+                    {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
                     <div className={styles.capmingplace_explain}>
                         <Row>
                             <Col xs={8}>
@@ -62,6 +64,32 @@ function Camp() {
                                         </div>
                                     </Col>
                                 </Row>
+                            </Col>
+                        </Row>
+                    </div>
+
+                    {/* 선택바(캠핑장소개, 위치&주변정보, 리뷰, 이용안내) */}
+                    <div className={styles.campingexplain_selectbar}>
+                        <Row>
+                            <Col xs={3}>
+                                <div className={styles.campingexplain_select}>
+                                    <h4>캠핑장 소개</h4>
+                                </div>
+                            </Col>
+                            <Col xs={3}>
+                                <div className={styles.campingexplain_select}>
+                                    <h4>캠핑장 위치 & 주변 정보</h4>
+                                </div>
+                            </Col>
+                            <Col xs={3}>
+                                <div className={styles.campingexplain_select}>
+                                    <h4>캠핑장 리뷰</h4>
+                                </div>
+                            </Col>
+                            <Col xs={3}>
+                                <div className={styles.campingexplain_select}>
+                                    <h4>캠핑장 이용안내</h4>
+                                </div>
                             </Col>
                         </Row>
                     </div>
