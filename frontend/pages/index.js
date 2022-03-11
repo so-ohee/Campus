@@ -1,7 +1,10 @@
 import First from '/components/MainPage/First.js';
 import Second from '/components/MainPage/Second.js';
 import Third from '/components/MainPage/Third.js';
-import firebase from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
 
 console.log(firebase);
 
