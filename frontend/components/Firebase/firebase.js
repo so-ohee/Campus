@@ -1,7 +1,7 @@
-import * as firebase from "firebase/app";
-import 'firebase/auth';
-import 'firebase/storage';
-import 'firebase/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_API_Key,
@@ -10,11 +10,11 @@ const firebaseConfig = {
     projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
     storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
     messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_ID,
-    appId: process.env.NEXT_PUBLIC_APP_ID,
+    appId: process.env.NEXT_PUBLIC_APP_ID
 };
 
-// const app = initializeApp(firebaseConfig);
-firebase.initializeApp(firebaseConfig);
+// export default firebase.initializeApp(firebaseConfig);
 
+firebase.initializeApp(firebaseConfig);
 export const firebaseInstance = firebase;
 export const authService = firebase.auth();
