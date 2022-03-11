@@ -50,9 +50,10 @@ function Login(props) {
         let provider;
         if (name === "google") {
             provider = new GoogleAuthProvider();
-        } else if (name === "github") {
-            provider = new GithubAuthProvider();
         }
+        // else if (name === "github") {
+        //     provider = new GithubAuthProvider();
+        // }
         const data = await signInWithPopup(authService, provider);
         console.log(data);
     };
@@ -76,7 +77,7 @@ function Login(props) {
                     <img className={styles.login_pic} src="/logo.png" />
                 </div>
                 <div className={styles.login_pic_div}>
-                    <img className={styles.login_kakao_pic} name="kakao" onClick={onSocialClick} src="/kakaologin.png" />
+                    {/* <img className={styles.login_kakao_pic} name="kakao" onClick={onSocialClick} src="/kakaologin.png" /> */}
                     <img className={styles.login_google_pic} name="google" onClick={onSocialClick}  src="/googlelogin.png" />
                 </div>
             </Modal.Body>
