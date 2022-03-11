@@ -20,7 +20,7 @@ function Navibar() {
 
   return (
     <>
-      <Navbar bg="success" expand="lg">
+      <Navbar style={{backgroundColor: "#007D0D"}} expand="lg">
         <Container>
           <Navbar.Brand href="/">
             <img className={styles.navi_pic} src="/logo.png" />
