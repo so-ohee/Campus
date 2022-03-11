@@ -48,6 +48,8 @@ public class S3Service {
     }
 
     public String upload(MultipartFile file) throws IOException {
+        log.debug("S3Service upload call");
+
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(file.getContentType());
         objectMetadata.setContentLength(file.getSize());
@@ -63,7 +65,8 @@ public class S3Service {
     }
 
     public void delete(String url) throws AmazonServiceException {
-//        log.info("url : {}", url);
+        log.debug("S3Service delete call");
+
         String fileName = url.substring(url.indexOf("com/")+4); //50+4
         s3Client.deleteObject(bucket, fileName);
         log.info("fileName : {} 삭제", fileName);
