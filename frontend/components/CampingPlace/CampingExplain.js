@@ -67,32 +67,6 @@ function CampingExplain() {
                             </Col>
                         </Row>
                     </div>
-
-                    {/* 선택바(캠핑장소개, 위치&주변정보, 리뷰, 이용안내) */}
-                    <div className={styles.campingexplain_selectbar}>
-                        <Row>
-                            <Col xs={3}>
-                                <div className={styles.campingexplain_select}>
-                                    <h4>캠핑장 소개</h4>
-                                </div>
-                            </Col>
-                            <Col xs={3}>
-                                <div className={styles.campingexplain_select}>
-                                    <h4>캠핑장 위치 & 주변 정보</h4>
-                                </div>
-                            </Col>
-                            <Col xs={3}>
-                                <div className={styles.campingexplain_select}>
-                                    <h4>캠핑장 리뷰</h4>
-                                </div>
-                            </Col>
-                            <Col xs={3}>
-                                <div className={styles.campingexplain_select}>
-                                    <h4>캠핑장 이용안내</h4>
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
                 </Row>
             </Container>
         </>
