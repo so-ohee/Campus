@@ -33,7 +33,7 @@ public class CampingController {
     })
     public ResponseEntity getCampsite(@RequestParam int campingId,
                                       @RequestParam(required = false) String userUid) {
-        log.debug("CampingController getCamping call - campingId : "+campingId+", userUid : "+userUid);
+        log.debug("CampingController getCamping call");
 
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
