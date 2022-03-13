@@ -63,7 +63,7 @@ function Login(props) {
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
-            centered
+            centered 
         >
             <Modal.Header closeButton>
                 <Modal.Title className={styles.login_header} id="contained-modal-title-vcenter">
