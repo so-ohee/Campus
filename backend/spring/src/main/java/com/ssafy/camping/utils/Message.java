@@ -15,4 +15,8 @@ public class Message {
     public static final String CREATE_REVIEW_FAIL = "캠핑장 후기 등록 실패";
 
     public static final String FILE_EXTENSION_EXCEPTION = "파일 확장자가 jpg나 png가 아닙니다.";
+
+    public static final String FIND_CAMPSITE_REVIEW_FAIL = "캠핑장 후기 조회 실패";
+    public static final String FIND_CAMPSITE_REVIEW_SUCCESS = "캠핑장 후기 조회 성공";
+    public static final String NOT_FOUND_CAMPSITE_REVIEW = "캠핑장 후기가 없습니다.";
 }

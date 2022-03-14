@@ -1,10 +1,7 @@
 package com.ssafy.camping.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
@@ -33,6 +30,10 @@ public class Review {
     @JsonManagedReference
     @OneToMany(mappedBy = "review") //양방향 매핑을 위해 연관 관계의 주인을 mappedBy로 지정
     private List<FileReview> files = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "review")
+    private Rating rating;
 
     @Builder
     public Review(String userUid, Integer campingId, String title, String content) {
