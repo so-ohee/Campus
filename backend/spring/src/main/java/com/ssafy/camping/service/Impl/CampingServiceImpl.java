@@ -1,7 +1,9 @@
 package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.entity.Camping;
+import com.ssafy.camping.entity.ViewLog;
 import com.ssafy.camping.repository.CampingRepository;
+import com.ssafy.camping.repository.ViewLogRepository;
 import com.ssafy.camping.service.CampingService;
 import com.ssafy.camping.service.VisitService;
 import com.ssafy.camping.utils.Message;
@@ -19,6 +21,8 @@ import java.util.Optional;
 public class CampingServiceImpl implements CampingService {
 
     private final CampingRepository campingRepository;
+    private final ViewLogRepository viewLogRepository;
+    
     private final VisitService visitService;
 
     @Override
@@ -32,8 +36,14 @@ public class CampingServiceImpl implements CampingService {
             return resultMap;
         }
 
-        //userUid 값이 존재한다면 캠핑장 다녀왔는지 확인
-        boolean visitCampsite = userUid != null ? visitService.visitCampsite(userUid) : false;
+        boolean visitCampsite = false;
+        if(userUid != null) {//userUid 값이 존재한다면
+            visitCampsite = visitService.visitCampsite(userUid); //캠핑장 다녀왔는지 확인
+            ViewLog viewLog = ViewLog.builder()
+                    .userUid(userUid)
+                    .campingId(campingId).build();
+            viewLogRepository.save(viewLog); //캠핑장 상세보기 방문 로그 저장
+        }
 
         resultMap.put("campsite",campsite.get()); //캠핑장 정보
         resultMap.put("visit",visitCampsite); //방문여부
