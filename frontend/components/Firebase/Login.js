@@ -1,48 +1,16 @@
 import { Button, Modal } from 'react-bootstrap';
 import styles from '/styles/Firebase/Login.module.css';
-import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    GoogleAuthProvider,
-    GithubAuthProvider,
-} from "@firebase/auth";
+import { getAuth, setPersistence, signInWithPopup, inMemoryPersistence, GoogleAuthProvider, getRedirectResult, signInWithRedirect} from "@firebase/auth";
 import { authService, firebaseInstance, auth  } from "./firebase";
-import { useState } from 'react';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Login(props) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true);
-    const [error, setError] = useState("");
-    const onChange = (event) => {
-        const {
-        target: { name, value },
-        } = event;
-        if (name === "email") {
-        setEmail(value);
-        } else if (name === "password") {
-        setPassword(value);
-        }
-    };
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        try {
-        let data;
-        if (newAccount) {
-            data = await authService.createUserWithEmailAndPassword(
-            email,
-            password
-            );
-        } else {
-            data = await authService.signInWithEmailAndPassword(email, password);
-        }
-        console.log(data);
-        } catch (error) {
-        setError(error.message);
-        }
-    };
-    const toggleAccount = () => setNewAccount((prev) => !prev);
+
     const onSocialClick = async (event) => {
         const {
             target: { name },
@@ -51,11 +19,18 @@ function Login(props) {
         if (name === "google") {
             provider = new GoogleAuthProvider();
         }
-        // else if (name === "github") {
-        //     provider = new GithubAuthProvider();
-        // }
         const data = await signInWithPopup(authService, provider);
         console.log(data);
+
+        // 토큰이 없다면 등록
+        if (typeof window !== "undefined") {
+            console.log(data.user.accessToken);
+            // 만약 이전에 토큰이 있다면
+            // localStorage.removeItem("token");
+            // 토큰 새로 등록하기
+            localStorage.setItem("token", data.user.accessToken);
+            location.reload()
+        }
     };
 
     return (
