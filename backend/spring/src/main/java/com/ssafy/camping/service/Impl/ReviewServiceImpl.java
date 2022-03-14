@@ -101,4 +101,25 @@ public class ReviewServiceImpl implements ReviewService {
 
         return resultMap;
     }
+
+    @Override
+    public Map<String, Object> deleteReview(Integer reviewId) throws Exception {
+        log.debug("ReviewService deleteReview call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<Review> review = reviewRepository.findById(reviewId);
+        if(!review.isPresent()) {
+            resultMap.put("message", Message.NOT_FOUND_REVIEW);
+            return resultMap;
+        }
+        //캠핑장 후기 삭제 처리
+        review.get().setDeleteState(1);
+        reviewRepository.save(review.get());
+
+        //해당 후기 파일 삭제
+        fileService.reviewFileDelete(reviewId);
+
+        resultMap.put("message", Message.DELETE_REVIEW_SUCCESS);
+        return resultMap;
+    }
 }

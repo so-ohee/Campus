@@ -9,4 +9,6 @@ public interface FileService {
 
     //리뷰 파일 저장
     void reviewFileSave(Review review, MultipartFile[] files) throws Exception;
+    //리뷰 파일 삭제
+    void reviewFileDelete(Integer reviewId) throws Exception;
 }
