@@ -74,7 +74,7 @@ public class ReviewServiceImpl implements ReviewService {
         log.debug("ReviewService campsiteReviewList call");
 
         Map<String, Object> resultMap = new HashMap<>();
-        Page<Review> review = reviewRepository.findByCampingId(campingId, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "reviewId")));
+        Page<Review> review = reviewRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "reviewId")));
         if(review.isEmpty()) {
             resultMap.put("message", Message.NOT_FOUND_CAMPSITE_REVIEW);
             return resultMap;
