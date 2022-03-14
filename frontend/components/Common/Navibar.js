@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Nav,
   Container,
@@ -14,9 +14,21 @@ import {
 } from "react-bootstrap";
 import Login from '../Firebase/Login';
 import styles from "/styles/Common/Navibar.module.css";
+import { authService } from "firebase/compat/app";
 
 function Navibar() {
   const [LoginmodalShow, LoginsetModalShow] = React.useState(false);
+  const onLogOutClick = () => {
+    // localStorage.removeItem(localStorage.token);
+    localStorage.removeItem('token');
+    console.log(localStorage);
+    location.reload()
+  }
+
+  let token = null;
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
 
   return (
     <>
@@ -53,14 +65,25 @@ function Navibar() {
                 <NavDropdown align="end" title={
                   <img className={styles.navi_profile_pic} src="/profile.png" />
                 } id="dropdown-menu-align-end">
-                  <NavDropdown.Item onClick={() => LoginsetModalShow(true)}>Login</NavDropdown.Item>
-                  <Login
-                    show={LoginmodalShow}
-                    onHide={() => LoginsetModalShow(false)}
-                  />
+                  {
+                    !token && (
+                      <>
+                        <NavDropdown.Item onClick={() => LoginsetModalShow(true)}>Login</NavDropdown.Item>
+                        <Login
+                          show={LoginmodalShow}
+                          onHide={() => LoginsetModalShow(false)}
+                        />
+                      </>
+                    ) 
+                  }
+                  {
+                    token && (
+                      <>
+                        <NavDropdown.Item onClick={() => onLogOutClick()}>Logout</NavDropdown.Item>
+                      </>
+                    )
+                  }
                   <NavDropdown.Item>My Profile</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item>Logout</NavDropdown.Item>
                 </NavDropdown>
               </div>
             </Navbar.Collapse>  
@@ -70,33 +93,4 @@ function Navibar() {
     </>
   );
 }
-
-// function MyVerticallyCenteredModal(props) {
-//   return (
-//     <Modal
-//       {...props}
-//       size="lg"
-//       aria-labelledby="contained-modal-title-vcenter"
-//       centered
-//     >
-//       <Modal.Header closeButton>
-//         <Modal.Title id="contained-modal-title-vcenter">
-//           Modal heading
-//         </Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <h4>Centered Modal</h4>
-//         <p>
-//           Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-//           dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-//           consectetur ac, vestibulum at eros.
-//         </p>
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button onClick={props.onHide}>Close</Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// }
-
 export default Navibar;

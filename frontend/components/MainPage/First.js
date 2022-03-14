@@ -24,7 +24,7 @@ function First() {
     return (
         <div className={styles.first_main}>
             <Container>
-                <h1 className={styles.first_h1}>지금 뜨는 캠핑장 TOP 3</h1>
+                <h1 className={styles.first_h1}>봄 추천 캠핑장 TOP 3</h1>
                 <Row>
                     {dummy.map((element, index) => {
                         return (
