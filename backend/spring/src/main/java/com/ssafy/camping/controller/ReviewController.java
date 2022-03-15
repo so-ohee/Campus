@@ -48,7 +48,7 @@ public class ReviewController {
         return new ResponseEntity(resultMap, status);
     }
 
-    @ApiOperation(value = "캠핑장 상세보기의 후기 조회")
+    @ApiOperation(value = "캠핑장 상세보기에서 후기 목록 조회")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true,
                     dataType = "int", paramType = "query"),
@@ -71,6 +71,27 @@ public class ReviewController {
             log.error(Message.FIND_CAMPSITE_REVIEW_FAIL+": {}",e.getMessage());
 
             resultMap.put("message", Message.FIND_CAMPSITE_REVIEW_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "캠핑장 후기 삭제")
+    @DeleteMapping("/{reviewId}")
+    public ResponseEntity capmsiteReviewDelete(@PathVariable Integer reviewId) {
+        log.debug("ReviewController capmsiteReviewDelete call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = reviewService.deleteReview(reviewId);
+            if(resultMap.get("message").equals(Message.CREATE_REVIEW_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.DELETE_REVIEW_FAIL+": {}",e.getMessage());
+
+            resultMap.put("message", Message.DELETE_REVIEW_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);

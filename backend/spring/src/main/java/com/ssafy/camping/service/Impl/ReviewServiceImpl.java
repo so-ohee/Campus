@@ -74,7 +74,7 @@ public class ReviewServiceImpl implements ReviewService {
         log.debug("ReviewService campsiteReviewList call");
 
         Map<String, Object> resultMap = new HashMap<>();
-        Page<Review> review = reviewRepository.findByCampingId(campingId, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "reviewId")));
+        Page<Review> review = reviewRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "reviewId")));
         if(review.isEmpty()) {
             resultMap.put("message", Message.NOT_FOUND_CAMPSITE_REVIEW);
             return resultMap;
@@ -99,6 +99,27 @@ public class ReviewServiceImpl implements ReviewService {
         resultMap.put("totalPage", review.getTotalPages()+1); //총 페이지 수
         resultMap.put("review", list);
 
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> deleteReview(Integer reviewId) throws Exception {
+        log.debug("ReviewService deleteReview call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<Review> review = reviewRepository.findById(reviewId);
+        if(!review.isPresent()) {
+            resultMap.put("message", Message.NOT_FOUND_REVIEW);
+            return resultMap;
+        }
+        //캠핑장 후기 삭제 처리
+        review.get().setDeleteState(1);
+        reviewRepository.save(review.get());
+
+        //해당 후기 파일 삭제
+        fileService.reviewFileDelete(reviewId);
+
+        resultMap.put("message", Message.DELETE_REVIEW_SUCCESS);
         return resultMap;
     }
 }
