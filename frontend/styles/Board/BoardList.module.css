@@ -6,10 +6,18 @@
 }
 
 .boardlist_table {
-    margin-bottom: 10%;
+    height: 700px;
+    /* 임시 밑줄 */
+    border-bottom: 1px solid black;
+    margin-bottom: 2%;
 }
 
-.boardlist_tr {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
+.boardlist_thead_tr {
+    height: 50px;
+    background-color: #198754;
+}
+
+.boardlist_tbody_tr {
+    height: 50px;
+    border-bottom: 1px solid lightgrey;
 }
