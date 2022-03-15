@@ -1,0 +1,29 @@
+.campinguse_div {
+    margin-top: 3%;
+    height: 50px;
+    border-bottom: 5px solid black;
+}
+
+.campinguse_arrow {
+    width: 50px;
+}
+
+.campinguse_h4 {
+    font-weight: bold;
+}
+
+.campinguse_div2 {
+    margin-top: 2%;
+    margin-bottom: 5%;
+    height: 700px;
+    border: 1px solid black;
+    text-align-last: center;
+}
+
+.campinguse_div3 {
+    margin-top: 2%;
+    margin-bottom: 5%;
+    height: 300px;
+    border: 1px solid black;
+    text-align-last: center;
+}

@@ -10,7 +10,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema camping
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `camping` ;
 
 -- -----------------------------------------------------
 -- Schema camping
@@ -21,49 +20,66 @@ USE `camping` ;
 -- -----------------------------------------------------
 -- Table `camping`.`camping`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`camping` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`camping` (
-  `camping_id` INT NOT NULL AUTO_INCREMENT,
-  `faclt_nm` VARCHAR(45) NULL DEFAULT NULL,
-  `line_intro` VARCHAR(45) NULL DEFAULT NULL,
-  `intro` VARCHAR(1000) NULL DEFAULT NULL,
-  `addr1` VARCHAR(100) NULL DEFAULT NULL,
-  `addr2` VARCHAR(100) NULL DEFAULT NULL,
-  `lctCl` VARCHAR(45) NULL DEFAULT NULL,
-  `induty` VARCHAR(45) NULL DEFAULT NULL,
-  `operPdCl` VARCHAR(45) NULL DEFAULT NULL,
-  `operDeCl` VARCHAR(45) NULL DEFAULT NULL,
-  `homepage` VARCHAR(200) NULL DEFAULT NULL,
-  `posblFcltyCl` VARCHAR(100) NULL DEFAULT NULL,
-  `tel` VARCHAR(45) NULL DEFAULT NULL,
-  `firstImageUrl` VARCHAR(200) NULL DEFAULT NULL,
-  `resveUrl` VARCHAR(200) NULL DEFAULT NULL,
-  `sbrsCl` VARCHAR(100) NULL,
-  `gnrlSiteCo` INT NULL,
-  `autoSiteCo` INT NULL,
-  `glampSiteCo` INT NULL,
-  `caravSiteCo` INT NULL,
-  `sbrsEtc` VARCHAR(100) NULL,
-  `sitedStnc` INT NULL,
-  `siteBottomCl1` INT NULL,
-  `siteBottomCl2` INT NULL,
-  `siteBottomCl3` INT NULL,
-  `siteBottomCl4` INT NULL,
-  `siteBottomCl5` INT NULL,
-  `siteMg1Width` INT NULL,
-  `siteMg1Vrticl` INT NULL,
-  `siteMg1Co` INT NULL,
-  `siteMg2Width` INT NULL,
-  `siteMg2Vrticl` INT NULL,
-  `siteMg2Co` INT NULL,
-  `siteMg3Width` INT NULL,
-  `siteMg3Vrticl` INT NULL,
-  `siteMg3Co` INT NULL,
-  `animalCmgCl` VARCHAR(10) NULL DEFAULT NULL,
-  `brazierCl` VARCHAR(10) NULL DEFAULT NULL,
-  `mapX` DOUBLE NULL,
-  `mapY` DOUBLE NULL,
+  `camping_id` BIGINT NOT NULL,
+  `faclt_nm` TEXT NULL DEFAULT NULL,
+  `line_intro` TEXT NULL DEFAULT NULL,
+  `intro` TEXT NULL DEFAULT NULL,
+  `manage_status` TEXT NULL DEFAULT NULL,
+  `hvof_bgnde` TEXT NULL DEFAULT NULL,
+  `hvof_enddle` TEXT NULL DEFAULT NULL,
+  `induty` TEXT NULL DEFAULT NULL,
+  `lct_cl` TEXT NULL DEFAULT NULL,
+  `do_nm` TEXT NULL DEFAULT NULL,
+  `sigungu_nm` TEXT NULL DEFAULT NULL,
+  `addr1` TEXT NULL DEFAULT NULL,
+  `addr2` TEXT NULL DEFAULT NULL,
+  `map_x` DOUBLE NULL DEFAULT NULL,
+  `map_y` DOUBLE NULL DEFAULT NULL,
+  `direction` TEXT NULL DEFAULT NULL,
+  `tel` TEXT NULL DEFAULT NULL,
+  `homepage` TEXT NULL DEFAULT NULL,
+  `resve_url` TEXT NULL DEFAULT NULL,
+  `resve_cl` TEXT NULL DEFAULT NULL,
+  `gnrl_site_co` BIGINT NULL DEFAULT NULL,
+  `auto_site_co` BIGINT NULL DEFAULT NULL,
+  `glamp_site_co` BIGINT NULL DEFAULT NULL,
+  `carav_site_co` BIGINT NULL DEFAULT NULL,
+  `indvdl_carav_site_co` BIGINT NULL DEFAULT NULL,
+  `sited_stnc` BIGINT NULL DEFAULT NULL,
+  `site_mg1_width` BIGINT NULL DEFAULT NULL,
+  `site_mg2_width` BIGINT NULL DEFAULT NULL,
+  `site_mg3_width` BIGINT NULL DEFAULT NULL,
+  `site_mg1_vrticl` BIGINT NULL DEFAULT NULL,
+  `site_mg2_vrticl` BIGINT NULL DEFAULT NULL,
+  `site_mg3_vrticl` BIGINT NULL DEFAULT NULL,
+  `site_mg1_co` BIGINT NULL DEFAULT NULL,
+  `site_mg2_co` BIGINT NULL DEFAULT NULL,
+  `site_mg3_co` BIGINT NULL DEFAULT NULL,
+  `site_bottom_cl1` BIGINT NULL DEFAULT NULL,
+  `site_bottom_cl2` BIGINT NULL DEFAULT NULL,
+  `site_bottom_cl3` BIGINT NULL DEFAULT NULL,
+  `site_bottom_cl4` BIGINT NULL DEFAULT NULL,
+  `site_bottom_cl5` BIGINT NULL DEFAULT NULL,
+  `glamp_inner_fclty` TEXT NULL DEFAULT NULL,
+  `carav_inner_fclty` TEXT NULL DEFAULT NULL,
+  `oper_pd_cl` TEXT NULL DEFAULT NULL,
+  `oper_de_cl` TEXT NULL DEFAULT NULL,
+  `trler_acmpny_at` TEXT NULL DEFAULT NULL,
+  `carav_acmpny_at` TEXT NULL DEFAULT NULL,
+  `toilet_co` BIGINT NULL DEFAULT NULL,
+  `swrm_co` BIGINT NULL DEFAULT NULL,
+  `wtrpl_co` BIGINT NULL DEFAULT NULL,
+  `brazier_cl` TEXT NULL DEFAULT NULL,
+  `sbrs_cl` TEXT NULL DEFAULT NULL,
+  `sbrs_etc` TEXT NULL DEFAULT NULL,
+  `posbl_fclty_cl` TEXT NULL DEFAULT NULL,
+  `posbl_fclty_etc` TEXT NULL DEFAULT NULL,
+  `thema_envrn_cl` TEXT NULL DEFAULT NULL,
+  `eqpmn_lend_cl` TEXT NULL DEFAULT NULL,
+  `animal_cmg_cl` TEXT NULL DEFAULT NULL,
+  `first_image_url` TEXT NULL DEFAULT NULL,
+  `blog_cnt` BIGINT NULL DEFAULT 0,
   PRIMARY KEY (`camping_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -73,13 +89,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`user` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`user` (
   `user_uid` VARCHAR(45) NOT NULL,
-  `user_name` VARCHAR(45) NOT NULL,
   `user_state` TINYINT NOT NULL DEFAULT '0',
-  `user_profile` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`user_uid`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -89,16 +101,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`bookmark`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`bookmark` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`bookmark` (
   `bookmark_id` INT NOT NULL AUTO_INCREMENT,
   `user_uid` VARCHAR(45) NOT NULL,
-  `camping_id` INT NOT NULL,
+  `camping_id` BIGINT NOT NULL,
   PRIMARY KEY (`bookmark_id`),
   INDEX `fk_bookmark_user1_idx` (`user_uid` ASC) VISIBLE,
-  INDEX `fk_bookmark_camping1_idx` (`camping_id` ASC) VISIBLE,
-  CONSTRAINT `fk_bookmark_camping1`
+  INDEX `fk_bookmark_camping21_idx` (`camping_id` ASC) VISIBLE,
+  CONSTRAINT `fk_bookmark_camping21`
     FOREIGN KEY (`camping_id`)
     REFERENCES `camping`.`camping` (`camping_id`),
   CONSTRAINT `fk_bookmark_user1`
@@ -112,8 +122,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`notice`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`notice` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`notice` (
   `notice_id` INT NOT NULL AUTO_INCREMENT,
   `user_uid` VARCHAR(45) NOT NULL,
@@ -123,7 +131,6 @@ CREATE TABLE IF NOT EXISTS `camping`.`notice` (
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_state` TINYINT NOT NULL DEFAULT '0',
   `update_time` DATETIME NULL DEFAULT NULL,
-  `delete_state` TINYINT NOT NULL DEFAULT '0',
   `hit` INT NOT NULL DEFAULT '0',
   PRIMARY KEY (`notice_id`),
   INDEX `fk_notice_user1_idx` (`user_uid` ASC) VISIBLE,
@@ -138,8 +145,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`comment_notice`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`comment_notice` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`comment_notice` (
   `comment_id` INT NOT NULL AUTO_INCREMENT,
   `notice_id` INT NOT NULL,
@@ -151,7 +156,9 @@ CREATE TABLE IF NOT EXISTS `camping`.`comment_notice` (
   INDEX `fk_comment_notice_notice1_idx` (`notice_id` ASC) VISIBLE,
   CONSTRAINT `fk_comment_notice_notice1`
     FOREIGN KEY (`notice_id`)
-    REFERENCES `camping`.`notice` (`notice_id`))
+    REFERENCES `camping`.`notice` (`notice_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -160,12 +167,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`review`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`review` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`review` (
   `review_id` INT NOT NULL AUTO_INCREMENT,
   `user_uid` VARCHAR(45) NOT NULL,
-  `camping_id` INT NOT NULL,
+  `camping_id` BIGINT NOT NULL,
   `title` VARCHAR(45) NOT NULL,
   `content` TEXT NOT NULL,
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -175,14 +180,15 @@ CREATE TABLE IF NOT EXISTS `camping`.`review` (
   `hit` INT NOT NULL DEFAULT '0',
   PRIMARY KEY (`review_id`),
   INDEX `fk_review_user_idx` (`user_uid` ASC) VISIBLE,
-  INDEX `fk_review_camping1_idx` (`camping_id` ASC) VISIBLE,
-  CONSTRAINT `fk_review_camping1`
+  INDEX `fk_review_camping21_idx` (`camping_id` ASC) VISIBLE,
+  CONSTRAINT `fk_review_camping21`
     FOREIGN KEY (`camping_id`)
     REFERENCES `camping`.`camping` (`camping_id`),
   CONSTRAINT `fk_review_user`
     FOREIGN KEY (`user_uid`)
     REFERENCES `camping`.`user` (`user_uid`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -190,8 +196,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`comment_review`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`comment_review` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`comment_review` (
   `comment_id` INT NOT NULL AUTO_INCREMENT,
   `review_id` INT NOT NULL,
@@ -212,17 +216,17 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`file_notice`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`file_notice` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`file_notice` (
   `file_id` INT NOT NULL AUTO_INCREMENT,
   `notice_id` INT NOT NULL,
-  `fil_path` VARCHAR(100) NOT NULL,
+  `file_path` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`file_id`),
   INDEX `fk_notice_file_notice1_idx` (`notice_id` ASC) VISIBLE,
   CONSTRAINT `fk_notice_file_notice1`
     FOREIGN KEY (`notice_id`)
-    REFERENCES `camping`.`notice` (`notice_id`))
+    REFERENCES `camping`.`notice` (`notice_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -231,18 +235,17 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`file_review`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`file_review` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`file_review` (
   `file_id` INT NOT NULL AUTO_INCREMENT,
   `review_id` INT NOT NULL,
-  `fil_path` VARCHAR(100) NOT NULL,
+  `file_path` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`file_id`),
   INDEX `fk_review_file_review1_idx` (`review_id` ASC) VISIBLE,
   CONSTRAINT `fk_review_file_review1`
     FOREIGN KEY (`review_id`)
     REFERENCES `camping`.`review` (`review_id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -250,8 +253,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`follow`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`follow` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`follow` (
   `follow_id` INT NOT NULL AUTO_INCREMENT,
   `user_uid` VARCHAR(45) NOT NULL,
@@ -273,8 +274,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`rating`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`rating` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`rating` (
   `rating_id` INT NOT NULL AUTO_INCREMENT,
   `review_id` INT NOT NULL,
@@ -287,6 +286,7 @@ CREATE TABLE IF NOT EXISTS `camping`.`rating` (
     FOREIGN KEY (`review_id`)
     REFERENCES `camping`.`review` (`review_id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -294,16 +294,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`view_log`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`view_log` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`view_log` (
   `view_id` INT NOT NULL AUTO_INCREMENT,
   `user_uid` VARCHAR(45) NOT NULL,
-  `camping_id` INT NOT NULL,
+  `camping_id` BIGINT NOT NULL,
   PRIMARY KEY (`view_id`),
-  INDEX `fk_view_log_camping1_idx` (`camping_id` ASC) VISIBLE,
   INDEX `fk_view_log_user1_idx` (`user_uid` ASC) VISIBLE,
-  CONSTRAINT `fk_view_log_camping1`
+  INDEX `fk_view_log_camping21_idx` (`camping_id` ASC) VISIBLE,
+  CONSTRAINT `fk_view_log_camping21`
     FOREIGN KEY (`camping_id`)
     REFERENCES `camping`.`camping` (`camping_id`),
   CONSTRAINT `fk_view_log_user1`
@@ -317,22 +315,21 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `camping`.`visit`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `camping`.`visit` ;
-
 CREATE TABLE IF NOT EXISTS `camping`.`visit` (
   `visit_id` INT NOT NULL AUTO_INCREMENT,
   `user_uid` VARCHAR(45) NOT NULL,
-  `camping_id` INT NOT NULL,
+  `camping_id` BIGINT NOT NULL,
   PRIMARY KEY (`visit_id`),
   INDEX `fk_visit_user1_idx` (`user_uid` ASC) VISIBLE,
-  INDEX `fk_visit_camping1_idx` (`camping_id` ASC) VISIBLE,
-  CONSTRAINT `fk_visit_camping1`
+  INDEX `fk_visit_camping21_idx` (`camping_id` ASC) VISIBLE,
+  CONSTRAINT `fk_visit_camping21`
     FOREIGN KEY (`camping_id`)
     REFERENCES `camping`.`camping` (`camping_id`),
   CONSTRAINT `fk_visit_user1`
     FOREIGN KEY (`user_uid`)
     REFERENCES `camping`.`user` (`user_uid`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
