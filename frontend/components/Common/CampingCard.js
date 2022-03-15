@@ -13,11 +13,11 @@ function CampingCard(params) {
           >
             {params.address}
           </Card.Subtitle>
-          <Card.Text style={{ fontSize: "16px" }}>
+          {/* <Card.Text style={{ fontSize: "16px" }}>
             {params.hashtag.map((element, index) => {
               return <span key={index}>#{element} </span>;
             })}
-          </Card.Text>
+          </Card.Text> */}
         </Card.Body>
       </Card>
     </>

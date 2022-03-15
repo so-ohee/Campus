@@ -2,6 +2,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import styles from "/styles/MainPage/MainPageFirst.module.css";
 import CampingCard from "/components/common/CampingCard";
 import { viewCamping } from "../../function/axios";
+import { useEffect, useState } from 'react';
 
 const dummy = [
     {
@@ -21,23 +22,40 @@ const dummy = [
     },
 ];
 
+
 function First() {
+
+    const [campingplace, setCampingplace] = useState();
+    useEffect(() => {
+        viewCamping(3)
+        .then(function (response) {
+            setCampingplace(response.data.campsite);
+    });
+    }, []);
+    
     return (
         <div className={styles.first_main}>
             <Container>
                 <h1 className={styles.first_h1}>봄 추천 캠핑장 TOP 3</h1>
                 <Row>
-                    {dummy.map((element, index) => {
+                    {/* {campingplace.map((element, index) => {
                         return (
                         <Col sm key={index}>
                             <CampingCard
-                            title={element.title}
-                            address={element.address}
-                            hashtag={element.hashtag}
+                            title={element.facltNm}
+                            address={element.addr1}
+                            hashtag={element.sbrsCl}
                             />
                         </Col>
                         );
-                    })}
+                    })} */}
+                    <Col>
+                        <CampingCard
+                        title={campingplace.facltNm}
+                        address={campingplace.addr1}
+                        // hashtag={campingplace}
+                        />
+                    </Col>
                 </Row>
             </Container>
         </div>
