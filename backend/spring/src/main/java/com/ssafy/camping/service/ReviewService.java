@@ -10,6 +10,8 @@ public interface ReviewService {
     Map<String, Object> register (ReviewCreateDto reviewDto, MultipartFile[] files) throws Exception;
     //캠핑장 상세보기에서 후기 목록 조회
     Map<String, Object> campsiteReviewList (Integer campingId, int page) throws Exception;
+    //캠핑장 후기 조회
+    Map<String, Object> getReview(Integer reviewId) throws Exception;
     //캠핑장 후기 삭제
     Map<String, Object> deleteReview(Integer reviewId) throws Exception;
 }

@@ -1,9 +1,14 @@
 package com.ssafy.camping.service.Impl;
 
+import com.ssafy.camping.dto.FileDto;
 import com.ssafy.camping.dto.Review.CampsiteReviewResDto;
 import com.ssafy.camping.dto.Review.ReviewCreateDto;
+import com.ssafy.camping.dto.Review.ReviewResDto;
+import com.ssafy.camping.entity.Camping;
+import com.ssafy.camping.entity.FileReview;
 import com.ssafy.camping.entity.Rating;
 import com.ssafy.camping.entity.Review;
+import com.ssafy.camping.repository.CampingRepository;
 import com.ssafy.camping.repository.RatingRepository;
 import com.ssafy.camping.repository.ReviewRepository;
 import com.ssafy.camping.service.FileService;
@@ -27,6 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final RatingRepository ratingRepository;
+    private final CampingRepository campingRepository;
 
     private final FileService fileService;
 
@@ -103,13 +109,63 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
+    public Map<String, Object> getReview(Integer reviewId) throws Exception {
+        log.debug("ReviewService getReview call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<Review> review = reviewRepository.findById(reviewId);
+        if(!review.isPresent() || review.get().getDeleteState()==1) { //존재하는 후기인지 확인
+            resultMap.put("message", Message.NOT_FOUND_CAMPSITE_REVIEW);
+            return resultMap;
+        }
+
+        //캠핑장 명
+        String campsite = campingRepository.findById(review.get().getCampingId()).get().getFacltNm();
+        //평점
+        Rating rating = review.get().getRating();
+
+        //파일
+        List<FileDto> files = new ArrayList<>();
+        //if(review.get().getFiles()!=null)
+        for(FileReview file : review.get().getFiles()) {
+            files.add(new FileDto(file.getFileId(), file.getFilePath()));
+        }
+
+        //조회수
+        int hit = review.get().getHit()+1;
+        //조회수 증가
+        review.get().setHit(hit);
+        reviewRepository.save(review.get());
+
+        ReviewResDto reviewDto = ReviewResDto.builder()
+                .reviewId(review.get().getReviewId())
+                .userUid(review.get().getUserUid())
+                .campingId(review.get().getCampingId())
+                .facltNm(campsite)
+                .environment(rating.getEnvironment())
+                .facility(rating.getFacility())
+                .service(rating.getService())
+                .title(review.get().getTitle())
+                .files(files)
+                .content(review.get().getContent())
+                .createTime(review.get().getCreateTime())
+                .updateTime(review.get().getUpdateTime())
+                .hit(hit).build();
+
+        resultMap.put("review", reviewDto);
+        resultMap.put("message", Message.FIND_CAMPSITE_REVIEW_SUCCESS);
+        return resultMap;
+    }
+
+    @Override
     public Map<String, Object> deleteReview(Integer reviewId) throws Exception {
         log.debug("ReviewService deleteReview call");
 
         Map<String, Object> resultMap = new HashMap<>();
         Optional<Review> review = reviewRepository.findById(reviewId);
-        if(!review.isPresent()) {
-            resultMap.put("message", Message.NOT_FOUND_REVIEW);
+        if(!review.isPresent() || review.get().getDeleteState()==1) {
+            resultMap.put("message", Message.NOT_FOUND_CAMPSITE_REVIEW);
             return resultMap;
         }
         //캠핑장 후기 삭제 처리
