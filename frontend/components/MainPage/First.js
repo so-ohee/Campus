@@ -1,6 +1,7 @@
 import { Row, Col, Container } from 'react-bootstrap';
 import styles from "/styles/MainPage/MainPageFirst.module.css";
 import CampingCard from "/components/common/CampingCard";
+import { viewCamping } from "../../function/axios";
 
 const dummy = [
     {

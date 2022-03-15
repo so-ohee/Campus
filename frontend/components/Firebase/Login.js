@@ -1,13 +1,12 @@
 import { Button, Modal } from 'react-bootstrap';
 import styles from '/styles/Firebase/Login.module.css';
-import { getAuth, setPersistence, signInWithPopup, inMemoryPersistence, GoogleAuthProvider, getRedirectResult, signInWithRedirect} from "@firebase/auth";
-import { authService, firebaseInstance, auth  } from "./firebase";
+import { signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
+import { authService } from "./firebase";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { sendUserUid } from "../../function/axios";
 
 function Login(props) {
 
@@ -25,11 +24,11 @@ function Login(props) {
         // 토큰이 없다면 등록
         if (typeof window !== "undefined") {
             console.log(data.user.accessToken);
-            // 만약 이전에 토큰이 있다면
-            // localStorage.removeItem("token");
-            // 토큰 새로 등록하기
+            // 만약 이전에 토큰이 있다면 토큰 새로 등록하기
             localStorage.setItem("token", data.user.accessToken);
-            location.reload()
+            // user Uid DB 전송하기
+            sendUserUid(data.user.uid);
+            location.reload();
         }
     };
 
