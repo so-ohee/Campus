@@ -1,0 +1,15 @@
+.boardlist_h1 {
+    text-align-last: center;
+    font-weight: bold;
+    padding-top: 2%;
+    margin-bottom: 4%;
+}
+
+.boardlist_table {
+    margin-bottom: 10%;
+}
+
+.boardlist_tr {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
