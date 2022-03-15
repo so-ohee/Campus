@@ -1,11 +1,11 @@
-import Navibar from "/components/Common/Navibar";
-import Footer from "/components/Common/Footer";
-import Jumbotron from "/components/Common/Jumbotron";
+import Navbar from "/components/layout/Navbar";
+import Footer from "/components/layout/Footer";
+import Jumbotron from "/components/layout/Jumbotron";
 
 function Layout({ children }) {
   return (
     <>
-      <Navibar />
+      <Navbar />
       <Jumbotron />
       {children}
       <Footer />
