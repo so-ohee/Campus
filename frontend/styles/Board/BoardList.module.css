@@ -5,6 +5,11 @@
     margin-bottom: 4%;
 }
 
+.boardlist_button {
+    text-align: right;
+    margin-bottom: 1%;
+}
+
 .boardlist_table {
     height: 700px;
     /* 임시 밑줄 */
@@ -20,4 +25,9 @@
 .boardlist_tbody_tr {
     height: 50px;
     border-bottom: 1px solid lightgrey;
+}
+
+.boardlist_pagination {
+    justify-content: center;
+    margin-bottom: 5%;
 }

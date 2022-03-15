@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
+import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "/styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination'
+import {useRouter} from 'next/router'
+import WriteReview from '/components/Board/WriteReview.js';
+import Link from 'next/link';
 
-function campingplace() {
+function boardlist(props) {
 
-    const [selected, setSelected] = useState("1");
+    const submitSign = () => {
+        props.propFunction("작성")
+      }
     let active = 2;
     let items = [];
     for (let number = 1; number <= 5; number++) {
@@ -21,6 +26,9 @@ function campingplace() {
         <div>
             <Container>
                 <h1 className={styles.boardlist_h1}>실시간 캠핑 소식</h1>
+                <div className={styles.boardlist_button}>
+                    <Button variant="success" onClick={submitSign}>리뷰 작성</Button>
+                </div>
                 <div className={styles.boardlist_table}>
                     <table>
                         <thead>
@@ -41,10 +49,10 @@ function campingplace() {
                         </tbody>
                     </table>
                 </div>
-                <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
+                <Pagination className={styles.boardlist_pagination}>{items}</Pagination>
             </Container>
         </div>
     );
 }
 
-export default campingplace;
+export default boardlist;
