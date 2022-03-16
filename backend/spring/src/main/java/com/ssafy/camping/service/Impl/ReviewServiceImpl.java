@@ -37,7 +37,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Map<String, Object> postReview (ReviewCreateDto reviewDto, MultipartFile[] files) throws Exception {
-        log.debug("ReviewService register call");
+        log.debug("ReviewService postReview call");
         Map<String, Object> resultMap = new HashMap<>();
 
         //캠핑장 후기 저장
