@@ -5,3 +5,45 @@
     margin-bottom: 4%;
 }
 
+.writereview_h6 {
+    font-weight: bold;
+}
+
+.writereview_campingname {
+    font-weight: bold;
+    color: green;
+}
+
+.writereview_title {
+    font-weight: bold;
+    color: green;
+}
+
+.writereview_input {
+    width: 500px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.writereview_input2 {
+    width: 1320px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.writereview_textarea {
+    padding: 1%;
+    width: 1320px;
+    height: 500px;
+}
+
+.writereview_buttons {
+    margin-top: 1%;
+    margin-bottom: 5%;
+    justify-content: center;
+}
+
+.writereview_button {
+    margin-left: 2%;
+    width: 8%;
+}
