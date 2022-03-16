@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
-import styles from "/styles/Board/BoardList.module.css";
+import React from 'react';
+import { Button, Container,} from 'react-bootstrap';
+import styles from "/styles/Qna/QnaList.module.css";
 import Pagination from 'react-bootstrap/Pagination'
 
 function qnalist(props) {
@@ -25,14 +25,14 @@ function qnalist(props) {
     return (
         <div>
             <Container>
-                <h1 className={styles.boardlist_h1}>QnA 게시판</h1>
-                <div className={styles.boardlist_button}>
+                <h1 className={styles.qnalist_h1}>QnA 게시판</h1>
+                <div className={styles.qnalist_button}>
                     <Button variant="success" onClick={submitSign}>QnA 작성</Button>
                 </div>
-                <div className={styles.boardlist_table}>
+                <div className={styles.qnalist_table}>
                     <table>
                         <thead>
-                            <tr className={styles.boardlist_thead_tr}>
+                            <tr className={styles.qnalist_thead_tr}>
                                 <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
                                 <th style={{width: "800px", textAlignLast: "center"}}>제목</th>
                                 <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
@@ -40,7 +40,7 @@ function qnalist(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className={styles.boardlist_tbody_tr} onClick={submitSign2}>
+                            <tr className={styles.qnalist_tbody_tr} onClick={submitSign2}>
                                 <td style={{width: "150px", textAlignLast: "center"}}>1</td>
                                 <td style={{width: "720px"}}>첫번째 게시글입니다.</td>
                                 <td style={{width: "120px", textAlignLast: "center"}}>박주한</td>
@@ -49,7 +49,7 @@ function qnalist(props) {
                         </tbody>
                     </table>
                 </div>
-                <Pagination className={styles.boardlist_pagination}>{items}</Pagination>
+                <Pagination className={styles.qnalist_pagination}>{items}</Pagination>
             </Container>
         </div>
     );

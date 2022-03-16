@@ -1,34 +1,34 @@
-.boardlist_h1 {
+.qnalist_h1 {
     text-align-last: center;
     font-weight: bold;
     padding-top: 2%;
     margin-bottom: 4%;
 }
 
-.boardlist_button {
+.qnalist_button {
     text-align: right;
     margin-bottom: 1%;
     margin-right: 3%;
 }
 
-.boardlist_table {
+.qnalist_table {
     height: 700px;
     text-align: -webkit-center;
     border-bottom: 1px solid black;
     margin-bottom: 2%;
 }
 
-.boardlist_thead_tr {
+.qnalist_thead_tr {
     height: 50px;
     background-color: #198754;
 }
 
-.boardlist_tbody_tr {
+.qnalist_tbody_tr {
     height: 50px;
     border-bottom: 1px solid lightgrey;
 }
 
-.boardlist_pagination {
+.qnalist_pagination {
     justify-content: center;
     margin-bottom: 5%;
 }
