@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "/styles/Board/DetailReview.module.css";
+import CommentCard from "/components/common/CommentCard";
+
+const dummy = [
+    {
+        name: "서은민",
+        content: "어쩌구 저쩌구 쏼라쏼라",
+        date: "2022.03.16 11:07",
+    },
+    {
+        name: "박소희",
+        content: "어쩌구 저쩌구 쏼라쏼라 ㅋㅋㅋㅋㅋㅋ",
+        date: "2022.03.16 11:11",
+    },
+];
 
 function detailreview(props) {
 
@@ -76,6 +90,19 @@ function detailreview(props) {
                 <div className={styles.detailreview_comment}>
                     <h4>댓글 (Counting Star~)</h4>
                 </div>
+                <Row style={{justifyContent: "center", marginBottom: "5%"}}>
+                    {dummy.map((element, index) => {
+                        return (
+                            <Row sm key={index} style={{textAlignLast: "center"}}>
+                                <CommentCard
+                                    name={element.name}
+                                    content={element.content}
+                                    date={element.date}
+                                />
+                            </Row>
+                        );
+                    })}
+                </Row>
             </Container>
         </div>
     );
