@@ -49,34 +49,57 @@ function Navibar() {
                 </NavLink>{" "}
                 /
                 <NavLink href="qna">
-                  <h6 style={{ color: "white", fontWeight: "bold", width: "80px"  }}>QnA</h6>
+                  <h6 style={{ color: "white", fontWeight: "bold", width: "80px"  }}>NEWS</h6>
                 </NavLink>
-                <img className={styles.navi_bell_pic} src="/bell.png" />
-                <div className={styles.navi_dropdown}>
-                <NavDropdown align="end" title={
-                  <img className={styles.navi_profile_pic} src="/profile.png" />
-                } id="dropdown-menu-align-end">
+                {/* <div className={styles.navi_dropdown}>
+                  <NavDropdown align="end" title={
+                    <img className={styles.navi_profile_pic} src="/profile.png" />
+                  } id="dropdown-menu-align-end">
+                    {
+                      !token && (
+                        <>
+                          <NavDropdown.Item onClick={() => LoginsetModalShow(true)}>Login</NavDropdown.Item>
+                          <Login
+                            show={LoginmodalShow}
+                            onHide={() => LoginsetModalShow(false)}
+                          />
+                        </>
+                      ) 
+                    }
+                    {
+                      token && (
+                        <>
+                          <NavDropdown.Item onClick={() => onLogOutClick()}>Logout</NavDropdown.Item>
+                        </>
+                      )
+                    }
+                    <NavDropdown.Item>My Profile</NavDropdown.Item>
+                  </NavDropdown>
+                </div> */}
                   {
                     !token && (
-                      <>
-                        <NavDropdown.Item onClick={() => LoginsetModalShow(true)}>Login</NavDropdown.Item>
-                        <Login
-                          show={LoginmodalShow}
-                          onHide={() => LoginsetModalShow(false)}
-                        />
-                      </>
+                        <>
+                          <h6 style={{ color: "white", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</h6>
+                          <Login
+                            show={LoginmodalShow}
+                            onHide={() => LoginsetModalShow(false)}
+                          />
+                        </>
                     ) 
                   }
                   {
                     token && (
-                      <>
-                        <NavDropdown.Item onClick={() => onLogOutClick()}>Logout</NavDropdown.Item>
-                      </>
+                      <div className={styles.navi_dropdown}>
+                        <NavDropdown align="end" title={
+                          <img className={styles.navi_profile_pic} src="/profile.png" />
+                        } id="dropdown-menu-align-end">
+                          <NavDropdown.Item>마이페이지</NavDropdown.Item>
+                          <NavDropdown.Item>정보 수정</NavDropdown.Item>
+                          <NavDropdown.Item onClick={() => onLogOutClick()}>로그아웃</NavDropdown.Item>
+                        </NavDropdown>
+                      </div> 
                     )
                   }
-                  <NavDropdown.Item>My Profile</NavDropdown.Item>
-                </NavDropdown>
-              </div>
             </Navbar.Collapse>  
           </di>
         </Container>
