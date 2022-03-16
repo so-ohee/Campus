@@ -49,10 +49,15 @@ public class RecommendServiceImpl implements RecommendService {
 
         resultMap.put("season", season + "에 이런 캠핑장 어때요?"); //문구 만들어서 줄까?
 
-        List<Camping> seasonList = campingRepository.searchByThema(thema); //계절에 맞는 캠핑장 중 블로그 글 많은 50곳
+        //계절에 맞는 캠핑장 중 블로그 글 많은 50곳
+        List<Camping> seasonList = campingRepository.searchByThema(thema);
         resultMap.put("seasonList", randomSelect(seasonList)); //필요한 정보만 보내기 -> 캠핑장명 + 주소 + ?
         
-        //블로그순 추가하기
+        //블로그 글 많은 100곳
+        List<Camping> blogList = campingRepository.findTop100ByOrderByBlogCntDesc();
+        resultMap.put("blogList", randomSelect(blogList));
+
+
         
         resultMap.put("message", Message.FIND_CAMPSITE_SUCCESS);
 

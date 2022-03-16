@@ -198,4 +198,7 @@ public class Camping {
     @ApiModelProperty(value = "대표이미지")
     private String firstImageUrl;
 
+    @ApiModelProperty(value = "블로그 글 개수")
+    private int blogCnt;
+
 }
