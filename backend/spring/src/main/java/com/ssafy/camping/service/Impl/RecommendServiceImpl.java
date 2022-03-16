@@ -1,10 +1,12 @@
 package com.ssafy.camping.service.Impl;
 
+import com.ssafy.camping.dto.Camping.CampingListDto;
 import com.ssafy.camping.entity.Camping;
 import com.ssafy.camping.repository.CampingRepository;
 import com.ssafy.camping.service.RecommendService;
 import com.ssafy.camping.service.VisitService;
 import com.ssafy.camping.utils.Message;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -57,15 +59,13 @@ public class RecommendServiceImpl implements RecommendService {
         List<Camping> blogList = campingRepository.findTop100ByOrderByBlogCntDesc();
         resultMap.put("blogList", randomSelect(blogList));
 
-
-        
         resultMap.put("message", Message.FIND_CAMPSITE_SUCCESS);
 
         return resultMap;
     }
 
     @Override
-    public List<Camping> randomSelect(List<Camping> list) throws Exception{
+    public List<CampingListDto> randomSelect(List<Camping> list) throws Exception{
 
         int total = list.size();
         Set<Integer> set = new HashSet<>();
@@ -75,10 +75,22 @@ public class RecommendServiceImpl implements RecommendService {
             set.add(d.intValue());
         }
 
-        List<Camping> final_list = new ArrayList<>();
-        for(Integer i : set)
-            final_list.add(list.get(i));
+        List<CampingListDto> campingList = new ArrayList<>();
+        for(Integer i : set){
+            Camping camping = list.get(i);
+            CampingListDto campingListDto = CampingListDto.builder()
+                    .campingId(camping.getCampingId())
+                    .firstImageUrl(camping.getFirstImageUrl())
+                    .facltNm(camping.getFacltNm())
+                    .addr1(camping.getAddr1())
+                    .induty(camping.getInduty())
+                    .lctCl(camping.getLctCl())
+                    .themaEnvrnCl(camping.getThemaEnvrnCl())
+                    .build();
 
-        return final_list;
+            campingList.add(campingListDto);
+        }
+
+        return campingList;
     }
 }
