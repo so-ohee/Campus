@@ -34,22 +34,9 @@ function First() {
     }, []);
     
     return (
-        // <div className={styles.first_main}>
-        //     <Container>
-        //         <h1 className={styles.first_h1}>봄 추천 캠핑장 TOP 3</h1>
-        //         <Row>
-        //             <Col>
-        //                 <CampingCard
-        //                 title={campingplace.facltNm}
-        //                 address={campingplace.addr1}
-        //                 />
-        //             </Col>
-        //         </Row>
-        //     </Container>
-        // </div>
         <div className={styles.first_main}>
             <Container>
-                <h1 className={styles.first_h1}>지금 뜨는 캠핑장 TOP 3</h1>
+                <h1 className={styles.first_h1}>봄 추천 캠핑장 TOP 3</h1>
                 <Row>
                     {dummy.map((element, index) => {
                         return (
@@ -66,7 +53,6 @@ function First() {
                 
             </Container>
         </div>
-
     );
 }
 export default First;

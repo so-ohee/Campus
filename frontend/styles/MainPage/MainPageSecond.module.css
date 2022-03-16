@@ -34,4 +34,13 @@
 
 .second_h6 {
     text-align-last: left;
+    margin-bottom: 20%;
+}
+
+.second_servey {
+    width: 115px;
+    text-align-last: left;
+    margin-bottom: 20%;
+    color: blue;
+    border-bottom: 1px solid blue;
 }
