@@ -34,31 +34,39 @@ function First() {
     }, []);
     
     return (
+        // <div className={styles.first_main}>
+        //     <Container>
+        //         <h1 className={styles.first_h1}>봄 추천 캠핑장 TOP 3</h1>
+        //         <Row>
+        //             <Col>
+        //                 <CampingCard
+        //                 title={campingplace.facltNm}
+        //                 address={campingplace.addr1}
+        //                 />
+        //             </Col>
+        //         </Row>
+        //     </Container>
+        // </div>
         <div className={styles.first_main}>
             <Container>
-                <h1 className={styles.first_h1}>봄 추천 캠핑장 TOP 3</h1>
+                <h1 className={styles.first_h1}>지금 뜨는 캠핑장 TOP 3</h1>
                 <Row>
-                    {/* {campingplace.map((element, index) => {
+                    {dummy.map((element, index) => {
                         return (
                         <Col sm key={index}>
                             <CampingCard
-                            title={element.facltNm}
-                            address={element.addr1}
-                            hashtag={element.sbrsCl}
+                            title={element.title}
+                            address={element.address}
+                            hashtag={element.hashtag}
                             />
                         </Col>
                         );
-                    })} */}
-                    <Col>
-                        <CampingCard
-                        title={campingplace.facltNm}
-                        address={campingplace.addr1}
-                        // hashtag={campingplace}
-                        />
-                    </Col>
+                    })}
                 </Row>
+                
             </Container>
         </div>
+
     );
 }
 export default First;

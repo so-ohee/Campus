@@ -40,15 +40,6 @@ function Navibar() {
           <di>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
-              <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <img className={styles.navi_search_pic} src="/search.png" />
-              </Form>
                 <NavLink href="campingplace">
                   <h6 style={{ color: "white", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</h6>
                 </NavLink>{" "}
@@ -57,8 +48,8 @@ function Navibar() {
                   <h6 style={{ color: "white", fontWeight: "bold", width: "60px"  }}>BOARD</h6>
                 </NavLink>{" "}
                 /
-                <NavLink href="rentsite">
-                  <h6 style={{ color: "white", fontWeight: "bold", width: "80px"  }}>RENT SITE</h6>
+                <NavLink href="qna">
+                  <h6 style={{ color: "white", fontWeight: "bold", width: "80px"  }}>QnA</h6>
                 </NavLink>
                 <img className={styles.navi_bell_pic} src="/bell.png" />
                 <div className={styles.navi_dropdown}>
