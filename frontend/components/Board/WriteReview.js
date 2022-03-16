@@ -3,11 +3,15 @@ import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap'
 import styles from "/styles/Board/WriteReview.module.css";
 import ReactStars from "react-rating-stars-component";
 
-function writereview() {
+function writereview(props) {
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
     };
+
+    const submitSign = () => {
+        props.propFunction("기본")
+    }
     
     return (
         <div>
@@ -88,7 +92,7 @@ function writereview() {
                 <div>
                     <Row className={styles.writereview_buttons}>
                         <Button variant="success" className={styles.writereview_button}>수정</Button>
-                        <Button variant="success" className={styles.writereview_button}>삭제</Button>
+                        <Button variant="success" className={styles.writereview_button} onClick={submitSign}>뒤로가기</Button>
                     </Row>
                 </div>
 

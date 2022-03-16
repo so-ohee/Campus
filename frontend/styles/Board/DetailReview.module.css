@@ -28,3 +28,13 @@
     margin-left: 2%;
     width: 25%;
 }
+
+.detailreview_buttons {
+    margin-top: 1%;
+    margin-bottom: 5%;
+    justify-content: center;
+}
+.detailreview_button {
+    margin-left: 2%;
+    width: 8%;
+}

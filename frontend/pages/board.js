@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BoardList from '/components/Board/BoardList.js';
 import WriteReview from '/components/Board/WriteReview.js';
 import ModifyReview from '/components/Board/ModifyReview.js';
@@ -7,10 +7,14 @@ import DetailReview from '/components/Board/DetailReview.js';
 
 function board() {
 
-    const [page, setPage] = useState("작성");
+    const [page, setPage] = useState("기본");
     const highFunction = (text) => {
         setPage(text);
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 700);
+      }, [page]);
 
     return (
         <>
