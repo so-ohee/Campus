@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "/styles/Board/DetailReview.module.css";
 import CommentCard from "/components/common/CommentCard";
+import Router from "next/router";
 
 const dummy = [
     {
@@ -23,6 +24,9 @@ function detailreview(props) {
     };
     const submitSign = () => {
         props.propFunction("수정")
+    }
+    const submitSign2 = () => {
+        props.propFunction("기본")
     }
     
     return (
@@ -103,6 +107,12 @@ function detailreview(props) {
                         );
                     })}
                 </Row>
+
+                <div>
+                    <Row className={styles.detailreview_buttons}>
+                        <Button variant="success" className={styles.detailreview_button}  onClick={submitSign2}>뒤로가기</Button>
+                    </Row>
+                </div>
             </Container>
         </div>
     );

@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "/styles/Board/ModifyReview.module.css";
 
-function modifyreview() {
+function modifyreview(props) {
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
     };
+    const submitSign = () => {
+        props.propFunction("상세")
+    }
     
     return (
         <div>
@@ -73,7 +76,7 @@ function modifyreview() {
                 </div>
                 <Row className={styles.modifyreview_buttons}>
                     <Button variant="success" className={styles.modifyreview_button}>수정</Button>
-                    <Button variant="success" className={styles.modifyreview_button}>삭제</Button>
+                    <Button variant="success" className={styles.modifyreview_button} onClick={submitSign}>뒤로가기</Button>
                 </Row>
             </Container>
         </div>
