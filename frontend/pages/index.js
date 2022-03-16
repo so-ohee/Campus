@@ -8,8 +8,8 @@ import "firebase/compat/storage";
 import { authService } from '../components/Firebase/firebase';
 import { useEffect, useState } from 'react';
 
-console.log(firebase);
-console.log(authService.currentUser);
+// console.log(firebase);
+// console.log(authService.currentUser);
 
 function Home() {
   return (
@@ -20,7 +20,6 @@ function Home() {
           <Third />
         </div>
     </>
-    
   );
 }
 
