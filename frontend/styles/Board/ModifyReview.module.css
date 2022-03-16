@@ -1,0 +1,39 @@
+.modifyreview_h1 {
+    text-align-last: center;
+    font-weight: bold;
+    padding-top: 2%;
+    margin-bottom: 4%;
+}
+
+.modifyreview_title {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 0.5%;
+    height: 40px;
+    border: 1px solid lightgrey;
+}
+
+.modifyreview_div {
+    padding: 3%;
+    background: darkseagreen;
+    height: 200px;
+}
+
+.modifyreview_detail {
+    padding: 2%;
+    height: 500px;
+}
+
+.modifyreview_comment {
+    height: 300px;
+    padding: 2%;
+}
+
+.modifyreview_button1 {
+    width: 25%;
+}
+
+.modifyreview_button2 {
+    margin-left: 2%;
+    width: 25%;
+}

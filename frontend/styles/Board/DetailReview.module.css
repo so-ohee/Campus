@@ -1,0 +1,31 @@
+.detailreview_h1 {
+    text-align-last: center;
+    font-weight: bold;
+    padding-top: 2%;
+    margin-bottom: 4%;
+}
+
+.detailreview_div {
+    padding: 3%;
+    background: darkseagreen;
+    height: 200px;
+}
+
+.detailreview_detail {
+    padding: 2%;
+    height: 500px;
+}
+
+.detailreview_comment {
+    height: 300px;
+    padding: 2%;
+}
+
+.detailreview_button1 {
+    width: 25%;
+}
+
+.detailreview_button2 {
+    margin-left: 2%;
+    width: 25%;
+}
