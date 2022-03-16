@@ -7,7 +7,7 @@ import DetailReview from '/components/Board/DetailReview.js';
 
 function board() {
 
-    const [page, setPage] = useState("상세");
+    const [page, setPage] = useState("기본");
     const highFunction = (text) => {
         setPage(text);
     }

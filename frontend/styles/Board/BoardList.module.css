@@ -8,11 +8,12 @@
 .boardlist_button {
     text-align: right;
     margin-bottom: 1%;
+    margin-right: 3%;
 }
 
 .boardlist_table {
     height: 700px;
-    /* 임시 밑줄 */
+    text-align: -webkit-center;
     border-bottom: 1px solid black;
     margin-bottom: 2%;
 }

@@ -23,7 +23,6 @@ function boardlist(props) {
     }
 
     return (
-        
         <div>
             <Container>
                 <h1 className={styles.boardlist_h1}>실시간 캠핑 소식</h1>
