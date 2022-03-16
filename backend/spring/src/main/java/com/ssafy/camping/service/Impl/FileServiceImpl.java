@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -82,6 +83,16 @@ public class FileServiceImpl implements FileService {
                     .filePath(imgURL)
                     .notice(notice).build();
             fileNoticeRepository.save(file); //DB에 S3 URL 저장
+        }
+    }
+
+    @Override
+    public void noticeFileDelete(List<FileNotice> files) throws Exception {
+        log.debug("FileService noticeFileDelete call");
+
+        for(FileNotice file : files) {
+            //S3에서 파일 삭제
+            s3Service.delete(file.getFilePath());
         }
     }
 }

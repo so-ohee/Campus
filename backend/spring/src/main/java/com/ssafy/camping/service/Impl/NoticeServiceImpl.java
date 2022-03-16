@@ -1,6 +1,7 @@
 package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.dto.Notice.NoticeReqDto;
+import com.ssafy.camping.entity.FileNotice;
 import com.ssafy.camping.entity.Notice;
 import com.ssafy.camping.repository.NoticeRepository;
 import com.ssafy.camping.service.FileService;
@@ -9,10 +10,13 @@ import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -49,6 +53,31 @@ public class NoticeServiceImpl implements NoticeService {
         resultMap.put("message", Message.CREATE_NOTICE_SUCCESS);
         resultMap.put("noticeId", notice.getNoticeId());
 
+        return resultMap;
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> deleteNotice(Integer noticeId) throws Exception {
+        log.debug("NoticeService deleteNotice call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<Notice> notice = noticeRepository.findById(noticeId);
+        if(!notice.isPresent()) {
+            resultMap.put("message", Message.NOT_FOUND_NOTICE);
+            return resultMap;
+        }
+
+        //해당 게시글 파일 삭제
+        if(notice.get().getFiles()!=null) {
+            List<FileNotice> files = notice.get().getFiles();
+            fileService.noticeFileDelete(files);
+        }
+
+        //게시글 삭제
+        noticeRepository.deleteById(noticeId);
+
+        resultMap.put("message", Message.DELETE_NOTICE_SUCCESS);
         return resultMap;
     }
 }
