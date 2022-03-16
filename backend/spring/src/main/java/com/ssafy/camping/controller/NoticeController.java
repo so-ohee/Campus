@@ -45,4 +45,25 @@ public class NoticeController {
         }
         return new ResponseEntity(resultMap, status);
     }
+
+    @ApiOperation(value = "게시글 삭제")
+    @DeleteMapping("/{noticeId}")
+    public ResponseEntity delete(@PathVariable Integer noticeId) {
+        log.debug("NoticeController delete call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = noticeService.deleteNotice(noticeId);
+            if(resultMap.get("message").equals(Message.DELETE_NOTICE_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.DELETE_NOTICE_FAIL+": {}",e.getMessage());
+
+            resultMap.put("message", Message.DELETE_NOTICE_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }
