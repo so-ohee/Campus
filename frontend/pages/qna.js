@@ -7,7 +7,7 @@ import DetailQna from '/components/QnA/DetailQna.js';
 
 function qna() {
 
-    const [page, setPage] = useState("기본");
+    const [page, setPage] = useState("작성");
     const highFunction = (text) => {
         setPage(text);
     }

@@ -16,7 +16,7 @@ function writereview(props) {
     return (
         <div>
             <Container>
-                <h1 className={styles.writereview_h1}>캠핑장 리뷰 작성</h1>
+                <h1 className={styles.writereview_h1}>QnA 작성</h1>
 
                 {/* 캠핑장 이름 */}
                 <div style={{marginBottom: "5%"}}>
