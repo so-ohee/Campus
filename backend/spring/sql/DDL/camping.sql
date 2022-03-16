@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `camping`.`camping` (
   `eqpmn_lend_cl` TEXT NULL DEFAULT NULL,
   `animal_cmg_cl` TEXT NULL DEFAULT NULL,
   `first_image_url` TEXT NULL DEFAULT NULL,
-  `blog_cnt` BIGINT NULL DEFAULT 0,
+  `blog_cnt` BIGINT NULL DEFAULT '0',
   PRIMARY KEY (`camping_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -120,65 +120,20 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `camping`.`notice`
+-- Table `camping`.`board`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`notice` (
-  `notice_id` INT NOT NULL AUTO_INCREMENT,
-  `user_uid` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `camping`.`board` (
+  `board_id` INT NOT NULL AUTO_INCREMENT,
   `category` VARCHAR(45) NOT NULL,
-  `title` VARCHAR(45) NOT NULL,
-  `content` TEXT NOT NULL,
-  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_state` TINYINT NOT NULL DEFAULT '0',
-  `update_time` DATETIME NULL DEFAULT NULL,
-  `hit` INT NOT NULL DEFAULT '0',
-  PRIMARY KEY (`notice_id`),
-  INDEX `fk_notice_user1_idx` (`user_uid` ASC) VISIBLE,
-  CONSTRAINT `fk_notice_user1`
-    FOREIGN KEY (`user_uid`)
-    REFERENCES `camping`.`user` (`user_uid`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `camping`.`comment_notice`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`comment_notice` (
-  `comment_id` INT NOT NULL AUTO_INCREMENT,
-  `notice_id` INT NOT NULL,
-  `comment` VARCHAR(400) NOT NULL,
-  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_state` TINYINT NOT NULL DEFAULT '0',
-  `update_time` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`comment_id`),
-  INDEX `fk_comment_notice_notice1_idx` (`notice_id` ASC) VISIBLE,
-  CONSTRAINT `fk_comment_notice_notice1`
-    FOREIGN KEY (`notice_id`)
-    REFERENCES `camping`.`notice` (`notice_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `camping`.`review`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`review` (
-  `review_id` INT NOT NULL AUTO_INCREMENT,
   `user_uid` VARCHAR(45) NOT NULL,
-  `camping_id` BIGINT NOT NULL,
+  `camping_id` BIGINT NULL,
   `title` VARCHAR(45) NOT NULL,
   `content` TEXT NOT NULL,
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_state` TINYINT NOT NULL DEFAULT '0',
   `update_time` DATETIME NULL DEFAULT NULL,
   `delete_state` TINYINT NOT NULL DEFAULT '0',
   `hit` INT NOT NULL DEFAULT '0',
-  PRIMARY KEY (`review_id`),
+  PRIMARY KEY (`board_id`),
   INDEX `fk_review_user_idx` (`user_uid` ASC) VISIBLE,
   INDEX `fk_review_camping21_idx` (`camping_id` ASC) VISIBLE,
   CONSTRAINT `fk_review_camping21`
@@ -194,56 +149,36 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `camping`.`comment_review`
+-- Table `camping`.`comment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`comment_review` (
+CREATE TABLE IF NOT EXISTS `camping`.`comment` (
   `comment_id` INT NOT NULL AUTO_INCREMENT,
-  `review_id` INT NOT NULL,
+  `board_id` INT NOT NULL,
   `comment` VARCHAR(400) NOT NULL,
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_state` TINYINT NOT NULL DEFAULT '0',
   `update_time` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`comment_id`),
-  INDEX `fk_comment_review_review1_idx` (`review_id` ASC) VISIBLE,
+  INDEX `fk_comment_review_review1_idx` (`board_id` ASC) VISIBLE,
   CONSTRAINT `fk_comment_review_review1`
-    FOREIGN KEY (`review_id`)
-    REFERENCES `camping`.`review` (`review_id`))
+    FOREIGN KEY (`board_id`)
+    REFERENCES `camping`.`board` (`board_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `camping`.`file_notice`
+-- Table `camping`.`file_board`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`file_notice` (
+CREATE TABLE IF NOT EXISTS `camping`.`file_board` (
   `file_id` INT NOT NULL AUTO_INCREMENT,
-  `notice_id` INT NOT NULL,
+  `board_id` INT NOT NULL,
   `file_path` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`file_id`),
-  INDEX `fk_notice_file_notice1_idx` (`notice_id` ASC) VISIBLE,
-  CONSTRAINT `fk_notice_file_notice1`
-    FOREIGN KEY (`notice_id`)
-    REFERENCES `camping`.`notice` (`notice_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `camping`.`file_review`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`file_review` (
-  `file_id` INT NOT NULL AUTO_INCREMENT,
-  `review_id` INT NOT NULL,
-  `file_path` VARCHAR(200) NULL DEFAULT NULL,
-  PRIMARY KEY (`file_id`),
-  INDEX `fk_review_file_review1_idx` (`review_id` ASC) VISIBLE,
+  INDEX `fk_review_file_review1_idx` (`board_id` ASC) VISIBLE,
   CONSTRAINT `fk_review_file_review1`
-    FOREIGN KEY (`review_id`)
-    REFERENCES `camping`.`review` (`review_id`))
+    FOREIGN KEY (`board_id`)
+    REFERENCES `camping`.`board` (`board_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
@@ -276,15 +211,15 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `camping`.`rating` (
   `rating_id` INT NOT NULL AUTO_INCREMENT,
-  `review_id` INT NOT NULL,
+  `board_id` INT NOT NULL,
   `environment` INT NOT NULL,
   `facility` INT NOT NULL,
   `service` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`rating_id`),
-  INDEX `fk_rating_review1_idx` (`review_id` ASC) VISIBLE,
+  INDEX `fk_rating_review1_idx` (`board_id` ASC) VISIBLE,
   CONSTRAINT `fk_rating_review1`
-    FOREIGN KEY (`review_id`)
-    REFERENCES `camping`.`review` (`review_id`))
+    FOREIGN KEY (`board_id`)
+    REFERENCES `camping`.`board` (`board_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
@@ -308,6 +243,7 @@ CREATE TABLE IF NOT EXISTS `camping`.`view_log` (
     FOREIGN KEY (`user_uid`)
     REFERENCES `camping`.`user` (`user_uid`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -332,6 +268,37 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `camping`.`file_camping`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `camping`.`file_camping` (
+  `file_id` INT NOT NULL,
+  `camping_id` BIGINT NOT NULL,
+  `file_path` VARCHAR(200) NULL,
+  PRIMARY KEY (`file_id`),
+  INDEX `fk_file_camping_camping1_idx` (`camping_id` ASC) VISIBLE,
+  CONSTRAINT `fk_file_camping_camping1`
+    FOREIGN KEY (`camping_id`)
+    REFERENCES `camping`.`camping` (`camping_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `camping`.`survey`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `camping`.`survey` (
+  `user_uid` VARCHAR(45) NOT NULL,
+  INDEX `fk_survey_user1_idx` (`user_uid` ASC) VISIBLE,
+  CONSTRAINT `fk_survey_user1`
+    FOREIGN KEY (`user_uid`)
+    REFERENCES `camping`.`user` (`user_uid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
