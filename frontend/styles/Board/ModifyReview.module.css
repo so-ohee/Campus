@@ -8,8 +8,19 @@
 .modifyreview_title {
     margin-top: 1%;
     margin-bottom: 1%;
-    padding: 0.5%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 2%;
+    padding-right: 2%;
     height: 40px;
+    border: 1px solid lightgrey;
+}
+
+.modifyreview_content {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding: 2%;
+    height: 500px;
     border: 1px solid lightgrey;
 }
 
@@ -19,21 +30,12 @@
     height: 200px;
 }
 
-.modifyreview_detail {
-    padding: 2%;
-    height: 500px;
+.modifyreview_buttons {
+    margin-top: 1%;
+    margin-bottom: 5%;
+    justify-content: center;
 }
-
-.modifyreview_comment {
-    height: 300px;
-    padding: 2%;
-}
-
-.modifyreview_button1 {
-    width: 25%;
-}
-
-.modifyreview_button2 {
+.modifyreview_button {
     margin-left: 2%;
-    width: 25%;
+    width: 8%;
 }

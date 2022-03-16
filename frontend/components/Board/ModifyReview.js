@@ -72,6 +72,10 @@ function modifyreview() {
                     내용입니다~~~~~~~~~~<br />
                     내용입니다~~~~~~~~~~<br />
                 </div>
+                <Row className={styles.modifyreview_buttons}>
+                    <Button variant="success" className={styles.modifyreview_button}>수정</Button>
+                    <Button variant="success" className={styles.modifyreview_button}>삭제</Button>
+                </Row>
             </Container>
         </div>
     );
