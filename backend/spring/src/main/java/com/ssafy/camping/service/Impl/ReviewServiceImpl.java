@@ -157,6 +157,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
     public Map<String, Object> deleteReview(Integer reviewId) throws Exception {
         log.debug("ReviewService deleteReview call");
 
@@ -170,8 +171,11 @@ public class ReviewServiceImpl implements ReviewService {
         review.get().setDeleteState(1);
         reviewRepository.save(review.get());
 
-        //해당 후기 파일 삭제
-        fileService.reviewFileDelete(reviewId);
+        //해당 후기에 파일이 존재한다면 파일 삭제
+        if(review.get().getFiles()!=null) {
+            List<FileReview> files = review.get().getFiles();
+            fileService.reviewFileDelete(files);
+        }
 
         resultMap.put("message", Message.DELETE_REVIEW_SUCCESS);
         return resultMap;

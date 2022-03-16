@@ -12,11 +12,9 @@ import com.ssafy.camping.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -26,7 +24,6 @@ public class FileServiceImpl implements FileService {
     private final S3Service s3Service;
     private final FileReviewRepository fileReviewRepository;
     private final FileNoticeRepository fileNoticeRepository;
-    private final ReviewRepository reviewRepository;
 
     @Override
     public boolean fileExtensionCheck(MultipartFile[] files) throws Exception{
@@ -56,20 +53,14 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    @Transactional
-    public void reviewFileDelete(Integer reviewId) throws Exception {
+    public void reviewFileDelete(List<FileReview> files) throws Exception {
         log.debug("FileService reviewFileDelete call");
 
-        Optional<Review> review = reviewRepository.findById(reviewId);
-        //파일이 존재할 경우
-        if(review.get().getFiles()!=null) {
-            for(FileReview file : review.get().getFiles()) {
-                //S3에서 파일 삭제
-                s3Service.delete(file.getFilePath());
-                //파일 테이블에서 삭제
-                fileReviewRepository.deleteById(file.getFileId());
-            }
-
+        for(FileReview file : files) {
+            //S3에서 파일 삭제
+            s3Service.delete(file.getFilePath());
+            //파일 테이블에서 삭제
+            fileReviewRepository.deleteById(file.getFileId());
         }
     }
 
