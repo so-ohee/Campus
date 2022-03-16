@@ -1,7 +1,10 @@
 package com.ssafy.camping.service.Impl;
 
+import com.ssafy.camping.entity.FileNotice;
 import com.ssafy.camping.entity.FileReview;
+import com.ssafy.camping.entity.Notice;
 import com.ssafy.camping.entity.Review;
+import com.ssafy.camping.repository.FileNoticeRepository;
 import com.ssafy.camping.repository.FileReviewRepository;
 import com.ssafy.camping.repository.ReviewRepository;
 import com.ssafy.camping.service.FileService;
@@ -12,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -22,6 +24,7 @@ public class FileServiceImpl implements FileService {
 
     private final S3Service s3Service;
     private final FileReviewRepository fileReviewRepository;
+    private final FileNoticeRepository fileNoticeRepository;
     private final ReviewRepository reviewRepository;
 
     @Override
@@ -66,6 +69,19 @@ public class FileServiceImpl implements FileService {
                 fileReviewRepository.deleteById(file.getFileId());
             }
 
+        }
+    }
+
+    @Override
+    public void noticeFileSave(Notice notice, MultipartFile[] files) throws Exception {
+        log.debug("FileService noticeFileSave call");
+
+        for (MultipartFile mfile : files) {
+            String imgURL = s3Service.upload(mfile);  //S3에 파일 업로드 후 URL 가져오기
+            FileNotice file =  FileNotice.builder()
+                    .filePath(imgURL)
+                    .notice(notice).build();
+            fileNoticeRepository.save(file); //DB에 S3 URL 저장
         }
     }
 }

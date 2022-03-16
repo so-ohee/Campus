@@ -21,7 +21,8 @@ public class Message {
 
     public static final String FILE_EXTENSION_EXCEPTION = "파일 확장자가 jpg나 png가 아닙니다.";
 
-
+    public static final String CREATE_NOTICE_SUCCESS = "게시글 등록 성공";
+    public static final String CREATE_NOTICE_FAIL = "게시글 등록 실패";
 
 
 }

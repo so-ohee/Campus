@@ -35,7 +35,7 @@ public class ReviewController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
-            resultMap = reviewService.register(review, files);
+            resultMap = reviewService.postReview(review, files);
             if(resultMap.get("message").equals(Message.CREATE_REVIEW_SUCCESS)) {
                 status = HttpStatus.CREATED;
             }

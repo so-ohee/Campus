@@ -4,7 +4,6 @@ import com.ssafy.camping.dto.FileDto;
 import com.ssafy.camping.dto.Review.CampsiteReviewResDto;
 import com.ssafy.camping.dto.Review.ReviewCreateDto;
 import com.ssafy.camping.dto.Review.ReviewResDto;
-import com.ssafy.camping.entity.Camping;
 import com.ssafy.camping.entity.FileReview;
 import com.ssafy.camping.entity.Rating;
 import com.ssafy.camping.entity.Review;
@@ -37,7 +36,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final FileService fileService;
 
     @Override
-    public Map<String, Object> register(ReviewCreateDto reviewDto, MultipartFile[] files) throws Exception {
+    public Map<String, Object> postReview (ReviewCreateDto reviewDto, MultipartFile[] files) throws Exception {
         log.debug("ReviewService register call");
         Map<String, Object> resultMap = new HashMap<>();
 
@@ -127,7 +126,6 @@ public class ReviewServiceImpl implements ReviewService {
 
         //파일
         List<FileDto> files = new ArrayList<>();
-        //if(review.get().getFiles()!=null)
         for(FileReview file : review.get().getFiles()) {
             files.add(new FileDto(file.getFileId(), file.getFilePath()));
         }
