@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import BoardList from '/components/Board/BoardList.js';
-import WriteReview from '/components/Board/WriteReview.js';
+import WriteMain from '/components/Board/WriteMain.js';
 import ModifyReview from '/components/Board/ModifyReview.js';
 import DetailReview from '/components/Board/DetailReview.js';
 
 function board() {
 
-    const [page, setPage] = useState("기본");
+    const [page, setPage] = useState("작성");
     const highFunction = (text) => {
         setPage(text);
     }
@@ -23,7 +23,7 @@ function board() {
                     page === "기본" && <BoardList propFunction={highFunction} />
                 }
                 {
-                    page === "작성" && <WriteReview propFunction={highFunction}  />
+                    page === "작성" && <WriteMain propFunction={highFunction}  />
                 }
                 {
                     page === "수정" && <ModifyReview propFunction={highFunction}  />
