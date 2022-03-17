@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Dropdown, Nav, NavItem, Row, Tab } from 'react-bootstrap';
+import { Button, Col, Container, Dropdown, Form, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "/styles/Board/WriteReview.module.css";
 import ReactStars from "react-rating-stars-component";
 
@@ -12,6 +12,28 @@ function writereview(props) {
     const submitSign = () => {
         props.propFunction("기본")
     }
+
+    const [postfiles, setPostfiles] = useState({
+        file: [],
+        previewURL: "",
+    });
+
+    const uploadFile = (e) => {
+        e.stopPropagation();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        const filesInArr = Array.from(e.target.files);
+    
+        reader.onloadend = () => {
+            setPostfiles({
+                file: filesInArr,
+                previewURL: reader.result,
+            });
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
     
     return (
         <div>
@@ -75,6 +97,20 @@ function writereview(props) {
                         </Row>
                     </Col>
                 </Row>
+            </div>
+
+            {/* 게시글 제목 */}
+            <div style={{marginBottom: "5%"}}>
+                <h5 className={styles.writereview_title}>사진 업로드</h5>
+                {/* <Form.Group controlId="formFileSm" className="mb-3">
+                    <Form.Control nultiple="multiple" type="file" size="sm" />
+                </Form.Group> */}
+                <input
+                id="upload-file"
+                type="file"
+                multiple
+                onChange={uploadFile}
+                ></input>
             </div>
 
             {/* 게시글 제목 */}

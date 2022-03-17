@@ -21,7 +21,7 @@ function writermain(props) {
     return (
         <div>
             <Container>
-                <div style={{ marginTop: "5%", width: "350px" }}>
+                <div style={{ marginTop: "3%", marginBottom: "5%", width: "350px" }}>
                     <Row>
                         <Col xs={4} style={{ marginTop: "2%" }}>
                             <h5 className={styles.writereview_category}>카테고리</h5>
