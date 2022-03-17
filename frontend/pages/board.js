@@ -4,10 +4,11 @@ import BoardList from '/components/Board/BoardList.js';
 import WriteMain from '/components/Board/WriteMain.js';
 import ModifyReview from '/components/Board/ModifyReview.js';
 import DetailReview from '/components/Board/DetailReview.js';
+import DetailQnaFree from '/components/Board/DetailQnaFree.js';
 
 function board() {
 
-    const [page, setPage] = useState("작성");
+    const [page, setPage] = useState("기본");
     const highFunction = (text) => {
         setPage(text);
     }
@@ -30,6 +31,9 @@ function board() {
                 }
                 {
                     page === "상세" && <DetailReview propFunction={highFunction}  />
+                }
+                {
+                    page === "자유상세" && <DetailQnaFree propFunction={highFunction}  />
                 }
             </div>
         </>
