@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Dropdown, Nav, NavItem, Row, Tab } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Col, Container, Dropdown, Row } from 'react-bootstrap';
 import styles from "/styles/Board/WriteReview.module.css";
 import WriteReview from '/components/Board/WriteReview.js';
+import WriteQna from '/components/Board/WriteQna.js';
+import WriteFree from '/components/Board/WriteFree.js';
 
-function writereview(props) {
+function writermain(props) {
 
     const [page, setPage] = useState("리뷰");
-    const highFunction = (text) => {
-        setPage(text);
-    }
     const review = () => {
         setPage("리뷰");
     }
@@ -30,7 +29,7 @@ function writereview(props) {
                         <Col xs={8}>
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    Select Category
+                                    {page}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item onClick={review}>리뷰</Dropdown.Item>
@@ -45,14 +44,14 @@ function writereview(props) {
                     page === "리뷰" && <WriteReview/>
                 }
                 {
-                    page === "자유" && <WriteMain/>
+                    page === "자유" && <WriteFree/>
                 }
                 {
-                    page === "QnA" && <ModifyReview/>
+                    page === "QnA" && <WriteQna/>
                 }
             </Container>
         </div>
     );
 }
 
-export default writereview;
+export default writermain;
