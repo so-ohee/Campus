@@ -1,7 +1,10 @@
 package com.ssafy.camping.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
@@ -13,31 +16,32 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @DynamicInsert
-public class Review {
+public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer reviewId;
+    private Integer boardId;
     private String userUid;
+    private String category;
     private Integer campingId;
     private String title;
     private String content;
     private String createTime;
-    private int updateState;
     private String updateTime;
     private int deleteState;
     private int hit;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "review") //양방향 매핑을 위해 연관 관계의 주인을 mappedBy로 지정
-    private List<FileReview> files = new ArrayList<>();
+    @OneToMany(mappedBy = "board") //양방향 매핑을 위해 연관 관계의 주인을 mappedBy로 지정
+    private List<FileBoard> files = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToOne(mappedBy = "review")
+    @OneToOne(mappedBy = "board")
     private Rating rating;
 
     @Builder
-    public Review(String userUid, Integer campingId, String title, String content) {
+    public Board(String userUid, String category, Integer campingId, String title, String content) {
         this.userUid = userUid;
+        this.category = category;
         this.campingId = campingId;
         this.title = title;
         this.content = content;

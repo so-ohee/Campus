@@ -1,4 +1,4 @@
-package com.ssafy.camping.dto.Review;
+package com.ssafy.camping.dto.Board;
 
 import com.ssafy.camping.dto.FileDto;
 import io.swagger.annotations.ApiModel;
@@ -12,22 +12,14 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@ApiModel(value = "ReviewResDto : 캠핑장 후기 조회")
-public class ReviewResDto {
-    @ApiModelProperty(value = "후기 고유 번호")
-    private int reviewId;
+@ApiModel(value = "BoardResDto : 게시글 조회")
+public class BoardResDto {
+    @ApiModelProperty(value = "게시글 고유 번호")
+    private int boardId;
     @ApiModelProperty(value = "작성자 고유 번호")
     private String userUid;
-    @ApiModelProperty(value = "캠핑장 고유 번호")
-    private Integer campingId;
-    @ApiModelProperty(value = "캠핑장 명")
-    private String facltNm;
-    @ApiModelProperty(value = "평점 - 환경")
-    private int environment;
-    @ApiModelProperty(value = "평점 - 시설")
-    private int facility;
-    @ApiModelProperty(value = "평점 - 서비스")
-    private int service;
+    @ApiModelProperty(value = "카테고리")
+    private String category;
     @ApiModelProperty(value = "제목")
     private String title;
     @ApiModelProperty(value = "파일")

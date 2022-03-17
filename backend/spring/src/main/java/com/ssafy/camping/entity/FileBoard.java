@@ -10,20 +10,20 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
-public class FileNotice {
+public class FileBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer fileId;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "notice_id")
-    private Notice notice;
+    @JoinColumn(name = "board_id")
+    private Board board;
     private String filePath;
 
     @Builder
-    public FileNotice(Notice notice, String filePath) {
-        this.notice = notice;
+    public FileBoard(Board board, String filePath) {
+        this.board = board;
         this.filePath = filePath;
     }
 }

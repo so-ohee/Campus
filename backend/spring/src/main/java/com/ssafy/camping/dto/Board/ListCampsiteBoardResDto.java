@@ -1,4 +1,4 @@
-package com.ssafy.camping.dto.Review;
+package com.ssafy.camping.dto.Board;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,10 +7,10 @@ import lombok.Getter;
 
 @Getter
 @Builder
-@ApiModel(value = "CampsiteReviewResDto : 캠핑장 후기 조회")
-public class CampsiteReviewResDto {
-    @ApiModelProperty(value = "후기 고유 번호")
-    private int reviewId;
+@ApiModel(value = "ListCampsiteBoardResDto : 캠핑장 상세보기 - 후기 조회")
+public class ListCampsiteBoardResDto {
+    @ApiModelProperty(value = "게시글 고유 번호")
+    private int boardId;
     @ApiModelProperty(value = "작성자 고유 번호")
     private String userUid;
     @ApiModelProperty(value = "평점")

@@ -17,16 +17,16 @@ public class Rating {
 
     @JsonBackReference
     @OneToOne
-    @JoinColumn(name = "review_id")
-    private Review review;
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     private int environment;
     private int facility;
     private int service;
 
     @Builder
-    public Rating(Review review, int environment, int facility, int service) {
-        this.review = review;
+    public Rating(Board board, int environment, int facility, int service) {
+        this.board = board;
         this.environment = environment;
         this.facility = facility;
         this.service = service;
