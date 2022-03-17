@@ -1,9 +1,7 @@
 package com.ssafy.camping.service.Impl;
 
-import com.ssafy.camping.entity.FileNotice;
-import com.ssafy.camping.entity.FileReview;
-import com.ssafy.camping.entity.Notice;
-import com.ssafy.camping.entity.Review;
+import com.ssafy.camping.entity.*;
+import com.ssafy.camping.repository.FileBoardRepository;
 import com.ssafy.camping.repository.FileNoticeRepository;
 import com.ssafy.camping.repository.FileReviewRepository;
 import com.ssafy.camping.repository.ReviewRepository;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Properties;
 
 @Slf4j
 @Service
@@ -24,6 +23,7 @@ public class FileServiceImpl implements FileService {
     private final S3Service s3Service;
     private final FileReviewRepository fileReviewRepository;
     private final FileNoticeRepository fileNoticeRepository;
+    private final FileBoardRepository fileBoardRepository;
 
     @Override
     public boolean fileExtensionCheck(MultipartFile[] files) throws Exception{
@@ -84,6 +84,31 @@ public class FileServiceImpl implements FileService {
         for(FileNotice file : files) {
             //S3에서 파일 삭제
             s3Service.delete(file.getFilePath());
+        }
+    }
+
+    @Override
+    public void boardFileSave(Board board, MultipartFile[] files) throws Exception {
+        log.debug("FileService boardFileSave call");
+
+        for (MultipartFile mfile : files) {
+            String imgURL = s3Service.upload(mfile);  //S3에 파일 업로드 후 URL 가져오기
+            FileBoard file =  FileBoard.builder()
+                    .filePath(imgURL)
+                    .board(board).build();
+            fileBoardRepository.save(file); //DB에 S3 URL 저장
+        }
+    }
+
+    @Override
+    public void boardFileDelete(List<FileBoard> files) throws Exception {
+        log.debug("FileService boardFileDelete call");
+
+        for(FileBoard file : files) {
+            //S3에서 파일 삭제
+            s3Service.delete(file.getFilePath());
+            //파일 테이블에서 삭제
+            fileBoardRepository.deleteById(file.getFileId());
         }
     }
 }

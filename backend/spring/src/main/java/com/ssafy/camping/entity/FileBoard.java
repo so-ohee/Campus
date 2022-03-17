@@ -7,28 +7,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
+@Entity
 @NoArgsConstructor
-public class Rating {
+public class FileBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ratingId;
+    private Integer fileId;
 
     @JsonBackReference
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
-
-    private int environment;
-    private int facility;
-    private int service;
+    private String filePath;
 
     @Builder
-    public Rating(Board board, int environment, int facility, int service) {
+    public FileBoard(Board board, String filePath) {
         this.board = board;
-        this.environment = environment;
-        this.facility = facility;
-        this.service = service;
+        this.filePath = filePath;
     }
 }

@@ -60,12 +60,12 @@ public class ReviewServiceImpl implements ReviewService {
         }
 
         //캠핑장 평점 저장
-        Rating rating = Rating.builder()
-                .review(review)
-                .environment(reviewDto.getEnvironment())
-                .facility(reviewDto.getFacility())
-                .service(reviewDto.getService()).build();
-        ratingRepository.save(rating);
+//        Rating rating = Rating.builder()
+//                .review(review)
+//                .environment(reviewDto.getEnvironment())
+//                .facility(reviewDto.getFacility())
+//                .service(reviewDto.getService()).build();
+//        ratingRepository.save(rating);
 
         resultMap.put("message", Message.CREATE_REVIEW_SUCCESS);
         resultMap.put("reviewId", review.getReviewId());
@@ -87,13 +87,14 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<CampsiteReviewResDto> list = new ArrayList<>();
         for(Review r : review) {
-            Rating rating = r.getRating();
-            double ratingAvg = (rating.getEnvironment() + rating.getFacility() + rating.getService()) / 3.0;
+//            Rating rating = r.getRating();
+//            double ratingAvg = (rating.getEnvironment() + rating.getFacility() + rating.getService()) / 3.0;
 
             CampsiteReviewResDto campsiteReviewResDto = CampsiteReviewResDto.builder()
                     .reviewId(r.getReviewId())
                     .userUid(r.getUserUid())
-                    .rating(ratingAvg)
+                    //.rating(ratingAvg)
+                    .rating(0)
                     .title(r.getTitle())
                     .createTime(r.getCreateTime())
                     .hit(r.getHit()).build();
@@ -122,7 +123,7 @@ public class ReviewServiceImpl implements ReviewService {
         //캠핑장 명
         String campsite = campingRepository.findById(review.get().getCampingId()).get().getFacltNm();
         //평점
-        Rating rating = review.get().getRating();
+       // Rating rating = review.get().getRating();
 
         //파일
         List<FileDto> files = new ArrayList<>();
@@ -141,9 +142,9 @@ public class ReviewServiceImpl implements ReviewService {
                 .userUid(review.get().getUserUid())
                 .campingId(review.get().getCampingId())
                 .facltNm(campsite)
-                .environment(rating.getEnvironment())
-                .facility(rating.getFacility())
-                .service(rating.getService())
+             //   .environment(rating.getEnvironment())
+             //   .facility(rating.getFacility())
+              //  .service(rating.getService())
                 .title(review.get().getTitle())
                 .files(files)
                 .content(review.get().getContent())

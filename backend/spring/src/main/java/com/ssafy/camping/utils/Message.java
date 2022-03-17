@@ -11,7 +11,7 @@ public class Message {
     public static final String FIND_CAMPSITE_FAIL = "캠핑장 조회 실패";
     public static final String FIND_CAMPSITE_SUCCESS = "캠핑장 조회 성공";
 
-    public static final String NOT_FOUND_CAMPSITE_REVIEW = "캠핑장 후기가 없습니다.";
+    //public static final String NOT_FOUND_CAMPSITE_REVIEW = "캠핑장 후기가 없습니다.";
     public static final String FIND_CAMPSITE_REVIEW_FAIL = "캠핑장 후기 조회 실패";
     public static final String FIND_CAMPSITE_REVIEW_SUCCESS = "캠핑장 후기 조회 성공";
     public static final String CREATE_REVIEW_SUCCESS = "캠핑장 후기 등록 성공";
@@ -26,5 +26,16 @@ public class Message {
     public static final String CREATE_NOTICE_FAIL = "게시글 등록 실패";
     public static final String DELETE_NOTICE_SUCCESS = "게시글 삭제 성공";
     public static final String DELETE_NOTICE_FAIL = "게시글 삭제 실패";
+
+    //board
+    public static final String NOT_FOUND_BOARD = "게시글을 찾을 수 없습니다";
+    public static final String FIND_BOARD_SUCCESS = "게시글 조회 성공";
+    public static final String FIND_BOARD_FAIL = "게시글 조회 실패";
+    public static final String CREATE_BOARD_SUCCESS = "게시글 등록 성공";
+    public static final String CREATE_BOARD_FAIL = "게시글 등록 실패";
+    public static final String NOT_FOUND_CAMPSITE_REVIEW = "캠핑장 후기를 찾을 수 없습니다";
+    public static final String DELETE_BOARD_SUCCESS = "게시글 삭제 성공";
+    public static final String DELETE_BOARD_FAIL = "게시글 삭제 실패";
+
 
 }
