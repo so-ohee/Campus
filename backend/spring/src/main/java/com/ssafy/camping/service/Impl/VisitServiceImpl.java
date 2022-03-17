@@ -14,9 +14,9 @@ public class VisitServiceImpl implements VisitService {
     private final VisitRepository visitRepository;
 
     @Override
-    public boolean visitCampsite(String userUid) throws Exception {
-        log.debug("VisitService visitCampsite call");
+    public boolean stateVisitCampsite(Integer campingId, String userUid) throws Exception {
+        log.debug("VisitService stateVisitCampsite call");
 
-        return visitRepository.findByUserUid(userUid) == null ? false : true;
+        return visitRepository.findByCampingIdAndUserUid(campingId, userUid)==null ? false : true;
     }
 }
