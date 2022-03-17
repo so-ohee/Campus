@@ -3,13 +3,40 @@ import { Button, Col, Container, Form, Nav, NavItem, NavLink, Row, Tab, Tabs} fr
 import styles from "/styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 
+const dummy = [
+    {
+        content: "달천공원오토캠핑장",
+        category: "리뷰",
+        writer: "박주한",
+        date: "2022-03-17",
+    },
+    {
+        content: "청풍호오토캠핑장",
+        category: "자유",
+        writer: "박소희",
+        date: "2022-03-17",
+    },
+    {
+        content: "마음이 머무는 곳",
+        category: "QnA",
+        writer: "최다운",
+        date: "2022-03-17",
+    },
+];
+
+
 function boardlist(props) {
 
     const submitSign = () => {
         props.propFunction("작성")
     }
+
     const submitSign2 = () => {
         props.propFunction("상세")
+    }
+
+    const submitSign3 = () => {
+        props.propFunction("자유상세")
     }
     
     // Pagination
@@ -23,15 +50,7 @@ function boardlist(props) {
         );
     }
 
-    // Tab Menu
-    const [value, setValue] = React.useState('one');
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
     return (
-
         <div>
             <Container>
                 <h1 className={styles.boardlist_h1}>게시판</h1>
@@ -47,9 +66,9 @@ function boardlist(props) {
                     </Row>
                 </div>
 
-                <div style={{marginBottom: "-1.3%"}}>
-                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-                        <Tab style={{width: "500px"}} eventKey="전체" title="전체">
+                <div style={{marginBottom: "-1.2%", marginLeft: "4%"}}>
+                    <Tabs style={{width: "500px"}} defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+                        <Tab eventKey="전체" title="전체">
                             
                         </Tab>
                         <Tab eventKey="Q&A" title="Q&A">
@@ -72,18 +91,41 @@ function boardlist(props) {
                         <thead>
                             <tr className={styles.boardlist_thead_tr}>
                                 <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
-                                <th style={{width: "800px", textAlignLast: "center"}}>제목</th>
+                                <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
+                                <th style={{width: "700px", textAlignLast: "center"}}>제목</th>
                                 <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
                                 <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className={styles.boardlist_tbody_tr} onClick={submitSign2}>
-                                <td style={{width: "150px", textAlignLast: "center"}}>1</td>
-                                <td style={{width: "720px"}}>첫번째 게시글입니다.</td>
-                                <td style={{width: "120px", textAlignLast: "center"}}>박주한</td>
-                                <td style={{width: "150px", textAlignLast: "center"}}>2020-10-25</td>
-                            </tr>
+                            {
+                                dummy.map((element, index) => {
+                                    return (
+                                        <>
+                                            {
+                                                element.category === "리뷰" && 
+                                                    <tr className={styles.boardlist_tbody_tr} onClick={submitSign2}>
+                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{index + 1}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                        <td style={{ width: "720px", paddingLeft: "3%" }}>{element.content}</td>
+                                                        <td style={{ width: "120px", textAlignLast: "center" }}>{element.writer}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.date}</td>
+                                                    </tr>
+                                            }
+                                            {
+                                                element.category !== "리뷰" && 
+                                                    <tr className={styles.boardlist_tbody_tr} onClick={submitSign3}>
+                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{index + 1}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                        <td style={{ width: "720px", paddingLeft: "3%" }}>{element.content}</td>
+                                                        <td style={{ width: "120px", textAlignLast: "center" }}>{element.writer}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.date}</td>
+                                                    </tr>
+                                            }
+                                        </>
+                                    )
+                                })
+                            }
                         </tbody>
                     </table>
                 </div>
