@@ -2,8 +2,6 @@ package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.dto.Board.*;
 import com.ssafy.camping.dto.FileDto;
-import com.ssafy.camping.dto.Review.CampsiteReviewResDto;
-import com.ssafy.camping.dto.Review.ReviewResDto;
 import com.ssafy.camping.entity.*;
 import com.ssafy.camping.repository.BoardRepository;
 import com.ssafy.camping.repository.CampingRepository;
@@ -101,7 +99,7 @@ public class BoardServiceImpl implements BoardService {
             boardRepository.deleteById(boardId);
         }
 
-        resultMap.put("message", Message.DELETE_REVIEW_SUCCESS);
+        resultMap.put("message", Message.DELETE_BOARD_SUCCESS);
         return resultMap;
     }
 
@@ -195,7 +193,7 @@ public class BoardServiceImpl implements BoardService {
             list.add(listCampsiteBoardResDto);
         }
 
-        resultMap.put("message", Message.FIND_CAMPSITE_REVIEW_SUCCESS);
+        resultMap.put("message", Message.FIND_BOARD_SUCCESS);
         resultMap.put("totalPage", boards.getTotalPages()); //총 페이지 수
         resultMap.put("board", list);
 
