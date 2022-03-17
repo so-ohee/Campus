@@ -1,9 +1,8 @@
 package com.ssafy.camping.service.Impl;
 
-import com.ssafy.camping.dto.Board.BoardResDto;
-import com.ssafy.camping.dto.Board.RegisterBoardReqDto;
-import com.ssafy.camping.dto.Board.ReviewBoardResDto;
+import com.ssafy.camping.dto.Board.*;
 import com.ssafy.camping.dto.FileDto;
+import com.ssafy.camping.dto.Review.CampsiteReviewResDto;
 import com.ssafy.camping.dto.Review.ReviewResDto;
 import com.ssafy.camping.entity.*;
 import com.ssafy.camping.repository.BoardRepository;
@@ -14,6 +13,9 @@ import com.ssafy.camping.service.FileService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -169,11 +171,72 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Map<String, Object> listCampsiteBoard(Integer campingId, int page) throws Exception {
-        return null;
+        log.debug("BoardService listCampsiteBoard call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Page<Board> boards = boardRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+        if(boards.isEmpty()) {
+            resultMap.put("message", Message.NOT_FOUND_BOARD);
+            return resultMap;
+        }
+
+        List<ListCampsiteBoardResDto> list = new ArrayList<>();
+        for(Board review : boards) {
+            Rating rating = review.getRating();
+            double ratingAvg = (rating.getEnvironment() + rating.getFacility() + rating.getService()) / 3.0;
+
+            ListCampsiteBoardResDto listCampsiteBoardResDto = ListCampsiteBoardResDto.builder()
+                    .boardId(review.getBoardId())
+                    .userUid(review.getUserUid())
+                    .rating(ratingAvg)
+                    .title(review.getTitle())
+                    .createTime(review.getCreateTime())
+                    .hit(review.getHit()).build();
+            list.add(listCampsiteBoardResDto);
+        }
+
+        resultMap.put("message", Message.FIND_CAMPSITE_REVIEW_SUCCESS);
+        resultMap.put("totalPage", boards.getTotalPages()); //총 페이지 수
+        resultMap.put("board", list);
+
+        return resultMap;
     }
 
     @Override
+    @Transactional
     public Map<String, Object> listBoard(String category, int page) throws Exception {
-        return null;
+        log.debug("BoardService listBoard call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Page<Board> boards;
+        
+        if(category==null) {//카테고리가 없다면 전체 조회
+            boards = boardRepository.findByDeleteState(0,PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+        }else {//있다면 해당 카테고리 게시글만 조회
+            boards = boardRepository.findByCategoryAndDeleteState(category,0,PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+        }
+
+        if(boards.isEmpty()) {
+            resultMap.put("message", Message.NOT_FOUND_BOARD);
+            return resultMap;
+        }
+
+        List<ListBoardResDto> list = new ArrayList<>();
+        for(Board board : boards) {
+            ListBoardResDto listBoardResDto = ListBoardResDto.builder()
+                    .boardId(board.getBoardId())
+                    .category(board.getCategory())
+                    .title(board.getTitle())
+                    .userUid(board.getUserUid())
+                    .createTime(board.getCreateTime())
+                    .hit(board.getHit()).build();
+            list.add(listBoardResDto);
+        }
+
+        resultMap.put("message", Message.FIND_BOARD_SUCCESS);
+        resultMap.put("totalPage", boards.getTotalPages()); //총 페이지 수
+        resultMap.put("board", list);
+
+        return resultMap;
     }
 }

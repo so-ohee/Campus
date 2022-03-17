@@ -3,6 +3,8 @@ package com.ssafy.camping.controller;
 import com.ssafy.camping.dto.Board.RegisterBoardReqDto;
 import com.ssafy.camping.service.BoardService;
 import com.ssafy.camping.utils.Message;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -94,6 +96,59 @@ public class BoardController {
         return new ResponseEntity(resultMap, status);
     }
 
-//    @ApiOperation(value = "캠핑장 상세보기 - 후기 목록")
-//    @ApiOperation(value = "게시글 목록")
+    @ApiOperation(value = "캠핑장 상세보기 - 후기 목록")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true,
+                    dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
+                    dataType = "int", paramType = "query")
+    })
+    @GetMapping("/review")
+    public ResponseEntity listCampsiteBoard(@RequestParam Integer campingId,
+                                             @RequestParam(defaultValue = "1") int page) {
+        log.debug("BoardController listCampsiteBoard call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = boardService.listCampsiteBoard(campingId, page-1);
+            if(resultMap.get("message").equals(Message.FIND_BOARD_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.FIND_BOARD_FAIL+": {}",e.getMessage());
+
+            resultMap.put("message", Message.FIND_BOARD_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "게시글 목록")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "category", value = "카테고리", required = false,
+                    dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
+                    dataType = "int", paramType = "query")
+    })
+    @GetMapping()
+    public ResponseEntity listBoard(@RequestParam(required = false) String category,
+                                            @RequestParam(defaultValue = "1") int page) {
+        log.debug("BoardController listBoard call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = boardService.listBoard(category, page-1);
+            if(resultMap.get("message").equals(Message.FIND_BOARD_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.FIND_BOARD_FAIL+": {}",e.getMessage());
+
+            resultMap.put("message", Message.FIND_BOARD_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }
