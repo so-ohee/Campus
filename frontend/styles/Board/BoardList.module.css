@@ -5,6 +5,16 @@
     margin-bottom: 4%;
 }
 
+.boardlist_title_content {
+    width: 99px;
+    height: 37px;
+    margin-right: -1.1%;
+    padding-top: 0.6%;
+    border: 2px solid grey;
+    background: lightgrey;
+    border-radius: 8%;
+}
+
 .boardlist_button {
     text-align: right;
     margin-bottom: 1%;

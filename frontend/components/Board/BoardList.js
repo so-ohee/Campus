@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
+import { Button, Col, Container, Form, Nav, NavItem, NavLink, Row, Tab, Tabs} from 'react-bootstrap';
 import styles from "/styles/Board/BoardList.module.css";
-import Pagination from 'react-bootstrap/Pagination'
+import Pagination from 'react-bootstrap/Pagination';
 
 function boardlist(props) {
 
@@ -12,23 +12,61 @@ function boardlist(props) {
         props.propFunction("상세")
     }
     
+    // Pagination
     let active = 2;
     let items = [];
     for (let number = 1; number <= 5; number++) {
-    items.push(
-        <Pagination.Item key={number} active={number === active}>
-        {number}
-        </Pagination.Item>,
-    );
+        items.push(
+            <Pagination.Item key={number} active={number === active}>
+            {number}
+            </Pagination.Item>,
+        );
     }
 
+    // Tab Menu
+    const [value, setValue] = React.useState('one');
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
     return (
+
         <div>
             <Container>
-                <h1 className={styles.boardlist_h1}>실시간 캠핑 소식</h1>
+                <h1 className={styles.boardlist_h1}>게시판</h1>
                 <div className={styles.boardlist_button}>
-                    <Button variant="success" onClick={submitSign}>리뷰 작성</Button>
+                    <Row style={{ justifyContent: "right" }}>
+                        <div className={styles.boardlist_title_content}>
+                            <h6>제목/내용</h6>
+                        </div>
+                        <Form.Group style={{width:"300px", float: "right"}} controlId="formBasicPassword">
+                            <Form.Control type="password" placeholder="Password" />
+                        </Form.Group>
+                        <Button variant="success" style={{width: "100px"}} onClick={submitSign}>리뷰 작성</Button>
+                    </Row>
                 </div>
+
+                <div style={{marginBottom: "-1.3%"}}>
+                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+                        <Tab style={{width: "500px"}} eventKey="전체" title="전체">
+                            
+                        </Tab>
+                        <Tab eventKey="Q&A" title="Q&A">
+                            
+                        </Tab>
+                        <Tab eventKey="자유" title="자유">
+                            
+                        </Tab>
+                        <Tab eventKey="후기" title="후기">
+                            
+                        </Tab>
+                        <Tab eventKey="뉴스" title="뉴스">
+                            
+                        </Tab>
+                    </Tabs>
+                </div>
+
                 <div className={styles.boardlist_table}>
                     <table>
                         <thead>
