@@ -19,7 +19,7 @@ function Navibar() {
 
   return (
     <>
-      <Navbar style={{backgroundColor: "#007D0D"}} expand="lg">
+      <Navbar style={{backgroundColor: "white"}} expand="lg">
         <Container>
           <Navbar.Brand href="/">
             <img className={styles.navi_pic} src="/logo.png" />
@@ -28,20 +28,20 @@ function Navibar() {
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
                 <NavLink href="campingplace">
-                  <h6 style={{ color: "white", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</h6>
+                  <h6 style={{ color: "black", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</h6>
                 </NavLink>{" "}
                 /
                 <NavLink href="board">
-                  <h6 style={{ color: "white", fontWeight: "bold", width: "60px"  }}>BOARD</h6>
+                  <h6 style={{ color: "black", fontWeight: "bold", width: "60px"  }}>BOARD</h6>
                 </NavLink>{" "}
                 /
                 <NavLink href="qna">
-                  <h6 style={{ color: "white", fontWeight: "bold", width: "80px"  }}>NEWS</h6>
+                  <h6 style={{ color: "black", fontWeight: "bold", width: "80px"  }}>NEWS</h6>
                 </NavLink>
                   {
                     !token && (
                         <div>
-                          <h6 style={{ color: "white", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</h6>
+                          <h6 style={{ color: "black", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</h6>
                           <Login
                             show={LoginmodalShow}
                             onHide={() => LoginsetModalShow(false)}

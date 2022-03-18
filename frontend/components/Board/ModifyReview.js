@@ -14,7 +14,7 @@ function modifyreview(props) {
     return (
         <div>
             <Container>
-                <h1 className={styles.modifyreview_h1}>리뷰 수정하기</h1>
+                <h1 className={styles.modifyreview_h1}>수정하기</h1>
                 <div className={styles.modifyreview_div}>
                     <Row>
                         <Col xs={9}>

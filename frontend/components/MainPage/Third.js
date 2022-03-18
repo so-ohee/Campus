@@ -63,7 +63,7 @@ function Third() {
         // </div>
         <div className={styles.third_main}>
             <Container>
-                <h1 className={styles.third_h1}>봄 추천 캠핑장 TOP 3</h1>
+                <h1 className={styles.third_h1}>인기 캠핑장 TOP 3</h1>
                 <Row>
                     {dummy.map((element, index) => {
                         return (

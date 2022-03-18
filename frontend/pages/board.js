@@ -14,7 +14,7 @@ function board() {
     }
 
     useEffect(() => {
-        window.scrollTo(0, 700);
+        window.scrollTo(0, 500);
       }, [page]);
 
     return (
