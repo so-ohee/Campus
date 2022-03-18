@@ -17,6 +17,6 @@ public class BookmarkServiceImpl implements BookmarkService {
     public boolean stateBookmark(Integer campingId, String userUid) throws Exception {
         log.debug("BookmarkService stateBookmark call");
 
-        return bookmarkRepository.findByCampingIdAndUserUid(campingId, userUid)==null ? false : true;
+        return bookmarkRepository.existsByCampingIdAndUserUid(campingId, userUid);
     }
 }

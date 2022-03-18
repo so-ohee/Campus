@@ -11,4 +11,6 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     Page<Board> findByDeleteState(int deleteState, Pageable pageable);
 
     Page<Board> findByCategoryAndDeleteState(String category, int deleteState, Pageable pageable);
+
+    boolean existsByCampingIdAndUserUid(Integer campingId, String userUid);
 }
