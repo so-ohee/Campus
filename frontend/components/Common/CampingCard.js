@@ -1,9 +1,19 @@
+import { useEffect, useState } from 'react';
 import { Card } from "react-bootstrap";
 
 function CampingCard(params) {
+
+  const [hash, setHash] = useState([]);
+  useEffect(() => {
+    console.log(params.hashtag)
+    // setHash(params.hashtag.split(","));
+  })
+
+  // console.log(hash);
+
   return (
     <>
-      <Card style={{ width: "20rem" }}>
+      <Card style={{ width: "21rem", height: "23rem" }}>
         <Card.Img variant="top" src="/logo.png" />
         <Card.Body>
           <Card.Title style={{ fontSize: "24px" }}>{params.title}</Card.Title>
@@ -13,11 +23,12 @@ function CampingCard(params) {
           >
             {params.address}
           </Card.Subtitle>
-          {/* <Card.Text style={{ fontSize: "16px" }}>
-            {params.hashtag.map((element, index) => {
+          <Card.Text style={{ fontSize: "16px" }}>
+            {/* {params.hashtag.map((element, index) => {
               return <span key={index}>#{element} </span>;
-            })}
-          </Card.Text> */}
+            })} */}
+            {params.hashtag}
+          </Card.Text>
         </Card.Body>
       </Card>
     </>
