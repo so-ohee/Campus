@@ -17,6 +17,6 @@ public class VisitServiceImpl implements VisitService {
     public boolean stateVisitCampsite(Integer campingId, String userUid) throws Exception {
         log.debug("VisitService stateVisitCampsite call");
 
-        return visitRepository.findByCampingIdAndUserUid(campingId, userUid)==null ? false : true;
+        return visitRepository.existsByCampingIdAndUserUid(campingId, userUid);
     }
 }
