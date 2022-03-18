@@ -25,11 +25,13 @@ import { useEffect, useState } from 'react';
 
 function First() {
 
+    const [title, setTitle] = useState("");
     const [campingplace, setCampingplace] = useState([]);
     useEffect(() => {
         viewCamping()
-        .then(function (response) {
-            setCampingplace(response.data.seasonList);
+            .then(function (response) {
+                setTitle(response.data.season);
+                setCampingplace(response.data.seasonList);
     });
     }, []);
 
@@ -38,7 +40,7 @@ function First() {
     return (
         <div className={styles.first_main}>
             <Container>
-                <h1 className={styles.first_h1}>봄 추천 캠핑장 TOP 3</h1>
+                <h1 className={styles.first_h1}>{title}</h1>
                 <Row>
                     {campingplace.map((element, index) => {
                         return (
