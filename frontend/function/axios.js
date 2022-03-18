@@ -6,6 +6,6 @@ export const sendUserUid = async (userUid) => {
     await axios.get(`${ url }`+ `/` + `user` +`/`+ `${userUid}`)
 };
 
-export const viewCamping = async (campingId) => {
-    return await axios.get(`${url}` + `camping?campingId=` + `${campingId}`)
+export const viewCamping = async () => {
+    return await axios.get(`${url}`+ `/` + `mainRecommend`)
 };
