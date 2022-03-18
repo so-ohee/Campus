@@ -8,6 +8,7 @@ import com.ssafy.camping.repository.CampingRepository;
 import com.ssafy.camping.repository.RatingRepository;
 import com.ssafy.camping.service.BoardService;
 import com.ssafy.camping.service.FileService;
+import com.ssafy.camping.service.VisitService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ public class BoardServiceImpl implements BoardService {
     private final RatingRepository ratingRepository;
     private final CampingRepository campingRepository;
     private final FileService fileService;
+    private final VisitService visitService;
 
     @Override
     public Map<String, Object> registerBoard(RegisterBoardReqDto boardDto, MultipartFile[] files) throws Exception {
@@ -53,6 +55,9 @@ public class BoardServiceImpl implements BoardService {
                     .facility(boardDto.getFacility())
                     .service(boardDto.getService()).build();
             ratingRepository.save(rating);
+
+            //방문 저장
+            visitService.saveVisitCampsite(board.getCampingId(), board.getUserUid());
         }
 
         //파일이 존재할 경우 게시글 파일 저장
@@ -65,7 +70,7 @@ public class BoardServiceImpl implements BoardService {
             //파일 저장
             fileService.boardFileSave(board,files);
         }
-
+        
         resultMap.put("message", Message.CREATE_BOARD_SUCCESS);
         resultMap.put("boardId", board.getBoardId());
 
