@@ -10,7 +10,7 @@ function mypage() {
     return (
         
         <div>
-            <Container style={{ height: "1500px" }}>
+            <Container style={{ height: "1300px" }}>
                 <div className={styles.mypage_div1}>
                     <Row>
                         <Col xs={2}>
