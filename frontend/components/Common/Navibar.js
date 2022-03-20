@@ -9,7 +9,8 @@ function Navibar() {
     // localStorage.removeItem(localStorage.token);
     localStorage.removeItem('token');
     console.log(localStorage);
-    location.reload()
+    // location.reload();
+    document.location.href = "/";
   }
 
   let token = null;
