@@ -1,5 +1,6 @@
 package com.ssafy.camping.controller;
 
+import com.ssafy.camping.dto.UserDto;
 import com.ssafy.camping.service.UserService;
 import com.ssafy.camping.utils.Message;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,14 +24,14 @@ public class UserController {
     private final UserService userService;
 
     @ApiOperation(value = "회원 가입")
-    @GetMapping("/{userUid}")
-    public ResponseEntity register(@PathVariable String userUid) {
+    @PostMapping()
+    public ResponseEntity register(@Valid @RequestBody UserDto userDto) {
         log.debug("UserController register call");
 
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
-            resultMap = userService.register(userUid);
+            resultMap = userService.register(userDto);
             if(resultMap.get("message").equals(Message.SIGNUP_SUCCESS)) //회원가입 성공
                 status = HttpStatus.CREATED;
         } catch (Exception e) {
