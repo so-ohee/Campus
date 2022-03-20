@@ -36,6 +36,10 @@ function Navibar() {
                   <h6 style={{ color: "black", fontWeight: "bold", width: "60px"  }}>BOARD</h6>
                 </NavLink>{" "}
                 /
+                <NavLink href="search">
+                  <h6 style={{ color: "black", fontWeight: "bold", width: "60px"  }}>SEARCH</h6>
+                </NavLink>{" "}
+                /
                 <NavLink href="qna">
                   <h6 style={{ color: "black", fontWeight: "bold", width: "80px"  }}>NEWS</h6>
                 </NavLink>
