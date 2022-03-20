@@ -50,7 +50,7 @@ function First() {
                             <CampingCard
                             title={element.facltNm}
                             address={element.addr1}
-                            hashtag={element.themaEnvrnCl.replaceAll(",", " #")}
+                            hashtag={element.themaEnvrnCl}
                             />
                         </Col>
                         );
