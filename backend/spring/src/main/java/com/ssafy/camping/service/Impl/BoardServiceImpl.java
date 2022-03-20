@@ -177,7 +177,7 @@ public class BoardServiceImpl implements BoardService {
         log.debug("BoardService listCampsiteBoard call");
 
         Map<String, Object> resultMap = new HashMap<>();
-        Page<Board> boards = boardRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+        Page<Board> boards = boardRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
         if(boards.isEmpty()) {
             resultMap.put("message", Message.NOT_FOUND_BOARD);
             return resultMap;
@@ -210,14 +210,31 @@ public class BoardServiceImpl implements BoardService {
     public Map<String, Object> listBoard(String category, int page) throws Exception {
         log.debug("BoardService listBoard call");
 
-        Map<String, Object> resultMap = new HashMap<>();
         Page<Board> boards;
-        
         if(category==null) {//카테고리가 없다면 전체 조회
-            boards = boardRepository.findByDeleteState(0,PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+            boards = boardRepository.findByDeleteState(0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
         }else {//있다면 해당 카테고리 게시글만 조회
-            boards = boardRepository.findByCategoryAndDeleteState(category,0,PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+            boards = boardRepository.findByCategoryAndDeleteState(category,0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
         }
+
+        return makeListBoard(boards);
+    }
+
+    @Override
+    public Map<String, Object> userListBoard(String userUid, int page) throws Exception {
+        log.debug("BoardService userListBoard call");
+
+        Page<Board> boards = boardRepository.findByUserUidAndDeleteState(userUid,0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
+        for(Board board : boards) {
+            System.out.println(board.getBoardId());
+        }
+        return makeListBoard(boards);
+    }
+
+    @Override
+    public Map<String, Object> makeListBoard(Page<Board> boards) throws Exception {
+        log.debug("BoardService makeListBoard call");
+        Map<String, Object> resultMap = new HashMap<>();
 
         if(boards.isEmpty()) {
             resultMap.put("message", Message.NOT_FOUND_BOARD);
@@ -249,4 +266,6 @@ public class BoardServiceImpl implements BoardService {
 
         return boardRepository.existsByCampingIdAndUserUid(campingId, userUid);
     }
+
+
 }
