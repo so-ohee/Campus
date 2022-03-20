@@ -160,7 +160,7 @@ public class BoardController {
             @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
                     dataType = "int", paramType = "query")
     })
-    @GetMapping("/board")
+    @GetMapping("/user")
     public ResponseEntity userListBoard (@RequestParam String userUid,
                                          @RequestParam(defaultValue = "1") int page)  {
         log.debug("BoardController userListBoard call");
