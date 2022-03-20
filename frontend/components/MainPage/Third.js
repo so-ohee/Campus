@@ -1,6 +1,5 @@
 import { Row, Col, Container } from 'react-bootstrap';
 import styles from "/styles/MainPage/MainPageThird.module.css";
-import ReviewCard from "/components/common/ReviewCard";
 import CampingCard from "/components/common/CampingCard";
 import { viewCamping } from "../../function/axios";
 import { useEffect, useState } from 'react';
