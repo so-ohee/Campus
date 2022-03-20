@@ -27,6 +27,7 @@ function First() {
 
     const [title, setTitle] = useState("");
     const [campingplace, setCampingplace] = useState([]);
+
     useEffect(() => {
         viewCamping()
             .then(function (response) {
@@ -36,6 +37,7 @@ function First() {
     }, []);
 
     console.log(campingplace);
+    // console.log();
     
     return (
         <div className={styles.first_main}>

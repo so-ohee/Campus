@@ -126,7 +126,7 @@ function writereview(props) {
 
             <div>
                 <Row className={styles.writereview_buttons}>
-                    <Button variant="success" className={styles.writereview_button}>수정</Button>
+                    <Button variant="success" className={styles.writereview_button}>등록</Button>
                     <Button variant="success" className={styles.writereview_button} onClick={submitSign}>뒤로가기</Button>
                 </Row>
             </div>

@@ -2,7 +2,6 @@ import { Button, Modal } from 'react-bootstrap';
 import styles from '/styles/Firebase/Login.module.css';
 import { signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
 import { authService } from "./firebase";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";

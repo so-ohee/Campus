@@ -1,6 +1,5 @@
 import { Row, Col, Container } from 'react-bootstrap';
 import styles from "/styles/MainPage/MainPageThird.module.css";
-import ReviewCard from "/components/common/ReviewCard";
 import CampingCard from "/components/common/CampingCard";
 import { viewCamping } from "../../function/axios";
 import { useEffect, useState } from 'react';
@@ -79,12 +78,12 @@ function Third() {
             <Container>
                 <h1 className={styles.third_h1}>인기 캠핑장 TOP 3</h1>
                 <Row>
-                    {campingplace.map((element, index) => {
+                {campingplace.map((element, index) => {
                         return (
                         <Col sm key={index}>
                             <CampingCard
                             title={element.facltNm}
-                            address={element.addr1}
+                            address={element.addr1} 
                             hashtag={element.themaEnvrnCl}
                             />
                         </Col>
