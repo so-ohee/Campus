@@ -9,17 +9,17 @@ function search() {
     return (
         
         <div>
-            <Container style={{ height: "1300px" }}>
+            <Container style={{ height: "1200px" }}>
                 <div className={styles.search_div1}>
                     <h1 style={{fontWeight: "bold"}}>캠핑장 검색</h1>
                 </div>
 
                 <div className={styles.search_div2}>
-                    <Tabs style={{width: "1320px"}} defaultActiveKey="Visited" id="uncontrolled-tab-example" className="mb-3">
-                        <Tab eventKey="Visited" title="지역">
+                    <Tabs style={{width: "1320px"}} defaultActiveKey="filter" id="uncontrolled-tab-example" className="mb-3">
+                        <Tab eventKey="area" title="지역">
                             <AreaSearch />
                         </Tab>
-                        <Tab eventKey="Review" title="필터링">
+                        <Tab eventKey="filter" title="필터링">
                             <FliterSearch />
                         </Tab>
                     </Tabs>

@@ -1,0 +1,25 @@
+.filtersearch_container {
+    background: rgb(243, 248, 250);
+    margin-top: 5%;
+    width: 1000px;
+    padding: 4%;
+    border-radius: 5%;
+}
+
+.filtersearch_div {
+    height: 150px;
+}
+
+.filtersearch_button {
+    width: 140px;
+    height: 40px;
+    margin-left: 1%;
+    margin-top: 1%;
+    background: lightgrey;
+    border: 0px;
+}
+
+.filtersearch_div2{
+    margin-top: 5%;
+    text-align: -webkit-center;
+}
