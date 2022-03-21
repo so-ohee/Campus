@@ -38,4 +38,19 @@ public class CommentServiceImpl implements CommentService {
 
         return resultMap;
     }
+
+    @Override
+    public Map<String, Object> deleteComment(Integer commentId) throws Exception {
+        log.debug("CommentService registerComment call");
+        Map<String, Object> resultMap = new HashMap<>();
+
+        if(!commentRepository.findById(commentId).isPresent()) {
+            resultMap.put("message", Message.NOT_FOUND_COMMENT);
+            return resultMap;
+        }
+
+        commentRepository.deleteById(commentId);
+        resultMap.put("message", Message.DELETE_COMMENT_SUCCESS);
+        return resultMap;
+    }
 }

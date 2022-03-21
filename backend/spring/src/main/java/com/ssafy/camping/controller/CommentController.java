@@ -43,4 +43,25 @@ public class CommentController {
         }
         return new ResponseEntity(resultMap, status);
     }
+
+    @ApiOperation(value = "댓글 삭제")
+    @DeleteMapping({"{commentId}"})
+    public ResponseEntity deleteComment(@PathVariable Integer commentId) {
+        log.debug("CommentController deleteComment call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = commentService.deleteComment(commentId);
+            if (resultMap.get("message").equals(Message.DELETE_COMMENT_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.DELETE_COMMENT_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.DELETE_COMMENT_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }
