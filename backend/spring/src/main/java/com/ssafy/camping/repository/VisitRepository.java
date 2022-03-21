@@ -9,4 +9,6 @@ public interface VisitRepository extends JpaRepository<Visit, Integer> {
     boolean existsByCampingIdAndUserUid(Integer campingId, String userUid);
 
     Page<Visit> findByUserUid(String userUid, Pageable pageable);
+
+    void deleteByCampingIdAndUserUid(Integer campingId, String userUid);
 }
