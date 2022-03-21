@@ -1,12 +1,8 @@
 import React from 'react';
-import { Button, Container, Row } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 import styles from "/styles/Board/WriteReview.module.css";
 
 function writefree(props) {
-
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-    };
 
     const submitSign = () => {
         props.propFunction("기본")

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Dropdown, Form, Nav, NavItem, Row, Tab } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
 import styles from "/styles/Board/WriteReview.module.css";
 import ReactStars from "react-rating-stars-component";
 
