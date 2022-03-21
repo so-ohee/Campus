@@ -7,7 +7,7 @@ function survey() {
     return (
         <>
             <div className={styles.survey_div1}>
-                    <h1 style={{fontWeight: "bold"}}>캠핑장 검색</h1>
+                    <h1 style={{fontWeight: "bold"}}>설문</h1>
             </div>
             
             <Container className={styles.survey_container}>
@@ -78,7 +78,7 @@ function survey() {
             </Container>
             
             <div className={styles.survey_div4}>
-                <Button style={{background: "#007D0D"}}>검색</Button>
+                <Button style={{background: "#007D0D"}}>완료</Button>
             </div>
         </>
     );
