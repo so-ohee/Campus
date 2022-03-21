@@ -75,10 +75,10 @@ function detailreview(props) {
                         </Col>
                         <Col xs={3}>
                             <Row>
-                                <p>박주한 2021.03.16 09:58 작성</p>
+                                <h6>박주한 2021.03.16 09:58 작성</h6>
                             </Row>
                             <Row>
-                                <p>박주한 2021.03.16 수정</p>
+                                <h6>박주한 2021.03.16 수정</h6>
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                                 <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>

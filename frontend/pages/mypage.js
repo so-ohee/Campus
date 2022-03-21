@@ -4,28 +4,26 @@ import styles from "/styles/MyPage/MyPage.module.css";
 import VisitedCamp from '/components/MyPage/VisitedCamp.js';
 import ReviewCamp from '/components/MyPage/ReviewCamp.js';
 import Bookmarkcamp from '/components/MyPage/Bookmarkcamp.js';
+import { bringUser } from "../function/axios";
 
 function mypage() {
-
-    const [name, setName] = useState("");
-    const [photo, setPhoto] = useState("");
+    const [data, setData] = useState("");
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
-        setName(localStorage.getItem("name"));
-        setPhoto(localStorage.getItem("photoURL"));
+        bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
     }, [])
 
     return (
-        
         <div>
             <Container style={{ height: "1300px" }}>
                 <div className={styles.mypage_div1}>
                     <Row>
                         <Col xs={2}>
-                            <img className={styles.mypage_profile_pic} src={photo} />
+                            <img className={styles.mypage_profile_pic} src={ `${data.profile}` } />
                         </Col>
                         <Col xs={10} style={{alignSelf: "center"}}>
-                            <h2 style={{ fontWeight: "bold" }}>{ name }</h2>
+                            <h2 style={{ fontWeight: "bold" }}>{ data.name }</h2>
                         </Col>
                     </Row>
                 </div>

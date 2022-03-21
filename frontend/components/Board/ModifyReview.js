@@ -57,7 +57,7 @@ function modifyreview(props) {
                         </Col>
                         <Col xs={3}>
                             <Row>
-                                <p>박주한 2021.03.16 09:58 작성</p>
+                                <h6>박주한 2021.03.16 09:58 작성</h6>
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                             </Row>

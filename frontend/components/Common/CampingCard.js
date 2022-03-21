@@ -28,7 +28,7 @@ function CampingCard(params) {
               return <span key={index}>#{element} </span>;
             })} */}
             {
-              params.hashtag !==null ? <p>#{params.hashtag.replaceAll(",", " #")}</p> : null
+              params.hashtag !==null ? <h6>#{params.hashtag.replaceAll(",", " #")}</h6> : null
             }
             {/* #{params.hashtag} */}
           </Card.Text>
