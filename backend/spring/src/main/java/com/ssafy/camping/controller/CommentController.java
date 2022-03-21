@@ -1,6 +1,7 @@
 package com.ssafy.camping.controller;
 
-import com.ssafy.camping.dto.Comment.CommentReqDto;
+import com.ssafy.camping.dto.Comment.RegisterCommentReqDto;
+import com.ssafy.camping.dto.Comment.ModifyCommentReqDto;
 import com.ssafy.camping.service.CommentService;
 import com.ssafy.camping.utils.Message;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +26,7 @@ public class CommentController {
 
     @ApiOperation(value = "댓글 등록")
     @PostMapping
-    public ResponseEntity registerComment(@Valid @RequestBody CommentReqDto comment) {
+    public ResponseEntity registerComment(@Valid @RequestBody RegisterCommentReqDto comment) {
         log.debug("CommentController registerComment call");
 
         Map<String, Object> resultMap = new HashMap<>();
@@ -60,6 +61,27 @@ public class CommentController {
             log.error(Message.DELETE_COMMENT_FAIL+" : {}", e.getMessage());
 
             resultMap.put("message", Message.DELETE_COMMENT_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "댓글 수정")
+    @PutMapping
+    public ResponseEntity modifyComment(@RequestBody ModifyCommentReqDto comment) {
+        log.debug("CommentController modifyComment call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = commentService.modifyComment(comment);
+            if (resultMap.get("message").equals(Message.UPDATE_COMMENT_SUCCESS)) {
+                status = HttpStatus.CREATED;
+            }
+        } catch (Exception e) {
+            log.error(Message.UPDATE_COMMENT_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.UPDATE_COMMENT_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);
