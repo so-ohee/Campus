@@ -6,6 +6,7 @@ import com.ssafy.camping.entity.*;
 import com.ssafy.camping.repository.BoardRepository;
 import com.ssafy.camping.repository.CampingRepository;
 import com.ssafy.camping.repository.RatingRepository;
+import com.ssafy.camping.repository.UserRepository;
 import com.ssafy.camping.service.BoardService;
 import com.ssafy.camping.service.FileService;
 import com.ssafy.camping.service.VisitService;
@@ -31,6 +32,7 @@ public class BoardServiceImpl implements BoardService {
     private final CampingRepository campingRepository;
     private final FileService fileService;
     private final VisitService visitService;
+    private final UserRepository userRepository;
 
     @Override
     public Map<String, Object> registerBoard(RegisterBoardReqDto boardDto, MultipartFile[] files) throws Exception {
@@ -132,6 +134,8 @@ public class BoardServiceImpl implements BoardService {
         board.get().setHit(hit);
         boardRepository.save(board.get());
 
+        User user = userRepository.findById(board.get().getUserUid()).get();
+
         if(board.get().getCategory().equals("후기")) {
             //캠핑장 명
             String campsite = campingRepository.findById(board.get().getCampingId()).get().getFacltNm();
@@ -142,6 +146,8 @@ public class BoardServiceImpl implements BoardService {
                     .boardId(board.get().getBoardId())
                     .category(board.get().getCategory())
                     .userUid(board.get().getUserUid())
+                    .name(user.getName())
+                    .profile(user.getProfile())
                     .campingId(board.get().getCampingId())
                     .facltNm(campsite)
                     .environment(rating.getEnvironment())
@@ -159,6 +165,8 @@ public class BoardServiceImpl implements BoardService {
                     .boardId(board.get().getBoardId())
                     .category(board.get().getCategory())
                     .userUid(board.get().getUserUid())
+                    .name(user.getName())
+                    .profile(user.getProfile())
                     .title(board.get().getTitle())
                     .content(board.get().getContent())
                     .files(files)
@@ -188,9 +196,13 @@ public class BoardServiceImpl implements BoardService {
             Rating rating = review.getRating();
             double ratingAvg = (rating.getEnvironment() + rating.getFacility() + rating.getService()) / 3.0;
 
+            User user = userRepository.findById(review.getUserUid()).get();
+
             ListCampsiteBoardResDto listCampsiteBoardResDto = ListCampsiteBoardResDto.builder()
                     .boardId(review.getBoardId())
                     .userUid(review.getUserUid())
+                    .name(user.getName())
+                    .profile(user.getProfile())
                     .rating(ratingAvg)
                     .title(review.getTitle())
                     .createTime(review.getCreateTime())
@@ -240,7 +252,6 @@ public class BoardServiceImpl implements BoardService {
             resultMap.put("message", Message.NOT_FOUND_BOARD);
             return resultMap;
         }
-
         List<ListBoardResDto> list = new ArrayList<>();
         for(Board board : boards) {
             ListBoardResDto listBoardResDto = ListBoardResDto.builder()
@@ -248,6 +259,7 @@ public class BoardServiceImpl implements BoardService {
                     .category(board.getCategory())
                     .title(board.getTitle())
                     .userUid(board.getUserUid())
+                    .name(userRepository.findById(board.getUserUid()).get().getName())
                     .createTime(board.getCreateTime())
                     .hit(board.getHit()).build();
             list.add(listBoardResDto);

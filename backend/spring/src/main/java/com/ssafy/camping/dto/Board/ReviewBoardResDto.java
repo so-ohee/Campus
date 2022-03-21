@@ -19,6 +19,10 @@ public class ReviewBoardResDto {
     private int boardId;
     @ApiModelProperty(value = "작성자 고유 번호")
     private String userUid;
+    @ApiModelProperty(value = "작성자 이름")
+    private String name;
+    @ApiModelProperty(value = "작성자 프로필 사진")
+    private String profile;
     @ApiModelProperty(value = "카테고리")
     private String category;
     @ApiModelProperty(value = "캠핑장 고유 번호")

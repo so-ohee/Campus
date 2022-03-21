@@ -1,6 +1,7 @@
 package com.ssafy.camping.service;
 
 import com.ssafy.camping.dto.User.UserReqDto;
+import com.ssafy.camping.entity.User;
 
 import java.util.Map;
 
