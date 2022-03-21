@@ -1,6 +1,7 @@
 package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.entity.Visit;
+import com.ssafy.camping.repository.BoardRepository;
 import com.ssafy.camping.repository.VisitRepository;
 import com.ssafy.camping.service.CampingService;
 import com.ssafy.camping.service.VisitService;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +25,22 @@ import java.util.Map;
 public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository visitRepository;
+    private final BoardRepository boardRepository;
     private final CampingService campingService;
+
+    @Override
+    @Transactional
+    public Map<String, Object> userVisit(String userUid, Integer campingId) throws Exception {
+        log.debug("VisitService userVisit call");
+
+        Map<String, Object> resultMap = saveVisitCampsite(campingId, userUid);
+        if(resultMap.get("message").equals(Message.SAVE_VISIT)) { //이미 다녀온 캠핑장 이므로 취소해야함
+            resultMap = deleteVisitCampsite(campingId, userUid);
+        }
+
+        resultMap.put("visit", visitRepository.existsByCampingIdAndUserUid(campingId, userUid));
+        return resultMap;
+    }
 
     @Override
     public Map<String, Object> saveVisitCampsite(Integer campingId, String userUid) throws Exception {
@@ -42,6 +59,22 @@ public class VisitServiceImpl implements VisitService {
         visitRepository.save(visit);
 
         resultMap.put("message", Message.SAVE_VISIT_SUCCESS);
+        return resultMap;
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> deleteVisitCampsite(Integer campingId, String userUid) throws Exception {
+        log.debug("VisitService deleteVisitCampsite call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        //리뷰 작성이 되어있으면 방문 취소 불가
+        if(boardRepository.existsByCampingIdAndUserUid(campingId,userUid)) {
+            resultMap.put("message", Message.DELETE_VISIT_FAIL);
+        } else {
+            visitRepository.deleteByCampingIdAndUserUid(campingId,userUid);
+            resultMap.put("message", Message.DELETE_VISIT_SUCCESS);
+        }
         return resultMap;
     }
 

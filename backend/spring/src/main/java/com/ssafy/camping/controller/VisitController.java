@@ -50,4 +50,32 @@ public class VisitController {
         }
         return new ResponseEntity(resultMap, status);
     }
+
+    @ApiOperation(value = "다녀온 캠핑장 저장/취소")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userUid", value = "회원 고유 번호", required = true,
+                    dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true,
+                    dataType = "int", paramType = "query")
+    })
+    @GetMapping()
+    public ResponseEntity userVisit (@RequestParam String userUid,
+                                     @RequestParam int campingId)   {
+        log.debug("VisitController userVisit call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = visitService.userVisit(userUid, campingId);
+            if(resultMap.get("message").equals(Message.SAVE_VISIT_SUCCESS) || resultMap.get("message").equals(Message.DELETE_VISIT_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.VISIT_FAIL+": {}",e.getMessage());
+
+            resultMap.put("message", Message.VISIT_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }

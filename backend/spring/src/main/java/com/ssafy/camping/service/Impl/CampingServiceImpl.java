@@ -36,21 +36,15 @@ public class CampingServiceImpl implements CampingService {
 
         //userUid 값이 존재한다면
         if(userUid != null) {
-            //캠핑장 다녀왔는지 확인
-            boolean visitCampsite = visitRepository.existsByCampingIdAndUserUid(campingId, userUid);
-            //작성한 리뷰가 있는지 확인
-            boolean review = boardRepository.existsByCampingIdAndUserUid(campingId, userUid);
-            //캠핑장 북마크 확인
-            boolean bookmark = bookmarkRepository.existsByCampingIdAndUserUid(campingId, userUid);
             //캠핑장 상세보기 방문 로그 저장
             ViewLog viewLog = ViewLog.builder()
                     .userUid(userUid)
                     .campingId(campingId).build();
             viewLogRepository.save(viewLog);
 
-            resultMap.put("visit",visitCampsite); //방문여부
-            resultMap.put("bookmark",bookmark); //북마크여부
-            resultMap.put("review", review); //리뷰여부
+            resultMap.put("visit",visitRepository.existsByCampingIdAndUserUid(campingId, userUid)); //방문여부
+            resultMap.put("bookmark",bookmarkRepository.existsByCampingIdAndUserUid(campingId, userUid)); //북마크여부
+            resultMap.put("review", boardRepository.existsByCampingIdAndUserUid(campingId, userUid)); //리뷰여부
         }
 
         resultMap.put("campsite",campsite.get()); //캠핑장 정보
