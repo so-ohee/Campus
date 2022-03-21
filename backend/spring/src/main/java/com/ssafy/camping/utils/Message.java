@@ -23,6 +23,8 @@ public class Message {
     public static final String NOT_FOUND_CAMPSITE_REVIEW = "캠핑장 후기를 찾을 수 없습니다";
     public static final String DELETE_BOARD_SUCCESS = "게시글 삭제 성공";
     public static final String DELETE_BOARD_FAIL = "게시글 삭제 실패";
+    public static final String UPDATE_BOARD_SUCCESS = "게시글 수정 성공";
+    public static final String UPDATE_BOARD_FAIL = "게시글 수정 실패";
 
     //visit
     public static final String SAVE_VISIT_SUCCESS = "캠핑장 방문 저장 성공";
