@@ -7,8 +7,8 @@ function Navibar() {
   const [LoginmodalShow, LoginsetModalShow] = React.useState(false);
   const onLogOutClick = () => {
     // localStorage.removeItem(localStorage.token);
-    localStorage.removeItem('name');
     localStorage.removeItem('photoURL');
+    localStorage.removeItem('ally-supports-cache');
     localStorage.removeItem('token');
     console.log(localStorage);
     // location.reload();
