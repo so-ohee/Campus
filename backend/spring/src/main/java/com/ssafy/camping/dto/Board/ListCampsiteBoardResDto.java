@@ -13,6 +13,10 @@ public class ListCampsiteBoardResDto {
     private int boardId;
     @ApiModelProperty(value = "작성자 고유 번호")
     private String userUid;
+    @ApiModelProperty(value = "작성자 이름")
+    private String name;
+    @ApiModelProperty(value = "작성자 프로필 사진")
+    private String profile;
     @ApiModelProperty(value = "평점")
     private double rating;
     @ApiModelProperty(value = "제목")

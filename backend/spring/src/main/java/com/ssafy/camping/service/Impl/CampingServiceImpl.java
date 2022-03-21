@@ -1,21 +1,16 @@
 package com.ssafy.camping.service.Impl;
 
+import com.ssafy.camping.dto.Camping.CampingListDto;
 import com.ssafy.camping.entity.Camping;
 import com.ssafy.camping.entity.ViewLog;
-import com.ssafy.camping.repository.CampingRepository;
-import com.ssafy.camping.repository.ViewLogRepository;
-import com.ssafy.camping.service.BoardService;
-import com.ssafy.camping.service.BookmarkService;
+import com.ssafy.camping.repository.*;
 import com.ssafy.camping.service.CampingService;
-import com.ssafy.camping.service.VisitService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -24,9 +19,9 @@ public class CampingServiceImpl implements CampingService {
 
     private final CampingRepository campingRepository;
     private final ViewLogRepository viewLogRepository;
-    private final BookmarkService bookmarkService;
-    private final VisitService visitService;
-    private final BoardService boardService;
+    private final BookmarkRepository bookmarkRepository;
+    private final VisitRepository visitRepository;
+    private final BoardRepository boardRepository;
 
     @Override
     public Map<String, Object> getCampsite(int campingId, String userUid) throws Exception {
@@ -42,11 +37,11 @@ public class CampingServiceImpl implements CampingService {
         //userUid 값이 존재한다면
         if(userUid != null) {
             //캠핑장 다녀왔는지 확인
-            boolean visitCampsite = visitService.stateVisitCampsite(campingId, userUid);
+            boolean visitCampsite = visitRepository.existsByCampingIdAndUserUid(campingId, userUid);
             //작성한 리뷰가 있는지 확인
-            boolean review = boardService.stateUserCampsiteReview(campingId, userUid);
+            boolean review = boardRepository.existsByCampingIdAndUserUid(campingId, userUid);
             //캠핑장 북마크 확인
-            boolean bookmark = bookmarkService.stateBookmark(campingId, userUid);
+            boolean bookmark = bookmarkRepository.existsByCampingIdAndUserUid(campingId, userUid);
             //캠핑장 상세보기 방문 로그 저장
             ViewLog viewLog = ViewLog.builder()
                     .userUid(userUid)
@@ -61,5 +56,28 @@ public class CampingServiceImpl implements CampingService {
         resultMap.put("campsite",campsite.get()); //캠핑장 정보
         resultMap.put("message",Message.FIND_CAMPSITE_SUCCESS);
         return resultMap;
+    }
+
+    @Override
+    public List<CampingListDto> makeListCampsite(List<Integer> campingIds) throws Exception {
+        log.debug("CampingService makeListCampsite call");
+
+        List<Camping> campsites = campingRepository.findByCampingIdIn(campingIds);
+
+        List<CampingListDto> campingList = new ArrayList<>();
+        for(Camping camping : campsites){
+            CampingListDto campingListDto = CampingListDto.builder()
+                    .campingId(camping.getCampingId())
+                    .firstImageUrl(camping.getFirstImageUrl())
+                    .facltNm(camping.getFacltNm())
+                    .addr1(camping.getAddr1())
+                    .induty(camping.getInduty())
+                    .lctCl(camping.getLctCl())
+                    .themaEnvrnCl(camping.getThemaEnvrnCl())
+                    .build();
+
+            campingList.add(campingListDto);
+        }
+        return campingList;
     }
 }

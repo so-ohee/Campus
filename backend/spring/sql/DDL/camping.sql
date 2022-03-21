@@ -20,6 +20,20 @@ USE `camping` ;
 -- -----------------------------------------------------
 -- Table `camping`.`camping`
 -- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `camping`.`user` (
+    `user_uid` VARCHAR(45) NOT NULL,
+    `name` VARCHAR(45) NOT NULL,
+    `profile` VARCHAR(200) NULL DEFAULT NULL,
+    `user_state` TINYINT NOT NULL DEFAULT '0',
+    PRIMARY KEY (`user_uid`))
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `camping`.`user`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `camping`.`camping` (
   `camping_id` BIGINT NOT NULL,
   `faclt_nm` TEXT NULL DEFAULT NULL,
@@ -81,18 +95,6 @@ CREATE TABLE IF NOT EXISTS `camping`.`camping` (
   `first_image_url` TEXT NULL DEFAULT NULL,
   `blog_cnt` BIGINT NULL DEFAULT '0',
   PRIMARY KEY (`camping_id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `camping`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`user` (
-  `user_uid` VARCHAR(45) NOT NULL,
-  `user_state` TINYINT NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_uid`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
