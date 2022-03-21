@@ -6,12 +6,10 @@ import styles from "/styles/Common/Navibar.module.css";
 function Navibar() {
   const [LoginmodalShow, LoginsetModalShow] = React.useState(false);
   const onLogOutClick = () => {
-    // localStorage.removeItem(localStorage.token);
-    localStorage.removeItem('photoURL');
+    localStorage.removeItem('userUid');
     localStorage.removeItem('ally-supports-cache');
     localStorage.removeItem('token');
     console.log(localStorage);
-    // location.reload();
     document.location.href = "/";
   }
 
