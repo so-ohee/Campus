@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Col, Container, Nav } from 'react-bootstrap';
 import CampingExplain from '/components/CampingPlace/CampingExplain.js';
 import CampingIntro from '/components/CampingPlace/CampingIntro.js';
 import CampingMap from '/components/CampingPlace/CampingMap.js';

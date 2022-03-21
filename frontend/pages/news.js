@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Dropdown, Form, Nav, NavItem, NavLink, Row, Tab, Tabs} from 'react-bootstrap';
+import React from 'react';
+import { Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import styles from "/styles/News/News.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 
