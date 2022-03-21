@@ -31,7 +31,7 @@ function Login(props) {
             // user Uid DB 전송하기
             sendUserUid(data.user.uid);
             // console.log(data.user);
-            // location.reload();
+            location.reload();
         }
     };
 
