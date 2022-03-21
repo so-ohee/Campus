@@ -3,10 +3,7 @@ package com.ssafy.camping.service.Impl;
 import com.ssafy.camping.dto.Board.*;
 import com.ssafy.camping.dto.FileDto;
 import com.ssafy.camping.entity.*;
-import com.ssafy.camping.repository.BoardRepository;
-import com.ssafy.camping.repository.CampingRepository;
-import com.ssafy.camping.repository.RatingRepository;
-import com.ssafy.camping.repository.UserRepository;
+import com.ssafy.camping.repository.*;
 import com.ssafy.camping.service.BoardService;
 import com.ssafy.camping.service.FileService;
 import com.ssafy.camping.service.VisitService;
@@ -33,6 +30,7 @@ public class BoardServiceImpl implements BoardService {
     private final FileService fileService;
     private final VisitService visitService;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public Map<String, Object> registerBoard(RegisterBoardReqDto boardDto, MultipartFile[] files) throws Exception {
@@ -105,6 +103,9 @@ public class BoardServiceImpl implements BoardService {
         } else {
             boardRepository.deleteById(boardId);
         }
+
+        //댓글 삭제
+        commentRepository.deleteByBoardId(boardId);
 
         resultMap.put("message", Message.DELETE_BOARD_SUCCESS);
         return resultMap;
