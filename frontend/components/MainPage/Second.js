@@ -9,7 +9,7 @@ function Second() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const goServey = () => {
-        console.log("설문가자");
+        window.location.href = "survey";
     }
     
     let token = null;
