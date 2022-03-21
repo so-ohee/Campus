@@ -14,30 +14,7 @@ function Third() {
     });
     }, []);
 
-    // console.log(campingplace);
-
-    return (
-        // 일단 저장해두기
-        // <div className={styles.third_main}>
-        //     <Container>
-        //         <h1 className={styles.third_h1}>인기 캠핑장 TOP 3</h1>
-        //         <Row>
-        //             {dummy.map((element, index) => {
-        //                 return (
-        //                     <Col sm key={index}>
-        //                         <ReviewCard
-        //                             title={element.title}
-        //                             name={element.name}
-        //                             star={element.star}
-        //                             review={element.review}
-        //                         />
-        //                     </Col>
-        //                 );
-        //             })}
-        //         </Row>
-        //     </Container>
-        // </div>
-        
+    return (        
         <div className={styles.third_main}>
             <Container>
                 <h1 className={styles.third_h1}>인기 캠핑장 TOP 3</h1>

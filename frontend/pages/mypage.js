@@ -8,7 +8,6 @@ import { bringUser } from "../function/axios";
 
 function mypage() {
     const [data, setData] = useState("");
-    const [user, setUser] = useState([]);
 
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));

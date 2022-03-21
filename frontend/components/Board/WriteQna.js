@@ -4,10 +4,6 @@ import styles from "/styles/Board/WriteReview.module.css";
 
 function writeqna(props) {
 
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-    };
-
     const submitSign = () => {
         props.propFunction("기본")
     }

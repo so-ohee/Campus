@@ -24,7 +24,6 @@ function Login(props) {
             console.log(data.user);
             console.log(data.user.accessToken);
             // 만약 이전에 토큰이 있다면 토큰 새로 등록하기
-            // localStorage.setItem("name", data.user.displayName);
             localStorage.setItem("userUid", data.user.uid);
             localStorage.setItem("token", data.user.accessToken);
             // user Uid DB 전송하기
@@ -52,7 +51,6 @@ function Login(props) {
                     <img className={styles.login_pic} src="/logo.png" />
                 </div>
                 <div className={styles.login_pic_div}>
-                    {/* <img className={styles.login_kakao_pic} name="kakao" onClick={onSocialClick} src="/kakaologin.png" /> */}
                     <img className={styles.login_google_pic} name="google" onClick={onSocialClick}  src="/googlelogin.png" />
                 </div>
             </Modal.Body>

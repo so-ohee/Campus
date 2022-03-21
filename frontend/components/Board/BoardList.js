@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Form, Nav, NavItem, NavLink, Row, Tab, Tabs} from 'react-bootstrap';
+import React from 'react';
+import { Button, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import styles from "/styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 

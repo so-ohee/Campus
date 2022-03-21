@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
+import React from 'react';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "/styles/Board/ModifyReview.module.css";
 
 function modifyreview(props) {
