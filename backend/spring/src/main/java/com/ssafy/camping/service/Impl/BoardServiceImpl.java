@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
@@ -74,6 +75,43 @@ public class BoardServiceImpl implements BoardService {
         resultMap.put("message", Message.CREATE_BOARD_SUCCESS);
         resultMap.put("boardId", board.getBoardId());
 
+        return resultMap;
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> modifyBoard(ModifyBoardReqDto boardDto, MultipartFile[] files) throws Exception {
+        log.debug("BoardService modifyBoard call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<Board> board = boardRepository.findById(boardDto.getBoardId());
+        if(!board.isPresent() || board.get().getDeleteState()==1) {
+            resultMap.put("message", Message.NOT_FOUND_BOARD);
+            return resultMap;
+        }
+
+        board.get().setTitle(boardDto.getTitle());
+        board.get().setContent(boardDto.getTitle());
+        board.get().setUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        boardRepository.save(board.get());
+
+        //파일이 존재할 경우 게시글 파일 수정
+        if(files != null){
+            //파일 확장자 검사
+            if(!fileService.fileExtensionCheck(files)) {
+                resultMap.put("message", Message.FILE_EXTENSION_EXCEPTION);
+                return resultMap;
+            }
+            //기존 파일 삭제
+            List<FileBoard> originFiles = board.get().getFiles();
+            fileService.boardFileDelete(originFiles);
+
+            //새 파일 저장
+            fileService.boardFileSave(board.get(), files);
+        }
+
+        resultMap.put("message", Message.UPDATE_BOARD_SUCCESS);
+        resultMap.put("boardId", board.get().getBoardId());
         return resultMap;
     }
 

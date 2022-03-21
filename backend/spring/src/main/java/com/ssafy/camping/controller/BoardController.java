@@ -1,5 +1,6 @@
 package com.ssafy.camping.controller;
 
+import com.ssafy.camping.dto.Board.ModifyBoardReqDto;
 import com.ssafy.camping.dto.Board.RegisterBoardReqDto;
 import com.ssafy.camping.service.BoardService;
 import com.ssafy.camping.utils.Message;
@@ -49,6 +50,28 @@ public class BoardController {
             log.error(Message.CREATE_BOARD_FAIL+" : {}", e.getMessage());
 
             resultMap.put("message", Message.CREATE_BOARD_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "게시글 수정")
+    @PutMapping
+    public ResponseEntity modifyBoard(@Valid @RequestPart ModifyBoardReqDto board,
+                                   @RequestPart(required = false) MultipartFile[] files) {
+        log.debug("BoardController modifyBoard call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = boardService.modifyBoard(board, files);
+            if (resultMap.get("message").equals(Message.UPDATE_BOARD_SUCCESS)) {
+                status = HttpStatus.CREATED;
+            }
+        } catch (Exception e) {
+            log.error(Message.UPDATE_BOARD_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.UPDATE_BOARD_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);
