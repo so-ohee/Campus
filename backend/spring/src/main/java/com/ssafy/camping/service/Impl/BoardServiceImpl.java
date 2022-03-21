@@ -271,13 +271,4 @@ public class BoardServiceImpl implements BoardService {
 
         return resultMap;
     }
-
-    @Override
-    public boolean stateUserCampsiteReview(Integer campingId, String userUid) throws Exception {
-        log.debug("BoardService stateUserCampsiteReview call");
-
-        return boardRepository.existsByCampingIdAndUserUid(campingId, userUid);
-    }
-
-
 }

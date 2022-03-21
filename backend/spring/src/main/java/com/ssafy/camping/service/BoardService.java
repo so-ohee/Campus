@@ -8,8 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
 public interface BoardService {
-    //회원의 캠핑장 리뷰 작성 여부
-    boolean stateUserCampsiteReview(Integer campingId, String userUid) throws Exception;
     //게시글 등록
     Map<String, Object> registerBoard(RegisterBoardReqDto boardDto, MultipartFile[] files) throws Exception;
     //게시글 삭제

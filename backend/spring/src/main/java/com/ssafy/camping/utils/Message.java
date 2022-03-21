@@ -30,7 +30,9 @@ public class Message {
     public static final String DELETE_VISIT_SUCCESS = "캠핑장 방문 삭제 성공";
     public static final String DELETE_VISIT_FAIL = "캠핑장 방문 삭제 실패";
     public static final String SAVE_VISIT = "이미 캠핑장 방문 저장되어있습니다.";
-    public static final String NOT_FOUND_VISIT = "캠핑장 방문 저장을 찾을 수 없습니다.";
+    public static final String NOT_FOUND_VISIT = "캠핑장 방문을 찾을 수 없습니다.";
+    public static final String FIND_VISIT_SUCCESS = "방문 캠핑장 조회 성공";
+    public static final String FIND_VISIT_FAIL = "방문 캠핑장 조회 실패";
     
     //bookmark
     public static final String NOT_FOUND_BOOKMARK = "북마크를 찾을 수 없습니다";
