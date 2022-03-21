@@ -1,4 +1,3 @@
-import { Navbar } from "react-bootstrap";
 import styles from '/styles/Common/Footer.module.css';
 
 function Footer() {

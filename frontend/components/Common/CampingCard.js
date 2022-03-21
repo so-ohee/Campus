@@ -1,15 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Card } from "react-bootstrap";
 
 function CampingCard(params) {
-
-  const [hash, setHash] = useState([]);
-  // useEffect(() => {
-  //   console.log(params.hashtag)
-  //   // setHash(params.hashtag.split(","));
-  // })
-
-  // console.log(hash);
 
   return (
     <>
@@ -24,13 +16,9 @@ function CampingCard(params) {
             {params.address}
           </Card.Subtitle>
           <Card.Text style={{ fontSize: "16px" }}>
-            {/* {params.hashtag.map((element, index) => {
-              return <span key={index}>#{element} </span>;
-            })} */}
             {
               params.hashtag !==null ? <h6>#{params.hashtag.replaceAll(",", " #")}</h6> : null
             }
-            {/* #{params.hashtag} */}
           </Card.Text>
         </Card.Body>
       </Card>
