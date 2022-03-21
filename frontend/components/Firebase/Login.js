@@ -25,12 +25,12 @@ function Login(props) {
             console.log(data.user);
             console.log(data.user.accessToken);
             // 만약 이전에 토큰이 있다면 토큰 새로 등록하기
-            localStorage.setItem("name", data.user.displayName);
-            localStorage.setItem("photoURL", data.user.photoURL);
+            // localStorage.setItem("name", data.user.displayName);
+            // localStorage.setItem("photoURL", data.user.photoURL);
             localStorage.setItem("token", data.user.accessToken);
             // user Uid DB 전송하기
-            sendUserUid(data.user.uid);
-            // console.log(data.user);
+            sendUserUid(data.user.uid, data.user.displayName, data.user.photoURL);
+            console.log(data.user);
             location.reload();
         }
     };
