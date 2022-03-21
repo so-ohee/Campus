@@ -1,5 +1,6 @@
 package com.ssafy.camping.service;
 
+import com.ssafy.camping.dto.Board.ModifyBoardReqDto;
 import com.ssafy.camping.dto.Board.RegisterBoardReqDto;
 import com.ssafy.camping.entity.Board;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import java.util.Map;
 public interface BoardService {
     //게시글 등록
     Map<String, Object> registerBoard(RegisterBoardReqDto boardDto, MultipartFile[] files) throws Exception;
+    //게시글 수정
+    Map<String, Object> modifyBoard(ModifyBoardReqDto boardDto, MultipartFile[] files) throws Exception;
     //게시글 삭제
     Map<String, Object> deleteBoard(Integer boardId) throws Exception;
     //게시글 조회
