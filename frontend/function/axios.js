@@ -10,6 +10,7 @@ export const sendUserUid = async (userUid, displayName, photoURL) => {
     //         params: { name: displayName, profile: photoURL, userUid: userUid }
     //     })
     //     .then((res) => console.log("성공"));
+
     let data = {
         name: displayName,
         profile: photoURL,
