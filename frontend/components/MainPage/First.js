@@ -36,7 +36,7 @@ function First() {
     });
     }, []);
 
-    console.log(campingplace);
+    // console.log(campingplace);
     // console.log();
     
     return (

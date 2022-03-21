@@ -4,10 +4,10 @@ import { Card } from "react-bootstrap";
 function CampingCard(params) {
 
   const [hash, setHash] = useState([]);
-  useEffect(() => {
-    console.log(params.hashtag)
-    // setHash(params.hashtag.split(","));
-  })
+  // useEffect(() => {
+  //   console.log(params.hashtag)
+  //   // setHash(params.hashtag.split(","));
+  // })
 
   // console.log(hash);
 
