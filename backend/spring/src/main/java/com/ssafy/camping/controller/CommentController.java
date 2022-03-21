@@ -4,6 +4,8 @@ import com.ssafy.camping.dto.Comment.RegisterCommentReqDto;
 import com.ssafy.camping.dto.Comment.ModifyCommentReqDto;
 import com.ssafy.camping.service.CommentService;
 import com.ssafy.camping.utils.Message;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -82,6 +84,34 @@ public class CommentController {
             log.error(Message.UPDATE_COMMENT_FAIL+" : {}", e.getMessage());
 
             resultMap.put("message", Message.UPDATE_COMMENT_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "댓글 조회")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "boardId", value = "게시글 고유 번호", required = true,
+                    dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
+                    dataType = "int", paramType = "query")
+    })
+    @GetMapping
+    public ResponseEntity listComment(@RequestParam Integer boardId,
+                                      @RequestParam(defaultValue = "1") int page) {
+        log.debug("CommentController listComment call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = commentService.listComment(boardId, page-1);
+            if (resultMap.get("message").equals(Message.FIND_COMMENT_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.FIND_COMMENT_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.FIND_COMMENT_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);

@@ -47,5 +47,7 @@ public class Message {
     public static final String DELETE_COMMENT_FAIL = "댓글 삭제 실패";
     public static final String UPDATE_COMMENT_SUCCESS = "댓글 수정 성공";
     public static final String UPDATE_COMMENT_FAIL = "댓글 수정 실패";
+    public static final String FIND_COMMENT_SUCCESS = "댓글 조회 성공";
+    public static final String FIND_COMMENT_FAIL = "댓글 조회 실패";
 
 }

@@ -12,4 +12,6 @@ public interface CommentService {
     Map<String, Object> deleteComment (Integer commentId) throws Exception;
     //댓글 수정
     Map<String, Object> modifyComment (ModifyCommentReqDto commentDto) throws Exception;
+    //댓글 조회
+    Map<String, Object> listComment (Integer boardId, int page) throws Exception;
 }

@@ -1,20 +1,23 @@
 package com.ssafy.camping.service.Impl;
 
+import com.ssafy.camping.dto.Comment.CommentResDto;
 import com.ssafy.camping.dto.Comment.RegisterCommentReqDto;
 import com.ssafy.camping.dto.Comment.ModifyCommentReqDto;
 import com.ssafy.camping.entity.Comment;
+import com.ssafy.camping.entity.User;
 import com.ssafy.camping.repository.CommentRepository;
+import com.ssafy.camping.repository.UserRepository;
 import com.ssafy.camping.service.CommentService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -22,6 +25,7 @@ import java.util.Optional;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Map<String, Object> registerComment(RegisterCommentReqDto commentDto) throws Exception {
@@ -75,6 +79,37 @@ public class CommentServiceImpl implements CommentService {
 
         resultMap.put("message", Message.UPDATE_COMMENT_SUCCESS);
         resultMap.put("commentId", comment.get().getCommentId());
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> listComment(Integer boardId, int page) throws Exception {
+        log.debug("CommentService listComment call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Page<Comment> comments = commentRepository.findByBoardId(boardId, PageRequest.of(page, 20, Sort.by(Sort.Direction.DESC, "commentId")));
+        if(comments.isEmpty()) {
+            resultMap.put("message", Message.NOT_FOUND_COMMENT);
+            return resultMap;
+        }
+
+        List<CommentResDto> list = new ArrayList<>();
+        for(Comment c : comments) {
+            User user = userRepository.findById(c.getUserUid()).get();
+
+            CommentResDto comment = CommentResDto.builder()
+                    .commentId(c.getCommentId())
+                    .userUid(c.getUserUid())
+                    .name(user.getName())
+                    .profile(user.getProfile())
+                    .comment(c.getComment())
+                    .createTime(c.getCreateTime())
+                    .updateTime(c.getUpdateTime()).build();
+            list.add(comment);
+        }
+        resultMap.put("message", Message.FIND_COMMENT_SUCCESS);
+        resultMap.put("comment", list);
+        resultMap.put("totalPage", comments.getTotalPages());
         return resultMap;
     }
 }
