@@ -1,6 +1,5 @@
 package com.ssafy.camping.service.Impl;
 
-import com.ssafy.camping.entity.Bookmark;
 import com.ssafy.camping.entity.Visit;
 import com.ssafy.camping.repository.VisitRepository;
 import com.ssafy.camping.service.CampingService;

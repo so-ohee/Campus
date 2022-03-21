@@ -26,13 +26,6 @@ public class BookmarkServiceImpl implements BookmarkService {
     private final CampingService campingService;
 
     @Override
-    public boolean stateBookmark(Integer campingId, String userUid) throws Exception {
-        log.debug("BookmarkService stateBookmark call");
-
-        return bookmarkRepository.existsByCampingIdAndUserUid(campingId, userUid);
-    }
-
-    @Override
     public Map<String, Object> userListBookmark(String userUid, int page) throws Exception {
         log.debug("BookmarkService userListBookmark call");
 
