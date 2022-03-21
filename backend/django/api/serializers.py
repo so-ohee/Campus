@@ -5,7 +5,7 @@ from .models import Camping, Visit
 class CampingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Camping
-        fields = ['camping_id', 'faclt_nm', 'addr1']
+        fields = ['camping_id', 'faclt_nm', 'addr1', 'blog_cnt', 'induty', 'lct_cl']
 
 
 class CampingAllSerializer(serializers.ModelSerializer):
