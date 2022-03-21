@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Tab, Tabs } from 'react-bootstrap';
 import styles from "/styles/MyPage/MyPage.module.css";
 import VisitedCamp from '/components/MyPage/VisitedCamp.js';
@@ -7,6 +7,14 @@ import Bookmarkcamp from '/components/MyPage/Bookmarkcamp.js';
 
 function mypage() {
 
+    const [name, setName] = useState("");
+    const [photo, setPhoto] = useState("");
+
+    useEffect(() => {
+        setName(localStorage.getItem("name"));
+        setPhoto(localStorage.getItem("photoURL"));
+    }, [])
+
     return (
         
         <div>
@@ -14,10 +22,10 @@ function mypage() {
                 <div className={styles.mypage_div1}>
                     <Row>
                         <Col xs={2}>
-                            <img className={styles.mypage_profile_pic} src="/profile.png" />
+                            <img className={styles.mypage_profile_pic} src={photo} />
                         </Col>
                         <Col xs={10} style={{alignSelf: "center"}}>
-                            <h2 style={{fontWeight: "bold"}}>이름</h2>
+                            <h2 style={{ fontWeight: "bold" }}>{ name }</h2>
                         </Col>
                     </Row>
                 </div>
