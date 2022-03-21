@@ -6,6 +6,7 @@ import com.ssafy.camping.entity.*;
 import com.ssafy.camping.repository.BoardRepository;
 import com.ssafy.camping.repository.CampingRepository;
 import com.ssafy.camping.repository.RatingRepository;
+import com.ssafy.camping.repository.UserRepository;
 import com.ssafy.camping.service.BoardService;
 import com.ssafy.camping.service.FileService;
 import com.ssafy.camping.service.VisitService;
@@ -31,6 +32,7 @@ public class BoardServiceImpl implements BoardService {
     private final CampingRepository campingRepository;
     private final FileService fileService;
     private final VisitService visitService;
+    private final UserRepository userRepository;
 
     @Override
     public Map<String, Object> registerBoard(RegisterBoardReqDto boardDto, MultipartFile[] files) throws Exception {
@@ -132,6 +134,8 @@ public class BoardServiceImpl implements BoardService {
         board.get().setHit(hit);
         boardRepository.save(board.get());
 
+        User user = userRepository.findById(board.get().getUserUid()).get();
+
         if(board.get().getCategory().equals("후기")) {
             //캠핑장 명
             String campsite = campingRepository.findById(board.get().getCampingId()).get().getFacltNm();
@@ -142,6 +146,8 @@ public class BoardServiceImpl implements BoardService {
                     .boardId(board.get().getBoardId())
                     .category(board.get().getCategory())
                     .userUid(board.get().getUserUid())
+                    .name(user.getName())
+                    .profile(user.getProfile())
                     .campingId(board.get().getCampingId())
                     .facltNm(campsite)
                     .environment(rating.getEnvironment())
@@ -159,6 +165,8 @@ public class BoardServiceImpl implements BoardService {
                     .boardId(board.get().getBoardId())
                     .category(board.get().getCategory())
                     .userUid(board.get().getUserUid())
+                    .name(user.getName())
+                    .profile(user.getProfile())
                     .title(board.get().getTitle())
                     .content(board.get().getContent())
                     .files(files)
@@ -177,7 +185,7 @@ public class BoardServiceImpl implements BoardService {
         log.debug("BoardService listCampsiteBoard call");
 
         Map<String, Object> resultMap = new HashMap<>();
-        Page<Board> boards = boardRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+        Page<Board> boards = boardRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
         if(boards.isEmpty()) {
             resultMap.put("message", Message.NOT_FOUND_BOARD);
             return resultMap;
@@ -188,9 +196,13 @@ public class BoardServiceImpl implements BoardService {
             Rating rating = review.getRating();
             double ratingAvg = (rating.getEnvironment() + rating.getFacility() + rating.getService()) / 3.0;
 
+            User user = userRepository.findById(review.getUserUid()).get();
+
             ListCampsiteBoardResDto listCampsiteBoardResDto = ListCampsiteBoardResDto.builder()
                     .boardId(review.getBoardId())
                     .userUid(review.getUserUid())
+                    .name(user.getName())
+                    .profile(user.getProfile())
                     .rating(ratingAvg)
                     .title(review.getTitle())
                     .createTime(review.getCreateTime())
@@ -210,20 +222,36 @@ public class BoardServiceImpl implements BoardService {
     public Map<String, Object> listBoard(String category, int page) throws Exception {
         log.debug("BoardService listBoard call");
 
-        Map<String, Object> resultMap = new HashMap<>();
         Page<Board> boards;
-        
         if(category==null) {//카테고리가 없다면 전체 조회
-            boards = boardRepository.findByDeleteState(0,PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+            boards = boardRepository.findByDeleteState(0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
         }else {//있다면 해당 카테고리 게시글만 조회
-            boards = boardRepository.findByCategoryAndDeleteState(category,0,PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
+            boards = boardRepository.findByCategoryAndDeleteState(category,0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
         }
+
+        return makeListBoard(boards);
+    }
+
+    @Override
+    public Map<String, Object> userListBoard(String userUid, int page) throws Exception {
+        log.debug("BoardService userListBoard call");
+
+        Page<Board> boards = boardRepository.findByUserUidAndDeleteState(userUid,0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
+        for(Board board : boards) {
+            System.out.println(board.getBoardId());
+        }
+        return makeListBoard(boards);
+    }
+
+    @Override
+    public Map<String, Object> makeListBoard(Page<Board> boards) throws Exception {
+        log.debug("BoardService makeListBoard call");
+        Map<String, Object> resultMap = new HashMap<>();
 
         if(boards.isEmpty()) {
             resultMap.put("message", Message.NOT_FOUND_BOARD);
             return resultMap;
         }
-
         List<ListBoardResDto> list = new ArrayList<>();
         for(Board board : boards) {
             ListBoardResDto listBoardResDto = ListBoardResDto.builder()
@@ -231,6 +259,7 @@ public class BoardServiceImpl implements BoardService {
                     .category(board.getCategory())
                     .title(board.getTitle())
                     .userUid(board.getUserUid())
+                    .name(userRepository.findById(board.getUserUid()).get().getName())
                     .createTime(board.getCreateTime())
                     .hit(board.getHit()).build();
             list.add(listBoardResDto);
@@ -241,12 +270,5 @@ public class BoardServiceImpl implements BoardService {
         resultMap.put("board", list);
 
         return resultMap;
-    }
-
-    @Override
-    public boolean stateUserCampsiteReview(Integer campingId, String userUid) throws Exception {
-        log.debug("BoardService stateUserCampsiteReview call");
-
-        return boardRepository.existsByCampingIdAndUserUid(campingId, userUid);
     }
 }

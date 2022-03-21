@@ -13,4 +13,6 @@ public interface CampingRepository extends JpaRepository<Camping, Integer> {
     List<Camping> searchByThema(@Param("thema") String thema);
 
     List<Camping> findTop100ByOrderByBlogCntDesc();
+
+    List<Camping> findByCampingIdIn(List<Integer> campingIds);
 }

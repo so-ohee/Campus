@@ -1,14 +1,22 @@
 package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.entity.Visit;
+import com.ssafy.camping.repository.BoardRepository;
 import com.ssafy.camping.repository.VisitRepository;
+import com.ssafy.camping.service.CampingService;
 import com.ssafy.camping.service.VisitService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -17,12 +25,21 @@ import java.util.Map;
 public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository visitRepository;
+    private final BoardRepository boardRepository;
+    private final CampingService campingService;
 
     @Override
-    public boolean stateVisitCampsite(Integer campingId, String userUid) throws Exception {
-        log.debug("VisitService stateVisitCampsite call");
+    @Transactional
+    public Map<String, Object> userVisit(String userUid, Integer campingId) throws Exception {
+        log.debug("VisitService userVisit call");
 
-        return visitRepository.existsByCampingIdAndUserUid(campingId, userUid);
+        Map<String, Object> resultMap = saveVisitCampsite(campingId, userUid);
+        if(resultMap.get("message").equals(Message.SAVE_VISIT)) { //이미 다녀온 캠핑장 이므로 취소해야함
+            resultMap = deleteVisitCampsite(campingId, userUid);
+        }
+
+        resultMap.put("visit", visitRepository.existsByCampingIdAndUserUid(campingId, userUid));
+        return resultMap;
     }
 
     @Override
@@ -31,7 +48,7 @@ public class VisitServiceImpl implements VisitService {
 
         Map<String, Object> resultMap = new HashMap<>();
         //캠핑장 방문 여부 확인
-        if(stateVisitCampsite(campingId, userUid)) {
+        if(visitRepository.existsByCampingIdAndUserUid(campingId, userUid)) {
             resultMap.put("message", Message.SAVE_VISIT);
             return resultMap;
         }
@@ -42,6 +59,44 @@ public class VisitServiceImpl implements VisitService {
         visitRepository.save(visit);
 
         resultMap.put("message", Message.SAVE_VISIT_SUCCESS);
+        return resultMap;
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> deleteVisitCampsite(Integer campingId, String userUid) throws Exception {
+        log.debug("VisitService deleteVisitCampsite call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        //리뷰 작성이 되어있으면 방문 취소 불가
+        if(boardRepository.existsByCampingIdAndUserUid(campingId,userUid)) {
+            resultMap.put("message", Message.DELETE_VISIT_FAIL);
+        } else {
+            visitRepository.deleteByCampingIdAndUserUid(campingId,userUid);
+            resultMap.put("message", Message.DELETE_VISIT_SUCCESS);
+        }
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> userListVisit(String userUid, int page) throws Exception {
+        log.debug("VisitService userListVisit call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Page<Visit> visits = visitRepository.findByUserUid(userUid, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "visitId")));
+        if(visits.isEmpty()) {
+            resultMap.put("message", Message.NOT_FOUND_VISIT);
+            return resultMap;
+        }
+
+        List<Integer> campingIds = new ArrayList<>();
+        for(Visit v : visits) {
+            campingIds.add(v.getCampingId());
+        }
+
+        resultMap.put("message", Message.FIND_BOOKMARK_SUCCESS);
+        resultMap.put("campsite", campingService.makeListCampsite(campingIds));
+        resultMap.put("totalPage", visits.getTotalPages());
         return resultMap;
     }
 }

@@ -151,4 +151,33 @@ public class BoardController {
         }
         return new ResponseEntity(resultMap, status);
     }
+
+
+    @ApiOperation(value = "내가 작성한 게시글 목록")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userUid", value = "회원 고유 번호", required = true,
+                    dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
+                    dataType = "int", paramType = "query")
+    })
+    @GetMapping("/user")
+    public ResponseEntity userListBoard (@RequestParam String userUid,
+                                         @RequestParam(defaultValue = "1") int page)  {
+        log.debug("BoardController userListBoard call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = boardService.userListBoard(userUid, page-1);
+            if(resultMap.get("message").equals(Message.FIND_BOARD_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.FIND_BOARD_FAIL+": {}",e.getMessage());
+
+            resultMap.put("message", Message.FIND_BOARD_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }
