@@ -46,3 +46,16 @@ python manage.py runserver
 python manage.py makemigrations
 python manage.py migrate
 ```
+
+
+
+#### MySQL 모델이 변경되었을 때
+
+```django
+python manage.py inspectdb > models.py
+```
+
+- 생성된 models.py 파일을 api폴더에 넣어준다.
+
+
+
