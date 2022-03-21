@@ -1,0 +1,36 @@
+.survey_div1 {
+    margin-top: 5%;
+    text-align-last: center;
+}
+
+.survey_container {
+    background: rgb(243, 248, 250);
+    margin-top: 2%;
+    width: 1000px;
+    padding: 4%;
+    border-radius: 5%;
+}
+
+.survey_div2 {
+    height: 150px;
+}
+
+.survey_div3 {
+    margin-top: 7%;
+    height: 150px;
+}
+
+.survey_button {
+    width: 140px;
+    height: 40px;
+    margin-left: 1%;
+    margin-top: 1%;
+    background: lightgrey;
+    border: 0px;
+}
+
+.survey_div4{
+    margin-top: 1%;
+    margin-bottom: 3%;
+    text-align: -webkit-center;
+}
