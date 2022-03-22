@@ -111,7 +111,7 @@ function detailreview(props) {
                 </div>
                 <hr />
                 <div className={styles.detailreview_comment}>
-                    <h4>댓글 (Counting Star~)</h4>
+                    <h4>댓글 {dummy.length}</h4>
                 </div>
                 <Row style={{justifyContent: "center", marginBottom: "5%"}}>
                     {dummy.map((element, index) => {
