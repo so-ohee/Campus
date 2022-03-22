@@ -7,7 +7,7 @@ function commentcard(params) {
         <Container>
             <Row className={styles.commentcard_row}>
                 <Col className={styles.commentcard_col} xs={2}>
-                    <img className={styles.commentcard_profile} src="/profile.png" ></img>
+                    <img className={styles.commentcard_profile} src={params.src} ></img>
                 </Col>
                 <Col className={styles.commentcard_col} xs={8}>
                     <Row>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "/styles/Board/DetailReview.module.css";
 import CommentCard from "/components/common/CommentCard";
-import { campingBoardMore } from "../../function/axios";
+import { campingBoardMore, commentSearch } from "../../function/axios";
 
 const dummy = [
     {
@@ -31,13 +31,19 @@ function detailreview(props) {
         props.propFunction("기본")
     }
 
+    // 게시글 상세정보 받아오기
     const [datas, setDatas] = useState([]);
-
     useEffect(() => {
         campingBoardMore(props.datas).then((res) => setDatas(res.data.board));
     }, [])
 
-    console.log(datas);
+    // 댓글 조회
+    const [dummy, setDummy] = useState([]);
+    useEffect(() => {
+        commentSearch(props.datas).then((res) => setDummy(res.data.comment));
+    }, [])
+
+    console.log(dummy);
 
     return (
         <div>
@@ -112,9 +118,10 @@ function detailreview(props) {
                         return (
                             <Row sm key={index} style={{textAlignLast: "center"}}>
                                 <CommentCard
+                                    src={element.profile}
                                     name={element.name}
-                                    content={element.content}
-                                    date={element.date}
+                                    content={element.comment}
+                                    date={element.createTime}
                                 />
                             </Row>
                         );
