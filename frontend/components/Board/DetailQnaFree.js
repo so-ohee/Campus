@@ -60,25 +60,38 @@ function detailreview(props) {
                     {datas.content}
                 </div>
                 <hr />
-                <div className={styles.detailreview_comment}>
-                    <h4>댓글</h4>
-                </div>
-                <Row style={{justifyContent: "center", marginBottom: "5%"}}>
-                    {dummy.map((element, index) => {
-                        return (
-                            <Row sm key={index} style={{textAlignLast: "center"}}>
-                                <CommentCard
-                                    commentId={element.commentId}
-                                    src={element.profile}
-                                    name={element.name}
-                                    content={element.comment}
-                                    date={element.createTime}
-                                />
-                            </Row>
-                        );
-                    })}
-                </Row>
-
+                
+                {
+                    dummy === null ?
+                        (
+                            <>
+                                <div className={styles.detailreview_comment}>
+                                    <h4>댓글</h4>
+                                </div>
+                                <Row style={{justifyContent: "center", marginBottom: "5%"}}>
+                                    {dummy.map((element, index) => {
+                                        return (
+                                            <Row sm key={index} style={{textAlignLast: "center"}}>
+                                                <CommentCard
+                                                    commentId={element.commentId}
+                                                    src={element.profile}
+                                                    name={element.name}
+                                                    content={element.comment}
+                                                    date={element.createTime}
+                                                />
+                                            </Row>
+                                        );
+                                    })}
+                                </Row>
+                            </>
+                        ) :
+                        (
+                            <div className={styles.detailreview_comment}>
+                                <h1 style={{textAlign: "center"}}>댓글이 없습니다</h1>
+                            </div>
+                        )
+                }
+                
                 <div>
                     <Row className={styles.detailreview_buttons}>
                         <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>

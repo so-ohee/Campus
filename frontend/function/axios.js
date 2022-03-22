@@ -51,10 +51,8 @@ export const campingBoardMore = async (boardId) => {
 
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
-    axios.delete(`${url}`+ `/` + `board` + `/` + `${boardId}`).then(() => location.reload())
+    axios.delete(`${url}`+ `/` + `board` + `/` + `${boardId}`)
 }
-
-
 
 // 댓글 기능
 // 댓글 조회
