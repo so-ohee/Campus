@@ -132,5 +132,23 @@ public class UserServiceImpl implements UserService {
         resultMap.put("message", Message.UPDATE_USER_SUCCESS);
         return resultMap;
     }
+
+    @Override
+    public Map<String, Object> modifyUserProfile(String userUid, MultipartFile file) throws Exception {
+        log.debug("UserService modifyUserName call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<User> user = userRepository.findById(userUid);
+        if(!user.isPresent() || user.get().getUserState()==2) { //회원이 존재하지 않을 경우
+            resultMap.put("message", Message.NOT_FOUND_USER);
+            return resultMap;
+        }
+
+        user.get().setProfile(fileService.userFileUpdate(user.get().getProfile(),file));
+        userRepository.save(user.get());
+        resultMap.put("profile", user.get().getProfile());
+        resultMap.put("message", Message.UPDATE_USER_SUCCESS);
+        return resultMap;
+    }
 }
 

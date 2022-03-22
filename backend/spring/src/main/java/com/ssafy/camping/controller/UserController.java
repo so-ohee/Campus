@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -95,6 +96,27 @@ public class UserController {
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
             resultMap = userService.modifyUserName(user);
+            if(resultMap.get("message").equals(Message.UPDATE_USER_SUCCESS))
+                status = HttpStatus.CREATED;
+        } catch (Exception e) {
+            log.error(Message.UPDATE_USER_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.UPDATE_USER_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "회원 프로필 사진 수정")
+    @PutMapping("{userUid}")
+    public ResponseEntity modifyUserProfile(@PathVariable String userUid,
+                                            @RequestPart(required = false) MultipartFile file) {
+        log.debug("UserController modifyUserProfile call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = userService.modifyUserProfile(userUid, file);
             if(resultMap.get("message").equals(Message.UPDATE_USER_SUCCESS))
                 status = HttpStatus.CREATED;
         } catch (Exception e) {

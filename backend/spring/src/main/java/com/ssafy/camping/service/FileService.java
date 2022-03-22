@@ -13,4 +13,7 @@ public interface FileService {
     void boardFileSave(Board board, MultipartFile[] files) throws Exception;
     //게시글 파일 삭제
     void boardFileDelete(List<FileBoard> files) throws Exception;
+
+    //회원 프로필 사진 수정
+    String userFileUpdate(String profile, MultipartFile file) throws Exception;
 }
