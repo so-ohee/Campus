@@ -1,13 +1,20 @@
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "/styles/Common/CommentCard.module.css";
+import { commentDelete } from "../../function/axios"
+import { useEffect, useState } from 'react';
 
 function commentcard(params) {
-    
+
+    function deleteComment(commentId) {
+        // console.log(commentId)
+        commentDelete(commentId);
+    }
+
     return (
         <Container>
             <Row className={styles.commentcard_row}>
                 <Col className={styles.commentcard_col} xs={2}>
-                    <img className={styles.commentcard_profile} src="/profile.png" ></img>
+                    <img className={styles.commentcard_profile} src={params.src} ></img>
                 </Col>
                 <Col className={styles.commentcard_col} xs={8}>
                     <Row>
@@ -29,7 +36,7 @@ function commentcard(params) {
                         <Button variant="success" className={styles.commentcard_button1}>수정</Button>
                     </Row>
                     <Row style={{justifyContent: "center"}}>
-                        <Button variant="success" className={styles.commentcard_button2}>삭제</Button>
+                        <Button variant="success" className={styles.commentcard_button2} onClick={() => deleteComment(params.commentId)}>삭제</Button>
                     </Row>
                 </Col>
             </Row>

@@ -50,4 +50,32 @@ public class BookmarkController {
         }
         return new ResponseEntity(resultMap, status);
     }
+
+    @ApiOperation(value = "북마크 저장/취소")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userUid", value = "회원 고유 번호", required = true,
+                    dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true,
+                    dataType = "int", paramType = "query")
+    })
+    @GetMapping()
+    public ResponseEntity bookmark (@RequestParam String userUid,
+                                     @RequestParam int campingId)   {
+        log.debug("BookmarkController bookmark call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = bookmarkService.bookmark(userUid, campingId);
+            if(resultMap.get("message").equals(Message.SAVE_BOOKMARK_SUCCESS) || resultMap.get("message").equals(Message.DELETE_BOOKMARK_SUCCESS)) {
+                status = HttpStatus.OK;
+            }
+        } catch (Exception e) {
+            log.error(Message.BOOKMARK_FAIL+": {}",e.getMessage());
+
+            resultMap.put("message", Message.BOOKMARK_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }

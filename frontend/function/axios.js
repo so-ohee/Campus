@@ -2,6 +2,7 @@ import axios from "axios";
 
 const url = "http://localhost:8080/";
 
+// 회원 기능 
 // 로그인 (회원 정보 DB에 저징)
 export const sendUserUid = async (userUid, displayName, photoURL) => {
     const url2 = "http://localhost:8080/user";
@@ -30,6 +31,40 @@ export async function bringUser(userUid) {
     return res;
 }
 
+
+
+// 게시판 기능
+// 추천 캠핑장 (메인화면 켐핑장 추천 기능 구현)
 export const viewCamping = async () => {
     return await axios.get(`${url}`+ `/` + `mainRecommend`)
 };
+
+// 게시판 목록 출력 (전체)
+export const campingBoard = async () => {
+    return await axios.get(`${url}`+ `/` + `board`)
+}
+
+// 게시판 목록 출력 (상세조회)
+export const campingBoardMore = async (boardId) => {
+    return await axios.get(`${url}`+ `/` + `board`+ `/` + `${boardId}`)
+}
+
+// 게시글 삭제
+export const articleDelete = async (boardId) => {
+    axios.delete(`${url}`+ `/` + `board` + `/` + `${boardId}`)
+}
+
+// 댓글 기능
+// 댓글 조회
+export const commentSearch = async (boardId) => {
+    return await axios.get(`${url}`+ `/` + `comment?boardId=` + `${boardId}`)
+}
+
+// 댓글 작성
+
+// 댓글 수정
+
+// 댓글 삭제
+export const commentDelete = async (commentId) => {
+    axios.delete(`${url}`+ `/` + `comment`+ `/` + `${commentId}`).then(() => location.reload())
+}
