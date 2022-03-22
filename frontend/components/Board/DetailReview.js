@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "/styles/Board/DetailReview.module.css";
 import CommentCard from "/components/common/CommentCard";
-import { campingBoardMore, commentSearch } from "../../function/axios";
+import { campingBoardMore, articleDelete, commentSearch } from "../../function/axios";
 
 function detailreview(props) {
 
@@ -24,11 +24,18 @@ function detailreview(props) {
         campingBoardMore(props.datas).then((res) => setDatas(res.data.board));
     }, [])
 
+    // 게시글 삭제
+    const deleteArticle = () => {
+        articleDelete(datas.boardId).then(() => location.reload())
+    }
+
     // 댓글 조회
     const [dummy, setDummy] = useState([]);
     useEffect(() => {
         commentSearch(props.datas).then((res) => setDummy(res.data.comment));
     }, [])
+
+    console.log(datas);
 
     return (
         <div>
@@ -86,7 +93,7 @@ function detailreview(props) {
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                                 <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>
-                                <Button variant="success" className={styles.detailreview_button2}>삭제</Button>
+                                <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
                             </Row>
                         </Col>
                     </Row>
@@ -95,25 +102,37 @@ function detailreview(props) {
                     {datas.content}
                 </div>
                 <hr />
-                <div className={styles.detailreview_comment}>
-                    <h4>댓글 {dummy.length}</h4>
-                </div>
-                <Row style={{justifyContent: "center", marginBottom: "5%"}}>
-                    {dummy.map((element, index) => {
-                        return (
-                            <Row sm key={index} style={{textAlignLast: "center"}}>
-                                <CommentCard
-                                    commentId={element.commentId}
-                                    src={element.profile}
-                                    name={element.name}
-                                    content={element.comment}
-                                    date={element.createTime}
-                                />
-                            </Row>
-                        );
-                    })}
-                </Row>
-
+                {
+                    dummy === null ?
+                        (
+                            <>
+                                <div className={styles.detailreview_comment}>
+                                    <h4>댓글</h4>
+                                </div>
+                                <Row style={{justifyContent: "center", marginBottom: "5%"}}>
+                                    {dummy.map((element, index) => {
+                                        return (
+                                            <Row sm key={index} style={{textAlignLast: "center"}}>
+                                                <CommentCard
+                                                    commentId={element.commentId}
+                                                    src={element.profile}
+                                                    name={element.name}
+                                                    content={element.comment}
+                                                    date={element.createTime}
+                                                />
+                                            </Row>
+                                        );
+                                    })}
+                                </Row>
+                            </>
+                        ) :
+                        (
+                            <div className={styles.detailreview_comment}>
+                                <h1 style={{textAlign: "center"}}>댓글이 없습니다</h1>
+                            </div>
+                        )
+                }
+                
                 <div>
                     <Row className={styles.detailreview_buttons}>
                         <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>
