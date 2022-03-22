@@ -102,7 +102,7 @@ function boardlist(props) {
                                         }
                                         {
                                             element.category !== "후기" && 
-                                                <tr className={styles.boardlist_tbody_tr} onClick={submitSign3}>
+                                                <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
                                                     <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                     <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>

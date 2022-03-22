@@ -4,19 +4,6 @@ import styles from "/styles/Board/DetailReview.module.css";
 import CommentCard from "/components/common/CommentCard";
 import { campingBoardMore, commentSearch } from "../../function/axios";
 
-const dummy = [
-    {
-        name: "서은민",
-        content: "어쩌구 저쩌구 쏼라쏼라",
-        date: "2022.03.16 11:07",
-    },
-    {
-        name: "박소희",
-        content: "어쩌구 저쩌구 쏼라쏼라 ㅋㅋㅋㅋㅋㅋ",
-        date: "2022.03.16 11:11",
-    },
-];
-
 function detailreview(props) {
 
     const ratingChanged = (newRating) => {
@@ -42,8 +29,6 @@ function detailreview(props) {
     useEffect(() => {
         commentSearch(props.datas).then((res) => setDummy(res.data.comment));
     }, [])
-
-    console.log(dummy);
 
     return (
         <div>

@@ -1,20 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "/styles/Board/DetailReview.module.css";
 import CommentCard from "/components/common/CommentCard";
-
-const dummy = [
-    {
-        name: "서은민",
-        content: "어쩌구 저쩌구 쏼라쏼라",
-        date: "2022.03.16 11:07",
-    },
-    {
-        name: "박소희",
-        content: "어쩌구 저쩌구 쏼라쏼라 ㅋㅋㅋㅋㅋㅋ",
-        date: "2022.03.16 11:11",
-    },
-];
+import { campingBoardMore, commentSearch } from "../../function/axios";
 
 function detailreview(props) {
 
@@ -27,24 +15,39 @@ function detailreview(props) {
     const submitSign2 = () => {
         props.propFunction("기본")
     }
+
+    // 게시글 상세정보 받아오기
+    const [datas, setDatas] = useState([]);
+    useEffect(() => {
+        campingBoardMore(props.datas).then((res) => setDatas(res.data.board));
+    }, [])
+
+    // 댓글 조회
+    const [dummy, setDummy] = useState([]);
+    useEffect(() => {
+        commentSearch(props.datas).then((res) => setDummy(res.data.comment));
+    }, [])
     
     return (
         <div>
             <Container>
-                <h1 className={styles.detailreview_h1}>QnA / 자유 상세보기</h1>
+                <h1 className={styles.detailreview_h1}>{datas.title}</h1>
                 <div className={styles.detailreview_div}>
                     <Row>
                         <Col xs={9}>
                             <Row>
-                                <h3 style={{fontWeight: "bold"}}>QnA / 자유</h3>
+                                <h3 style={{fontWeight: "bold"}}>{datas.category}</h3>
                             </Row>
                         </Col>
                         <Col xs={3}>
                             <Row>
-                                <h6>박주한 2021.03.16 09:58 작성</h6>
+                                <h6>{datas.name} {datas.createTime} 작성</h6>
                             </Row>
                             <Row>
-                                <h6>박주한 2021.03.16 수정</h6>
+                                {
+                                    datas.updateTime === null ? <h6>수정되지 않은 글입니다.</h6>
+                                    : <h6>{datas.name} {datas.updateTime} 수정</h6>
+                                }
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                                 <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>
@@ -54,20 +57,21 @@ function detailreview(props) {
                     </Row>
                 </div>
                 <div className={styles.detailreview_detail}>
-                    게시글 보기
+                    {datas.content}
                 </div>
                 <hr />
                 <div className={styles.detailreview_comment}>
-                    <h4>댓글 (Counting Star~)</h4>
+                    <h4>댓글</h4>
                 </div>
                 <Row style={{justifyContent: "center", marginBottom: "5%"}}>
                     {dummy.map((element, index) => {
                         return (
                             <Row sm key={index} style={{textAlignLast: "center"}}>
                                 <CommentCard
+                                    src={element.profile}
                                     name={element.name}
-                                    content={element.content}
-                                    date={element.date}
+                                    content={element.comment}
+                                    date={element.createTime}
                                 />
                             </Row>
                         );
