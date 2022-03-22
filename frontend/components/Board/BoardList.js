@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Button, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import styles from "/styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
+import { campingBoard } from "../../function/axios";
 
 const dummy = [
     {
@@ -38,6 +39,14 @@ function boardlist(props) {
     const submitSign3 = () => {
         props.propFunction("자유상세")
     }
+
+    const [dummy, setDummy] = useState([]);
+
+    useEffect(() => {
+        campingBoard().then((res) => setDummy(res.data.board));
+    }, [])
+
+    console.log(dummy);
     
     // Pagination
     let active = 2;
@@ -103,21 +112,21 @@ function boardlist(props) {
                                         {
                                             element.category === "리뷰" && 
                                                 <tr className={styles.boardlist_tbody_tr} onClick={submitSign2}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{index + 1}</td>
+                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "720px", paddingLeft: "3%" }}>{element.content}</td>
-                                                    <td style={{ width: "120px", textAlignLast: "center" }}>{element.writer}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.date}</td>
+                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>
                                         }
                                         {
                                             element.category !== "리뷰" && 
                                                 <tr className={styles.boardlist_tbody_tr} onClick={submitSign3}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{index + 1}</td>
+                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "720px", paddingLeft: "3%" }}>{element.content}</td>
-                                                    <td style={{ width: "120px", textAlignLast: "center" }}>{element.writer}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.date}</td>
+                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>
                                         }
                                     </>

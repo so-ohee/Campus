@@ -30,6 +30,13 @@ export async function bringUser(userUid) {
     return res;
 }
 
+// 추천 캠핑장 (메인화면 켐핑장 추천 기능 구현)
 export const viewCamping = async () => {
     return await axios.get(`${url}`+ `/` + `mainRecommend`)
 };
+
+
+// 게시판 목록 출력 (전체)
+export const campingBoard = async () => {
+    return await axios.get(`${url}`+ `/` + `board`)
+}
