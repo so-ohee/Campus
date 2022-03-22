@@ -49,7 +49,19 @@ export const campingBoardMore = async (boardId) => {
     return await axios.get(`${url}`+ `/` + `board`+ `/` + `${boardId}`)
 }
 
+
+
+// 댓글 기능
 // 댓글 조회
 export const commentSearch = async (boardId) => {
     return await axios.get(`${url}`+ `/` + `comment?boardId=` + `${boardId}`)
+}
+
+// 댓글 작성
+
+// 댓글 수정
+
+// 댓글 삭제
+export const commentDelete = async (commentId) => {
+    axios.delete(`${url}`+ `/` + `comment`+ `/` + `${commentId}`).then(() => location.reload())
 }

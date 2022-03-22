@@ -103,6 +103,7 @@ function detailreview(props) {
                         return (
                             <Row sm key={index} style={{textAlignLast: "center"}}>
                                 <CommentCard
+                                    commentId={element.commentId}
                                     src={element.profile}
                                     name={element.name}
                                     content={element.comment}
