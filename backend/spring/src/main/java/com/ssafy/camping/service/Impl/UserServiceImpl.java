@@ -2,9 +2,12 @@ package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.dto.User.UserReqDto;
 import com.ssafy.camping.dto.User.UserResDto;
+import com.ssafy.camping.entity.Board;
 import com.ssafy.camping.entity.User;
+import com.ssafy.camping.repository.BoardRepository;
 import com.ssafy.camping.repository.SurveyRepository;
 import com.ssafy.camping.repository.UserRepository;
+import com.ssafy.camping.service.BoardService;
 import com.ssafy.camping.service.UserService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,6 +26,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final SurveyRepository surveyRepository;
+    private final BoardService boardService;
+    private final BoardRepository boardRepository;
 
     @Override
     public Map<String, Object> register(UserReqDto userReqDto) throws Exception{
@@ -76,6 +82,31 @@ public class UserServiceImpl implements UserService {
 
         resultMap.put("message", Message.FIND_USER_SUCCESS);
         resultMap.put("user", userResDto);
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> withdrawalUser(String userUid) throws Exception {
+        log.debug("UserService withdrawalUser call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<User> user = userRepository.findById(userUid);
+        if(!user.isPresent()) { //회원이 존재하지 않을 경우
+            resultMap.put("message", Message.NOT_FOUND_USER);
+            return resultMap;
+        }
+
+        // 회원 탈퇴 처리(state : 0 -> 2)
+        user.get().setUserState(2);
+        userRepository.save(user.get());
+
+        // 작성한 게시글 삭제 처리
+        List<Board> boardList = boardRepository.findByUserUid(userUid);
+        for(Board b : boardList) {
+            boardService.deleteBoard(b.getBoardId());
+        }
+
+        resultMap.put("message", Message.USER_WITHDRAWAL_SUCCESS);
         return resultMap;
     }
 }

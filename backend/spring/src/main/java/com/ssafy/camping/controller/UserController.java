@@ -24,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
     @ApiOperation(value = "회원 가입")
-    @PostMapping()
+    @PostMapping
     public ResponseEntity register(@Valid @RequestBody UserReqDto userReqDto) {
         log.debug("UserController register call");
 
@@ -58,6 +58,26 @@ public class UserController {
             log.error(Message.NOT_FOUND_USER+" : {}", e.getMessage());
 
             resultMap.put("message",Message.NOT_FOUND_USER);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "회원 탈퇴")
+    @DeleteMapping("{userUid}")
+    public ResponseEntity withdrawalUser(@PathVariable String userUid) {
+        log.debug("UserController withdrawalUser call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = userService.withdrawalUser(userUid);
+            if(resultMap.get("message").equals(Message.USER_WITHDRAWAL_SUCCESS))
+                status = HttpStatus.OK;
+        } catch (Exception e) {
+            log.error(Message.USER_WITHDRAWAL_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.USER_WITHDRAWAL_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);

@@ -1,7 +1,6 @@
 package com.ssafy.camping.service;
 
 import com.ssafy.camping.dto.User.UserReqDto;
-import com.ssafy.camping.entity.User;
 
 import java.util.Map;
 
@@ -10,4 +9,6 @@ public interface UserService {
     Map<String, Object> register(UserReqDto userReqDto) throws Exception;
     //회원 정보 조회
     Map<String, Object> getUser(String userUid) throws Exception;
+    //회원 탈퇴
+    Map<String, Object> withdrawalUser(String userUid) throws Exception;
 }
