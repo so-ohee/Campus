@@ -1,5 +1,6 @@
 package com.ssafy.camping.service.Impl;
 
+import com.ssafy.camping.dto.User.ModifyUserReqDto;
 import com.ssafy.camping.dto.User.UserReqDto;
 import com.ssafy.camping.dto.User.UserResDto;
 import com.ssafy.camping.entity.Board;
@@ -8,11 +9,13 @@ import com.ssafy.camping.repository.BoardRepository;
 import com.ssafy.camping.repository.SurveyRepository;
 import com.ssafy.camping.repository.UserRepository;
 import com.ssafy.camping.service.BoardService;
+import com.ssafy.camping.service.FileService;
 import com.ssafy.camping.service.UserService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +31,7 @@ public class UserServiceImpl implements UserService {
     private final SurveyRepository surveyRepository;
     private final BoardService boardService;
     private final BoardRepository boardRepository;
+    private final FileService fileService;
 
     @Override
     public Map<String, Object> register(UserReqDto userReqDto) throws Exception{
@@ -80,8 +84,8 @@ public class UserServiceImpl implements UserService {
                 .userState(userState)
                 .survey(surveyRepository.existsByUserUid(userUid)).build();
 
-        resultMap.put("message", Message.FIND_USER_SUCCESS);
         resultMap.put("user", userResDto);
+        resultMap.put("message", Message.FIND_USER_SUCCESS);
         return resultMap;
     }
 
@@ -107,6 +111,25 @@ public class UserServiceImpl implements UserService {
         }
 
         resultMap.put("message", Message.USER_WITHDRAWAL_SUCCESS);
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> modifyUserName(ModifyUserReqDto userDto) throws Exception {
+        log.debug("UserService modifyUserName call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Optional<User> user = userRepository.findById(userDto.getUserUid());
+        if(!user.isPresent()) { //회원이 존재하지 않을 경우
+            resultMap.put("message", Message.NOT_FOUND_USER);
+            return resultMap;
+        }
+
+        user.get().setName(userDto.getName());
+        userRepository.save(user.get());
+
+        resultMap.put("userName", userDto.getName());
+        resultMap.put("message", Message.UPDATE_USER_SUCCESS);
         return resultMap;
     }
 }

@@ -1,8 +1,11 @@
 package com.ssafy.camping.controller;
 
+import com.ssafy.camping.dto.User.ModifyUserReqDto;
 import com.ssafy.camping.dto.User.UserReqDto;
 import com.ssafy.camping.service.UserService;
 import com.ssafy.camping.utils.Message;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +81,26 @@ public class UserController {
             log.error(Message.USER_WITHDRAWAL_FAIL+" : {}", e.getMessage());
 
             resultMap.put("message", Message.USER_WITHDRAWAL_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "회원 이름 수정")
+    @PutMapping()
+    public ResponseEntity modifyUserName(@RequestBody ModifyUserReqDto user) {
+        log.debug("UserController modifyUserName call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = userService.modifyUserName(user);
+            if(resultMap.get("message").equals(Message.UPDATE_USER_SUCCESS))
+                status = HttpStatus.CREATED;
+        } catch (Exception e) {
+            log.error(Message.UPDATE_USER_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.UPDATE_USER_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);
