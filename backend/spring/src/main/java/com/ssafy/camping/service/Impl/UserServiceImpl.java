@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> resultMap = new HashMap<>();
         Optional<User> user = userRepository.findById(userUid);
 
-        if(!user.isPresent()) { //회원이 존재하지 않을 경우
+        if(!user.isPresent() || user.get().getUserState()==2) { //회원이 존재하지 않을 경우
             resultMap.put("message", Message.NOT_FOUND_USER);
             return resultMap;
         }
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
         Map<String, Object> resultMap = new HashMap<>();
         Optional<User> user = userRepository.findById(userUid);
-        if(!user.isPresent()) { //회원이 존재하지 않을 경우
+        if(!user.isPresent() || user.get().getUserState()==2) { //회원이 존재하지 않을 경우
             resultMap.put("message", Message.NOT_FOUND_USER);
             return resultMap;
         }
@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
 
         Map<String, Object> resultMap = new HashMap<>();
         Optional<User> user = userRepository.findById(userDto.getUserUid());
-        if(!user.isPresent()) { //회원이 존재하지 않을 경우
+        if(!user.isPresent() || user.get().getUserState()==2) { //회원이 존재하지 않을 경우
             resultMap.put("message", Message.NOT_FOUND_USER);
             return resultMap;
         }
