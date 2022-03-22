@@ -57,4 +57,15 @@ public class FileServiceImpl implements FileService {
             fileBoardRepository.deleteById(file.getFileId());
         }
     }
+
+    @Override
+    public String userFileUpdate(String profile, MultipartFile file) throws Exception {
+        //프로필이 s3에 저장되어 있는 경우 s3삭제
+        if(profile!=null && profile.contains("s3")) {
+            s3Service.delete(profile);
+        }
+
+        //profile이 null이 아닌경우 s3에 저장
+        return file!=null ? s3Service.upload(file) : "";
+    }
 }
