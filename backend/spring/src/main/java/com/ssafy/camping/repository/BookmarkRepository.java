@@ -9,4 +9,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Integer> {
     boolean existsByCampingIdAndUserUid(Integer campingId, String userUid);
 
     Page<Bookmark> findByUserUid(String userUid, Pageable pageable);
+
+    void deleteByCampingIdAndUserUid(Integer campingId, String userUid);
 }
