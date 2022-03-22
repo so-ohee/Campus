@@ -8,6 +8,7 @@
 
 .commentcard_profile {
     width: 100px;
+    border-radius: 50%;
 }
 
 .commentcard_h5 {

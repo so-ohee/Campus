@@ -1,29 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Button, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import styles from "/styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
-
-const dummy = [
-    {
-        content: "달천공원오토캠핑장",
-        category: "리뷰",
-        writer: "박주한",
-        date: "2022-03-17",
-    },
-    {
-        content: "청풍호오토캠핑장",
-        category: "자유",
-        writer: "박소희",
-        date: "2022-03-17",
-    },
-    {
-        content: "마음이 머무는 곳",
-        category: "QnA",
-        writer: "최다운",
-        date: "2022-03-17",
-    },
-];
-
+import { campingBoard } from "../../function/axios";
 
 function boardlist(props) {
 
@@ -33,11 +12,22 @@ function boardlist(props) {
 
     const submitSign2 = () => {
         props.propFunction("상세")
+        
+    }
+
+    function submitData(datas) {
+        props.propData(datas)
     }
 
     const submitSign3 = () => {
         props.propFunction("자유상세")
     }
+
+    const [dummy, setDummy] = useState([]);
+
+    useEffect(() => {
+        campingBoard().then((res) => setDummy(res.data.board));
+    }, [])
     
     // Pagination
     let active = 2;
@@ -69,13 +59,13 @@ function boardlist(props) {
                     <Tab eventKey="전체" title="전체">
                         
                     </Tab>
+                    <Tab eventKey="후기" title="후기">
+                        
+                    </Tab>
                     <Tab eventKey="Q&A" title="Q&A">
                         
                     </Tab>
                     <Tab eventKey="자유" title="자유">
-                        
-                    </Tab>
-                    <Tab eventKey="후기" title="후기">
                         
                     </Tab>
                     <Tab eventKey="뉴스" title="뉴스">
@@ -101,23 +91,23 @@ function boardlist(props) {
                                 return (
                                     <>
                                         {
-                                            element.category === "리뷰" && 
-                                                <tr className={styles.boardlist_tbody_tr} onClick={submitSign2}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{index + 1}</td>
+                                            element.category === "후기" && 
+                                                <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
+                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "720px", paddingLeft: "3%" }}>{element.content}</td>
-                                                    <td style={{ width: "120px", textAlignLast: "center" }}>{element.writer}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.date}</td>
+                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>
                                         }
                                         {
-                                            element.category !== "리뷰" && 
-                                                <tr className={styles.boardlist_tbody_tr} onClick={submitSign3}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{index + 1}</td>
+                                            element.category !== "후기" && 
+                                                <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
+                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "720px", paddingLeft: "3%" }}>{element.content}</td>
-                                                    <td style={{ width: "120px", textAlignLast: "center" }}>{element.writer}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.date}</td>
+                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>
                                         }
                                     </>
