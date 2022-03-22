@@ -2,6 +2,7 @@ package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.entity.Visit;
 import com.ssafy.camping.repository.BoardRepository;
+import com.ssafy.camping.repository.CampingRepository;
 import com.ssafy.camping.repository.VisitRepository;
 import com.ssafy.camping.service.CampingService;
 import com.ssafy.camping.service.VisitService;
@@ -26,6 +27,7 @@ public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository visitRepository;
     private final BoardRepository boardRepository;
+    private final CampingRepository campingRepository;
     private final CampingService campingService;
 
     @Override
@@ -33,7 +35,13 @@ public class VisitServiceImpl implements VisitService {
     public Map<String, Object> userVisit(String userUid, Integer campingId) throws Exception {
         log.debug("VisitService userVisit call");
 
-        Map<String, Object> resultMap = saveVisitCampsite(campingId, userUid);
+        Map<String, Object> resultMap = new HashMap<>();
+        if(!campingRepository.findById(campingId).isPresent()) { //존재하는 캠핑장인지 확인
+            resultMap.put("message", Message.NOT_FOUND_CAMPSITE);
+            return resultMap;
+        }
+
+        resultMap = saveVisitCampsite(campingId, userUid);
         if(resultMap.get("message").equals(Message.SAVE_VISIT)) { //이미 다녀온 캠핑장 이므로 취소해야함
             resultMap = deleteVisitCampsite(campingId, userUid);
         }

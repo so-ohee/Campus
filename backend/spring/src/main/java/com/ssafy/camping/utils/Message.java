@@ -40,6 +40,9 @@ public class Message {
     public static final String NOT_FOUND_BOOKMARK = "북마크를 찾을 수 없습니다";
     public static final String FIND_BOOKMARK_SUCCESS = "북마크 조회 성공";
     public static final String FIND_BOOKMARK_FAIL = "북마크 조회 실패";
+    public static final String SAVE_BOOKMARK_SUCCESS = "북마크 저장 성공";
+    public static final String DELETE_BOOKMARK_SUCCESS = "북마크 삭제 성공";
+    public static final String BOOKMARK_FAIL = "북마크 실패";
 
     //comment
     public static final String NOT_FOUND_COMMENT = "댓글을 찾을 수 없습니다";
