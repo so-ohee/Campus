@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Navbar, NavLink, NavDropdown } from "react-bootstrap";
 import Login from '../Firebase/Login';
 import styles from "/styles/Common/Navibar.module.css";
+import { bringUser } from "../../function/axios";
 
 function Navibar() {
   const [LoginmodalShow, LoginsetModalShow] = React.useState(false);
@@ -17,6 +18,12 @@ function Navibar() {
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
   }
+
+  const [data, setData] = useState("");
+
+    useEffect(() => {
+        bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
+    }, [])
 
   return (
     <>
@@ -58,7 +65,7 @@ function Navibar() {
                     token && (
                         <div className={styles.navi_dropdown}>
                             <NavDropdown align="end" title={
-                              <img className={styles.navi_profile_pic} src="/profile.png" />
+                              <img className={styles.navi_profile_pic} src={ `${data.profile}` } />
                             } id="dropdown-menu-align-end">
                               <NavDropdown.Item href="mypage">마이페이지</NavDropdown.Item>
                               <NavDropdown.Item>정보 수정</NavDropdown.Item>
