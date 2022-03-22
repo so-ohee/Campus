@@ -35,8 +35,12 @@ export const viewCamping = async () => {
     return await axios.get(`${url}`+ `/` + `mainRecommend`)
 };
 
-
 // 게시판 목록 출력 (전체)
 export const campingBoard = async () => {
     return await axios.get(`${url}`+ `/` + `board`)
+}
+
+// 게시판 목록 출력 (상세조회)
+export const campingBoardMore = async (boardId) => {
+    return await axios.get(`${url}`+ `/` + `board`+ `/` + `${boardId}`)
 }

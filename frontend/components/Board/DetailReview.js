@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "/styles/Board/DetailReview.module.css";
 import CommentCard from "/components/common/CommentCard";
+import { campingBoardMore } from "../../function/axios";
 
 const dummy = [
     {
@@ -21,29 +22,39 @@ function detailreview(props) {
     const ratingChanged = (newRating) => {
         console.log(newRating);
     };
+
     const submitSign = () => {
         props.propFunction("수정")
     }
+
     const submitSign2 = () => {
         props.propFunction("기본")
     }
-    
+
+    const [datas, setDatas] = useState([]);
+
+    useEffect(() => {
+        campingBoardMore(props.datas).then((res) => setDatas(res.data.board));
+    }, [])
+
+    console.log(datas);
+
     return (
         <div>
             <Container>
-                <h1 className={styles.detailreview_h1}>리뷰 상세보기</h1>
+                <h1 className={styles.detailreview_h1}>{datas.title}</h1>
                 <div className={styles.detailreview_div}>
                     <Row>
                         <Col xs={9}>
                             <Row>
-                                <h3 style={{fontWeight: "bold"}}>달천공원오토캠핑장</h3>
+                                <h3 style={{fontWeight: "bold"}}>{datas.facltNm}</h3>
                             </Row>
                             <Row style={{width: "300px", marginTop: "1%"}}>
                                 <Col xs={4}>
                                     <h6 style={{fontWeight: "bold", marginTop: "2%"}}>서비스</h6>
                                 </Col>
                                 <Col xs={1}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>4</h6>
+                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>{datas.service}</h6>
                                 </Col>
                                 <Col xs={7}>
                                     <img src="/star.png" style={{width: "70%"}}></img>
@@ -54,7 +65,7 @@ function detailreview(props) {
                                     <h6 style={{fontWeight: "bold", marginTop: "2%"}}>환경</h6>
                                 </Col>
                                 <Col xs={1}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>4</h6>
+                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>{datas.environment}</h6>
                                 </Col>
                                 <Col xs={7}>
                                     <img src="/star.png" style={{width: "70%"}}></img>
@@ -65,7 +76,7 @@ function detailreview(props) {
                                     <h6 style={{fontWeight: "bold", marginTop: "2%"}}>부대시설</h6>
                                 </Col>
                                 <Col xs={1}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>4</h6>
+                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>{datas.facility}</h6>
                                 </Col>
                                 <Col xs={7}>
                                     <img src="/star.png" style={{width: "70%"}}></img>
@@ -74,10 +85,13 @@ function detailreview(props) {
                         </Col>
                         <Col xs={3}>
                             <Row>
-                                <h6>박주한 2021.03.16 09:58 작성</h6>
+                                <h6>{datas.name} {datas.createTime} 작성</h6>
                             </Row>
                             <Row>
-                                <h6>박주한 2021.03.16 수정</h6>
+                                {
+                                    datas.updateTime === null ? <h6>수정되지 않은 글입니다.</h6>
+                                    : <h6>{datas.name} {datas.updateTime} 수정</h6>
+                                }
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                                 <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>
@@ -87,7 +101,7 @@ function detailreview(props) {
                     </Row>
                 </div>
                 <div className={styles.detailreview_detail}>
-                    게시글 보기
+                    {datas.content}
                 </div>
                 <hr />
                 <div className={styles.detailreview_comment}>
