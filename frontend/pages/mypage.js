@@ -9,18 +9,13 @@ import { getAuth, deleteUser } from "firebase/auth";
 
 function mypage() {
     const [data, setData] = useState("");
-    const [user, setUser] = useState([]);
 
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
-
-    useEffect(() => {
-        setUser(auth);
-    }, [])
-    // const user = auth().currentUser;
+    const user = auth.currentUser;
 
     console.log(auth);
-    console.log(user.currentUser);
+    console.log(auth.currentUser);
     
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
