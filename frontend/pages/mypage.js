@@ -5,23 +5,40 @@ import VisitedCamp from '/components/MyPage/VisitedCamp.js';
 import ReviewCamp from '/components/MyPage/ReviewCamp.js';
 import Bookmarkcamp from '/components/MyPage/Bookmarkcamp.js';
 import { bringUser, changePic, changeProfileName, memberDelete } from "../function/axios";
+import { getAuth, deleteUser } from "firebase/auth";
 
 function mypage() {
     const [data, setData] = useState("");
-    const [modalShow, setModalShow] = React.useState(false);
+    const [user, setUser] = useState([]);
 
+    const [modalShow, setModalShow] = React.useState(false);
+    const auth = getAuth();
+
+    useEffect(() => {
+        setUser(auth);
+    }, [])
+    // const user = auth().currentUser;
+
+    console.log(auth);
+    console.log(user.currentUser);
+    
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
     }, [])
 
-    const deleteMember = () => {
-        memberDelete(localStorage.getItem("userUid"))
-            .then(() => {
-                localStorage.removeItem('userUid');
-                localStorage.removeItem('ally-supports-cache');
-                localStorage.removeItem('token');
-                document.location.href = "/";
-            });
+    const deleteMember = async () => {
+        // memberDelete(localStorage.getItem("userUid"))
+        //     .then(() => {
+        //         localStorage.removeItem('userUid');
+        //         localStorage.removeItem('ally-supports-cache');
+        //         localStorage.removeItem('token');
+        //         // document.location.href = "/";
+        //     });
+        await deleteUser(user)
+            .then(() => console.log("성공"))
+            .catch((error) => {
+                console.log("실패")
+        });
     }
 
     return (
