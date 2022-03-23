@@ -22,10 +22,11 @@ pip install -r requirements.txt
 
 
 
-#### 4. pip 설치목록 저장 - 새로운 것을 설치했을 때만
+#### 4. 모델 정의 후에 마이그레이션 수행
 
-```python
-pip freeze > requirements.txt
+```shell
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 
@@ -40,11 +41,10 @@ python manage.py runserver
 
 
 
-#### 모델 정의 후에 마이그레이션 수행
+#### pip 설치목록 저장 - 새로운 것을 설치했을 때
 
-```shell
-python manage.py makemigrations
-python manage.py migrate
+```python
+pip freeze > requirements.txt
 ```
 
 

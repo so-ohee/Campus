@@ -147,7 +147,13 @@ class Rating(models.Model):
 
 
 class Survey(models.Model):
-    user_uid = models.ForeignKey('User', models.DO_NOTHING, db_column='user_uid')
+    user_uid = models.OneToOneField('User', models.DO_NOTHING, db_column='user_uid', primary_key=True)
+    induty = models.JSONField(blank=True, null=True)
+    lct_cl = models.JSONField(blank=True, null=True)
+    do_nm = models.CharField(max_length=45, blank=True, null=True)
+    site_bottom_cl = models.JSONField(blank=True, null=True)
+    sbrs_cl = models.JSONField(blank=True, null=True)
+    animal_cmg_cl = models.JSONField(blank=True, null=True)
 
     class Meta:
         managed = False
