@@ -20,20 +20,6 @@ USE `camping` ;
 -- -----------------------------------------------------
 -- Table `camping`.`camping`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `camping`.`user` (
-    `user_uid` VARCHAR(45) NOT NULL,
-    `name` VARCHAR(45) NOT NULL,
-    `profile` VARCHAR(200) NULL DEFAULT NULL,
-    `user_state` TINYINT NOT NULL DEFAULT '0',
-    PRIMARY KEY (`user_uid`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `camping`.`user`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `camping`.`camping` (
   `camping_id` BIGINT NOT NULL,
   `faclt_nm` TEXT NULL DEFAULT NULL,
@@ -95,6 +81,20 @@ CREATE TABLE IF NOT EXISTS `camping`.`camping` (
   `first_image_url` TEXT NULL DEFAULT NULL,
   `blog_cnt` BIGINT NULL DEFAULT '0',
   PRIMARY KEY (`camping_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `camping`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `camping`.`user` (
+  `user_uid` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `profile` VARCHAR(200) NULL DEFAULT NULL,
+  `user_state` TINYINT NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_uid`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -168,9 +168,7 @@ CREATE TABLE IF NOT EXISTS `camping`.`comment` (
     REFERENCES `camping`.`board` (`board_id`),
   CONSTRAINT `fk_comment_user1`
     FOREIGN KEY (`user_uid`)
-    REFERENCES `camping`.`user` (`user_uid`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `camping`.`user` (`user_uid`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -236,7 +234,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `camping`.`survey` (
   `user_uid` VARCHAR(45) NOT NULL,
+  `induty` JSON NULL DEFAULT NULL,
+  `lct_cl` JSON NULL DEFAULT NULL,
+  `do_nm` VARCHAR(45) NULL DEFAULT NULL,
+  `site_bottom_cl` JSON NULL DEFAULT NULL,
+  `sbrs_cl` JSON NULL DEFAULT NULL,
+  `animal_cmg_cl` JSON NULL DEFAULT NULL,
   INDEX `fk_survey_user1_idx` (`user_uid` ASC) VISIBLE,
+  PRIMARY KEY (`user_uid`),
   CONSTRAINT `fk_survey_user1`
     FOREIGN KEY (`user_uid`)
     REFERENCES `camping`.`user` (`user_uid`))
@@ -284,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `camping`.`visit` (
     FOREIGN KEY (`user_uid`)
     REFERENCES `camping`.`user` (`user_uid`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 78675
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
