@@ -26,9 +26,10 @@ function First() {
                         return (
                         <Col sm key={index}>
                             <CampingCard
-                            title={element.facltNm}
-                            address={element.addr1}
-                            hashtag={element.themaEnvrnCl}
+                                campingId={element.campingId}
+                                title={element.facltNm}
+                                address={element.addr1}
+                                hashtag={element.themaEnvrnCl}
                             />
                         </Col>
                         );

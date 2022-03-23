@@ -23,6 +23,7 @@ function Third() {
                         return (
                         <Col sm key={index}>
                             <CampingCard
+                            campingId={element.campingId}
                             title={element.facltNm}
                             address={element.addr1} 
                             hashtag={element.themaEnvrnCl}
