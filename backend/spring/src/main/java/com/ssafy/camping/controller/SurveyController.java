@@ -23,7 +23,7 @@ public class SurveyController {
 
     private final SurveyService surveyService;
 
-    @ApiOperation(value = "설문 등록")
+    @ApiOperation(value = "설문 등록/수정")
     @PostMapping
     public ResponseEntity registerSurvey(@Valid @RequestBody SurveyReqDto survey) {
         log.debug("SurveyController registerSurvey call");

@@ -14,21 +14,21 @@ public class SurveyReqDto {
     @NotBlank
     private String userUid;
 
-    @ApiModelProperty(value = "캠핑 유형", example = "일반야영장, 자동차야영장")
+    @ApiModelProperty(value = "캠핑 유형", example = "['일반야영장','자동차야영장']")
     List<String> induty;
 
-    @ApiModelProperty(value = "선호 환경", example = "")
+    @ApiModelProperty(value = "선호 환경", example = "['산']")
     List<String> lctCl;
 
-    @ApiModelProperty(value = "거주지역")
+    @ApiModelProperty(value = "거주지역", example = "경기도")
     private String doNm;
 
-    @ApiModelProperty(value = "바닥형태", example = "")
+    @ApiModelProperty(value = "바닥형태", example = "['잔디']")
     List<String> siteBottomCl;
 
-    @ApiModelProperty(value = "편의시설", example = "")
+    @ApiModelProperty(value = "편의시설", example = "['온수','전기']")
     List<String> sbrsCl;
 
-    @ApiModelProperty(value = "반려견 동반 여부", example = "")
+    @ApiModelProperty(value = "반려견 동반 여부", example = "['대형견']")
     List<String> animalCmgCl;
 }
