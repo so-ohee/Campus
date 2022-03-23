@@ -1,4 +1,5 @@
 import axios from "axios";
+import { formatWithValidation } from 'next/dist/shared/lib/utils';
 
 const url = "http://localhost:8080/";
 
@@ -29,6 +30,42 @@ export const sendUserUid = async (userUid, displayName, photoURL) => {
 export async function bringUser(userUid) {
     let res = await axios.get(`${url}` + `/` + `user` + `/` + `${userUid}`)
     return res;
+}
+
+// 프로필 사진 변경
+export async function changePic(userUid, formData) {
+
+    const url2 = "http://localhost:8080/user/";
+
+    await axios({
+        method: 'put',
+        url: url2 + `${userUid}`,
+        data: formData,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    }).then((res) => console.log(res));
+}
+
+// 아이디 변경
+export async function changeProfileName(name, userUid) {
+
+    const url2 = "http://localhost:8080/user/";
+
+    let data = {
+        name: name,
+        userUid: userUid,
+    }
+    axios
+    .put(url2,  JSON.stringify(data), {
+        headers: {
+            "Content-Type": `application/json`,
+        },
+        proxy: url2
+        })
+        .then((res) => {
+            console.log("로그인 성공 & 회원정보 DB 전송 완료");
+    });
 }
 
 
