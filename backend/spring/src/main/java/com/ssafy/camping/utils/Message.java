@@ -65,4 +65,9 @@ public class Message {
     public static final String CREATE_SURVEY_FAIL = "설문 등록 실패";
     public static final String FIND_SURVEY_SUCCESS = "설문 조회 성공";
     public static final String FIND_SURVEY_FAIL = "설문 조회 실패";
+
+    //news
+    public static final String NOT_FOUND_NEWS = "뉴스를 찾을 수 없습니다";
+    public static final String FIND_NEWS_SUCCESS = "뉴스 조회 성공";
+    public static final String FIND_NEWS_FAIL = "뉴스 조회 실패";
 }

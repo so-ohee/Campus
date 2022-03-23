@@ -4,8 +4,6 @@ import com.ssafy.camping.dto.User.ModifyUserReqDto;
 import com.ssafy.camping.dto.User.UserReqDto;
 import com.ssafy.camping.service.UserService;
 import com.ssafy.camping.utils.Message;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
