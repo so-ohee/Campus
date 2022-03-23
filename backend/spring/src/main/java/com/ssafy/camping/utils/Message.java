@@ -52,4 +52,9 @@ public class Message {
     public static final String FIND_COMMENT_SUCCESS = "댓글 조회 성공";
     public static final String FIND_COMMENT_FAIL = "댓글 조회 실패";
 
+    //survey
+    public static final String CREATE_SURVEY_SUCCESS = "설문 등록 성공";
+    public static final String CREATE_SURVEY_FAIL = "설문 등록 실패";
+    public static final String FIND_SURVEY_SUCCESS = "설문 조회 성공";
+    public static final String FIND_SURVEY_FAIL = "설문 조회 실패";
 }

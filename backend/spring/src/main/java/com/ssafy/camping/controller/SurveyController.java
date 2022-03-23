@@ -33,13 +33,13 @@ public class SurveyController {
         try {
             resultMap = surveyService.registerSurvey(survey);
 
-            if (resultMap.get("message").equals(Message.CREATE_BOARD_SUCCESS)) {
+            if (resultMap.get("message").equals(Message.CREATE_SURVEY_SUCCESS)) {
                 status = HttpStatus.CREATED;
             }
         } catch (Exception e) {
-            log.error(Message.CREATE_BOARD_FAIL+" : {}", e.getMessage());
+            log.error(Message.CREATE_SURVEY_FAIL+" : {}", e.getMessage());
 
-            resultMap.put("message", Message.CREATE_BOARD_FAIL);
+            resultMap.put("message", Message.CREATE_SURVEY_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);
@@ -55,13 +55,13 @@ public class SurveyController {
         try {
             resultMap = surveyService.getSurvey(userUid);
 
-            if(resultMap.get("message").equals(Message.FIND_BOARD_SUCCESS)) {
+            if(resultMap.get("message").equals(Message.FIND_SURVEY_SUCCESS)) {
                 status = HttpStatus.OK;
             }
         } catch (Exception e) {
-            log.error(Message.FIND_BOARD_FAIL+" : {}", e.getMessage());
+            log.error(Message.FIND_SURVEY_FAIL+" : {}", e.getMessage());
 
-            resultMap.put("message", Message.FIND_BOARD_FAIL);
+            resultMap.put("message", Message.FIND_SURVEY_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);

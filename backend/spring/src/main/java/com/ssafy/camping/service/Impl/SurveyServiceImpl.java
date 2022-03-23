@@ -36,7 +36,7 @@ public class SurveyServiceImpl implements SurveyService {
 
         surveyRepository.save(survey);
 
-        resultMap.put("message", Message.CREATE_BOARD_SUCCESS);
+        resultMap.put("message", Message.CREATE_SURVEY_SUCCESS);
 
         return resultMap;
     }
@@ -48,7 +48,7 @@ public class SurveyServiceImpl implements SurveyService {
 
         Optional<Survey> survey = surveyRepository.findByUserUid(userUid);
         if(!survey.isPresent()){
-            resultMap.put("message", Message.NOT_FOUND_BOARD);
+            resultMap.put("message", Message.NOT_FOUND_USER);
             return resultMap;
         }
 
@@ -61,7 +61,7 @@ public class SurveyServiceImpl implements SurveyService {
                 .animalCmgCl(survey.get().getAnimalCmgCl()).build();
 
         resultMap.put("survey", surveyResDto);
-        resultMap.put("message", Message.FIND_BOARD_SUCCESS);
+        resultMap.put("message", Message.FIND_SURVEY_SUCCESS);
 
         return resultMap;
     }
