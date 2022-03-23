@@ -34,7 +34,7 @@ export async function bringUser(userUid) {
 
 // 프로필 사진 변경
 export async function changePic(userUid, formData) {
-
+    console.log(formData);
     const url2 = "http://localhost:8080/user/";
 
     await axios({
@@ -66,6 +66,11 @@ export async function changeProfileName(name, userUid) {
         .then((res) => {
             console.log("로그인 성공 & 회원정보 DB 전송 완료");
     });
+}
+
+// 회원탈퇴
+export const memberDelete = async (userUid) => {
+    axios.delete(`${url}`+ `/` + `user` + `/` + `${userUid}`)
 }
 
 

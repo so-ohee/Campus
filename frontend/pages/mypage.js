@@ -4,7 +4,7 @@ import styles from "/styles/MyPage/MyPage.module.css";
 import VisitedCamp from '/components/MyPage/VisitedCamp.js';
 import ReviewCamp from '/components/MyPage/ReviewCamp.js';
 import Bookmarkcamp from '/components/MyPage/Bookmarkcamp.js';
-import { bringUser, changePic, changeProfileName } from "../function/axios";
+import { bringUser, changePic, changeProfileName, memberDelete } from "../function/axios";
 
 function mypage() {
     const [data, setData] = useState("");
@@ -13,6 +13,16 @@ function mypage() {
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
     }, [])
+
+    const deleteMember = () => {
+        memberDelete(localStorage.getItem("userUid"))
+            .then(() => {
+                localStorage.removeItem('userUid');
+                localStorage.removeItem('ally-supports-cache');
+                localStorage.removeItem('token');
+                document.location.href = "/";
+            });
+    }
 
     return (
         <div>
@@ -31,7 +41,7 @@ function mypage() {
                                 show={modalShow}
                                 onHide={() => setModalShow(false)}
                             />
-                            <Button variant='outline-danger'>회원탈퇴</Button>
+                            <Button variant='outline-danger' onClick={() => deleteMember()}>회원탈퇴</Button>
                         </Col>
                     </Row>
                 </div>
@@ -57,7 +67,7 @@ function mypage() {
 function ModifyModal(props) {
 
     const [userid, setUserid] = useState("");
-    const [datas, setDatas] = useState([]);
+    const [datas, setDatas] = useState("");
     const [name, setName] = useState("");
 
     useEffect(() => {
@@ -71,8 +81,9 @@ function ModifyModal(props) {
             const uploadFile = e.target.files[0];
             // console.log(uploadFile);
             const formData = new FormData()
-            formData.append('files', uploadFile)
+            formData.append('file', uploadFile)
             setDatas(formData);
+            console.log(formData)
         }
     };
 
@@ -135,6 +146,6 @@ function ModifyModal(props) {
             </Modal.Footer>
         </Modal>
         );
-  }
+}
 
 export default mypage;
