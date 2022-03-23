@@ -87,32 +87,35 @@ function boardlist(props) {
                     </thead>
                     <tbody>
                         {
-                            dummy.map((element, index) => {
-                                return (
-                                    <>
-                                        {
-                                            element.category === "후기" && 
-                                                <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
-                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
-                                                </tr>
-                                        }
-                                        {
-                                            element.category !== "후기" && 
-                                                <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
-                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
-                                                </tr>
-                                        }
-                                    </>
-                                )
-                            })
+                            dummy !== null ? 
+                            (
+                                dummy.map((element, index) => {
+                                    return (
+                                        <>
+                                            {
+                                                element.category === "후기" && 
+                                                    <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
+                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                        <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                        <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                    </tr>
+                                            }
+                                            {
+                                                element.category !== "후기" && 
+                                                    <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
+                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                        <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                        <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                    </tr>
+                                            }
+                                        </>
+                                    )
+                                })
+                            ) : null
                         }
                     </tbody>
                 </table>
