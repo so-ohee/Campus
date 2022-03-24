@@ -1,7 +1,10 @@
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "/styles/CampingPlace/CampingIntro.module.css";
 
-function CampingIntro() {
+function CampingIntro(props) {
+
+    console.log(props.campingId);
+
     return (
         <>
             <Container>

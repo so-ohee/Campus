@@ -1,3 +1,4 @@
+import React, { createContext, useContext } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import styles from "/styles/MainPage/MainPageFirst.module.css";
 import CampingCard from "/components/common/CampingCard";
@@ -16,7 +17,7 @@ function First() {
                 setCampingplace(response.data.seasonList);
     });
     }, []);
-    
+
     return (
         <div className={styles.first_main}>
             <Container>

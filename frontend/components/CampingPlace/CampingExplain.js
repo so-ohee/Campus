@@ -1,3 +1,4 @@
+import React, { createContext, useContext } from 'react';
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "/styles/CampingPlace/CampingExplain.module.css";
 
@@ -20,7 +21,12 @@ const dummy = [
     },
 ];
 
+// export async function receiveId(res) {
+//     console.log(res);
+// }
+
 function CampingExplain() {
+
     return (
         <>
             <Container>

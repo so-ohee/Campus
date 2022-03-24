@@ -5,8 +5,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
 
-// console.log(firebase);
-// console.log(authService.currentUser);
+// 초기화면
 
 function Home() {
   return (

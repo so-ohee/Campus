@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from "next/router";
 import { Col, Container, Nav } from 'react-bootstrap';
 import CampingExplain from '/components/CampingPlace/CampingExplain.js';
 import CampingIntro from '/components/CampingPlace/CampingIntro.js';
@@ -7,9 +8,15 @@ import CampingReview from '/components/CampingPlace/CampingReview.js';
 import CampingUse from '/components/CampingPlace/CampingUse.js';
 import styles from "/styles/CampingPlace/CampingPlace.module.css";
 
-function campingplace() {
+function campingplace(props) {
 
   const [selected, setSelected] = useState("1");
+  const [datas, setDatas] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    setDatas(router.query.campingplace);
+  })
 
   return (
     
@@ -35,7 +42,7 @@ function campingplace() {
           </div> 
         <div>
           {
-            selected === "1" && <CampingIntro />
+            selected === "1" && <CampingIntro campingId={datas} />
           }
           {
             selected === "2" && <CampingMap />
