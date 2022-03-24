@@ -3,10 +3,13 @@ package com.ssafy.camping.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.json.simple.JSONObject;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @ApiModel(value = "NewsDto : 뉴스 조회")
 public class NewsDto {
 	@ApiModelProperty(value = "제목")
@@ -17,4 +20,11 @@ public class NewsDto {
 	private String description;
 	@ApiModelProperty(value = "작성일")
 	private String date;
+
+	public NewsDto(JSONObject newsJson) {
+		this.title = (String) newsJson.get("title");
+		this.link = (String) newsJson.get("link");
+		this.description = (String) newsJson.get("description");
+		this.date = (String) newsJson.get("pubDate");
+	}
 }

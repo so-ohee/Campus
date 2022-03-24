@@ -1,6 +1,7 @@
 package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.dto.ItemDto;
+import com.ssafy.camping.dto.NewsDto;
 import com.ssafy.camping.service.NaverSearchService;
 import com.ssafy.camping.utils.Message;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
@@ -48,14 +50,13 @@ public class NaverSearchServiceImpl implements NaverSearchService {
 
         JSONParser parser = new JSONParser();
         JSONObject obj = (JSONObject) parser.parse(responseBody);
-        JSONArray item = (JSONArray) obj.get("items");
+        JSONArray items = (JSONArray) obj.get("items");
 
         List<ItemDto> list = new ArrayList<>();
-        for (int i = 0; i < item.size(); i++) {
-            ItemDto n = new ItemDto((JSONObject) item.get(i));
-            if (n != null) {
-                list.add(n);
-            }
+        for (int i = 0; i < items.size(); i++) {
+            ItemDto item = new ItemDto((JSONObject) items.get(i));
+
+            list.add(item);
         }
 
         if(!list.isEmpty()) {
@@ -64,6 +65,58 @@ public class NaverSearchServiceImpl implements NaverSearchService {
             resultMap.put("totalPage", 100);
         } else {
             resultMap.put("message", Message.NOT_FOUND_ITEM);
+        }
+
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> getNews(Integer page) throws Exception{
+        log.debug("NaverSearchService getNews call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        String text = "캠핑";
+        try {
+            text = URLEncoder.encode(text, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            log.error("검색어 인코딩 실패: {}", e.getMessage());
+            throw new RuntimeException("검색어 인코딩 실패", e);
+        }
+
+        String apiURL = "https://openapi.naver.com/v1/search/news?query=" + text + "&start=" + page; // json 결과
+
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-Naver-Client-Id", clientId);
+        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        String responseBody = get(apiURL, requestHeaders);
+
+        JSONParser parser = new JSONParser();
+        JSONObject obj = (JSONObject) parser.parse(responseBody);
+        JSONArray items = (JSONArray) obj.get("items");
+
+        List<NewsDto> list = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            NewsDto news = new NewsDto((JSONObject) items.get(i));
+
+            news.setTitle(news.getTitle().replaceAll("&nbsp;", " ").replaceAll("<br>", "\r\n").
+                    replaceAll("&quot;", "\"").replaceAll("&gt;", ">").replaceAll("<b>", "").replaceAll("</b>", ""));
+            news.setDescription(news.getDescription().replaceAll("&nbsp;", " ").replaceAll("<br>", "\r\n").replaceAll("&quot;", "\"").
+                    replaceAll("&gt;", ">").replaceAll("<b>", "").replaceAll("</b>", "").replaceAll("◀ＶＣＲ▶", "").replaceAll("◀ＥＮＤ▶", ""));
+
+            SimpleDateFormat fDate = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ROOT);
+            SimpleDateFormat nDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date sDate = fDate.parse(news.getDate());
+            news.setDate(nDate.format(sDate));
+
+            list.add(news);
+        }
+
+        if(!list.isEmpty()) {
+            resultMap.put("message", Message.FIND_NEWS_SUCCESS);
+            resultMap.put("news", list);
+            resultMap.put("totalPage", 100);
+        } else {
+            resultMap.put("message", Message.NOT_FOUND_NEWS);
         }
 
         return resultMap;

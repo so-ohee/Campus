@@ -3,7 +3,7 @@ package com.ssafy.camping.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ssafy.camping.service.NewsService;
+import com.ssafy.camping.service.NaverSearchService;
 import com.ssafy.camping.utils.Message;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 public class NewsController {
 
-    private final NewsService newsService;
+    private final NaverSearchService naverSearchService;
 
     @ApiOperation(value = "캠핑 뉴스 목록")
     @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
@@ -32,7 +32,7 @@ public class NewsController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
-            resultMap = newsService.getNews(page);
+            resultMap = naverSearchService.getNews(page);
             if(resultMap.get("message").equals(Message.FIND_NEWS_SUCCESS)) {
                 status = HttpStatus.OK;
             }
