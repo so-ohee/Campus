@@ -7,6 +7,7 @@ import CampingMap from '/components/CampingPlace/CampingMap.js';
 import CampingReview from '/components/CampingPlace/CampingReview.js';
 import CampingUse from '/components/CampingPlace/CampingUse.js';
 import styles from "/styles/CampingPlace/CampingPlace.module.css";
+import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 
 function campingplace(props) {
 
@@ -16,6 +17,7 @@ function campingplace(props) {
 
   useEffect(() => {
     setDatas(router.query.campingplace);
+    receiveCamping_out(datas);
   })
 
   return (

@@ -110,3 +110,14 @@ export const commentSearch = async (boardId) => {
 export const commentDelete = async (commentId) => {
     axios.delete(`${url}`+ `/` + `comment`+ `/` + `${commentId}`).then(() => location.reload())
 }
+
+
+// 캠핑장 기능 (로그인 시)
+export const receiveCamping_in = async (campingId, userUid) => {
+    return await axios.get(`${url}`+`/camping?campingId=${campingId}&userUid=${userUid}`)
+}
+
+// 캠핑장 기능 (로그아웃 시)
+export const receiveCamping_out = async (campingId, userUid) => {
+    return await axios.get(`${url}`+`/camping?campingId=${campingId}&userUid=${userUid}`)
+}
