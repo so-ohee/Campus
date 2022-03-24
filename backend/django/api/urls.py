@@ -4,6 +4,6 @@ from . import views
 app_name = "api"
 
 urlpatterns = [
-    path('recommend1/', views.recommend1),
+    path('recommend1/<uid>', views.recommend1),
     path('test/', views.test),
 ]

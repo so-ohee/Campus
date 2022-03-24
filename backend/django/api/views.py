@@ -10,8 +10,8 @@ import pandas as pd
 import pickle
 
 @api_view(('GET',))
-def recommend1(request):        # cf 10개, survey 10개를 받아 최대 20개 중 랜덤으로 10개 반환
-    uid = 'l6uEzsFywoOiNTu1FweAzXO85pG3'
+def recommend1(request, uid):        # cf 10개, survey 10개를 받아 최대 20개 중 랜덤으로 10개 반환
+    # uid = 'l6uEzsFywoOiNTu1FweAzXO85pG3'
     
     cf_ids = CF(uid)                # CF 받아오기
     survey_campings = survey(uid)   # survey 받아오기
@@ -66,7 +66,7 @@ def survey(uid):
     survey = Survey.objects.get(pk=uid)
     # survey.site_bottom_cl = ['site_bottom_cl1', 'site_bottom_cl2']
     # survey.lct_cl = []
-    # survey.sbrs_cl = ['전기', '무선인터넷','마트']
+    # survey.sbrs_cl = ['전기', '무선인터넷','마트', '트램폴린']
     # survey.animal_cmg_cl = ['가능', '가능(소형견)']
 
     q = Q()
