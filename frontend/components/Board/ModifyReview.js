@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "/styles/Board/ModifyReview.module.css";
 
-function modifyreview(props) {
+function Modifyreview(props) {
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -83,4 +83,4 @@ function modifyreview(props) {
     );
 }
 
-export default modifyreview;
+export default Modifyreview;

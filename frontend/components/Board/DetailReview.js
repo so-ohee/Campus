@@ -4,7 +4,7 @@ import styles from "/styles/Board/DetailReview.module.css";
 import CommentCard from "/components/common/CommentCard";
 import { campingBoardMore, articleDelete, commentSearch } from "../../function/axios";
 
-function detailreview(props) {
+function Detailreview(props) {
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -143,4 +143,4 @@ function detailreview(props) {
     );
 }
 
-export default detailreview;
+export default Detailreview;

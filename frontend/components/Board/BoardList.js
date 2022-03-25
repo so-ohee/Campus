@@ -4,7 +4,7 @@ import styles from "/styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 import { campingBoard } from "../../function/axios";
 
-function boardlist(props) {
+function Boardlist(props) {
 
     const submitSign = () => {
         props.propFunction("작성")
@@ -125,4 +125,4 @@ function boardlist(props) {
     );
 }
 
-export default boardlist;
+export default Boardlist;
