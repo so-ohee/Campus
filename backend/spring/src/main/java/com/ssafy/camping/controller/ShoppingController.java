@@ -1,8 +1,5 @@
 package com.ssafy.camping.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.ssafy.camping.service.NaverSearchService;
 import com.ssafy.camping.utils.Message;
 import io.swagger.annotations.ApiImplicitParam;
@@ -13,33 +10,36 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/news")
+@RequestMapping("/shop")
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
-public class NewsController {
+public class ShoppingController {
 
-    private final NaverSearchService naverSearchService;
+    private final NaverSearchService shoppingService;
 
-    @ApiOperation(value = "캠핑 뉴스 목록")
+    @ApiOperation(value = "쇼핑 목록")
     @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
             dataType = "int", paramType = "query")
     @GetMapping()
-    public ResponseEntity getNews(@RequestParam(defaultValue = "1") Integer page) throws Exception {
-        log.debug("NewsController getNews call");
+    public ResponseEntity getItem(@RequestParam(defaultValue = "1") Integer page) throws Exception {
+        log.debug("ShoppingController getItem call");
 
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
-            resultMap = naverSearchService.getNews(page);
-            if(resultMap.get("message").equals(Message.FIND_NEWS_SUCCESS)) {
+            resultMap = shoppingService.getItem(page);
+            if(resultMap.get("message").equals(Message.FIND_ITEM_SUCCESS)) {
                 status = HttpStatus.OK;
             }
         } catch (Exception e) {
-            log.error(Message.FIND_NEWS_FAIL+": {}", e.getMessage());
+            log.error(Message.FIND_ITEM_FAIL+": {}", e.getMessage());
 
-            resultMap.put("message", Message.FIND_NEWS_FAIL);
+            resultMap.put("message", Message.FIND_ITEM_FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity(resultMap, status);

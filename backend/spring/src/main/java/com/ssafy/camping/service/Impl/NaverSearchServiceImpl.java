@@ -1,6 +1,8 @@
-package com.ssafy.camping.service;
+package com.ssafy.camping.service.Impl;
 
+import com.ssafy.camping.dto.ItemDto;
 import com.ssafy.camping.dto.NewsDto;
+import com.ssafy.camping.service.NaverSearchService;
 import com.ssafy.camping.utils.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -19,15 +21,58 @@ import java.util.*;
 
 @Slf4j
 @Service
-public class NewsService {
+public class NaverSearchServiceImpl implements NaverSearchService {
 
     @Value("${api.naver.clientId}")
     private String clientId;
     @Value("${api.naver.clientSecret}")
     private String clientSecret;
 
+    @Override
+    public Map<String, Object> getItem(Integer page) throws Exception{
+        log.debug("NaverSearchService getItem call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        String text = "캠핑";
+        try {
+            text = URLEncoder.encode(text, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            log.error("검색어 인코딩 실패: {}", e.getMessage());
+            throw new RuntimeException("검색어 인코딩 실패", e);
+        }
+
+        String apiURL = "https://openapi.naver.com/v1/search/shop.json?query=" + text + "&start=" + page; // json 결과
+
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-Naver-Client-Id", clientId);
+        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        String responseBody = get(apiURL, requestHeaders);
+
+        JSONParser parser = new JSONParser();
+        JSONObject obj = (JSONObject) parser.parse(responseBody);
+        JSONArray items = (JSONArray) obj.get("items");
+
+        List<ItemDto> list = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            ItemDto item = new ItemDto((JSONObject) items.get(i));
+
+            list.add(item);
+        }
+
+        if(!list.isEmpty()) {
+            resultMap.put("message", Message.FIND_ITEM_SUCCESS);
+            resultMap.put("items", list);
+            resultMap.put("totalPage", 100);
+        } else {
+            resultMap.put("message", Message.NOT_FOUND_ITEM);
+        }
+
+        return resultMap;
+    }
+
+    @Override
     public Map<String, Object> getNews(Integer page) throws Exception{
-        log.debug("NewsService getNews call");
+        log.debug("NaverSearchService getNews call");
 
         Map<String, Object> resultMap = new HashMap<>();
         String text = "캠핑";
@@ -47,31 +92,23 @@ public class NewsService {
 
         JSONParser parser = new JSONParser();
         JSONObject obj = (JSONObject) parser.parse(responseBody);
-        JSONArray item = (JSONArray) obj.get("items");
+        JSONArray items = (JSONArray) obj.get("items");
 
         List<NewsDto> list = new ArrayList<>();
-        for (int i = 0; i < item.size(); i++) {
-            NewsDto n = new NewsDto();
-            JSONObject tmp = (JSONObject) item.get(i);
-            String title = (String) tmp.get("title");
-            String link = (String) tmp.get("link");
-            String description = (String) tmp.get("description");
-            String date = (String) tmp.get("pubDate");
+        for (int i = 0; i < items.size(); i++) {
+            NewsDto news = new NewsDto((JSONObject) items.get(i));
 
-            n.setTitle(title.replaceAll("&nbsp;", " ").replaceAll("<br>", "\r\n").
+            news.setTitle(news.getTitle().replaceAll("&nbsp;", " ").replaceAll("<br>", "\r\n").
                     replaceAll("&quot;", "\"").replaceAll("&gt;", ">").replaceAll("<b>", "").replaceAll("</b>", ""));
-            n.setLink(link);
-            n.setDescription(description.replaceAll("&nbsp;", " ").replaceAll("<br>", "\r\n").replaceAll("&quot;", "\"").
+            news.setDescription(news.getDescription().replaceAll("&nbsp;", " ").replaceAll("<br>", "\r\n").replaceAll("&quot;", "\"").
                     replaceAll("&gt;", ">").replaceAll("<b>", "").replaceAll("</b>", "").replaceAll("◀ＶＣＲ▶", "").replaceAll("◀ＥＮＤ▶", ""));
 
             SimpleDateFormat fDate = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ROOT);
             SimpleDateFormat nDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            Date sDate = fDate.parse(date);
-            n.setDate(nDate.format(sDate));
+            Date sDate = fDate.parse(news.getDate());
+            news.setDate(nDate.format(sDate));
 
-            if (n != null) {
-                list.add(n);
-            }
+            list.add(news);
         }
 
         if(!list.isEmpty()) {
@@ -86,7 +123,7 @@ public class NewsService {
     }
 
     public String get(String apiUrl, Map<String, String> requestHeaders) {
-        log.debug("NewsService get call");
+        log.debug("NaverSearchService get call");
 
         HttpURLConnection con = connect(apiUrl);
         try {
@@ -110,7 +147,7 @@ public class NewsService {
     }
 
     private HttpURLConnection connect(String apiUrl) {
-        log.debug("NewsService connect call");
+        log.debug("NaverSearchService connect call");
 
         try {
             URL url = new URL(apiUrl);
@@ -125,7 +162,7 @@ public class NewsService {
     }
 
     private String readBody(InputStream body) {
-        log.debug("NewsService readBody call");
+        log.debug("NaverSearchService readBody call");
 
         InputStreamReader streamReader = new InputStreamReader(body);
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
