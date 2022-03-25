@@ -20,7 +20,7 @@ function First() {
 
     return (
         <div className={styles.first_main}>
-            <Container>
+            {/* <Container>
                 <h1 className={styles.first_h1}>{title}</h1>
                 <Row>
                     {campingplace.map((element, index) => {
@@ -37,7 +37,7 @@ function First() {
                     })}
                 </Row>
                 
-            </Container>
+            </Container> */}
         </div>
     );
 }

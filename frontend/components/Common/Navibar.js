@@ -29,9 +29,9 @@ function Navibar() {
     <>
       <Navbar style={{backgroundColor: "white"}} expand="lg">
         <Container>
-          <Navbar.Brand href="/">
+          {/* <Navbar.Brand href="/">
             <img className={styles.navi_pic} src="../../logo.png" />
-          </Navbar.Brand>
+          </Navbar.Brand> */}
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
@@ -64,13 +64,13 @@ function Navibar() {
                   {
                     token && (
                         <div className={styles.navi_dropdown}>
-                            <NavDropdown align="end" title={
+                            {/* <NavDropdown align="end" title={
                               <img className={styles.navi_profile_pic} src={ `${data.profile}` } />
                             } id="dropdown-menu-align-end">
                               <NavDropdown.Item href="mypage">마이페이지</NavDropdown.Item>
                               <NavDropdown.Item>정보 수정</NavDropdown.Item>
                               <NavDropdown.Item onClick={() => onLogOutClick()}>로그아웃</NavDropdown.Item>
-                            </NavDropdown>
+                            </NavDropdown> */}
                         </div> 
                     )
                   }
