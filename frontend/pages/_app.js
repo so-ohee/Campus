@@ -11,7 +11,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <base href="/"/>
         <meta charSet="UTF-8" />
         <title>Campus</title>
         <link rel="shortcut icon" href="/favicon.ico" />
