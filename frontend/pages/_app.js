@@ -11,8 +11,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
         <base href="/"/>
         <meta charSet="UTF-8" />
         <title>Campus</title>
