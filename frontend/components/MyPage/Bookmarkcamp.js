@@ -1,11 +1,11 @@
 import React from 'react';
-import CampingCard from "/components/common/CampingCard";
+import CampingCard from "../Common/CampingCard";
 import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { viewCamping } from "../../function/axios";
-import styles from "/styles/MyPage/Bookmarkcamp.module.css";
+import styles from "../../styles/MyPage/Bookmarkcamp.module.css";
 
-function bookmarkcamp() {
+function Bookmarkcamp() {
 
     const [title, setTitle] = useState("");
     const [campingplace, setCampingplace] = useState([]);
@@ -78,4 +78,4 @@ function bookmarkcamp() {
     );
 }
 
-export default bookmarkcamp;
+export default Bookmarkcamp;

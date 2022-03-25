@@ -1,5 +1,5 @@
 import { Button, Modal } from 'react-bootstrap';
-import styles from '/styles/Firebase/Login.module.css';
+import styles from '../../styles/Firebase/Login.module.css';
 import { signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
 import { authService } from "./firebase";
 import "firebase/compat/auth";
@@ -48,10 +48,10 @@ function Login(props) {
             </Modal.Header>
             <Modal.Body>
                 <div className={styles.login_pic_div}>
-                    <img className={styles.login_pic} src="/logo.png" />
+                    <img className={styles.login_pic} src="../../logo.png" />
                 </div>
                 <div className={styles.login_pic_div}>
-                    <img className={styles.login_google_pic} name="google" onClick={onSocialClick}  src="/googlelogin.png" />
+                    <img className={styles.login_google_pic} name="google" onClick={onSocialClick}  src="../../googlelogin.png" />
                 </div>
             </Modal.Body>
             <Modal.Footer>

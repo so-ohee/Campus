@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Container, Row } from 'react-bootstrap';
-import styles from "/styles/Board/WriteReview.module.css";
+import { Button, Row } from 'react-bootstrap';
+import styles from "../../styles/Board/WriteReview.module.css";
 
-function writeqna(props) {
+function Writeqna(props) {
 
     const submitSign = () => {
         props.propFunction("기본")
@@ -33,4 +33,4 @@ function writeqna(props) {
     );
 }
 
-export default writeqna;
+export default Writeqna;

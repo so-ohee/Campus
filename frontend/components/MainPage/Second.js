@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import styles from '/styles/MainPage/MainPageSecond.module.css';
+import styles from '../../styles/MainPage/MainPageSecond.module.css';
 
 function Second() {
 
@@ -25,14 +24,14 @@ function Second() {
                     <Col>
                         <Row>
                             <Col xs={3}>
-                            <img className={styles.second_pic} src="/fire.png" />
+                            <img className={styles.second_pic} src="../../fire.png" />
                             </Col>
                             <Col xs={9} id={styles.second_col}>
                                 <div className={styles.second_div}>
                                     <h4 className={styles.second_h4}>알고리즘으로 찾는 캠핑장</h4>
-                                    <h6 className={styles.second_h6}>Cras sit amet nibh libero
+                                    <p className={styles.second_h6}>Cras sit amet nibh libero
                                         , in gravida nulla. Nulla vel metus
-                                        scelerisque ante sollicitudin. </h6>
+                                        scelerisque ante sollicitudin. </p>
                                 </div>
                             </Col>
                         </Row>
@@ -40,14 +39,14 @@ function Second() {
                     <Col>
                         <Row>
                             <Col xs={3}>
-                            <img className={styles.second_pic} src="/tent.png" />
+                            <img className={styles.second_pic} src="../../tent.png" />
                             </Col>
                             <Col xs={9} id={styles.second_col}>
                                 <div className={styles.second_div}>
                                     <h4 className={styles.second_h4}>다양한 종류의 캠핑장</h4>
-                                    <h6 className={styles.second_h6}>Cras sit amet nibh libero
+                                    <p className={styles.second_h6}>Cras sit amet nibh libero
                                     , in gravida nulla. Nulla vel metus
-                                    scelerisque ante sollicitudin. </h6>
+                                    scelerisque ante sollicitudin. </p>
                                 </div>
                             </Col>
                         </Row>
@@ -55,7 +54,7 @@ function Second() {
                     <Col>
                         <Row>
                             <Col xs={3}>
-                            <img className={styles.second_pic} src="/lamp.png" />
+                            <img className={styles.second_pic} src="../../lamp.png" />
                             </Col>
                             <Col xs={9} id={styles.second_col}>
                                 <div className={styles.second_div}>
@@ -63,7 +62,7 @@ function Second() {
                                     {
                                         !token && (
                                             <>
-                                            <h6 className={styles.second_servey} onClick={handleShow}>설문하러 가기... </h6>
+                                            <p className={styles.second_servey} onClick={handleShow}>설문하러 가기... </p>
                                             <Modal show={show} onHide={handleClose} animation={false}>
                                                 <Modal.Header closeButton>
                                                 <Modal.Title>로그인 해주세요!</Modal.Title>
@@ -79,7 +78,7 @@ function Second() {
                                     }
                                     {
                                         token && (
-                                            <h6 className={styles.second_servey} onClick={() => goServey()}>설문하러 가기... </h6>
+                                            <p className={styles.second_servey} onClick={() => goServey()}>설문하러 가기... </p>
                                         )
                                     }
                                     

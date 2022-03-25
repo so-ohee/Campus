@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
-import styles from "/styles/Board/DetailReview.module.css";
-import CommentCard from "/components/common/CommentCard";
+import styles from "../../styles/Board/DetailReview.module.css";
+import CommentCard from "../Common/CommentCard";
 import { campingBoardMore, commentSearch } from "../../function/axios";
 
-function detailreview(props) {
+function Detailreview(props) {
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -36,17 +36,17 @@ function detailreview(props) {
                     <Row>
                         <Col xs={9}>
                             <Row>
-                                <h3 style={{fontWeight: "bold"}}>{datas.category}</h3>
+                                <p style={{fontWeight: "bold"}}>{datas.category}</p>
                             </Row>
                         </Col>
                         <Col xs={3}>
                             <Row>
-                                <h6>{datas.name} {datas.createTime} 작성</h6>
+                                <p>{datas.name} {datas.createTime} 작성</p>
                             </Row>
                             <Row>
                                 {
-                                    datas.updateTime === null ? <h6>수정되지 않은 글입니다.</h6>
-                                    : <h6>{datas.name} {datas.updateTime} 수정</h6>
+                                    datas.updateTime === null ? <p>수정되지 않은 글입니다.</p>
+                                    : <p>{datas.name} {datas.updateTime} 수정</p>
                                 }
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
@@ -102,4 +102,4 @@ function detailreview(props) {
     );
 }
 
-export default detailreview;
+export default Detailreview;

@@ -1,14 +1,17 @@
 import { Container, Col, Row } from "react-bootstrap";
-import styles from "/styles/CampingPlace/CampingIntro.module.css";
+import styles from "../../styles/CampingPlace/CampingIntro.module.css";
 
-function CampingIntro() {
+function CampingIntro(props) {
+
+    console.log(props.campingId);
+
     return (
         <>
             <Container>
                 <Row>
                     {/* 캠핑장 사진 모음 */}
                     <div className={styles.capmingplace_main_pic_gather}>
-                        <img className={styles.capmingplace_main_pic} src="/logo.png" />
+                        <img className={styles.capmingplace_main_pic} src="../../logo.png" />
                     </div>
 
                     {/* 캠핑장 설명 */}
@@ -36,58 +39,58 @@ function CampingIntro() {
                     <div className={styles.capmingplace_main_explaingraph}>
                         <Row className={styles.capmingplace_main_explaingraph_row}>
                             <Col>
-                                <h6 style={{fontWeight: "bold"}}>캠핑장 환경</h6>
+                                <p style={{fontWeight: "bold"}}>캠핑장 환경</p>
                             </Col>
                             <Col>
-                                <h6>해변 / 국립공원</h6>
+                                <p>해변 / 국립공원</p>
                             </Col>
                             <Col>
-                                <h6 style={{fontWeight: "bold"}}>주요시설</h6>
+                                <p style={{fontWeight: "bold"}}>주요시설</p>
                             </Col>
                             <Col>
-                                <h6>일반야영장 (69면)</h6>
-                            </Col>
-                        </Row>
-                        <Row className={styles.capmingplace_main_explaingraph_row2}>
-                            <Col>
-                                <h6 style={{fontWeight: "bold"}}>캠핑장 유형</h6>
-                            </Col>
-                            <Col>
-                                <h6>일반야영장, 자동차야영장</h6>
-                            </Col>
-                            <Col>
-                                <h6 style={{fontWeight: "bold"}}>바닥형태</h6>
-                            </Col>
-                            <Col>
-                                <h6>맨흙 (69)</h6>
+                                <p>일반야영장 (69면)</p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
                             <Col>
-                                <h6 style={{fontWeight: "bold"}}>운영기간</h6>
+                                <p style={{fontWeight: "bold"}}>캠핑장 유형</p>
                             </Col>
                             <Col>
-                                <h6>봄, 여름, 가을, 겨울</h6>
+                                <p>일반야영장, 자동차야영장</p>
                             </Col>
                             <Col>
-                                <h6 style={{fontWeight: "bold"}}>반려동물</h6>
+                                <p style={{fontWeight: "bold"}}>바닥형태</p>
                             </Col>
                             <Col>
-                                <h6>출입 불가능</h6>
+                                <p>맨흙 (69)</p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
                             <Col>
-                                <h6 style={{fontWeight: "bold"}}>운영일</h6>
+                                <p style={{fontWeight: "bold"}}>운영기간</p>
                             </Col>
                             <Col>
-                                <h6>평일+주말</h6>
+                                <p>봄, 여름, 가을, 겨울</p>
                             </Col>
                             <Col>
-                                <h6 style={{fontWeight: "bold"}}>화로대</h6>
+                                <p style={{fontWeight: "bold"}}>반려동물</p>
                             </Col>
                             <Col>
-                                <h6>개별</h6>
+                                <p>출입 불가능</p>
+                            </Col>
+                        </Row>
+                        <Row className={styles.capmingplace_main_explaingraph_row2}>
+                            <Col>
+                                <p style={{fontWeight: "bold"}}>운영일</p>
+                            </Col>
+                            <Col>
+                                <p>평일+주말</p>
+                            </Col>
+                            <Col>
+                                <p style={{fontWeight: "bold"}}>화로대</p>
+                            </Col>
+                            <Col>
+                                <p>개별</p>
                             </Col>
                         </Row>
                     </div>

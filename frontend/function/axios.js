@@ -1,5 +1,4 @@
 import axios from "axios";
-import { formatWithValidation } from 'next/dist/shared/lib/utils';
 
 const url = "http://localhost:8080/";
 
@@ -109,4 +108,16 @@ export const commentSearch = async (boardId) => {
 // 댓글 삭제
 export const commentDelete = async (commentId) => {
     axios.delete(`${url}`+ `/` + `comment`+ `/` + `${commentId}`).then(() => location.reload())
+}
+
+
+// 캠핑장 기능 (로그인 시)
+export const receiveCamping_in = async (campingId, userUid) => {
+    return await axios.get(`${url}`+`/camping?campingId=${campingId}&userUid=${userUid}`)
+}
+
+// 캠핑장 기능 (로그아웃 시)
+export const receiveCamping_out = async (campingId) => {
+    console.log(campingId);
+    return await axios.get(`${url}`+`/camping?campingId=${campingId}`)
 }

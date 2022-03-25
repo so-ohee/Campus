@@ -70,4 +70,8 @@ public class Message {
     public static final String NOT_FOUND_NEWS = "뉴스를 찾을 수 없습니다";
     public static final String FIND_NEWS_SUCCESS = "뉴스 조회 성공";
     public static final String FIND_NEWS_FAIL = "뉴스 조회 실패";
+    
+    public static final String NOT_FOUND_ITEM = "쇼핑 상품을 찾을 수 없습니다";
+    public static final String FIND_ITEM_SUCCESS = "쇼핑 상품 찾기 성공";
+    public static final String FIND_ITEM_FAIL = "쇼핑 상품 찾기 실패";
 }

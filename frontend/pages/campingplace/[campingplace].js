@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { Col, Container, Nav } from 'react-bootstrap';
-import CampingExplain from '/components/CampingPlace/CampingExplain.js';
-import CampingIntro from '/components/CampingPlace/CampingIntro.js';
-import CampingMap from '/components/CampingPlace/CampingMap.js';
-import CampingReview from '/components/CampingPlace/CampingReview.js';
-import CampingUse from '/components/CampingPlace/CampingUse.js';
-import styles from "/styles/CampingPlace/CampingPlace.module.css";
+import { useEffect, useState } from 'react';
+import { useRouter } from "next/router";
+import { Container, Nav } from 'react-bootstrap';
+import CampingExplain from '../../components/CampingPlace/CampingExplain.js';
+import CampingIntro from '../../components/CampingPlace/CampingIntro.js';
+import CampingMap from '../../components/CampingPlace/CampingMap.js';
+import CampingReview from '../../components/CampingPlace/CampingReview.js';
+import CampingUse from '../../components/CampingPlace/CampingUse.js';
+import styles from "../../styles/CampingPlace/CampingPlace.module.css";
+import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 
-function campingplace() {
+function Campingplace(props) {
 
   const [selected, setSelected] = useState("1");
+  const [datas, setDatas] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    receiveCamping_out(router.query.campingplace).then((res) => console.log(res));
+  }, [])
 
   return (
     
@@ -35,7 +43,7 @@ function campingplace() {
           </div> 
         <div>
           {
-            selected === "1" && <CampingIntro />
+            selected === "1" && <CampingIntro campingId={datas} />
           }
           {
             selected === "2" && <CampingMap />
@@ -52,4 +60,4 @@ function campingplace() {
   );
 }
 
-export default campingplace;
+export default Campingplace;

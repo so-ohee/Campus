@@ -1,5 +1,5 @@
 import { Container, Col, Row } from "react-bootstrap";
-import styles from "/styles/CampingPlace/CampingReview.module.css";
+import styles from "../../styles/CampingPlace/CampingReview.module.css";
 
 const dummy = [
     {
@@ -26,13 +26,13 @@ function CampingReview() {
                 <div className={styles.campingreview_div}>
                     {dummy.map((element, index) => {
                         return (
-                            <div className={styles.campingreview_row}>
+                            <div className={styles.campingreview_row} key={index}>
                                 <Row>
                                     <Col xs={1}>
-                                        <img className={styles.campingreview_profile} src="/profile.png" />
+                                        <img className={styles.campingreview_profile} src="../../profile.png" />
                                     </Col>
                                     <Col xs={9}>
-                                        <img className={styles.campingreview_star} src="/star.png" />
+                                        <img className={styles.campingreview_star} src="../../star.png" />
                                         <h5>{element.name}</h5>
                                     </Col>
                                     <Col xs={2} style={{textAlignLast: "right"}}>

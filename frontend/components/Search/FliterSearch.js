@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
-import styles from "/styles/Search/FliterSearch.module.css";
+import styles from "../../styles/Search/FliterSearch.module.css";
 
-function filtersearch() {
+function Filtersearch() {
 
     return (
         <Container className={styles.filtersearch_container}>
@@ -77,4 +77,4 @@ function filtersearch() {
     );
 }
 
-export default filtersearch;
+export default Filtersearch;

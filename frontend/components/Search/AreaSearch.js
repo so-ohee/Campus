@@ -1,9 +1,9 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
-import { Col, Dropdown, Form, Row } from 'react-bootstrap';
-import styles from "/styles/Search/AreaSearch.module.css";
+import { Col, Form, Row } from 'react-bootstrap';
+import styles from "../../styles/Search/AreaSearch.module.css";
 
-function areasearch() {
+function Areasearch() {
 
     const [area, setArea] = useState("");
     const [thema, setThema] = useState("");
@@ -90,4 +90,4 @@ function areasearch() {
     );
 }
 
-export default areasearch;
+export default Areasearch;

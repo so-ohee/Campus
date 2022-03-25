@@ -1,7 +1,6 @@
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import styles from "/styles/Common/CommentCard.module.css";
+import styles from "../../styles/Common/CommentCard.module.css";
 import { commentDelete } from "../../function/axios"
-import { useEffect, useState } from 'react';
 
 function commentcard(params) {
 
@@ -22,12 +21,12 @@ function commentcard(params) {
                             <h5 className={styles.commentcard_h5}>{params.name}</h5>
                         </Col>
                         <Col xs={10}>
-                            <h6 className={styles.commentcard_h6}>{params.date}</h6>
+                            <p className={styles.commentcard_h6}>{params.date}</p>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <h6 className={styles.commentcard_h6_2}>{params.content}</h6>
+                            <p className={styles.commentcard_h6_2}>{params.content}</p>
                         </Col>
                     </Row>
                 </Col>

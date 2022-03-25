@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Navbar, NavLink, NavDropdown } from "react-bootstrap";
 import Login from '../Firebase/Login';
-import styles from "/styles/Common/Navibar.module.css";
+import styles from "../../styles/Common/Navibar.module.css";
 import { bringUser } from "../../function/axios";
 
 function Navibar() {
@@ -30,30 +30,30 @@ function Navibar() {
       <Navbar style={{backgroundColor: "white"}} expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            <img className={styles.navi_pic} src="/logo.png" />
+            <img className={styles.navi_pic} src="./../../../public/logo.png" />
           </Navbar.Brand>
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
                 <NavLink href="campingplace">
-                  <h6 style={{ color: "black", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</h6>
+                  <p style={{ color: "black", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</p>
                 </NavLink>{" "}
                 /
                 <NavLink href="board">
-                  <h6 style={{ color: "black", fontWeight: "bold", width: "60px"  }}>BOARD</h6>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px"  }}>BOARD</p>
                 </NavLink>{" "}
                 /
                 <NavLink href="search">
-                  <h6 style={{ color: "black", fontWeight: "bold", width: "60px"  }}>SEARCH</h6>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px"  }}>SEARCH</p>
                 </NavLink>{" "}
                 /
                 <NavLink href="news">
-                  <h6 style={{ color: "black", fontWeight: "bold", width: "80px"  }}>NEWS</h6>
+                  <p style={{ color: "black", fontWeight: "bold", width: "80px"  }}>NEWS</p>
                 </NavLink>
                   {
                     !token && (
                         <div>
-                          <h6 style={{ color: "black", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</h6>
+                          <p style={{ color: "black", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>
                           <Login
                             show={LoginmodalShow}
                             onHide={() => LoginsetModalShow(false)}

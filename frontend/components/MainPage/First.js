@@ -1,6 +1,7 @@
+import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import styles from "/styles/MainPage/MainPageFirst.module.css";
-import CampingCard from "/components/common/CampingCard";
+import styles from "../../styles/MainPage/MainPageFirst.module.css";
+import CampingCard from "../Common/CampingCard";
 import { viewCamping } from "../../function/axios";
 import { useEffect, useState } from 'react';
 
@@ -16,7 +17,7 @@ function First() {
                 setCampingplace(response.data.seasonList);
     });
     }, []);
-    
+
     return (
         <div className={styles.first_main}>
             <Container>
@@ -26,9 +27,10 @@ function First() {
                         return (
                         <Col sm key={index}>
                             <CampingCard
-                            title={element.facltNm}
-                            address={element.addr1}
-                            hashtag={element.themaEnvrnCl}
+                                campingId={element.campingId}
+                                title={element.facltNm}
+                                address={element.addr1}
+                                hashtag={element.themaEnvrnCl}
                             />
                         </Col>
                         );

@@ -1,6 +1,6 @@
 import { Row, Col, Container } from 'react-bootstrap';
-import styles from "/styles/MainPage/MainPageThird.module.css";
-import CampingCard from "/components/common/CampingCard";
+import styles from "../../styles/MainPage/MainPageThird.module.css";
+import CampingCard from "../Common/CampingCard";
 import { viewCamping } from "../../function/axios";
 import { useEffect, useState } from 'react';
 
@@ -23,6 +23,7 @@ function Third() {
                         return (
                         <Col sm key={index}>
                             <CampingCard
+                            campingId={element.campingId}
                             title={element.facltNm}
                             address={element.addr1} 
                             hashtag={element.themaEnvrnCl}

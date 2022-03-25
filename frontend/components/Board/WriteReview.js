@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
-import styles from "/styles/Board/WriteReview.module.css";
+import styles from "../../styles/Board/WriteReview.module.css";
 import ReactStars from "react-rating-stars-component";
 
-function writereview(props) {
+function Writereview(props) {
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -52,7 +52,7 @@ function writereview(props) {
                     <Col>
                         <Row>
                             <Col xs={3} style={{marginTop: "2.5%"}}>
-                                <h6 className={styles.writereview_h6}>서비스</h6>
+                                <p className={styles.writereview_h6}>서비스</p>
                             </Col>
                             <Col xs={8}>
                                 <ReactStars
@@ -68,7 +68,7 @@ function writereview(props) {
                     <Col>
                         <Row>
                             <Col xs={3} style={{marginTop: "2.5%"}}>
-                                <h6 className={styles.writereview_h6}>환경</h6>
+                                <p className={styles.writereview_h6}>환경</p>
                             </Col>
                             <Col xs={8}>
                                 <ReactStars
@@ -84,7 +84,7 @@ function writereview(props) {
                     <Col>
                         <Row>
                             <Col xs={3} style={{marginTop: "2.5%"}}>
-                                <h6 className={styles.writereview_h6}>부대시설</h6>
+                                <p className={styles.writereview_h6}>부대시설</p>
                             </Col>
                             <Col xs={8}>
                                 <ReactStars
@@ -134,4 +134,5 @@ function writereview(props) {
     );
 }
 
-export default writereview;
+export default Writereview;
+ 

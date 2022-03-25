@@ -1,5 +1,6 @@
+import React from 'react';
 import { Container, Col, Row } from "react-bootstrap";
-import styles from "/styles/CampingPlace/CampingExplain.module.css";
+import styles from "../../styles/CampingPlace/CampingExplain.module.css";
 
 const dummy = [
     {
@@ -20,14 +21,19 @@ const dummy = [
     },
 ];
 
+// export async function receiveId(res) {
+//     console.log(res);
+// }
+
 function CampingExplain() {
+
     return (
         <>
             <Container>
                 <Row>
                     {/* 사진 */}
                     <div className={styles.capmingplace_main_pic_div}>
-                        <img className={styles.capmingplace_main_pic} src="/logo.png" />
+                        <img className={styles.capmingplace_main_pic} src="../../logo.png" />
                     </div>
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
@@ -35,32 +41,32 @@ function CampingExplain() {
                         <Row>
                             <Col xs={8}>
                                 <h2 style={{fontWeight: "bold"}}>{dummy[0].title}</h2>
-                                <h6>{dummy[0].address}</h6>
-                                <h6>{dummy[0].phone}</h6>
-                                <h6 style={{color: "lightgrey"}}>
+                                <p>{dummy[0].address}</p>
+                                <p>{dummy[0].phone}</p>
+                                <p style={{color: "lightgrey"}}>
                                     {dummy[0].hashtag.map((element, index) => {
                                         return <span key={index}>#{element} </span>;
                                     })}
-                                </h6>
+                                </p>
                             </Col>
                             <Col xs={4} >
                                 <Row>
                                     <Col>
                                         <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon} src="/empty_heart.png" />
-                                            <h6 className={styles.campingexplain_reserve}>찜하기</h6>
+                                            <img className={styles.campingexplain_icon} src="../../empty_heart.png" />
+                                            <p className={styles.campingexplain_reserve}>찜하기</p>
                                         </div>
                                     </Col>
                                     <Col>
                                         <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon2} src="/empty_marker.png" />
-                                            <h6 className={styles.campingexplain_visit}>방문여부</h6>
+                                            <img className={styles.campingexplain_icon2} src="../../empty_marker.png" />
+                                            <p className={styles.campingexplain_visit}>방문여부</p>
                                         </div>
                                     </Col>
                                     <Col>
                                         <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon} src="/comment.png" />
-                                            <h6 className={styles.campingexplain_rewiew}>리뷰작성</h6>
+                                            <img className={styles.campingexplain_icon} src="../../comment.png" />
+                                            <p className={styles.campingexplain_rewiew}>리뷰작성</p>
                                         </div>
                                     </Col>
                                 </Row>

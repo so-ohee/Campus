@@ -1,10 +1,10 @@
 import React, { useEffect, useState }  from 'react';
 import { Button, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
-import styles from "/styles/Board/BoardList.module.css";
+import styles from "../../styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 import { campingBoard } from "../../function/axios";
 
-function boardlist(props) {
+function Boardlist(props) {
 
     const submitSign = () => {
         props.propFunction("작성")
@@ -47,7 +47,7 @@ function boardlist(props) {
 
                 <Row style={{ justifyContent: "right" }}>
                     <div className={styles.boardlist_title_content}>
-                        <h6>제목/내용</h6>
+                        <p>제목/내용</p>
                     </div>
                     <Form.Group style={{width:"300px", float: "right"}} controlId="formBasicPassword">
                         <Form.Control type="password" placeholder="Password" />
@@ -85,36 +85,39 @@ function boardlist(props) {
                             <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody> */}
                         {
-                            dummy.map((element, index) => {
-                                return (
-                                    <>
-                                        {
-                                            element.category === "후기" && 
-                                                <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
-                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
-                                                </tr>
-                                        }
-                                        {
-                                            element.category !== "후기" && 
-                                                <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
-                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
-                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
-                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
-                                                </tr>
-                                        }
-                                    </>
-                                )
-                            })
+                            dummy !== null ? 
+                            (
+                                dummy.map((element, index) => {
+                                    return (
+                                        <tbody key={index}>
+                                            {
+                                                element.category === "후기" && 
+                                                    <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
+                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                        <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                        <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                    </tr>
+                                            }
+                                            {
+                                                element.category !== "후기" && 
+                                                    <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
+                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                        <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                        <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                    </tr>
+                                            }
+                                        </tbody>
+                                    )
+                                })
+                            ) : null
                         }
-                    </tbody>
+                    {/* </tbody> */}
                 </table>
             </Container>
             <Pagination className={styles.boardlist_pagination}>{items}</Pagination>
@@ -122,4 +125,4 @@ function boardlist(props) {
     );
 }
 
-export default boardlist;
+export default Boardlist;
