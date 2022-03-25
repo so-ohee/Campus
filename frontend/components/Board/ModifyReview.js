@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import styles from "/styles/Board/ModifyReview.module.css";
+import styles from "../../styles/Board/ModifyReview.module.css";
 
 function Modifyreview(props) {
 

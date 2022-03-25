@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
-import styles from '/styles/MainPage/MainPageSecond.module.css';
+import styles from '../../styles/MainPage/MainPageSecond.module.css';
 
 function Second() {
 

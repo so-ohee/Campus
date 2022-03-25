@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Row } from 'react-bootstrap';
-import styles from "/styles/Board/WriteReview.module.css";
+import styles from "../../styles/Board/WriteReview.module.css";
 
 function Writefree(props) {
 

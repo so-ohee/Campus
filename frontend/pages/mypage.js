@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row, Tab, Tabs } from 'react-bootstrap';
-import styles from "/styles/MyPage/MyPage.module.css";
-import VisitedCamp from '/components/MyPage/VisitedCamp.js';
-import ReviewCamp from '/components/MyPage/ReviewCamp.js';
-import Bookmarkcamp from '/components/MyPage/Bookmarkcamp.js';
+import styles from "../styles/MyPage/MyPage.module.css";
+import VisitedCamp from '../components/MyPage/VisitedCamp.js';
+import ReviewCamp from '../components/MyPage/ReviewCamp.js';
+import Bookmarkcamp from '../components/MyPage/Bookmarkcamp.js';
 import { bringUser, changePic, changeProfileName, memberDelete } from "../function/axios";
 import { getAuth, deleteUser } from "firebase/auth";
 

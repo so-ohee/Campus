@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import styles from "/styles/Common/ReviewCard.module.css";
+import styles from "../../styles/Common/ReviewCard.module.css";
 
 function ReviewCard(params) {
     return (

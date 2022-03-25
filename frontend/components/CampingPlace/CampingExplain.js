@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import { Container, Col, Row } from "react-bootstrap";
-import styles from "/styles/CampingPlace/CampingExplain.module.css";
+import styles from "../../styles/CampingPlace/CampingExplain.module.css";
 
 const dummy = [
     {

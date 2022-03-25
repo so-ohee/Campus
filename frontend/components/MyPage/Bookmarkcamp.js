@@ -3,7 +3,7 @@ import CampingCard from "../Common/CampingCard";
 import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { viewCamping } from "../../function/axios";
-import styles from "/styles/MyPage/Bookmarkcamp.module.css";
+import styles from "../../styles/MyPage/Bookmarkcamp.module.css";
 
 function Bookmarkcamp() {
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Col, Container, Dropdown, Row } from 'react-bootstrap';
-import styles from "/styles/Board/WriteReview.module.css";
-import WriteReview from '/components/Board/WriteReview.js';
-import WriteQna from '/components/Board/WriteQna.js';
-import WriteFree from '/components/Board/WriteFree.js';
+import styles from "../../styles/Board/WriteReview.module.css";
+import WriteReview from '../Board/WriteReview';
+import WriteQna from '../Board/WriteQna.js';
+import WriteFree from '../Board/WriteFree.js';
 
 function Writermain(props) {
 

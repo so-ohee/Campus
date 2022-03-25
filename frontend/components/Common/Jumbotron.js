@@ -1,4 +1,4 @@
-import styles from '/styles/Common/Jumbotron.module.css';
+import styles from '../../styles/Common/Jumbotron.module.css';
 
 function Jumbotron() {
   return (

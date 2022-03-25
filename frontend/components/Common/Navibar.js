@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Navbar, NavLink, NavDropdown } from "react-bootstrap";
 import Login from '../Firebase/Login';
-import styles from "/styles/Common/Navibar.module.css";
+import styles from "../../styles/Common/Navibar.module.css";
 import { bringUser } from "../../function/axios";
 
 function Navibar() {

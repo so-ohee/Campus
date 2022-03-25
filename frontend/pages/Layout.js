@@ -1,7 +1,7 @@
 import React from 'react';
-import Navibar from "/components/Common/Navibar";
-import Footer from "/components/Common/Footer";
-import Jumbotron from "/components/Common/Jumbotron";
+import Navibar from "../components/Common/Navibar";
+import Footer from "../components/Common/Footer";
+import Jumbotron from "../components/Common/Jumbotron";
 
 function Layout({ children }) {
   

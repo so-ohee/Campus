@@ -1,7 +1,6 @@
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import styles from "/styles/Common/CommentCard.module.css";
+import styles from "../../styles/Common/CommentCard.module.css";
 import { commentDelete } from "../../function/axios"
-import { useEffect, useState } from 'react';
 
 function commentcard(params) {
 

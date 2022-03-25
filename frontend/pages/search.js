@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Tab, Tabs } from 'react-bootstrap';
-import styles from "/styles/Search/Search.module.css";
-import AreaSearch from '/components/Search/AreaSearch.js';
-import FliterSearch from '/components/Search/FliterSearch.js';
+import styles from "../styles/Search/Search.module.css";
+import AreaSearch from '../components/Search/AreaSearch.js';
+import FliterSearch from '../components/Search/FliterSearch.js';
 
 function search() {
 

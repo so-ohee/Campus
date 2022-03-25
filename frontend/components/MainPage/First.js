@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import styles from "/styles/MainPage/MainPageFirst.module.css";
+import styles from "../../styles/MainPage/MainPageFirst.module.css";
 import CampingCard from "../Common/CampingCard";
 import { viewCamping } from "../../function/axios";
 import { useEffect, useState } from 'react';

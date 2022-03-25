@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import BoardList from '/components/Board/BoardList.js';
-import WriteMain from '/components/Board/WriteMain.js';
-import ModifyReview from '/components/Board/ModifyReview.js';
-import DetailReview from '/components/Board/DetailReview.js';
-import DetailQnaFree from '/components/Board/DetailQnaFree.js';
+import BoardList from '../components/Board/BoardList.js';
+import WriteMain from '../components/Board/WriteMain.js';
+import ModifyReview from '../components/Board/ModifyReview.js';
+import DetailReview from '../components/Board/DetailReview.js';
+import DetailQnaFree from '../components/Board/DetailQnaFree.js';
 
 function Board(props) {
 

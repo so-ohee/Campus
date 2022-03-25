@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
-import styles from "/styles/Survey/Survey.module.css";
+import styles from "../styles/Survey/Survey.module.css";
 
 function survey() {
 

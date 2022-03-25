@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
-import styles from "/styles/Board/DetailReview.module.css";
+import styles from "../../styles/Board/DetailReview.module.css";
 import CommentCard from "../Common/CommentCard";
 import { campingBoardMore, commentSearch } from "../../function/axios";
 

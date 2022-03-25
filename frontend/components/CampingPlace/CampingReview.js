@@ -1,5 +1,5 @@
 import { Container, Col, Row } from "react-bootstrap";
-import styles from "/styles/CampingPlace/CampingReview.module.css";
+import styles from "../../styles/CampingPlace/CampingReview.module.css";
 
 const dummy = [
     {

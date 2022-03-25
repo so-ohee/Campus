@@ -1,5 +1,5 @@
 import { Row, Col, Container } from 'react-bootstrap';
-import styles from "/styles/MainPage/MainPageThird.module.css";
+import styles from "../../styles/MainPage/MainPageThird.module.css";
 import CampingCard from "../Common/CampingCard";
 import { viewCamping } from "../../function/axios";
 import { useEffect, useState } from 'react';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
-import styles from "/styles/Search/FliterSearch.module.css";
+import styles from "../../styles/Search/FliterSearch.module.css";
 
 function Filtersearch() {
 

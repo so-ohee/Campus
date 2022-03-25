@@ -1,6 +1,6 @@
 import { Container, Col, Row } from "react-bootstrap";
 import CampingCard from "../components/Common/CampingCard";
-import styles from "/styles/Recommend/Recommend.module.css";
+import styles from "../styles/Recommend/Recommend.module.css";
 
 const dummy = [
   {
