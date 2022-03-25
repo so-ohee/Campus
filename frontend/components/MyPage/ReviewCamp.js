@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { viewCamping } from "../../function/axios";
 import styles from "/styles/MyPage/ReviewCamp.module.css";
 
-function reviewcamp() {
+function Reviewcamp() {
 
     const [title, setTitle] = useState("");
     const [campingplace, setCampingplace] = useState([]);
@@ -78,4 +78,4 @@ function reviewcamp() {
     );
 }
 
-export default reviewcamp;
+export default Reviewcamp;

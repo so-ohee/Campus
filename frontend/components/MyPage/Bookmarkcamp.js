@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { viewCamping } from "../../function/axios";
 import styles from "/styles/MyPage/Bookmarkcamp.module.css";
 
-function bookmarkcamp() {
+function Bookmarkcamp() {
 
     const [title, setTitle] = useState("");
     const [campingplace, setCampingplace] = useState([]);
@@ -78,4 +78,4 @@ function bookmarkcamp() {
     );
 }
 
-export default bookmarkcamp;
+export default Bookmarkcamp;
