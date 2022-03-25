@@ -18,7 +18,7 @@ function CampingCard(params) {
   return (
       <>
           <Card style={{ width: "21rem", height: "23rem" }} onClick={() => moveCamping()}>
-              <Card.Img variant="top" src="/logo.png" />
+              <Card.Img variant="top" src="../../logo.png" />
               <Card.Body>
                   <Card.Title style={{ fontSize: "24px" }}>{params.title}</Card.Title>
                   <Card.Subtitle

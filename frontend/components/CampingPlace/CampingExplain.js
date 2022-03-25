@@ -33,7 +33,7 @@ function CampingExplain() {
                 <Row>
                     {/* 사진 */}
                     <div className={styles.capmingplace_main_pic_div}>
-                        <img className={styles.capmingplace_main_pic} src="/logo.png" />
+                        <img className={styles.capmingplace_main_pic} src="../../logo.png" />
                     </div>
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
@@ -53,19 +53,19 @@ function CampingExplain() {
                                 <Row>
                                     <Col>
                                         <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon} src="/empty_heart.png" />
+                                            <img className={styles.campingexplain_icon} src="../../empty_heart.png" />
                                             <p className={styles.campingexplain_reserve}>찜하기</p>
                                         </div>
                                     </Col>
                                     <Col>
                                         <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon2} src="/empty_marker.png" />
+                                            <img className={styles.campingexplain_icon2} src="../../empty_marker.png" />
                                             <p className={styles.campingexplain_visit}>방문여부</p>
                                         </div>
                                     </Col>
                                     <Col>
                                         <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon} src="/comment.png" />
+                                            <img className={styles.campingexplain_icon} src="../../comment.png" />
                                             <p className={styles.campingexplain_rewiew}>리뷰작성</p>
                                         </div>
                                     </Col>

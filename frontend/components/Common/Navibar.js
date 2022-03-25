@@ -30,7 +30,7 @@ function Navibar() {
       <Navbar style={{backgroundColor: "white"}} expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            <img className={styles.navi_pic} src="/logo.png" />
+            <img className={styles.navi_pic} src="../../logo.png" />
           </Navbar.Brand>
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />

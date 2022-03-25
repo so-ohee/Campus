@@ -11,7 +11,7 @@ function CampingIntro(props) {
                 <Row>
                     {/* 캠핑장 사진 모음 */}
                     <div className={styles.capmingplace_main_pic_gather}>
-                        <img className={styles.capmingplace_main_pic} src="/logo.png" />
+                        <img className={styles.capmingplace_main_pic} src="../../logo.png" />
                     </div>
 
                     {/* 캠핑장 설명 */}

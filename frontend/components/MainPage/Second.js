@@ -24,7 +24,7 @@ function Second() {
                     <Col>
                         <Row>
                             <Col xs={3}>
-                            <img className={styles.second_pic} src="/fire.png" />
+                            <img className={styles.second_pic} src="../../fire.png" />
                             </Col>
                             <Col xs={9} id={styles.second_col}>
                                 <div className={styles.second_div}>
@@ -39,7 +39,7 @@ function Second() {
                     <Col>
                         <Row>
                             <Col xs={3}>
-                            <img className={styles.second_pic} src="/tent.png" />
+                            <img className={styles.second_pic} src="../../tent.png" />
                             </Col>
                             <Col xs={9} id={styles.second_col}>
                                 <div className={styles.second_div}>
@@ -54,7 +54,7 @@ function Second() {
                     <Col>
                         <Row>
                             <Col xs={3}>
-                            <img className={styles.second_pic} src="/lamp.png" />
+                            <img className={styles.second_pic} src="../../lamp.png" />
                             </Col>
                             <Col xs={9} id={styles.second_col}>
                                 <div className={styles.second_div}>
