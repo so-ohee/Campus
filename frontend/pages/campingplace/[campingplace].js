@@ -16,9 +16,8 @@ function campingplace(props) {
   const router = useRouter();
 
   useEffect(() => {
-    setDatas(router.query.campingplace);
-    receiveCamping_out(datas);
-  })
+    receiveCamping_out(router.query.campingplace).then((res) => console.log(res));
+  }, [])
 
   return (
     
