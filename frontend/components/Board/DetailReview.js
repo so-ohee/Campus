@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "/styles/Board/DetailReview.module.css";
-import CommentCard from "/components/common/CommentCard";
+import CommentCard from "../Common/CommentCard";
 import { campingBoardMore, articleDelete, commentSearch } from "../../function/axios";
 
 function Detailreview(props) {
