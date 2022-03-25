@@ -85,13 +85,13 @@ function Boardlist(props) {
                             <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody> */}
                         {
                             dummy !== null ? 
                             (
                                 dummy.map((element, index) => {
                                     return (
-                                        <>
+                                        <tbody key={index}>
                                             {
                                                 element.category === "후기" && 
                                                     <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
@@ -112,12 +112,12 @@ function Boardlist(props) {
                                                         <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                     </tr>
                                             }
-                                        </>
+                                        </tbody>
                                     )
                                 })
                             ) : null
                         }
-                    </tbody>
+                    {/* </tbody> */}
                 </table>
             </Container>
             <Pagination className={styles.boardlist_pagination}>{items}</Pagination>
