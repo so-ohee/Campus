@@ -8,6 +8,8 @@ from django.db.models import Q
 import random
 import pandas as pd
 import pickle
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 @api_view(('GET',))
 def recommend1(request, uid):        # cf 10개, survey 10개를 받아 최대 20개 중 랜덤으로 10개 반환
@@ -143,6 +145,64 @@ def survey(uid):
     return choice_random(campings,10)
 
 
+def CBF(campingId):
+    data = pd.read_pickle("camping_tag.pkl")
+    id = data.index[data['campingId'] == int(campingId)][0]
+    tfidf = TfidfVectorizer(ngram_range=(1,1))
+    tfidf_matrix = tfidf.fit_transform(data['tag'])
+    cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+    sim_scores = list(enumerate(cosine_sim[id]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[0:13]
+    camp_indices = [idx[0] for idx in sim_scores]
+    campings = []
+    for i in camp_indices:
+        if i == id:
+            continue
+        campings.append(data['campingId'][i])
+    return campings
+
+
+@api_view(('GET',))
+def similar(request, campingId):  # campingId를 받아와서 비슷한 캠핑장 6개 추천
+    cbf_ids = CBF(campingId)
+    cbf_campings = []        # cbf_ids 를 캠핑 오브젝트로 변환
+    for i in cbf_ids:
+        cbf_campings.append(Camping.objects.get(pk=i))
+    serializer = CampingSerializer(choice_random(cbf_campings,6), many=True)
+    return Response(serializer.data)
+
+
+
+# 함수 정의
+def jaccard(a,b):
+    '''
+    a리스트와 b리스트 자카드 유사도 검사
+    '''
+    inter = 0
+    for i in a:
+        if i in b:
+            inter += 1
+    return inter/(len(a)+len(b)-inter)
+
+def choice_random(lst, n):
+    '''
+    lst에서 최대 크기 n 랜덤 리스트 반환
+    '''
+    cnt = len(lst)
+    random_nums = random.sample([i for i in range(cnt)], min(cnt, n))
+    lst_random = []
+    for i in random_nums:
+        lst_random.append(lst[i])
+    return lst_random
+
+
+
+
+
+
+
+
 @api_view(('GET',))
 def test(request):
     # dataframe 변환
@@ -171,28 +231,3 @@ def test(request):
 
 
     return Response(serializer.data)
-
-
-
-
-# 함수 정의
-def jaccard(a,b):
-    '''
-    a리스트와 b리스트 자카드 유사도 검사
-    '''
-    inter = 0
-    for i in a:
-        if i in b:
-            inter += 1
-    return inter/(len(a)+len(b)-inter)
-
-def choice_random(lst, n):
-    '''
-    lst에서 최대 크기 n 랜덤 리스트 반환
-    '''
-    cnt = len(lst)
-    random_nums = random.sample([i for i in range(cnt)], min(cnt, n))
-    lst_random = []
-    for i in random_nums:
-        lst_random.append(lst[i])
-    return lst_random
