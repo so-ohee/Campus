@@ -3,7 +3,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 import styles from "/styles/Board/WriteReview.module.css";
 import ReactStars from "react-rating-stars-component";
 
-function writereview(props) {
+function Writereview(props) {
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -134,4 +134,5 @@ function writereview(props) {
     );
 }
 
-export default writereview;
+export default Writereview;
+ 

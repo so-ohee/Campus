@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Row } from 'react-bootstrap';
 import styles from "/styles/Board/WriteReview.module.css";
 
-function writefree(props) {
+function Writefree(props) {
 
     const submitSign = () => {
         props.propFunction("기본")
@@ -33,4 +33,4 @@ function writefree(props) {
     );
 }
 
-export default writefree;
+export default Writefree;

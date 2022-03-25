@@ -5,7 +5,7 @@ import WriteReview from '/components/Board/WriteReview.js';
 import WriteQna from '/components/Board/WriteQna.js';
 import WriteFree from '/components/Board/WriteFree.js';
 
-function writermain(props) {
+function Writermain(props) {
 
     const [page, setPage] = useState("리뷰");
     const review = () => {
@@ -54,4 +54,4 @@ function writermain(props) {
     );
 }
 
-export default writermain;
+export default Writermain;
