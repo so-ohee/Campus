@@ -47,7 +47,7 @@ function Boardlist(props) {
 
                 <Row style={{ justifyContent: "right" }}>
                     <div className={styles.boardlist_title_content}>
-                        <h6>제목/내용</h6>
+                        <p>제목/내용</p>
                     </div>
                     <Form.Group style={{width:"300px", float: "right"}} controlId="formBasicPassword">
                         <Form.Control type="password" placeholder="Password" />

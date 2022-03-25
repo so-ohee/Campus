@@ -29,7 +29,7 @@ function CampingCard(params) {
                   </Card.Subtitle>
                   <Card.Text style={{ fontSize: "16px" }}>
                       {
-                        params.hashtag !==null ? <h6>#{params.hashtag.replaceAll(",", " #")}</h6> : null
+                        params.hashtag !==null ? <a>#{params.hashtag.replaceAll(",", " #")}</a> : null
                       }
                   </Card.Text>
               </Card.Body>

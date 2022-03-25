@@ -23,10 +23,10 @@ function Modifyreview(props) {
                             </Row>
                             <Row style={{width: "300px", marginTop: "1%"}}>
                                 <Col xs={4}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>서비스</h6>
+                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>서비스</p>
                                 </Col>
                                 <Col xs={1}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>4</h6>
+                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>4</p>
                                 </Col>
                                 <Col xs={7}>
                                     <img src="/star.png" style={{width: "70%"}}></img>
@@ -34,10 +34,10 @@ function Modifyreview(props) {
                             </Row>
                             <Row style={{width: "300px"}}>
                                 <Col xs={4}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>환경</h6>
+                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>환경</p>
                                 </Col>
                                 <Col xs={1}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>4</h6>
+                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>4</p>
                                 </Col>
                                 <Col xs={7}>
                                     <img src="/star.png" style={{width: "70%"}}></img>
@@ -45,10 +45,10 @@ function Modifyreview(props) {
                             </Row>
                             <Row style={{width: "300px"}}>
                                 <Col xs={4}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>부대시설</h6>
+                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>부대시설</p>
                                 </Col>
                                 <Col xs={1}>
-                                    <h6 style={{fontWeight: "bold", marginTop: "2%"}}>4</h6>
+                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>4</p>
                                 </Col>
                                 <Col xs={7}>
                                     <img src="/star.png" style={{width: "70%"}}></img>
@@ -57,7 +57,7 @@ function Modifyreview(props) {
                         </Col>
                         <Col xs={3}>
                             <Row>
-                                <h6>박주한 2021.03.16 09:58 작성</h6>
+                                <p>박주한 2021.03.16 09:58 작성</p>
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                             </Row>
