@@ -7,7 +7,7 @@ import Bookmarkcamp from '/components/MyPage/Bookmarkcamp.js';
 import { bringUser, changePic, changeProfileName, memberDelete } from "../function/axios";
 import { getAuth, deleteUser } from "firebase/auth";
 
-function mypage() {
+function Mypage() {
     const [data, setData] = useState("");
 
     const [modalShow, setModalShow] = React.useState(false);
@@ -160,4 +160,4 @@ function ModifyModal(props) {
         );
 }
 
-export default mypage;
+export default Mypage;

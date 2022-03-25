@@ -9,7 +9,7 @@ import CampingUse from '/components/CampingPlace/CampingUse.js';
 import styles from "/styles/CampingPlace/CampingPlace.module.css";
 import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 
-function campingplace(props) {
+function Campingplace(props) {
 
   const [selected, setSelected] = useState("1");
   const [datas, setDatas] = useState("");
@@ -60,4 +60,4 @@ function campingplace(props) {
   );
 }
 
-export default campingplace;
+export default Campingplace;

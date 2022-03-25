@@ -5,7 +5,7 @@ import ModifyReview from '/components/Board/ModifyReview.js';
 import DetailReview from '/components/Board/DetailReview.js';
 import DetailQnaFree from '/components/Board/DetailQnaFree.js';
 
-function board(props) {
+function Board(props) {
 
     const [page, setPage] = useState("기본");
     const [datas, setDatas] = useState("");
@@ -48,4 +48,4 @@ function board(props) {
     );
 }
 
-export default board;
+export default Board;

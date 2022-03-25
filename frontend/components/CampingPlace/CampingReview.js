@@ -26,7 +26,7 @@ function CampingReview() {
                 <div className={styles.campingreview_div}>
                     {dummy.map((element, index) => {
                         return (
-                            <div className={styles.campingreview_row}>
+                            <div className={styles.campingreview_row} key={index}>
                                 <Row>
                                     <Col xs={1}>
                                         <img className={styles.campingreview_profile} src="/profile.png" />
