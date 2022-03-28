@@ -16,13 +16,13 @@ function Campingplace(props) {
   const router = useRouter();
 
   useEffect(() => {
-    receiveCamping_out(router.query.campingplace).then((res) => console.log(res));
+    receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
   }, [])
 
   return (
     
     <div>
-      <CampingExplain />
+      <CampingExplain props={datas} />
         <Container>
           {/* 선택바(캠핑장소개, 위치&주변정보, 리뷰, 이용안내) */}
           <div className={styles.campingexplain_selectbar}>
