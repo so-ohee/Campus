@@ -21,7 +21,7 @@ function CampingCard(params) {
     router.push(`/campingplace/${ids}`)
   }
 
-  console.log(datas);
+  console.log(params);
 
   return (
       <>
