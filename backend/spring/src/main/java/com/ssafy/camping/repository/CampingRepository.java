@@ -1,6 +1,8 @@
 package com.ssafy.camping.repository;
 
 import com.ssafy.camping.entity.Camping;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +17,8 @@ public interface CampingRepository extends JpaRepository<Camping, Integer> {
     List<Camping> findTop100ByOrderByBlogCntDesc();
 
     List<Camping> findByCampingIdIn(List<Integer> campingIds);
+
+    Page<Camping> findByDoNm(String doNm, Pageable campingId);
+
+    Page<Camping> findByDoNmAndSigunguNm(String doNm, String sigunguNm, Pageable campingId);
 }
