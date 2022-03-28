@@ -24,7 +24,7 @@ function Navibar() {
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
     }, [])
-
+  
   return (
     <>
       <Navbar style={{backgroundColor: "white"}} expand="lg">

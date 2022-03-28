@@ -10,23 +10,24 @@ function CampingCard(params) {
   const [datas, setDatas] = useState("");
 
   useEffect(() => {
-    setIds(params.campingId);
-  })
-
-  useEffect(() => {
-      receiveCamping_out(ids).then((res) => setDatas(res.data.campsite));
+      receiveCamping_out(params.campingId).then((res) => setDatas(res.data.campsite));
   }, [])
   
-  const moveCamping = (id) => {
-    router.push(`/campingplace/${ids}`)
+  const moveCamping = () => {
+    router.push(`/campingplace/${params.campingId}`)
   }
 
-  console.log(params);
+  console.log(datas);
 
   return (
       <>
           <Card style={{ width: "21rem", height: "23rem" }} onClick={() => moveCamping()}>
-              <Card.Img variant="top" src={datas.firstImageUrl} />
+              {
+                datas.firstImageUrl == null ? 
+                  <Card.Img variant="top" src="../../logo.png" style={{ width: "100%" }} />
+                  : <Card.Img variant="top" src={datas.firstImageUrl} style={{width: "100%"}} />
+              }        
+              
               <Card.Body>
                   <Card.Title style={{ fontSize: "24px" }}>{datas.facltNm}</Card.Title>
                   <Card.Subtitle
