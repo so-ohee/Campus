@@ -27,7 +27,7 @@ export const sendUserUid = async (userUid, displayName, photoURL) => {
 
 // 회원 정보 불러오기
 export async function bringUser(userUid) {
-    let res = await axios.get(`${url}` + `/` + `user` + `/` + `${userUid}`)
+    let res = await axios.get(`${url}`+ `user` + `/` + `${userUid}`)
     return res;
 }
 
