@@ -22,9 +22,9 @@ function MyApp({ Component, pageProps }) {
         type="text/javascript"
       />
 
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>     
     </>
   );
 }

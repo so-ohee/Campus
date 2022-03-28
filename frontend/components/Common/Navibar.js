@@ -24,33 +24,31 @@ function Navibar() {
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
     }, [])
-
+  
   return (
     <>
       <Navbar style={{backgroundColor: "white"}} expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            <img className={styles.navi_pic} src="./../../../public/logo.png" />
+            <img className={styles.navi_pic} src="../../logo.png" />
+            {/* <img className={styles.navi_pic} src={process.env.NEXT_PUBLIC + "/logo.png" } /> */}
           </Navbar.Brand>
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
-                <NavLink href="campingplace">
-                  <p style={{ color: "black", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</p>
-                </NavLink>{" "}
-                /
                 <NavLink href="board">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px"  }}>BOARD</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px" }}>BOARD</p>
                 </NavLink>{" "}
                 /
                 <NavLink href="search">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px"  }}>SEARCH</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px" }}>SEARCH</p>
                 </NavLink>{" "}
                 /
                 <NavLink href="news">
-                  <p style={{ color: "black", fontWeight: "bold", width: "80px"  }}>NEWS</p>
-                </NavLink>
+                  <p style={{ color: "black", fontWeight: "bold", width: "80px" }}>NEWS</p>
+              </NavLink>
                   {
+                    
                     !token && (
                         <div>
                           <p style={{ color: "black", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>

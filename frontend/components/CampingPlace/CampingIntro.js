@@ -1,9 +1,17 @@
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingIntro.module.css";
+import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 
 function CampingIntro(props) {
 
-    console.log(props.campingId);
+    const [datas, setDatas] = useState("");
+    const router = useRouter();
+
+    useEffect(() => {
+        receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
+    }, [])
 
     return (
         <>
@@ -17,17 +25,13 @@ function CampingIntro(props) {
                     {/* 캠핑장 설명 */}
                     <div className={styles.capmingplace_main_explain2}>
                         <div>
-                            고사포 해변은 변산반도 국립공원에 포함된 해수욕장이다.약 2km에 이르는 백사장과 방풍을 위해 심어 놓은 약 300m의 넓고 긴 송림이 장관을 이룬다.
-                            일대의 해수욕장중에서 가장 큰 규모를 자랑한다. 울창한 송림은 야영지로서 적격이다. 고사포야영장은 이곳 고사포 해수욕장 송림안에 마련되어 있다.
-                            해수욕장 앞에는 새우 모양을 닮았다 하여 새우섬 또는 하섬으로 불리는 작은 섬이 하나있다.
-                            매월 음력 보름이나 그믐쯤에는 해수욕장에서 이곳까지 사람들이 현대판 모세의 기적이라고 부르는 약 2km의 바닷길이 열린다.
-                            이때에는 섬까지 걸어갈 수있으며, 조개나 낙지·해삼 등을 잡는 즐거움도 누릴 수 있다.
+                            {datas.intro}
                         </div>
                     </div>
 
                     {/* 캠핑장 정보 */}
                     <div>
-                        <h2 style={{fontWeight: "bold"}}>캠핑장 정보</h2>
+                        <h2 style={{fontWeight: "bold"}}>캠핑장 시설 정보</h2>
                     </div>
                     <div className={styles.capmingplace_main_explain3}>
                         <div>
@@ -42,13 +46,13 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>캠핑장 환경</p>
                             </Col>
                             <Col>
-                                <p>해변 / 국립공원</p>
+                                <p>{datas.lctCl}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>주요시설</p>
                             </Col>
                             <Col>
-                                <p>일반야영장 (69면)</p>
+                                <p>{datas.posblFcltyCl}</p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
@@ -56,13 +60,28 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>캠핑장 유형</p>
                             </Col>
                             <Col>
-                                <p>일반야영장, 자동차야영장</p>
+                                <p>{datas.induty}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>바닥형태</p>
                             </Col>
                             <Col>
-                                <p>맨흙 (69)</p>
+                                <p>
+                                    {
+                                        datas.siteBottomCl1 == 0 ? 
+                                            (
+                                                datas.siteBottomCl2 == 0 ?
+                                                    (
+                                                        datas.siteBottomCl3 == 0 ? 
+                                                            (
+                                                                datas.siteBottomCl4 == 0 ? (
+                                                                    datas.siteBottomCl5 == 0 ? null : "맨흙 ("+`${datas.siteBottomCl5}`+")"
+                                                                ) : "자갈 ("+`${datas.siteBottomCl4}`+")"
+                                                            ) : "테크 ("+`${datas.siteBottomCl3}`+")"
+                                                    ) : "파쇄석 ("+`${datas.siteBottomCl2}`+")"
+                                            ) : "잔디 ("+`${datas.siteBottomCl1}`+")"
+                                    }
+                                </p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
@@ -70,13 +89,13 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>운영기간</p>
                             </Col>
                             <Col>
-                                <p>봄, 여름, 가을, 겨울</p>
+                                <p>{datas.operPdCl}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>반려동물</p>
                             </Col>
                             <Col>
-                                <p>출입 불가능</p>
+                                <p>출입 {datas.animalCmgCl}</p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
@@ -84,13 +103,13 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>운영일</p>
                             </Col>
                             <Col>
-                                <p>평일+주말</p>
+                                <p>{datas.operDeCl}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>화로대</p>
                             </Col>
                             <Col>
-                                <p>개별</p>
+                                <p>{datas.brazierCl}</p>
                             </Col>
                         </Row>
                     </div>

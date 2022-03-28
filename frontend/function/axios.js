@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const url = "http://localhost:8080/";
+const url = "http://j6c103.p.ssafy.io:8080/";
 
 // 회원 기능 
 // 로그인 (회원 정보 DB에 저징)
 export const sendUserUid = async (userUid, displayName, photoURL) => {
-    const url2 = "http://localhost:8080/user";
+    const url2 = "http://j6c103.p.ssafy.io:8080/user";
 
     let data = {
         name: displayName,
@@ -27,14 +27,14 @@ export const sendUserUid = async (userUid, displayName, photoURL) => {
 
 // 회원 정보 불러오기
 export async function bringUser(userUid) {
-    let res = await axios.get(`${url}` + `/` + `user` + `/` + `${userUid}`)
+    let res = await axios.get(`${url}`+ `user` + `/` + `${userUid}`)
     return res;
 }
 
 // 프로필 사진 변경
 export async function changePic(userUid, formData) {
     console.log(formData);
-    const url2 = "http://localhost:8080/user/";
+    const url2 = "http://j6c103.p.ssafy.io:8080/user/";
 
     await axios({
         method: 'put',
@@ -49,7 +49,7 @@ export async function changePic(userUid, formData) {
 // 아이디 변경
 export async function changeProfileName(name, userUid) {
 
-    const url2 = "http://localhost:8080/user/";
+    const url2 = url + "http://j6c103.p.ssafy.io:8080/user/";
 
     let data = {
         name: name,
@@ -69,7 +69,7 @@ export async function changeProfileName(name, userUid) {
 
 // 회원탈퇴
 export const memberDelete = async (userUid) => {
-    axios.delete(`${url}`+ `/` + `user` + `/` + `${userUid}`)
+    axios.delete(`${url}`+ `user` + `/` + `${userUid}`)
 }
 
 
@@ -77,28 +77,28 @@ export const memberDelete = async (userUid) => {
 // 게시판 기능
 // 추천 캠핑장 (메인화면 켐핑장 추천 기능 구현)
 export const viewCamping = async () => {
-    return await axios.get(`${url}`+ `/` + `mainRecommend`)
+    return await axios.get(`${url}`+ `mainRecommend`)
 };
 
 // 게시판 목록 출력 (전체)
 export const campingBoard = async () => {
-    return await axios.get(`${url}`+ `/` + `board`)
+    return await axios.get(`${url}`+ `board`)
 }
 
 // 게시판 목록 출력 (상세조회)
 export const campingBoardMore = async (boardId) => {
-    return await axios.get(`${url}`+ `/` + `board`+ `/` + `${boardId}`)
+    return await axios.get(`${url}`+`board`+ `/` + `${boardId}`)
 }
 
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
-    axios.delete(`${url}`+ `/` + `board` + `/` + `${boardId}`)
+    axios.delete(`${url}`+`board` + `/` + `${boardId}`)
 }
 
 // 댓글 기능
 // 댓글 조회
 export const commentSearch = async (boardId) => {
-    return await axios.get(`${url}`+ `/` + `comment?boardId=` + `${boardId}`)
+    return await axios.get(`${url}`+`comment?boardId=` + `${boardId}`)
 }
 
 // 댓글 작성
@@ -107,17 +107,16 @@ export const commentSearch = async (boardId) => {
 
 // 댓글 삭제
 export const commentDelete = async (commentId) => {
-    axios.delete(`${url}`+ `/` + `comment`+ `/` + `${commentId}`).then(() => location.reload())
+    axios.delete(`${url}`+ `comment`+ `/` + `${commentId}`).then(() => location.reload())
 }
 
 
 // 캠핑장 기능 (로그인 시)
 export const receiveCamping_in = async (campingId, userUid) => {
-    return await axios.get(`${url}`+`/camping?campingId=${campingId}&userUid=${userUid}`)
+    return await axios.get(`${url}`+`camping?campingId=${campingId}&userUid=${userUid}`)
 }
 
 // 캠핑장 기능 (로그아웃 시)
 export const receiveCamping_out = async (campingId) => {
-    console.log(campingId);
-    return await axios.get(`${url}`+`/camping?campingId=${campingId}`)
+    return await axios.get(`${url}`+`camping?campingId=${campingId}`)
 }

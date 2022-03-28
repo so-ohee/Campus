@@ -1,14 +1,14 @@
 .capmingplace_main_pic_div{
     text-align-last: center;
     width: 1320px;
-    height: 300px;
+    height: 400px;
     margin-top: 5%;
-    border: 1px solid black;
 }
 
 .capmingplace_main_pic {
-    width: 30%;
-    margin-top: 3%;
+    width: 100%;
+    height: 93%;
+    margin-top: 1%;
 }
 
 .capmingplace_explain{
