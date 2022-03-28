@@ -13,8 +13,6 @@ function CampingIntro(props) {
         receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
     }, [])
 
-    console.log(datas);
-
     return (
         <>
             <Container>
