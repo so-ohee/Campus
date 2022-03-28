@@ -1,0 +1,37 @@
+.commentcard_row {
+    height: 150px;
+}
+
+.commentcard_col {
+    align-self: center;
+}
+
+.commentcard_profile {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.commentcard_h5 {
+    font-weight: bold;
+    text-align-last: left;
+}
+
+.commentcard_h6 {
+    text-align-last: left;
+    font-weight: bold;
+    color: green;
+}
+
+.commentcard_h6_2 {
+    margin-top: 1%;
+    text-align-last: left;
+}
+
+.commentcard_button1 {
+    width: 30%;
+    margin-bottom: 2%;
+}
+
+.commentcard_button2 {
+    width: 30%;
+}

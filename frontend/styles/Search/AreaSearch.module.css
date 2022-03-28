@@ -1,0 +1,43 @@
+.areasearch_div1 {
+    height: 200px;
+    background: darkseagreen;
+}
+
+.areasearch_formcontrol {
+    height: 50px;
+    border: 1px solid grey; 
+    padding: 2%;
+    background: white;
+}
+
+.areasearch_col1 {
+    text-align: -webkit-right;
+    padding-top: 3%;
+}
+
+.areasearch_col2 {
+    text-align: -webkit-center;
+    padding-top: 3%;
+}
+
+.areasearch_col3 {
+    text-align: -webkit-left;
+    padding-top: 3%;
+}
+
+.areasearch_row {
+    padding-top: 2%;
+    justify-content: center;
+}
+
+.areasearch_form {
+    width: 890px;
+    float: right;
+}
+
+.areasearch_div2 {
+    background: white; 
+    width: 200px;
+    height: 50px;
+    border-radius: 5%;
+}
