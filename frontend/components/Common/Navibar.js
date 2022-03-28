@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Navbar, NavLink, NavDropdown } from "react-bootstrap";
-import Login from '../Firebase/Login';
+// import Login from '../Firebase/Login';
 import styles from "../../styles/Common/Navibar.module.css";
-import { bringUser } from "../../function/axios";
+// import { bringUser } from "../../function/axios";
 
 function Navibar() {
   const [LoginmodalShow, LoginsetModalShow] = React.useState(false);
@@ -21,9 +21,9 @@ function Navibar() {
 
   const [data, setData] = useState("");
 
-    useEffect(() => {
-        bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
-    }, [])
+    // useEffect(() => {
+    //     bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
+    // }, [])
 
   return (
     <>
@@ -55,10 +55,10 @@ function Navibar() {
                     !token && (
                         <div>
                           <p style={{ color: "black", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>
-                          <Login
+                          {/* <Login
                             show={LoginmodalShow}
                             onHide={() => LoginsetModalShow(false)}
-                          />
+                          /> */}
                         </div>
                     ) 
                   }
