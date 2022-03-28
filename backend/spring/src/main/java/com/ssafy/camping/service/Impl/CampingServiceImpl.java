@@ -80,15 +80,27 @@ public class CampingServiceImpl implements CampingService {
     }
 
     @Override
-    public Map<String, Object> searchCampsite(String doNm, String sigunguNm, int page) throws Exception {
+    public Map<String, Object> searchCampsite(String doNm, String sigunguNm, String facltNm, int page) throws Exception {
         log.debug("CampingService searchCampsite call");
 
         Map<String, Object> resultMap = new HashMap<>();
         Page<Camping> campsites = null;
-        if(sigunguNm == null) {
-            campsites = campingRepository.findByDoNm(doNm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
+        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId"));
+        if(doNm.equals("전체")) {
+            if(facltNm == null)
+                campsites = campingRepository.findAll(pageRequest);
+            else
+                campsites = campingRepository.findByFacltNmContainingIgnoreCase(facltNm, pageRequest);
+        }else if(sigunguNm.equals("전체")) {
+            if(facltNm == null)
+                campsites = campingRepository.findByDoNm(doNm, pageRequest);
+            else
+                campsites = campingRepository.findByDoNmAndFacltNmContainingIgnoreCase(doNm, facltNm, pageRequest);
         } else {
-            campsites = campingRepository.findByDoNmAndSigunguNm(doNm, sigunguNm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
+            if(facltNm == null)
+                campsites = campingRepository.findByDoNmAndSigunguNm(doNm, sigunguNm, pageRequest);
+            else
+                campsites = campingRepository.findByDoNmAndSigunguNmAndFacltNmContainingIgnoreCase(doNm, sigunguNm, facltNm, pageRequest);
         }
 
         if(campsites.isEmpty()) {
