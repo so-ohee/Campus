@@ -118,6 +118,5 @@ export const receiveCamping_in = async (campingId, userUid) => {
 
 // 캠핑장 기능 (로그아웃 시)
 export const receiveCamping_out = async (campingId) => {
-    console.log(campingId);
     return await axios.get(`${url}`+`/camping?campingId=${campingId}`)
 }

@@ -36,22 +36,19 @@ function Navibar() {
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
-                <NavLink href="campingplace">
-                  <p style={{ color: "black", fontWeight: "bold", width: "130px" }}>CAMPING PLACE</p>
-                </NavLink>{" "}
-                /
                 <NavLink href="board">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px"  }}>BOARD</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px" }}>BOARD</p>
                 </NavLink>{" "}
                 /
                 <NavLink href="search">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px"  }}>SEARCH</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px" }}>SEARCH</p>
                 </NavLink>{" "}
                 /
                 <NavLink href="news">
-                  <p style={{ color: "black", fontWeight: "bold", width: "80px"  }}>NEWS</p>
-                </NavLink>
+                  <p style={{ color: "black", fontWeight: "bold", width: "80px" }}>NEWS</p>
+              </NavLink>
                   {
+                    
                     !token && (
                         <div>
                           <p style={{ color: "black", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>
