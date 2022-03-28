@@ -1,0 +1,46 @@
+.second_main {
+    height: 350px;
+    background: darkseagreen;
+}
+
+.second_h1 {
+    text-align-last: center;
+    font-weight: bold;
+    padding-top: 2%;
+    margin-bottom: 7%;
+}
+
+#second_row {
+    text-align-last: center;
+}
+
+#second_col {
+    align-self: center;
+}
+
+.second_pic {
+    width: 120%;
+}
+
+.second_div {
+    width: 95%;
+    margin-left: 6%;
+}
+
+.second_h4 {
+    text-align-last: left;
+    font-weight: bold;
+}
+
+.second_h6 {
+    text-align-last: left;
+    margin-bottom: 20%;
+}
+
+.second_servey {
+    width: 115px;
+    text-align-last: left;
+    margin-bottom: 20%;
+    color: blue;
+    border-bottom: 1px solid blue;
+}

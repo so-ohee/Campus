@@ -1,0 +1,15 @@
+.bookmarkcamp_div1 {
+    margin-top: 3%;
+    text-align-last: center;
+}
+
+.bookmarkcamp_main {
+    margin-top: 3%;
+    margin-bottom: 5%;
+    text-align: -webkit-center;
+}
+
+.bookmarkcamp_pagination {
+    justify-content: center;
+    margin-bottom: 5%;
+}
