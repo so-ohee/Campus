@@ -31,7 +31,7 @@ function Navibar() {
         <Container>
           <Navbar.Brand href="/">
             {/* <img className={styles.navi_pic} src="../../logo.png" /> */}
-            <img className={styles.navi_pic} src={"/logo.png" } />
+            <img className={styles.navi_pic} src={process.env.NEXT_PUBLIC + "/logo.png" } />
           </Navbar.Brand>
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />
