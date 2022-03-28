@@ -26,7 +26,7 @@ function Campingplace(props) {
         <Container>
           {/* 선택바(캠핑장소개, 위치&주변정보, 리뷰, 이용안내) */}
           <div className={styles.campingexplain_selectbar}>
-            <Nav className={styles.nav_pills} variant="pills" >
+            <Nav className={styles.nav_pills} variant="pills" defaultActiveKey="link-1">
               <Nav.Item className={styles.nav_item}>
                 <Nav.Link className={styles.nav_link} onClick={() => setSelected("1")} eventKey="link-1">캠핑장 소개</Nav.Link>
               </Nav.Item>
