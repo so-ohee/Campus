@@ -220,6 +220,82 @@ def CBF(campingId):
     return campings
 
 
+@api_view(('GET',))
+def search(request):
+
+    q = Q()
+
+    # induty
+    induty_list = ['일반야영장', '자동차야영장', '카라반', '글램핑']
+    induty = request.GET.getlist('induty')
+    q1 = Q()
+    for i in range(len(induty)):
+        if i == 0:
+            q1.add(Q(induty__contains=induty_list[int(induty[i])]), q.AND)
+        else:
+            q1.add(Q(induty__contains=induty_list[int(induty[i])]), q.OR)
+    q.add(q1, q1.AND)
+
+    # lct
+    lct_list = ['산', '숲', '계곡', '해변', '강', '도심', '섬', '호수']
+    lct = request.GET.getlist('lct')
+    q2 = Q()
+    for i in range(len(lct)):
+        if i == 0:
+            q2.add(Q(lct_cl__contains=lct_list[int(lct[i])]), q.AND)
+        else:
+            q2.add(Q(lct_cl__contains=lct_list[int(lct[i])]), q.OR)
+    q.add(q2, q2.AND)
+
+    # sbrs
+    sbrs_list = ['놀이터', '편의점', '무선인터넷', '물놀이장', '온수', '운동시설', '전기']
+    sbrs = request.GET.getlist('sbrs')
+    q3 = Q()
+    for i in range(len(sbrs)):
+        q3.add(Q(sbrs_cl__contains=sbrs_list[int(sbrs[i])]), q.AND)
+    q.add(q3, q3.AND)
+
+    # animal
+    animal = request.GET.get('animal')
+    q4 = Q()
+    if animal == None:
+        pass
+    elif int(animal) == 0:
+        q4.add(Q(animal_cmg_cl='가능'), q.AND)
+    elif int(animal) == 1:
+        q4.add(Q(animal_cmg_cl='가능'), q.AND)
+        q4.add(Q(animal_cmg_cl='가능(소형견)'), q.OR)
+    q.add(q4, q4.AND)
+
+    
+    # order
+    order = request.GET.get('order')
+    if order == '0':
+        campings = Camping.objects.filter(q).order_by('-blog_cnt')
+    elif order == '2':
+        campings = Camping.objects.filter(q).order_by('-faclt_nm')
+    elif order == '1':
+        x = request.GET.get('x', 126.8071876)
+        y = request.GET.get('y', 35.2040949)
+        myLocation = (float(x),float(y))
+        campings = Camping.objects.filter(q)
+        distance_list = []
+        for camping in campings:
+            lst = []
+            lst.append(camping.camping_id)
+            lst.append(haversine(myLocation,(camping.map_x, camping.map_y), unit = 'km'))
+            distance_list.append(lst)
+        distance_list.sort(key=lambda x:x[1])
+        
+        campings = []
+        for lst in distance_list:       # pagination할 시, 여기서 page 나누기
+            campings.append(Camping.objects.get(camping_id=lst[0]))
+    else:
+        campings = Camping.objects.filter(q)
+
+
+    serializer = CampingSerializer(campings, many=True)
+    return Response(serializer.data)
 
 
 
@@ -278,9 +354,12 @@ def test(request):
     # survey test
     # serializer = CampingSerializer(survey('l6uEzsFywoOiNTu1FweAzXO85pG3'), many=True)
 
-    a = (127.1878004, 38.1656895)
-    b = (126.93915, 37.7689833)
-    print(haversine(a,b, unit = 'km'))
+    # a = (127.1878004, 38.1656895)
+    # b = (126.93915, 37.7689833)
+    # print(haversine(a,b, unit = 'km'))
+
+    aa = request.GET.getlist('aa')
+    print(aa)
 
 
 
