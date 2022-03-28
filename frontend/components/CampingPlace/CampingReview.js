@@ -35,27 +35,32 @@ function CampingReview(props) {
         <>
             <Container>
                 <div className={styles.campingreview_div}>
-                    {dummy.map((element, index) => {
-                        return (
-                            <div className={styles.campingreview_row} key={index}>
-                                <Row>
-                                    <Col xs={1}>
-                                        <img className={styles.campingreview_profile} src={element.profile} />
-                                    </Col>
-                                    <Col xs={8}>
-                                        <img className={styles.campingreview_star} src="../../star.png" />
-                                        <h5>{element.name}</h5>
-                                    </Col>
-                                    <Col xs={3} style={{textAlignLast: "right"}}>
-                                        <h5>{element.createTime}</h5>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <h5 className={styles.campingreview_review}>{element.title}</h5>
-                                </Row>
-                            </div>
-                        );
-                    })}
+                    {
+                        dummy === null ? 
+                            (
+                                dummy.map((element, index) => {
+                                    return (
+                                        <div className={styles.campingreview_row} key={index}>
+                                            <Row>
+                                                <Col xs={1}>
+                                                    <img className={styles.campingreview_profile} src={element.profile} />
+                                                </Col>
+                                                <Col xs={8}>
+                                                    <img className={styles.campingreview_star} src="../../star.png" />
+                                                    <h5>{element.name}</h5>
+                                                </Col>
+                                                <Col xs={3} style={{textAlignLast: "right"}}>
+                                                    <h5>{element.createTime}</h5>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <h5 className={styles.campingreview_review}>{element.title}</h5>
+                                            </Row>
+                                        </div>
+                                    );
+                                })
+                        ) : null
+                    }
                 </div>
                 
             </Container>
