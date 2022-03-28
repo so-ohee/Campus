@@ -279,6 +279,7 @@ def search(request):
         y = request.GET.get('y', 35.2040949)
         myLocation = (float(x),float(y))
         campings = Camping.objects.filter(q)
+        
         distance_list = []
         for camping in campings:
             lst = []
@@ -287,9 +288,16 @@ def search(request):
             distance_list.append(lst)
         distance_list.sort(key=lambda x:x[1])
         
+        dict = {}
+        camping_all = Camping.objects.all()
+        num = 0
+        for camping in camping_all:
+            dict[camping.pk] = num
+            num += 1
+
         campings = []
-        for lst in distance_list:       # pagination할 시, 여기서 page 나누기
-            campings.append(Camping.objects.get(camping_id=lst[0]))
+        for lst in distance_list:
+            campings.append(camping_all[dict[lst[0]]])
     else:
         campings = Camping.objects.filter(q)
 
