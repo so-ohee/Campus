@@ -13,6 +13,8 @@ function CampingIntro(props) {
         receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
     }, [])
 
+    console.log(datas);
+
     return (
         <>
             <Container>
@@ -31,7 +33,7 @@ function CampingIntro(props) {
 
                     {/* 캠핑장 정보 */}
                     <div>
-                        <h2 style={{fontWeight: "bold"}}>캠핑장 정보</h2>
+                        <h2 style={{fontWeight: "bold"}}>캠핑장 시설 정보</h2>
                     </div>
                     <div className={styles.capmingplace_main_explain3}>
                         <div>
@@ -46,13 +48,13 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>캠핑장 환경</p>
                             </Col>
                             <Col>
-                                <p>해변 / 국립공원</p>
+                                <p>{datas.lctCl}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>주요시설</p>
                             </Col>
                             <Col>
-                                <p>일반야영장 (69면)</p>
+                                <p>{datas.posblFcltyCl}</p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
@@ -60,13 +62,28 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>캠핑장 유형</p>
                             </Col>
                             <Col>
-                                <p>일반야영장, 자동차야영장</p>
+                                <p>{datas.induty}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>바닥형태</p>
                             </Col>
                             <Col>
-                                <p>맨흙 (69)</p>
+                                <p>
+                                    {
+                                        datas.siteBottomCl1 == 0 ? 
+                                            (
+                                                datas.siteBottomCl2 == 0 ?
+                                                    (
+                                                        datas.siteBottomCl3 == 0 ? 
+                                                            (
+                                                                datas.siteBottomCl4 == 0 ? (
+                                                                    datas.siteBottomCl5 == 0 ? null : "맨흙 ("+`${datas.siteBottomCl5}`+")"
+                                                                ) : "자갈 ("+`${datas.siteBottomCl4}`+")"
+                                                            ) : "테크 ("+`${datas.siteBottomCl3}`+")"
+                                                    ) : "파쇄석 ("+`${datas.siteBottomCl2}`+")"
+                                            ) : "잔디 ("+`${datas.siteBottomCl1}`+")"
+                                    }
+                                </p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
@@ -74,13 +91,13 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>운영기간</p>
                             </Col>
                             <Col>
-                                <p>봄, 여름, 가을, 겨울</p>
+                                <p>{datas.operPdCl}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>반려동물</p>
                             </Col>
                             <Col>
-                                <p>출입 불가능</p>
+                                <p>출입 {datas.animalCmgCl}</p>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
@@ -88,13 +105,13 @@ function CampingIntro(props) {
                                 <p style={{fontWeight: "bold"}}>운영일</p>
                             </Col>
                             <Col>
-                                <p>평일+주말</p>
+                                <p>{datas.operDeCl}</p>
                             </Col>
                             <Col>
                                 <p style={{fontWeight: "bold"}}>화로대</p>
                             </Col>
                             <Col>
-                                <p>개별</p>
+                                <p>{datas.brazierCl}</p>
                             </Col>
                         </Row>
                     </div>

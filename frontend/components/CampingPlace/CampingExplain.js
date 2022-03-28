@@ -38,7 +38,7 @@ function CampingExplain(props) {
                 <Row>
                     {/* 사진 */}
                     <div className={styles.capmingplace_main_pic_div}>
-                        <img className={styles.capmingplace_main_pic} src="../../logo.png" />
+                        <img className={styles.capmingplace_main_pic} src={datas.firstImageUrl} />
                     </div>
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
@@ -46,7 +46,8 @@ function CampingExplain(props) {
                         <Row>
                             <Col xs={8}>
                                 <h2 style={{fontWeight: "bold"}}>{datas.facltNm}</h2>
-                                <p>{datas.addr1}</p>
+                                <p>{datas.addr1} {datas.addr2}</p>
+                                <p>{datas.tel}</p>
                                 <p style={{color: "lightgrey"}}>
                                     {/* {dummy[0].hashtag.map((element, index) => {
                                         return <span key={index}>#{element} </span>;
