@@ -273,7 +273,7 @@ def search(request):
     if order == '0':
         campings = Camping.objects.filter(q).order_by('-blog_cnt')
     elif order == '2':
-        campings = Camping.objects.filter(q).order_by('-faclt_nm')
+        campings = Camping.objects.filter(q).order_by('faclt_nm')
     elif order == '1':
         x = request.GET.get('x', 126.8071876)
         y = request.GET.get('y', 35.2040949)
@@ -358,8 +358,8 @@ def test(request):
     # b = (126.93915, 37.7689833)
     # print(haversine(a,b, unit = 'km'))
 
-    aa = request.GET.getlist('aa')
-    print(aa)
+    # aa = request.GET.getlist('aa')
+    # print(aa)
 
 
 
