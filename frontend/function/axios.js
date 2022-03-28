@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const url = "http://j6c103.p.ssafy.io:3000/";
+const url = "http://j6c103.p.ssafy.io:8080/";
 
 // 회원 기능 
 // 로그인 (회원 정보 DB에 저징)
 export const sendUserUid = async (userUid, displayName, photoURL) => {
-    const url2 = "http://j6c103.p.ssafy.io:3000/user";
+    const url2 = "http://j6c103.p.ssafy.io:8080/user";
 
     let data = {
         name: displayName,
@@ -34,7 +34,7 @@ export async function bringUser(userUid) {
 // 프로필 사진 변경
 export async function changePic(userUid, formData) {
     console.log(formData);
-    const url2 = "http://j6c103.p.ssafy.io:3000/user/";
+    const url2 = "http://j6c103.p.ssafy.io:8080/user/";
 
     await axios({
         method: 'put',
@@ -49,7 +49,7 @@ export async function changePic(userUid, formData) {
 // 아이디 변경
 export async function changeProfileName(name, userUid) {
 
-    const url2 = url + "http://j6c103.p.ssafy.io:3000/user/";
+    const url2 = url + "http://j6c103.p.ssafy.io:8080/user/";
 
     let data = {
         name: name,
