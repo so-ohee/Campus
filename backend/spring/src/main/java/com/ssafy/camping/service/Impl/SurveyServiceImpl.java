@@ -27,12 +27,12 @@ public class SurveyServiceImpl implements SurveyService {
         //설문 저장
         Survey survey = Survey.builder()
                 .userUid(surveyReqDto.getUserUid())
-                .induty(surveyReqDto.getInduty())
-                .lctCl(surveyReqDto.getLctCl())
-                .doNm(surveyReqDto.getDoNm())
-                .siteBottomCl(surveyReqDto.getSiteBottomCl())
-                .sbrsCl(surveyReqDto.getSbrsCl())
-                .animalCmgCl(surveyReqDto.getAnimalCmgCl()).build();
+                .q1Equipment(surveyReqDto.getQ1Equipment())
+                .q2Distance(surveyReqDto.getQ2Distance())
+                .q3Environment(surveyReqDto.getQ3Environment())
+                .q4Pet(surveyReqDto.getQ4Pet())
+                .userX(surveyReqDto.getUserX())
+                .userY(surveyReqDto.getUserY()).build();
 
         surveyRepository.save(survey);
 
@@ -53,12 +53,12 @@ public class SurveyServiceImpl implements SurveyService {
         }
 
         SurveyResDto surveyResDto = SurveyResDto.builder()
-                .induty(survey.get().getInduty())
-                .lctCl(survey.get().getLctCl())
-                .doNm(survey.get().getDoNm())
-                .siteBottomCl(survey.get().getSiteBottomCl())
-                .sbrsCl(survey.get().getSbrsCl())
-                .animalCmgCl(survey.get().getAnimalCmgCl()).build();
+                .q1Equipment(survey.get().getQ1Equipment())
+                .q2Distance(survey.get().getQ2Distance())
+                .q3Environment(survey.get().getQ3Environment())
+                .q4Pet(survey.get().getQ4Pet())
+                .userX(survey.get().getUserX())
+                .userY(survey.get().getUserY()).build();
 
         resultMap.put("survey", surveyResDto);
         resultMap.put("message", Message.FIND_SURVEY_SUCCESS);
