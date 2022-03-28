@@ -19,6 +19,8 @@ function Campingplace(props) {
     receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
   }, [])
 
+  console.log(router);
+
   return (
     
     <div>

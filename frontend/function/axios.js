@@ -69,7 +69,7 @@ export async function changeProfileName(name, userUid) {
 
 // 회원탈퇴
 export const memberDelete = async (userUid) => {
-    axios.delete(`${url}`+ `/` + `user` + `/` + `${userUid}`)
+    axios.delete(`${url}`+ `user` + `/` + `${userUid}`)
 }
 
 
@@ -77,28 +77,28 @@ export const memberDelete = async (userUid) => {
 // 게시판 기능
 // 추천 캠핑장 (메인화면 켐핑장 추천 기능 구현)
 export const viewCamping = async () => {
-    return await axios.get(`${url}`+ `/` + `mainRecommend`)
+    return await axios.get(`${url}`+ `mainRecommend`)
 };
 
 // 게시판 목록 출력 (전체)
 export const campingBoard = async () => {
-    return await axios.get(`${url}`+ `/` + `board`)
+    return await axios.get(`${url}`+ `board`)
 }
 
 // 게시판 목록 출력 (상세조회)
 export const campingBoardMore = async (boardId) => {
-    return await axios.get(`${url}`+ `/` + `board`+ `/` + `${boardId}`)
+    return await axios.get(`${url}`+`board`+ `/` + `${boardId}`)
 }
 
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
-    axios.delete(`${url}`+ `/` + `board` + `/` + `${boardId}`)
+    axios.delete(`${url}`+`board` + `/` + `${boardId}`)
 }
 
 // 댓글 기능
 // 댓글 조회
 export const commentSearch = async (boardId) => {
-    return await axios.get(`${url}`+ `/` + `comment?boardId=` + `${boardId}`)
+    return await axios.get(`${url}`+`comment?boardId=` + `${boardId}`)
 }
 
 // 댓글 작성
@@ -107,16 +107,16 @@ export const commentSearch = async (boardId) => {
 
 // 댓글 삭제
 export const commentDelete = async (commentId) => {
-    axios.delete(`${url}`+ `/` + `comment`+ `/` + `${commentId}`).then(() => location.reload())
+    axios.delete(`${url}`+ `comment`+ `/` + `${commentId}`).then(() => location.reload())
 }
 
 
 // 캠핑장 기능 (로그인 시)
 export const receiveCamping_in = async (campingId, userUid) => {
-    return await axios.get(`${url}`+`/camping?campingId=${campingId}&userUid=${userUid}`)
+    return await axios.get(`${url}`+`camping?campingId=${campingId}&userUid=${userUid}`)
 }
 
 // 캠핑장 기능 (로그아웃 시)
 export const receiveCamping_out = async (campingId) => {
-    return await axios.get(`${url}`+`/camping?campingId=${campingId}`)
+    return await axios.get(`${url}`+`camping?campingId=${campingId}`)
 }

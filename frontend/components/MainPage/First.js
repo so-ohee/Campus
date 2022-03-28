@@ -18,6 +18,8 @@ function First() {
     });
     }, []);
 
+    console.log(campingplace);
+
     return (
         <div className={styles.first_main}>
             <Container>
