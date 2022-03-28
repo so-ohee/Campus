@@ -1,6 +1,7 @@
 package com.ssafy.camping.service.Impl;
 
 import com.ssafy.camping.dto.Camping.CampingListDto;
+import com.ssafy.camping.entity.Bookmark;
 import com.ssafy.camping.entity.Camping;
 import com.ssafy.camping.entity.ViewLog;
 import com.ssafy.camping.repository.*;
@@ -8,6 +9,9 @@ import com.ssafy.camping.service.CampingService;
 import com.ssafy.camping.utils.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -73,5 +77,43 @@ public class CampingServiceImpl implements CampingService {
             campingList.add(campingListDto);
         }
         return campingList;
+    }
+
+    @Override
+    public Map<String, Object> searchCampsite(String do_nm, String sigungu_nm, int page) throws Exception {
+        log.debug("CampingService searchCampsite call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        Page<Camping> campsites = null;
+        if(sigungu_nm == null) {
+            campsites = campingRepository.findByDoNm(do_nm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
+        } else {
+            campsites = campingRepository.findByDoNmAndSigunguNm(do_nm, sigungu_nm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
+        }
+
+        if(campsites.isEmpty()) {
+            resultMap.put("message", Message.NOT_FOUND_CAMPSITE);
+            return resultMap;
+        }
+
+        List<CampingListDto> campingList = new ArrayList<>();
+        for(Camping camping : campsites){
+            CampingListDto campingListDto = CampingListDto.builder()
+                    .campingId(camping.getCampingId())
+                    .firstImageUrl(camping.getFirstImageUrl())
+                    .facltNm(camping.getFacltNm())
+                    .addr1(camping.getAddr1())
+                    .induty(camping.getInduty())
+                    .lctCl(camping.getLctCl())
+                    .themaEnvrnCl(camping.getThemaEnvrnCl())
+                    .build();
+
+            campingList.add(campingListDto);
+        }
+
+        resultMap.put("campsite",campingList);
+        resultMap.put("totalPage", campsites.getTotalPages());
+        resultMap.put("message",Message.FIND_CAMPSITE_SUCCESS);
+        return resultMap;
     }
 }

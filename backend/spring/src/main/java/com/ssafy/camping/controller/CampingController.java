@@ -24,7 +24,7 @@ public class CampingController {
     private final CampingService campingService;
 
     @ApiOperation(value = "캠핑장 상세보기")
-    @GetMapping()
+    @GetMapping
     @ApiImplicitParams({
             @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true,
                     dataType = "int", paramType = "query"),
@@ -39,6 +39,36 @@ public class CampingController {
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
             resultMap = campingService.getCampsite(campingId, userUid);
+            if(resultMap.get("message").equals(Message.FIND_CAMPSITE_SUCCESS)) //캠핑장 조회 성공
+                status = HttpStatus.OK;
+        } catch (Exception e) {
+            log.error(Message.FIND_CAMPSITE_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.FIND_CAMPSITE_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ApiOperation(value = "지역별 캠핑장 검색")
+    @GetMapping("search")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "do_nm", value = "시/도", required = true,
+                    dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "sigungu_nm", value = "시/군/구", required = false,
+                    dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
+                    dataType = "int", paramType = "query")
+    })
+    public ResponseEntity searchCampsite(@RequestParam String do_nm,
+                                         @RequestParam(required = false) String sigungu_nm,
+                                         @RequestParam(defaultValue = "1") int page) {
+        log.debug("CampingController searchCampsite call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = campingService.searchCampsite(do_nm, sigungu_nm, page-1);
             if(resultMap.get("message").equals(Message.FIND_CAMPSITE_SUCCESS)) //캠핑장 조회 성공
                 status = HttpStatus.OK;
         } catch (Exception e) {
