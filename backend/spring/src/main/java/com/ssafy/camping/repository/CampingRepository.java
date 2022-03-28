@@ -18,7 +18,7 @@ public interface CampingRepository extends JpaRepository<Camping, Integer> {
 
     List<Camping> findByCampingIdIn(List<Integer> campingIds);
 
-    Page<Camping> findByDoNm(String do_nm, Pageable campingId);
+    Page<Camping> findByDoNm(String doNm, Pageable campingId);
 
-    Page<Camping> findByDoNmAndSigunguNm(String do_nm, String sigungu_nm, Pageable campingId);
+    Page<Camping> findByDoNmAndSigunguNm(String doNm, String sigunguNm, Pageable campingId);
 }

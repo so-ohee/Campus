@@ -53,22 +53,22 @@ public class CampingController {
     @ApiOperation(value = "지역별 캠핑장 검색")
     @GetMapping("search")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "do_nm", value = "시/도", required = true,
+            @ApiImplicitParam(name = "doNm", value = "시/도", required = true,
                     dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "sigungu_nm", value = "시/군/구", required = false,
+            @ApiImplicitParam(name = "sigunguNm", value = "시/군/구", required = false,
                     dataType = "string", paramType = "query"),
             @ApiImplicitParam(name = "page", value = "페이지 번호", required = false,
                     dataType = "int", paramType = "query")
     })
-    public ResponseEntity searchCampsite(@RequestParam String do_nm,
-                                         @RequestParam(required = false) String sigungu_nm,
+    public ResponseEntity searchCampsite(@RequestParam String doNm,
+                                         @RequestParam(required = false) String sigunguNm,
                                          @RequestParam(defaultValue = "1") int page) {
         log.debug("CampingController searchCampsite call");
 
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
-            resultMap = campingService.searchCampsite(do_nm, sigungu_nm, page-1);
+            resultMap = campingService.searchCampsite(doNm, sigunguNm, page-1);
             if(resultMap.get("message").equals(Message.FIND_CAMPSITE_SUCCESS)) //캠핑장 조회 성공
                 status = HttpStatus.OK;
         } catch (Exception e) {

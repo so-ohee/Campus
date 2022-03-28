@@ -80,15 +80,15 @@ public class CampingServiceImpl implements CampingService {
     }
 
     @Override
-    public Map<String, Object> searchCampsite(String do_nm, String sigungu_nm, int page) throws Exception {
+    public Map<String, Object> searchCampsite(String doNm, String sigunguNm, int page) throws Exception {
         log.debug("CampingService searchCampsite call");
 
         Map<String, Object> resultMap = new HashMap<>();
         Page<Camping> campsites = null;
-        if(sigungu_nm == null) {
-            campsites = campingRepository.findByDoNm(do_nm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
+        if(sigunguNm == null) {
+            campsites = campingRepository.findByDoNm(doNm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
         } else {
-            campsites = campingRepository.findByDoNmAndSigunguNm(do_nm, sigungu_nm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
+            campsites = campingRepository.findByDoNmAndSigunguNm(doNm, sigunguNm, PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "campingId")));
         }
 
         if(campsites.isEmpty()) {
