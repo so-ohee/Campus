@@ -21,11 +21,11 @@ function CampingCard(params) {
 
   return (
       <>
-          <Card style={{ width: "21rem", height: "23rem" }} onClick={() => moveCamping()}>
+          <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%" }} onClick={() => moveCamping()}>
               {
                 datas.firstImageUrl == null ? 
-                  <Card.Img variant="top" src="../../logo.png" style={{ width: "100%" }} />
-                  : <Card.Img variant="top" src={datas.firstImageUrl} style={{width: "100%"}} />
+                  <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
+                  : <Card.Img variant="top" src={datas.firstImageUrl} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
               }        
               
               <Card.Body>
