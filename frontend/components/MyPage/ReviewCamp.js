@@ -41,11 +41,12 @@ function Reviewcamp() {
                         {campingplace.map((element, index) => {
                             return (
                             <Col sm key={index}>
-                                <CampingCard
-                                title={element.facltNm}
-                                address={element.addr1}
-                                hashtag={element.themaEnvrnCl}
-                                />
+                                    <CampingCard
+                                        campingId={element.campingId}
+                                        title={element.facltNm}
+                                        address={element.addr1}
+                                        hashtag={element.themaEnvrnCl}
+                                    />
                             </Col>
                             );
                         })}
@@ -60,11 +61,12 @@ function Reviewcamp() {
                         {campingplace.map((element, index) => {
                             return (
                             <Col sm key={index}>
-                                <CampingCard
-                                title={element.facltNm}
-                                address={element.addr1}
-                                hashtag={element.themaEnvrnCl}
-                                />
+                                    <CampingCard
+                                        campingId={element.campingId}
+                                        title={element.facltNm}
+                                        address={element.addr1}
+                                        hashtag={element.themaEnvrnCl}
+                                    />
                             </Col>
                             );
                         })}

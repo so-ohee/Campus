@@ -150,3 +150,15 @@ export const Shoppingcamp = async () => {
 export const Newscamp = async () => {
     return await axios.get(`${url}`+`news`)
 }
+
+
+// ************************************ 마이페이지 기능 ************************************
+// 방문한 캠핑장 목록
+export const VisitList = async (campingId) => {
+    return await axios.get(`${url}`+`visit/user?userUid=${campingId}`)
+}
+
+// 북마크한 캠핑장 목록
+export const BookMarkList = async (campingId) => {
+    return await axios.get(`${url}`+`bookmark/user?userUid=${campingId}`)
+}
