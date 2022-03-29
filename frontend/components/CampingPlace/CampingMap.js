@@ -3,12 +3,12 @@ import { Map, MapMarker } from "react-kakao-maps-sdk"
 import axios from "axios"
 
 
-function Test() {
+function CampingMap(props) {
     const x = 128.0342924
     const y = 34.7293609
     const campingName = '초전마을 캠핑장'
 
-    const markerImageSrc = "category.png"
+    const markerImageSrc = "/mapicon.png"
     const falseList = {0:false,1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false,9:false,10:false,11:false,12:false,13:false,14:false,15:false}
     const [isOpen, setIsOpen] = useState(false)
     const [isOpen1, setIsOpen1] = useState(falseList)
@@ -35,7 +35,7 @@ function Test() {
     const [hospitalList, setHospitalList] = useState([])
     const hospitalOrigin = { x: 10, y: 72 }
   
-  
+    console.log(props);
 
 
     function clickMart() {
@@ -313,4 +313,4 @@ function Test() {
     )
   }
 
-export default Test;
+export default CampingMap;

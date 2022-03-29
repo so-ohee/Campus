@@ -55,13 +55,13 @@ function Navibar() {
                 <p style={{ marginTop: "3%" }}>/</p>
               
                 <NavLink href="shopping">
-                  <p style={{ color: "black", fontWeight: "bold", width: "70px", marginTop: "20%" }}>SHOPPING</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "90px", marginTop: "20%" }}>SHOPPING</p>
                 </NavLink>
                   {
                     
                     !token && (
                         <div>
-                          <p style={{ color: "black", fontWeight: "bold", width: "135px" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>
+                          <p style={{ color: "black", fontWeight: "bold", width: "135px", marginTop: "12%" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>
                           <Login
                             show={LoginmodalShow}
                             onHide={() => LoginsetModalShow(false)}
