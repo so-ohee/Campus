@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import styles from "../styles/News/News.module.css";
 import Pagination from 'react-bootstrap/Pagination';
+import { Newscamp } from "../function/axios";
 
-function news(props) {
+function news() {
 
-    const submitSign = () => {
-        props.propFunction("작성")
-    }
+    const [dummy, setDummy] = useState([]);
+
+    useEffect(() => {
+        Newscamp().then((res) => setDummy(res.data.news));
+    }, [])
     
     // Pagination
     let active = 2;
@@ -19,6 +22,8 @@ function news(props) {
             </Pagination.Item>,
         );
     }
+
+    console.log(dummy);
 
     return (
         <div>
@@ -43,23 +48,38 @@ function news(props) {
                         </Form.Group>
                     </Col>
                 </Row>
+            </Container>
 
+            <Container style={{height: "1000px", marginTop: "1%"}}>
                 <table className={styles.news_table}>
                     <thead>
                         <tr className={styles.news_thead_tr}>
-                            <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
-                            <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
-                            <th style={{width: "700px", textAlignLast: "center"}}>제목</th>
-                            <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
-                            <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
+                            <th style={{width: "50px", textAlignLast: "center"}}>번호</th>
+                            <th style={{width: "300px", textAlignLast: "center"}}>제목</th>
+                            <th style={{width: "820px", textAlignLast: "center"}}>내용</th>
+                            <th style={{width: "150px", textAlignLast: "center"}}>일자</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        
-                    </tbody>
+                    {
+                        dummy !== null ? 
+                        (
+                            dummy.map((element, index) => {
+                                return (
+                                    <tbody key={index}>
+                                        { 
+                                            <tr className={styles.news_tbody_tr} onClick={() => window.open(`${element.link}`, '_black')}>
+                                                <td style={{ width: "50px", textAlignLast: "center" }}>{index+1}</td>
+                                                <td style={{ width: "300px", paddingLeft: "3%" }}>{element.title}</td>
+                                                <td style={{ width: "870px", textAlignLast: "left", paddingLeft: "3%", paddingRight: "3%" }}>{element.description}</td>
+                                                <td style={{ width: "100px", textAlignLast: "center" }}>{element.date}</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                )
+                            })
+                        ) : null
+                    }
                 </table>
-                
-                <Pagination className={styles.news_pagination}>{items}</Pagination>
             </Container>
         </div>
     );

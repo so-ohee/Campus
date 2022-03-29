@@ -35,11 +35,6 @@
 }
 
 .news_tbody_tr {
-    height: 50px;
+    height: 90px;
     border-bottom: 1px solid lightgrey;
-}
-
-.news_pagination {
-    justify-content: center;
-    margin-bottom: 5%;
 }
