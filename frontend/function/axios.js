@@ -184,3 +184,4 @@ export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
       }
 
       return await axios.post(`${url}survey`, data)
+    }
