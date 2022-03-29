@@ -25,8 +25,6 @@ function Visitedcamp() {
             .then((res) => setCampingplace(res.data.campsite));
     }, []);
 
-    console.log(campingplace)
-
     return (
         <>
             <div className={styles.visitedcamp_div1}>
