@@ -140,3 +140,8 @@ export const VisitCheck = async (campingId, userUid) => {
     console.log(userUid);
     return await axios.get(`${url}`+`visit?campingId=${campingId}&userUid=${userUid}`)
 }
+
+// 캠핑 관련 쇼핑
+export const Shoppingcamp = async () => {
+    return await axios.get(`${url}`+`shop`)
+}
