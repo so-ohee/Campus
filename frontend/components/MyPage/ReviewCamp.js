@@ -54,26 +54,6 @@ function Reviewcamp() {
                     
                 </Container>
             </div>
-            
-            <div className={styles.reviewcamp_main}>
-                <Container>
-                    <Row>
-                        {campingplace.map((element, index) => {
-                            return (
-                            <Col sm key={index}>
-                                    <CampingCard
-                                        campingId={element.campingId}
-                                        title={element.facltNm}
-                                        address={element.addr1}
-                                        hashtag={element.themaEnvrnCl}
-                                    />
-                            </Col>
-                            );
-                        })}
-                    </Row>
-                    
-                </Container>
-            </div>
 
             <Pagination className={styles.reviewcamp_pagination}>{items}</Pagination>
         </>

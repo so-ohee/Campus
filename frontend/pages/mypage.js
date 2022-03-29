@@ -63,11 +63,11 @@ function Mypage() {
                         <Tab eventKey="Visited" title="Visited">
                             <VisitedCamp />
                         </Tab>
-                        <Tab eventKey="Review" title="Review">
-                            <ReviewCamp />
-                        </Tab>
                         <Tab eventKey="Bookmark" title="Bookmark">
                             <Bookmarkcamp />
+                        </Tab>
+                        <Tab eventKey="Review" title="Review">
+                            <ReviewCamp />
                         </Tab>
                     </Tabs>
                 </div>
