@@ -2,7 +2,7 @@ import axios from "axios";
 
 const url = "http://j6c103.p.ssafy.io:8080/";
 
-// 회원 기능 
+// ************************************ 회원 기능 ************************************
 // 로그인 (회원 정보 DB에 저징)
 export const sendUserUid = async (userUid, displayName, photoURL) => {
     const url2 = "http://j6c103.p.ssafy.io:8080/user";
@@ -74,7 +74,7 @@ export const memberDelete = async (userUid) => {
 
 
 
-// 게시판 기능
+// ************************************ 게시판 기능 ************************************
 // 추천 캠핑장 (메인화면 켐핑장 추천 기능 구현)
 export const viewCamping = async () => {
     return await axios.get(`${url}`+ `mainRecommend`)
@@ -95,7 +95,7 @@ export const articleDelete = async (boardId) => {
     axios.delete(`${url}`+`board` + `/` + `${boardId}`)
 }
 
-// 댓글 기능
+// ************************************ 댓글 기능 ************************************
 // 댓글 조회
 export const commentSearch = async (boardId) => {
     return await axios.get(`${url}`+`comment?boardId=` + `${boardId}`)
@@ -111,6 +111,7 @@ export const commentDelete = async (commentId) => {
 }
 
 
+// ************************************ 캠핑장 기능 ************************************
 // 캠핑장 기능 (로그인 시)
 export const receiveCamping_in = async (campingId, userUid) => {
     return await axios.get(`${url}`+`camping?campingId=${campingId}&userUid=${userUid}`)
@@ -124,4 +125,23 @@ export const receiveCamping_out = async (campingId) => {
 // 캠핑장 상세보기 내, 후기 목록
 export const viewBoard = async (campingId) => {
     return await axios.get(`${url}`+`board/review?campingId=${campingId}`)
+}
+
+// 북마크
+export const BookMark = async (campingId, userUid) => {
+    // console.log(campingId);
+    // console.log(userUid);
+    return await axios.get(`${url}`+`bookmark?campingId=${campingId}&userUid=${userUid}`)
+}
+
+// 방문체크
+export const VisitCheck = async (campingId, userUid) => {
+    console.log(campingId);
+    console.log(userUid);
+    return await axios.get(`${url}`+`visit?campingId=${campingId}&userUid=${userUid}`)
+}
+
+// 캠핑 관련 쇼핑
+export const Shoppingcamp = async () => {
+    return await axios.get(`${url}`+`shop`)
 }

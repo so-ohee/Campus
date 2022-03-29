@@ -59,7 +59,12 @@ function CampingReview(props) {
                                         </div>
                                     );
                                 })
-                        ) : null
+                            ) : 
+                            (
+                                <div className={styles.campingreview_comment}>
+                                    <h1 style={{textAlign: "center"}}>댓글이 없습니다</h1>
+                                </div>
+                            )
                     }
                 </div>
                 

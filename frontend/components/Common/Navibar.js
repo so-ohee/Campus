@@ -35,18 +35,28 @@ function Navibar() {
           </Navbar.Brand>
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll" style={{justifyContent: "right"}}>
+            <Navbar.Collapse id="navbarScroll" style={{ justifyContent: "right" }}>
                 <NavLink href="board">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px" }}>BOARD</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "20%" }}>BOARD</p>
                 </NavLink>{" "}
-                /
+              
+                <p style={{ marginTop: "3%" }}>/</p>
+              
                 <NavLink href="search">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px" }}>SEARCH</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "22%" }}>SEARCH</p>
                 </NavLink>{" "}
-                /
+              
+                <p style={{ marginTop: "3%" }}>/</p>
+              
                 <NavLink href="news">
-                  <p style={{ color: "black", fontWeight: "bold", width: "80px" }}>NEWS</p>
-              </NavLink>
+                  <p style={{ color: "black", fontWeight: "bold", width: "45px", marginTop: "30%" }}>NEWS</p>
+                </NavLink>
+              
+                <p style={{ marginTop: "3%" }}>/</p>
+              
+                <NavLink href="shopping">
+                  <p style={{ color: "black", fontWeight: "bold", width: "70px", marginTop: "20%" }}>SHOPPING</p>
+                </NavLink>
                   {
                     
                     !token && (
