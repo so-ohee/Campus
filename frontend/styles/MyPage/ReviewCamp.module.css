@@ -9,7 +9,28 @@
     text-align: -webkit-center;
 }
 
-.reviewcampp_pagination {
+.reviewcamp_pagination {
     justify-content: center;
     margin-bottom: 5%;
+}
+
+.reviewcamp_table {
+    width: 1320px;
+    text-align: -webkit-center;
+    border-bottom: 1px solid black;
+    margin-bottom: 2%;
+}
+
+.reviewcamp_thead_tr {
+    height: 50px;
+    background-color: #198754;
+}
+
+.reviewcamp_tbody_tr {
+    height: 50px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.reviewcamp_comment {
+    padding: 2%;
 }

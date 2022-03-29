@@ -147,6 +147,29 @@ export const Shoppingcamp = async () => {
 }
 
 
+// 캠핑 관련 뉴스 목록
+export const Newscamp = async () => {
+    return await axios.get(`${url}`+`news`)
+}
+
+
+// ************************************ 마이페이지 기능 ************************************
+// 방문한 캠핑장 목록
+export const VisitList = async (campingId) => {
+    return await axios.get(`${url}`+`visit/user?userUid=${campingId}`)
+}
+
+// 북마크한 캠핑장 목록
+export const BookMarkList = async (campingId) => {
+    return await axios.get(`${url}`+`bookmark/user?userUid=${campingId}`)
+}
+
+// 내가 쓴 리뷰 목록
+export const ReviewList = async (campingId) => {
+    return await axios.get(`${url}`+`board/user?userUid=${campingId}`)
+}
+
+
 // ******************************* 설문 조사 ******************************************
 export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
 
@@ -161,4 +184,3 @@ export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
       }
 
       return await axios.post(`${url}survey`, data)
-}

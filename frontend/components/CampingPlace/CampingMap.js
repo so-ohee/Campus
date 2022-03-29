@@ -1,12 +1,28 @@
 import { useState, useEffect } from 'react';
 import { Map, MapMarker } from "react-kakao-maps-sdk"
 import axios from "axios"
-
+import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
+import { useRouter } from 'next/router';
 
 function CampingMap(props) {
-    const x = 128.0342924
-    const y = 34.7293609
-    const campingName = '초전마을 캠핑장'
+
+    const [datas1, setDatas1] = useState("");
+    const [datas2, setDatas2] = useState("");
+    const [datas3, setDatas3] = useState("");
+    const router = useRouter();
+
+    useEffect(() => {
+      receiveCamping_out(router.query.campingplace).then((res) => {
+        setDatas1(res.data.campsite.mapX);
+        setDatas2(res.data.campsite.mapY);
+        setDatas3(res.data.campsite.facltNm);
+        // console.log(res.data)
+      });
+    }, [])
+  
+    const x = datas1
+    const y = datas2
+    const campingName = datas3
 
     const markerImageSrc = "/mapicon.png"
     const falseList = {0:false,1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false,9:false,10:false,11:false,12:false,13:false,14:false,15:false}
@@ -34,9 +50,6 @@ function CampingMap(props) {
     const [hospitalPositions, setHospitalPositions] = useState([])
     const [hospitalList, setHospitalList] = useState([])
     const hospitalOrigin = { x: 10, y: 72 }
-  
-    console.log(props);
-
 
     function clickMart() {
       if (martPositions.length === 0){
@@ -134,7 +147,7 @@ function CampingMap(props) {
     
     return (
       <>
-        <div id="mapwrap">
+        <div id="mapwrap" style={{marginTop: "1%"}}>
           <Map // 지도를 표시할 Container
             id={`map`}
             center={{

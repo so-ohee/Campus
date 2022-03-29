@@ -2,12 +2,11 @@ import React from 'react';
 import CampingCard from "../Common/CampingCard";
 import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { viewCamping } from "../../function/axios";
+import { VisitList } from "../../function/axios";
 import styles from "../../styles/MyPage/VisitedCamp.module.css";
 
 function Visitedcamp() {
 
-    const [title, setTitle] = useState("");
     const [campingplace, setCampingplace] = useState([]);
 
     // Pagination
@@ -22,11 +21,8 @@ function Visitedcamp() {
     }
     
     useEffect(() => {
-        viewCamping()
-            .then(function (response) {
-                setTitle(response.data.season);
-                setCampingplace(response.data.seasonList);
-    });
+        VisitList(localStorage.getItem("userUid"))
+            .then((res) => setCampingplace(res.data.campsite));
     }, []);
 
     return (
@@ -38,42 +34,33 @@ function Visitedcamp() {
             <div className={styles.visitedcamp_main}>
                 <Container>
                     <Row>
-                        {campingplace.map((element, index) => {
-                            return (
-                            <Col sm key={index}>
-                                <CampingCard
-                                title={element.facltNm}
-                                address={element.addr1}
-                                hashtag={element.themaEnvrnCl}
-                                />
-                            </Col>
-                            );
-                        })}
+                        {
+                            campingplace === null ? 
+                                (
+                                    campingplace.map((element, index) => {
+                                    return (
+                                    <Col sm key={index} style={{marginBottom: "5%"}}>
+                                            <CampingCard
+                                                campingId={element.campingId}
+                                                title={element.facltNm}
+                                                address={element.addr1}
+                                                hashtag={element.themaEnvrnCl}
+                                            />
+                                    </Col>
+                                );
+                            })) : 
+                                (
+                                    <div className={styles.visitedcamp_comment}>
+                                        <h1 style={{textAlign: "center"}}>방문한 캠핑장이 없습니다</h1>
+                                    </div>
+                                )
+                        }
                     </Row>
                     
                 </Container>
             </div>
             
-            <div className={styles.visitedcamp_main}>
-                <Container>
-                    <Row>
-                        {campingplace.map((element, index) => {
-                            return (
-                            <Col sm key={index}>
-                                <CampingCard
-                                title={element.facltNm}
-                                address={element.addr1}
-                                hashtag={element.themaEnvrnCl}
-                                />
-                            </Col>
-                            );
-                        })}
-                    </Row>
-                    
-                </Container>
-            </div>
-
-            <Pagination className={styles.visitedcamp_pagination}>{items}</Pagination>
+            {/* <Pagination className={styles.visitedcamp_pagination}>{items}</Pagination> */}
         </>
     );
 }
