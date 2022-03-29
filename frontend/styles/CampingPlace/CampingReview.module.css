@@ -1,5 +1,6 @@
 .campingreview_div {
-    width: 1200px; 
+    width: 1200px;
+    height: 500px; 
     margin-left: auto;
     margin-right: auto;
     margin-top: 3%;
@@ -12,10 +13,13 @@
     place-content: center;
     margin-top: 2%;
     margin-bottom: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .campingreview_profile {
     width: 80px;
+    border-radius: 50%;
 }
 
 .campingreview_star {
@@ -25,4 +29,5 @@
 
 .campingreview_review {
     margin-top: 1%;
+    margin-left: 8%;
 }

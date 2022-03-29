@@ -5,6 +5,8 @@ app_name = "api"
 
 urlpatterns = [
     path('recommend1/<uid>', views.recommend1),
+    path('recommend2/<uid>', views.recommend2),
     path('similar/<campingId>', views.similar),
+    path('search/', views.search),
     path('test/', views.test),
 ]

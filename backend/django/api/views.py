@@ -10,11 +10,12 @@ import pandas as pd
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from haversine import haversine
+
+# uid = 'l6uEzsFywoOiNTu1FweAzXO85pG3'
 
 @api_view(('GET',))
-def recommend1(request, uid):        # cf 10개, survey 10개를 받아 최대 20개 중 랜덤으로 10개 반환
-    # uid = 'l6uEzsFywoOiNTu1FweAzXO85pG3'
-    
+def recommend1(request, uid):        # cf 20개, survey 10개를 받아 최대 30개 중 랜덤으로 10개 반환
     cf_ids = CF(uid)                # CF 받아오기
     survey_campings = survey(uid)   # survey 받아오기
 
@@ -25,6 +26,62 @@ def recommend1(request, uid):        # cf 10개, survey 10개를 받아 최대 2
     campings = list(set(cf_campings).union(set(survey_campings)))  # 중복 제거해서 넣기
     serializer = CampingSerializer(choice_random(campings,10), many=True)
 
+    return Response(serializer.data)
+
+
+@api_view(('GET',))
+def recommend2(request, uid):       # 자기가 간 캠핑장들 태그별로 count해 가중치로 점수 계산 후 10개 추천
+    visit = Visit.objects.all()
+    visit_list = []                 # 자기간 간 캠핑장 저장
+    for i in visit:
+        if i.user_uid.pk == uid:
+            visit_list.append(i.camping_id)
+    if len(visit_list) == 0:        # 자기가 간 캠핑장 없으면 빈 리스트 반환
+        return(Response([]))
+    
+    tag_dict = {}
+    data = pd.read_pickle("camping_tag.pkl")    # 태그 데이터 불러오기
+    data_dict = data.set_index('campingId').T.to_dict()
+    for campingId in visit_list:
+        for i in data_dict[campingId]['tag'].split():
+            if i in tag_dict:
+                tag_dict[i] += 1
+            else:
+                tag_dict[i] = 1
+
+    rank_list = []          # 점수 계산해서 rank_list에 넣기
+    for i in data_dict:
+        lst = [i,0]
+        for tag in tag_dict:
+            tag_dict[tag]
+            if tag in data_dict[i]['tag']:
+                lst[1] += tag_dict[tag]
+        rank_list.append(lst)
+    rank_list.sort(key=lambda x:-x[1])
+    
+    ids = []
+    for lst in rank_list:
+        if lst[0] not in visit_list:
+            ids.append(lst[0])
+        if len(ids) > 30:
+            break
+    
+    campings = []        # ids 를 캠핑 오브젝트로 변환
+    for i in ids:
+        campings.append(Camping.objects.get(pk=i))
+    
+    serializer = CampingSerializer(choice_random(campings,10), many=True)
+
+    return Response(serializer.data)
+
+
+@api_view(('GET',))
+def similar(request, campingId):  # campingId를 받아와서 비슷한 캠핑장 6개 추천
+    cbf_ids = CBF(campingId)
+    cbf_campings = []        # cbf_ids 를 캠핑 오브젝트로 변환
+    for i in cbf_ids:
+        cbf_campings.append(Camping.objects.get(pk=i))
+    serializer = CampingSerializer(choice_random(cbf_campings,6), many=True)
     return Response(serializer.data)
 
 
@@ -58,7 +115,7 @@ def CF(uid):
         if len(camping) > 20:           # 20개 넘으면 break
             break
 
-    return choice_random(list(camping),10)
+    return choice_random(list(camping),20)
 
 
 def survey(uid):
@@ -164,12 +221,88 @@ def CBF(campingId):
 
 
 @api_view(('GET',))
-def similar(request, campingId):  # campingId를 받아와서 비슷한 캠핑장 6개 추천
-    cbf_ids = CBF(campingId)
-    cbf_campings = []        # cbf_ids 를 캠핑 오브젝트로 변환
-    for i in cbf_ids:
-        cbf_campings.append(Camping.objects.get(pk=i))
-    serializer = CampingSerializer(choice_random(cbf_campings,6), many=True)
+def search(request):
+
+    q = Q()
+
+    # induty
+    induty_list = ['일반야영장', '자동차야영장', '카라반', '글램핑']
+    induty = request.GET.getlist('induty')
+    q1 = Q()
+    for i in range(len(induty)):
+        if i == 0:
+            q1.add(Q(induty__contains=induty_list[int(induty[i])]), q.AND)
+        else:
+            q1.add(Q(induty__contains=induty_list[int(induty[i])]), q.OR)
+    q.add(q1, q1.AND)
+
+    # lct
+    lct_list = ['산', '숲', '계곡', '해변', '강', '도심', '섬', '호수']
+    lct = request.GET.getlist('lct')
+    q2 = Q()
+    for i in range(len(lct)):
+        if i == 0:
+            q2.add(Q(lct_cl__contains=lct_list[int(lct[i])]), q.AND)
+        else:
+            q2.add(Q(lct_cl__contains=lct_list[int(lct[i])]), q.OR)
+    q.add(q2, q2.AND)
+
+    # sbrs
+    sbrs_list = ['놀이터', '편의점', '무선인터넷', '물놀이장', '온수', '운동시설', '전기']
+    sbrs = request.GET.getlist('sbrs')
+    q3 = Q()
+    for i in range(len(sbrs)):
+        q3.add(Q(sbrs_cl__contains=sbrs_list[int(sbrs[i])]), q.AND)
+    q.add(q3, q3.AND)
+
+    # animal
+    animal = request.GET.get('animal')
+    q4 = Q()
+    if animal == None:
+        pass
+    elif int(animal) == 0:
+        q4.add(Q(animal_cmg_cl='가능'), q.AND)
+    elif int(animal) == 1:
+        q4.add(Q(animal_cmg_cl='가능'), q.AND)
+        q4.add(Q(animal_cmg_cl='가능(소형견)'), q.OR)
+    q.add(q4, q4.AND)
+
+    
+    # order
+    order = request.GET.get('order')
+    if order == '0':
+        campings = Camping.objects.filter(q).order_by('-blog_cnt')
+    elif order == '2':
+        campings = Camping.objects.filter(q).order_by('faclt_nm')
+    elif order == '1':
+        x = request.GET.get('x', 126.8071876)
+        y = request.GET.get('y', 35.2040949)
+        myLocation = (float(x),float(y))
+        campings = Camping.objects.filter(q)
+        
+        distance_list = []
+        for camping in campings:
+            lst = []
+            lst.append(camping.camping_id)
+            lst.append(haversine(myLocation,(camping.map_x, camping.map_y), unit = 'km'))
+            distance_list.append(lst)
+        distance_list.sort(key=lambda x:x[1])
+        
+        dict = {}
+        camping_all = Camping.objects.all()
+        num = 0
+        for camping in camping_all:
+            dict[camping.pk] = num
+            num += 1
+
+        campings = []
+        for lst in distance_list:
+            campings.append(camping_all[dict[lst[0]]])
+    else:
+        campings = Camping.objects.filter(q)
+
+
+    serializer = CampingSerializer(campings, many=True)
     return Response(serializer.data)
 
 
@@ -228,6 +361,14 @@ def test(request):
 
     # survey test
     # serializer = CampingSerializer(survey('l6uEzsFywoOiNTu1FweAzXO85pG3'), many=True)
+
+    # a = (127.1878004, 38.1656895)
+    # b = (126.93915, 37.7689833)
+    # print(haversine(a,b, unit = 'km'))
+
+    # aa = request.GET.getlist('aa')
+    # print(aa)
+
 
 
     return Response(serializer.data)

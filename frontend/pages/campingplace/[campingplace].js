@@ -19,7 +19,7 @@ function Campingplace(props) {
     receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
   }, [])
 
-  console.log(router);
+  // console.log(window.location.pathname.replace("/campingplace/", ""))
 
   return (
     
@@ -48,13 +48,13 @@ function Campingplace(props) {
             selected === "1" && <CampingIntro campingId={datas} />
           }
           {
-            selected === "2" && <CampingMap />
+            selected === "2" && <CampingMap campingId={datas} />
           }
           {
-            selected === "3" && <CampingReview />
+            selected === "3" && <CampingReview campingId={datas} />
           }
           {
-            selected === "4" && <CampingUse />
+            selected === "4" && <CampingUse campingId={datas} />
           }
         </div>
       </Container>

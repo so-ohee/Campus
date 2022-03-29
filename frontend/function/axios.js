@@ -120,3 +120,8 @@ export const receiveCamping_in = async (campingId, userUid) => {
 export const receiveCamping_out = async (campingId) => {
     return await axios.get(`${url}`+`camping?campingId=${campingId}`)
 }
+
+// 캠핑장 상세보기 내, 후기 목록
+export const viewBoard = async (campingId) => {
+    return await axios.get(`${url}`+`board/review?campingId=${campingId}`)
+}
