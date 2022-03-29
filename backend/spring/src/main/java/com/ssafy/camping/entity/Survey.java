@@ -1,6 +1,7 @@
 package com.ssafy.camping.entity;
 
 import com.ssafy.camping.converter.SurveyDataConverter;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,37 +21,38 @@ public class Survey {
     @Id
     private String userUid;
 
-    @Convert(converter = SurveyDataConverter.class)
-    @Column(columnDefinition = "json")
-    private List<String> induty;
+    @ApiModelProperty(value = "장비여부")
+    @Column(name = "q1_equipment")
+    private Byte q1Equipment;
 
-    @Convert(converter = SurveyDataConverter.class)
-    @Column(columnDefinition = "json")
-    private List<String> lctCl;
+    @ApiModelProperty(value = "거리 설정")
+    @Column(name = "q2_distance")
+    private Byte q2Distance;
 
-    private String doNm;
+    @ApiModelProperty(value = "선호 환경")
+    @Column(name = "q3_environment")
+    private String q3Environment;
 
-    @Convert(converter = SurveyDataConverter.class)
-    @Column(columnDefinition = "json")
-    private List<String> siteBottomCl;
+    @ApiModelProperty(value = "애완동물 여부")
+    @Column(name = "q4_pet")
+    private Byte q4Pet;
 
-    @Convert(converter = SurveyDataConverter.class)
-    @Column(columnDefinition = "json")
-    private List<String> sbrsCl;
+    @ApiModelProperty(value = "사용자 X")
+    @Column(name = "user_x")
+    private double userX;
 
-    @Convert(converter = SurveyDataConverter.class)
-    @Column(columnDefinition = "json")
-    private List<String> animalCmgCl;
+    @ApiModelProperty(value = "사용자 Y")
+    @Column(name = "user_y")
+    private double userY;
 
     @Builder
-    public Survey(String userUid, List<String> induty, List<String> lctCl, String doNm,
-                  List<String> siteBottomCl, List<String> sbrsCl, List<String> animalCmgCl){
+    public Survey(String userUid, Byte q1Equipment, Byte q2Distance, String q3Environment, Byte q4Pet, double userX, double userY){
         this.userUid = userUid;
-        this.induty = induty;
-        this.lctCl = lctCl;
-        this.doNm = doNm;
-        this.siteBottomCl = siteBottomCl;
-        this.sbrsCl = sbrsCl;
-        this.animalCmgCl = animalCmgCl;
+        this.q1Equipment = q1Equipment;
+        this.q2Distance = q2Distance;
+        this.q3Environment = q3Environment;
+        this.q4Pet = q4Pet;
+        this.userX = userX;
+        this.userY = userY;
     }
 }

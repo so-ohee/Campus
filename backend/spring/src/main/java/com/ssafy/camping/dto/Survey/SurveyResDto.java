@@ -13,21 +13,21 @@ import java.util.List;
 @ApiModel(value = "SurveyResDto : 설문 조회")
 public class SurveyResDto {
 
-    @ApiModelProperty(value = "캠핑 유형")
-    List<String> induty;
+    @ApiModelProperty(value = "장비 여부")
+    Byte q1Equipment;
+
+    @ApiModelProperty(value = "거리 설정")
+    Byte q2Distance;
 
     @ApiModelProperty(value = "선호 환경")
-    List<String> lctCl;
+    String q3Environment;
 
-    @ApiModelProperty(value = "거주지역")
-    private String doNm;
+    @ApiModelProperty(value = "애완동물 여부")
+    Byte q4Pet;
 
-    @ApiModelProperty(value = "바닥형태")
-    List<String> siteBottomCl;
+    @ApiModelProperty(value = "사용자 x좌표")
+    double userX;
 
-    @ApiModelProperty(value = "편의시설")
-    List<String> sbrsCl;
-
-    @ApiModelProperty(value = "반려견 동반 여부")
-    List<String> animalCmgCl;
+    @ApiModelProperty(value = "사용자 y좌표")
+    double userY;
 }
