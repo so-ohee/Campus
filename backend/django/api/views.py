@@ -146,15 +146,14 @@ def survey(uid):
     campings = Camping.objects.filter(q).order_by('-blog_cnt')
 
     # map_x, map_y
-    if survey.q2_distance == 0 or survey.q2_distance == 1:
-        distance_check = [0, 60, 180]
-        user_location = (survey.user_x, survey.user_y)
-        campings_check = []
-        for camping in campings:
-            distance = haversine(user_location,(camping.map_x, camping.map_y))
-            if distance >= distance_check[survey.q2_distance] and distance < distance_check[survey.q2_distance + 1]:
-                campings_check.append(camping)
-        campings = campings_check
+    distance_check = [0, 60, 120, 1000]
+    user_location = (survey.user_x, survey.user_y)
+    campings_check = []
+    for camping in campings:
+        distance = haversine(user_location,(camping.map_x, camping.map_y))
+        if distance >= distance_check[survey.q2_distance] and distance < distance_check[survey.q2_distance + 1]:
+            campings_check.append(camping)
+    campings = campings_check
 
     campings = campings[:50]
 
