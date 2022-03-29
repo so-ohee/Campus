@@ -122,81 +122,41 @@ def survey(uid):
         return []
 
     survey = Survey.objects.get(pk=uid)
-    # survey.site_bottom_cl = ['site_bottom_cl1', 'site_bottom_cl2']
-    # survey.lct_cl = []
-    # survey.sbrs_cl = ['전기', '무선인터넷','마트', '트램폴린']
-    # survey.animal_cmg_cl = ['가능', '가능(소형견)']
 
     q = Q()
 
     # induty
     q1 = Q()
-    for i in range(len(survey.induty)):
-        if i == 0:
-            q1.add(Q(induty__contains=survey.induty[i]), q.AND)
-        else:
-            q1.add(Q(induty__contains=survey.induty[i]), q.OR)
-    q.add(q1, q1.AND)
+    if survey.q1_equipment == 1:
+        q1.add(Q(induty__contains='카라반'), q1.AND)
+        q1.add(Q(induty__contains='글램핑'), q1.OR)
+        q.add(q1, q1.AND)
 
-    # lct_cl
-    q2 = Q()
-    for i in range(len(survey.lct_cl)):
-        if i == 0:
-            q.add(Q(lct_cl__contains=survey.lct_cl[i]), q.AND)
-        else:
-            q.add(Q(lct_cl__contains=survey.lct_cl[i]), q.OR)
-    q.add(q2, q2.AND)
-    
-    # do_nm
+    # # lct_cl
     q3 = Q()
-    if survey.do_nm:
-        q.add(Q(do_nm=survey.do_nm), q.AND)
-    q.add(q3, q3.AND)
-
-    # site_bottom_cl
-    q4 = Q()
-    for i in range(len(survey.site_bottom_cl)):
-        if i == 0:
-            if survey.site_bottom_cl[i] == 'site_bottom_cl1':
-                q4.add(Q(site_bottom_cl1__gt=0), q4.AND)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl2':
-                q4.add(Q(site_bottom_cl2__gt=0), q4.AND)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl3':
-                q4.add(Q(site_bottom_cl3__gt=0), q4.AND)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl4':
-                q4.add(Q(site_bottom_cl4__gt=0), q4.AND)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl5':
-                q4.add(Q(site_bottom_cl5__gt=0), q4.AND)
-        else:
-            if survey.site_bottom_cl[i] == 'site_bottom_cl1':
-                q4.add(Q(site_bottom_cl1__gt=0), q4.OR)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl2':
-                q4.add(Q(site_bottom_cl2__gt=0), q4.OR)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl3':
-                q4.add(Q(site_bottom_cl3__gt=0), q4.OR)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl4':
-                q4.add(Q(site_bottom_cl4__gt=0), q4.OR)
-            if survey.site_bottom_cl[i] == 'site_bottom_cl5':
-                q4.add(Q(site_bottom_cl5__gt=0), q4.OR)
-    q.add(q4, q4.AND)
-
-    # sbrs_cl
-    q5 = Q()
-    for i in range(len(survey.sbrs_cl)):
-        q.add(Q(sbrs_cl__contains=survey.sbrs_cl[i]), q.AND)
-    q.add(q5, q5.AND)
+    q3.add(Q(lct_cl__contains=survey.q3_environment), q3.AND)
+    q.add(q3,q3.AND)
 
     # animal_cmg_cl
-    q6 = Q()
-    for i in range(len(survey.animal_cmg_cl)):
-        if i == 0:
-            q6.add(Q(animal_cmg_cl=survey.animal_cmg_cl[i]), q6.AND)
-        else:
-            q6.add(Q(animal_cmg_cl=survey.animal_cmg_cl[i]), q6.OR)
-    q.add(q6, q6.AND)
+    q4 = Q()
+    if survey.q4_pet == 0:
+        q4.add(Q(animal_cmg_cl__in=['가능', '가능(소형견)']), q4.AND)
+        q.add(q4,q4.AND)
+    
+    campings = Camping.objects.filter(q).order_by('-blog_cnt')
 
+    # map_x, map_y
+    if survey.q2_distance == 0 or survey.q2_distance == 1:
+        distance_check = [0, 60, 180]
+        user_location = (survey.user_x, survey.user_y)
+        campings_check = []
+        for camping in campings:
+            distance = haversine(user_location,(camping.map_x, camping.map_y))
+            if distance >= distance_check[survey.q2_distance] and distance < distance_check[survey.q2_distance + 1]:
+                campings_check.append(camping)
+        campings = campings_check
 
-    campings = Camping.objects.filter(q).order_by('-blog_cnt')[:100]
+    campings = campings[:50]
 
     return choice_random(campings,10)
 
@@ -222,7 +182,6 @@ def CBF(campingId):
 @api_view(('GET',))
 def search(request):
 
-    page = int(request.GET.get('page', 1))
     q = Q()
 
     # induty
@@ -301,6 +260,7 @@ def search(request):
     else:
         campings = Camping.objects.filter(q)
 
+    page = int(request.GET.get('page', 1))
     campings_page = campings[(page-1)*6:page*6]  # 페이지네이션
     totalPage = (len(campings)-1)//6 + 1
     serializer = CampingSerializer(campings_page, many=True)
