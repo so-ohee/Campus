@@ -39,13 +39,23 @@ function Navibar() {
                 <NavLink href="board">
                   <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "20%" }}>BOARD</p>
                 </NavLink>{" "}
-                  <p style={{ marginTop: "3%" }}>/</p>
+              
+                <p style={{ marginTop: "3%" }}>/</p>
+              
                 <NavLink href="search">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "20%" }}>SEARCH</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "22%" }}>SEARCH</p>
                 </NavLink>{" "}
-                  <p style={{ marginTop: "3%" }}>/</p>
+              
+                <p style={{ marginTop: "3%" }}>/</p>
+              
                 <NavLink href="news">
-                  <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "20%" }}>NEWS</p>
+                  <p style={{ color: "black", fontWeight: "bold", width: "45px", marginTop: "30%" }}>NEWS</p>
+                </NavLink>
+              
+                <p style={{ marginTop: "3%" }}>/</p>
+              
+                <NavLink href="shopping">
+                  <p style={{ color: "black", fontWeight: "bold", width: "70px", marginTop: "20%" }}>SHOPPING</p>
                 </NavLink>
                   {
                     
