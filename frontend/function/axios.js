@@ -145,3 +145,20 @@ export const VisitCheck = async (campingId, userUid) => {
 export const Shoppingcamp = async () => {
     return await axios.get(`${url}`+`shop`)
 }
+
+
+// ******************************* 설문 조사 ******************************************
+export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
+
+    let data = {
+        q1Equipment: q1,
+        q2Distance: q2,
+        q3Environment: q3,
+        q4Pet: q4,
+        userUid: uid,
+        userX: x,
+        userY: y
+      }
+
+      return await axios.post(`${url}survey`, data)
+}

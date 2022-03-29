@@ -1,8 +1,74 @@
+import { useEffect, useState } from 'react';
 import React from 'react';
-import { Button, Container, Row } from 'react-bootstrap';
+import { Button, Container, Row, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import styles from "../styles/Survey/Survey.module.css";
+import { useRouter } from 'next/router'
+import  { sendSurvey }  from "../function/axios";
+
 
 function survey() {
+    const router = useRouter()
+
+    const [lat, setLat] = useState(35.2040949)
+    const [long, setLong] = useState(126.8071876)
+    const [err, setErr] = useState(false)
+
+    const [q1, setQ1] = useState('')
+    const [q2, setQ2] = useState('')
+    const [q3, setQ3] = useState('')
+    const [q4, setQ4] = useState('')
+  
+    const radios1 = [
+      { name: '예', value: '0' },
+      { name: '아니오', value: '1' },
+    ]
+    const radios2 = [
+        { name: '1시간 이내', value: '0' },
+        { name: '1시간~2시간', value: '1' },
+        { name: '2시간 이후', value: '2' },
+      ]
+    const radios3 = [
+        { name: '산', value: '산' },
+        { name: '숲', value: '숲' },
+        { name: '계곡', value: '계곡' },
+        { name: '해변', value: '해변' },
+        { name: '강', value: '강' },
+        { name: '도심', value: '도심' },
+        { name: '섬', value: '섬' },
+        { name: '호수', value: '호수' },
+    ]
+    const radios4 = [
+        { name: '예', value: '0' },
+        { name: '아니오', value: '1' },
+      ]
+
+    const onClickButton = () => {
+        if (q1===''||q2===''||q3===''||q4===''){
+            alert('모든 항목에 응답해주세요!')
+        }
+        else{
+            const uid = localStorage.getItem("userUid")
+            sendSurvey(q1,q2,q3,q4,uid,long,lat).then((res) => console.log(res.data))
+            router.push('/recommend')
+        }
+    }
+
+    useEffect(() => {
+        if (navigator.geolocation) { // GPS를 지원하면
+            navigator.geolocation.getCurrentPosition(function(position) {
+                setLat(position.coords.latitude)
+                setLong(position.coords.longitude)
+                // console.log('위도 : ' + lat + ' 경도 : ' + long)
+            }, function(error) {
+                console.error(error);
+                setErr(true)
+            }, {
+                enableHighAccuracy: false,
+                maximumAge: 0,
+                timeout: Infinity
+            });
+        }
+    }, []);
 
     return (
         <>
@@ -13,72 +79,101 @@ function survey() {
             <Container className={styles.survey_container}>
                 <div className={styles.survey_div2}>
                     <Row>
-                        <h4 style={{ fontWeight: "bold" }}>숙박 구분</h4>
+                        <h4 style={{ fontWeight: "bold" }}>1. 장비가 있나요?</h4>
                     </Row>
                     <Row>
-                        <Button className={styles.survey_button}>오토캠핑</Button>
-                        <Button className={styles.survey_button}>글렘핑</Button>
-                        <Button className={styles.survey_button}>카라반</Button>
-                        <Button className={styles.survey_button}>펜션</Button>
-                        <Button className={styles.survey_button}>캠프닉(당일캠)</Button>
-                    </Row>
-                </div>
-                <div className={styles.survey_div2}>
-                    <Row>
-                        <h4 style={{ fontWeight: "bold" }}>검색 구분</h4>
-                    </Row>
-                    <Row>
-                        <Button className={styles.survey_button}>할인중</Button>
-                        <Button className={styles.survey_button}>적립가능</Button>
-                        <Button className={styles.survey_button}>이벤트중</Button>
-                        <Button className={styles.survey_button}>신용카드</Button>
-                        <Button className={styles.survey_button}>평일</Button>
+                        {radios1.map((radio, idx) => (
+                        <ToggleButton
+                            className={styles.survey_toggle_button}
+                            key={idx}
+                            id={`q1-${idx}`}
+                            type="radio"
+                            variant='outline-success'
+                            name="radio1"
+                            value={radio.value}
+                            checked={q1 === radio.value}
+                            onChange={(e) => setQ1(e.currentTarget.value)}
+                        >
+                            {radio.name}
+                        </ToggleButton>
+                        ))}
                     </Row>
                 </div>
                 <div className={styles.survey_div2}>
                     <Row>
-                        <h4 style={{ fontWeight: "bold" }}>정렬 조건</h4>
+                        <h4 style={{ fontWeight: "bold" }}>2. 소요시간은 얼마가 좋나요?</h4>
                     </Row>
                     <Row>
-                        <Button className={styles.survey_button}>추천순</Button>
-                        <Button className={styles.survey_button}>인기순</Button>
-                        <Button className={styles.survey_button}>가격순</Button>
-                        <Button className={styles.survey_button}>빈자리순</Button>
-                        <Button className={styles.survey_button}>거리순</Button>
+                        {radios2.map((radio, idx) => (
+                        <ToggleButton
+                            className={styles.survey_toggle_button}
+                            key={idx}
+                            id={`q2-${idx}`}
+                            type="radio"
+                            variant='outline-success'
+                            name="radio2"
+                            value={radio.value}
+                            checked={q2 === radio.value}
+                            onChange={(e) => setQ2(e.currentTarget.value)}
+                        >
+                            {radio.name}
+                        </ToggleButton>
+                        ))}
                     </Row>
+                    {err && <span>※ 현재 위치를 확인할 수 없습니다. url창 왼쪽 느낌표를 눌러 확인해주세요.</span>} 
                 </div>
                 <div className={styles.survey_div2}>
                     <Row>
-                        <h4 style={{ fontWeight: "bold" }}>기본 시설</h4>
+                        <h4 style={{ fontWeight: "bold" }}>3. 어떤 환경을 제일 좋아하시나요?</h4>
                     </Row>
                     <Row>
-                        <Button className={styles.survey_button}>바다</Button>
-                        <Button className={styles.survey_button}>산</Button>
-                        <Button className={styles.survey_button}>강</Button>
-                        <Button className={styles.survey_button}>계곡</Button>
-                        <Button className={styles.survey_button}>호수</Button>
-                        <Button className={styles.survey_button}>섬</Button>
+                        {radios3.map((radio, idx) => (
+                        <ToggleButton
+                            className={styles.survey_toggle_button}
+                            key={idx}
+                            id={`q3-${idx}`}
+                            type="radio"
+                            variant='outline-success'
+                            name="radio3"
+                            value={radio.value}
+                            checked={q3 === radio.value}
+                            onChange={(e) => setQ3(e.currentTarget.value)}
+                        >
+                            {radio.name}
+                        </ToggleButton>
+                        ))}
                     </Row>
                 </div>
-                <div className={styles.survey_div3}>
+                <br/><br/>
+                <div className={styles.survey_div2}>
                     <Row>
-                        <h4 style={{ fontWeight: "bold" }}>편의 시설</h4>
+                        <h4 style={{ fontWeight: "bold" }}>4. 반려견이 있나요?</h4>
                     </Row>
                     <Row>
-                        <Button className={styles.survey_button}>공용화장실</Button>
-                        <Button className={styles.survey_button}>개별화장실</Button>
-                        <Button className={styles.survey_button}>공용샤워장</Button>
-                        <Button className={styles.survey_button}>개별샤워장</Button>
-                        <Button className={styles.survey_button}>계수대</Button>
-                        <Button className={styles.survey_button}>매점</Button>
-                        <Button className={styles.survey_button}>와이파이</Button>
-                        <Button className={styles.survey_button}>카페</Button>
+                        {radios4.map((radio, idx) => (
+                        <ToggleButton
+                            className={styles.survey_toggle_button}
+                            key={idx}
+                            id={`q4-${idx}`}
+                            type="radio"
+                            variant='outline-success'
+                            name="radio4"
+                            value={radio.value}
+                            checked={q4 === radio.value}
+                            onChange={(e) => setQ4(e.currentTarget.value)}
+                        >
+                            {radio.name}
+                        </ToggleButton>
+                        ))}
                     </Row>
                 </div>
             </Container>
             
             <div className={styles.survey_div4}>
-                <Button style={{background: "#007D0D"}}>완료</Button>
+                <Button 
+                    onClick={onClickButton}
+                    variant='outline-success'
+                >완료</Button>
             </div>
         </>
     );
