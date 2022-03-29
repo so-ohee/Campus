@@ -38,7 +38,7 @@ function CampingCard(params) {
                   </Card.Subtitle>
                   <Card.Text style={{ fontSize: "16px" }}>
                       {
-                        datas.themaEnvrnCl !==null ? <a>#{datas.themaEnvrnCl}</a> : null
+                        datas.themaEnvrnCl !==null ? <a>#{`${datas.themaEnvrnCl}`.replaceAll(",", " #")}</a> : null
                       }
                   </Card.Text>
               </Card.Body>
