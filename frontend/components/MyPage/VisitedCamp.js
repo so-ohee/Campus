@@ -34,18 +34,27 @@ function Visitedcamp() {
             <div className={styles.visitedcamp_main}>
                 <Container>
                     <Row>
-                        {campingplace.map((element, index) => {
-                            return (
-                            <Col sm key={index} style={{marginBottom: "5%"}}>
-                                    <CampingCard
-                                        campingId={element.campingId}
-                                        title={element.facltNm}
-                                        address={element.addr1}
-                                        hashtag={element.themaEnvrnCl}
-                                    />
-                            </Col>
-                            );
-                        })}
+                        {
+                            campingplace === null ? 
+                                (
+                                    campingplace.map((element, index) => {
+                                    return (
+                                    <Col sm key={index} style={{marginBottom: "5%"}}>
+                                            <CampingCard
+                                                campingId={element.campingId}
+                                                title={element.facltNm}
+                                                address={element.addr1}
+                                                hashtag={element.themaEnvrnCl}
+                                            />
+                                    </Col>
+                                );
+                            })) : 
+                                (
+                                    <div className={styles.visitedcamp_comment}>
+                                        <h1 style={{textAlign: "center"}}>방문한 캠핑장이 없습니다</h1>
+                                    </div>
+                                )
+                        }
                     </Row>
                     
                 </Container>

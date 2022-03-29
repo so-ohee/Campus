@@ -34,50 +34,54 @@ function Reviewcamp() {
             </div>
 
             <div className={styles.reviewcamp_main}>
-            <Container style={{height: "700px", marginTop: "-0.7%"}}>
-                <table className={styles.reviewcamp_table}>
-                    <thead>
-                        <tr className={styles.reviewcamp_thead_tr}>
-                            <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
-                            <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
-                            <th style={{width: "700px", textAlignLast: "center"}}>제목</th>
-                            <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
-                            <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
-                        </tr>
-                    </thead>
-                        {
-                            dummy !== null ? 
-                            (
-                                dummy.map((element, index) => {
-                                    return (
+                <Container style={{ height: "700px", marginTop: "-0.7%" }}>
+                    {
+                        dummy === null ? 
+                        (
+                            dummy.map((element, index) => {
+                                return (
+                                    <table className={styles.reviewcamp_table}>
+                                        <thead>
+                                            <tr className={styles.reviewcamp_thead_tr}>
+                                                <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
+                                                <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
+                                                <th style={{width: "700px", textAlignLast: "center"}}>제목</th>
+                                                <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
+                                                <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
+                                            </tr>
+                                        </thead>
                                         <tbody key={index}>
-                                            {
-                                                element.category === "후기" && 
-                                                    <tr className={styles.reviewcamp_tbody_tr}>
-                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
-                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                        <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
-                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
-                                                        <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
-                                                    </tr>
-                                            }
-                                            {
-                                                element.category !== "후기" && 
-                                                    <tr className={styles.reviewcamp_tbody_tr}>
-                                                        <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
-                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                        <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
-                                                        <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
-                                                        <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
-                                                    </tr>
-                                            }
-                                        </tbody>
-                                    )
+                                        {
+                                            element.category === "후기" && 
+                                                <tr className={styles.reviewcamp_tbody_tr}>
+                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                </tr>
+                                        }
+                                        {
+                                            element.category !== "후기" && 
+                                                <tr className={styles.reviewcamp_tbody_tr}>
+                                                    <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
+                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
+                                                    <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                </tr>
+                                        }
+                                        </tbody>     
+                                    </table>)
                                 })
-                            ) : null
-                        }
-                </table>
-            </Container>
+                            ) : 
+                            (
+                                <div className={styles.reviewcamp_comment}>
+                                    <h1 style={{textAlign: "center"}}>작성한 리뷰가 없습니다</h1>
+                                </div>
+                            )
+                    }
+                </Container>
             </div>
 
             <Pagination className={styles.reviewcamp_pagination}>{items}</Pagination>
