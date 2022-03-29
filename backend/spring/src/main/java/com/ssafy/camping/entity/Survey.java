@@ -22,21 +22,27 @@ public class Survey {
     private String userUid;
 
     @ApiModelProperty(value = "장비여부")
+    @Column(name = "q1_equipment")
     private Byte q1Equipment;
 
     @ApiModelProperty(value = "거리 설정")
+    @Column(name = "q2_distance")
     private Byte q2Distance;
 
     @ApiModelProperty(value = "선호 환경")
+    @Column(name = "q3_environment")
     private String q3Environment;
 
     @ApiModelProperty(value = "애완동물 여부")
+    @Column(name = "q4_pet")
     private Byte q4Pet;
 
     @ApiModelProperty(value = "사용자 X")
+    @Column(name = "user_x")
     private double userX;
 
     @ApiModelProperty(value = "사용자 Y")
+    @Column(name = "user_y")
     private double userY;
 
     @Builder
