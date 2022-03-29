@@ -12,7 +12,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from haversine import haversine
 
-# uid = 'l6uEzsFywoOiNTu1FweAzXO85pG3'
 
 @api_view(('GET',))
 def recommend1(request, uid):        # cf 20개, survey 10개를 받아 최대 30개 중 랜덤으로 10개 반환
@@ -223,6 +222,7 @@ def CBF(campingId):
 @api_view(('GET',))
 def search(request):
 
+    page = int(request.GET.get('page', 1))
     q = Q()
 
     # induty
@@ -301,9 +301,10 @@ def search(request):
     else:
         campings = Camping.objects.filter(q)
 
-
-    serializer = CampingSerializer(campings, many=True)
-    return Response(serializer.data)
+    campings_page = campings[(page-1)*6:page*6]  # 페이지네이션
+    totalPage = (len(campings)-1)//6 + 1
+    serializer = CampingSerializer(campings_page, many=True)
+    return Response({'totalPage':totalPage, 'page':page, 'results': serializer.data})
 
 
 
