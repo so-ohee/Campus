@@ -40,6 +40,12 @@ function Detailreview(props) {
     return (
         <div>
             <Container>
+                <div>
+                    <Row className={styles.detailreview_buttons}>
+                        <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>
+                    </Row>
+                </div>
+
                 <h1 className={styles.detailreview_h1}>{datas.title}</h1>
                 <div className={styles.detailreview_div}>
                     <Row>
@@ -91,13 +97,18 @@ function Detailreview(props) {
                                     : <p>{datas.name} {datas.updateTime} 수정</p>
                                 }
                             </Row>
-                            <Row style={{justifyContent: "right", marginTop: "5%"}}>
+                            <Row style={{justifyContent: "right", marginTop: "15%", marginRight: "3%"}}>
                                 <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>
                                 <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
                             </Row>
                         </Col>
                     </Row>
                 </div>
+                
+                <div style={{textAlign: "-webkit-center", marginTop: "2%", marginBottom: "2%"}}>
+                    <img src={datas.files[0].filePath} style={{width: "500px", height: "350px"}} />
+                </div>
+
                 <div className={styles.detailreview_detail}>
                     {datas.content}
                 </div>
@@ -132,12 +143,6 @@ function Detailreview(props) {
                             </div>
                         )
                 }
-                
-                <div>
-                    <Row className={styles.detailreview_buttons}>
-                        <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>
-                    </Row>
-                </div>
             </Container>
         </div>
     );
