@@ -9,10 +9,13 @@ import { getAuth, deleteUser } from "firebase/auth";
 
 function Mypage() {
     const [data, setData] = useState("");
-
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
-    // const user = auth.currentUser;
+    const [page, setPage] = useState("");
+    // 새로고침 또는 페이진 전환 시 초기 위치
+    useEffect(() => {
+        window.scrollTo(0, 500);
+    }, [page]);
     
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));

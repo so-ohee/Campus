@@ -40,8 +40,6 @@ function Boardlist(props) {
         );
     }
 
-    console.log(dummy);
-
     return (
         <div>
             <Container >

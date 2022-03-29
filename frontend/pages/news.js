@@ -7,6 +7,12 @@ import { Newscamp } from "../function/axios";
 function news() {
 
     const [dummy, setDummy] = useState([]);
+    const [page, setPage] = useState("");
+    
+    // 새로고침 또는 페이진 전환 시 초기 위치
+    useEffect(() => {
+        window.scrollTo(0, 500);
+    }, [page]);
 
     useEffect(() => {
         Newscamp().then((res) => setDummy(res.data.news));
