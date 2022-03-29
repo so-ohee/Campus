@@ -162,3 +162,8 @@ export const VisitList = async (campingId) => {
 export const BookMarkList = async (campingId) => {
     return await axios.get(`${url}`+`bookmark/user?userUid=${campingId}`)
 }
+
+// 내가 쓴 리뷰 목록
+export const ReviewList = async (campingId) => {
+    return await axios.get(`${url}`+`board/user?userUid=${campingId}`)
+}

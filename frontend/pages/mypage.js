@@ -13,9 +13,6 @@ function Mypage() {
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
     const user = auth.currentUser;
-
-    console.log(auth);
-    console.log(auth.currentUser);
     
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));

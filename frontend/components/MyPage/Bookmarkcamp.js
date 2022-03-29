@@ -24,8 +24,6 @@ function Bookmarkcamp() {
         BookMarkList(localStorage.getItem("userUid"))
             .then((res) => setCampingplace(res.data.campsite));
     }, []);
-
-    console.log(campingplace);
     
     return (
         <>
