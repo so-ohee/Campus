@@ -89,7 +89,7 @@ function Boardlist(props) {
                     </thead>
                     {/* <tbody> */}
                         {
-                            dummy === null ? 
+                            dummy !== null ? 
                             (
                                 dummy.map((element, index) => {
                                     return (
