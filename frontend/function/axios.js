@@ -145,3 +145,8 @@ export const VisitCheck = async (campingId, userUid) => {
 export const Shoppingcamp = async () => {
     return await axios.get(`${url}`+`shop`)
 }
+
+// 캠핑 관련 뉴스 목록
+export const Newscamp = async () => {
+    return await axios.get(`${url}`+`news`)
+}

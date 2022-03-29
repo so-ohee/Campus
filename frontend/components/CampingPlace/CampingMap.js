@@ -37,7 +37,6 @@ function CampingMap(props) {
   
     console.log(props);
 
-
     function clickMart() {
       if (martPositions.length === 0){
         setMartPositions(martList)
