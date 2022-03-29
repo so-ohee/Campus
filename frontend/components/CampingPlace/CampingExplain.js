@@ -8,6 +8,7 @@ function CampingExplain(props) {
 
     const [datas, setDatas] = useState("");
     const [bookmark, setBookmark] = useState("");
+    const [visit, setVisit] = useState("");
     const router = useRouter();
 
     useEffect(() => {
@@ -18,7 +19,11 @@ function CampingExplain(props) {
         BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => setBookmark(res.data.bookmark));
     }
 
-    console.log(bookmark);
+    function PressVisit() {
+        VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => setVisit(res.data.visit));
+    }
+
+    console.log(visit);
         
     return (
         <>
@@ -58,8 +63,12 @@ function CampingExplain(props) {
                                         </div>
                                     </Col>
                                     <Col>
-                                        <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon2} src="../../empty_marker.png" />
+                                        <div style={{ textAlign: "-webkit-center" }}>
+                                            {
+                                                visit == false ? 
+                                                    <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../empty_marker.png" />
+                                                    : <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../marker.png" />
+                                            }
                                             <p className={styles.campingexplain_visit}>방문여부</p>
                                         </div>
                                     </Col>
