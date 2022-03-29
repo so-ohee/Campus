@@ -1,11 +1,11 @@
 .campingexplain_selectbar {
     height: 50px;
-    width: 1270px;
+    width: 100%;
     text-align: -webkit-center;
 }
 
 .campingexplain_select {
-    width:325px;
+    width: 100%;
     height: 60px;
     background: #198754;
     text-align-last: center;
@@ -17,7 +17,7 @@
 }
 
 .campingexplain_unselect {
-    width:325px;
+    width: 100%;
     height: 60px;
     background: white;
     text-align-last: center;
@@ -32,7 +32,7 @@
     place-content: center;
     border-bottom: 1px solid #198754;
     border-bottom-width: 3px;
-    width: 1240px;
+    width: 100%;
 }
 
 .nav_link {
@@ -48,5 +48,5 @@
 }
 
 .nav_item {
-    width:310px;
+    width:24%;
 }
