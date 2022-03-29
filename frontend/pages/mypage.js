@@ -13,9 +13,6 @@ function Mypage() {
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
     const user = auth.currentUser;
-
-    console.log(auth);
-    console.log(auth.currentUser);
     
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
@@ -63,11 +60,11 @@ function Mypage() {
                         <Tab eventKey="Visited" title="Visited">
                             <VisitedCamp />
                         </Tab>
-                        <Tab eventKey="Review" title="Review">
-                            <ReviewCamp />
-                        </Tab>
                         <Tab eventKey="Bookmark" title="Bookmark">
                             <Bookmarkcamp />
+                        </Tab>
+                        <Tab eventKey="Review" title="Review">
+                            <ReviewCamp />
                         </Tab>
                     </Tabs>
                 </div>

@@ -17,8 +17,6 @@ function CampingCard(params) {
     router.push(`/campingplace/${params.campingId}`)
   }
 
-  console.log(datas);
-
   return (
       <>
           <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%" }} onClick={() => moveCamping()}>
