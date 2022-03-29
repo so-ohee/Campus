@@ -2,17 +2,24 @@ import { useRouter } from 'next/router';
 import React, {useEffect, useState} from 'react';
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingExplain.module.css";
-import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
+import { receiveCamping_in, receiveCamping_out, BookMark, VisitCheck } from "../../function/axios";
 
 function CampingExplain(props) {
 
     const [datas, setDatas] = useState("");
+    const [bookmark, setBookmark] = useState("");
     const router = useRouter();
 
     useEffect(() => {
         receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
     }, [])
-    
+
+    function PressBookMark() {
+        BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => setBookmark(res.data.bookmark));
+    }
+
+    console.log(bookmark);
+        
     return (
         <>
             <Container>
@@ -41,9 +48,13 @@ function CampingExplain(props) {
                             <Col xs={4} >
                                 <Row>
                                     <Col>
-                                        <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon} src="../../empty_heart.png" />
-                                            <p className={styles.campingexplain_reserve}>찜하기</p>
+                                        <div style={{ textAlign: "-webkit-center" }} >
+                                            {
+                                                bookmark == false ? 
+                                                    <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../un_bookmark.png" />
+                                                    : <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../bookmark.png" />
+                                            }
+                                            <p className={styles.campingexplain_reserve}>북마크</p>
                                         </div>
                                     </Col>
                                     <Col>
