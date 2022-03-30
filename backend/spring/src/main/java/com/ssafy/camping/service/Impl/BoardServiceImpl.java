@@ -276,9 +276,7 @@ public class BoardServiceImpl implements BoardService {
         log.debug("BoardService userListBoard call");
 
         Page<Board> boards = boardRepository.findByUserUidAndDeleteState(userUid,0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
-        for(Board board : boards) {
-            System.out.println(board.getBoardId());
-        }
+
         return makeListBoard(boards);
     }
 
