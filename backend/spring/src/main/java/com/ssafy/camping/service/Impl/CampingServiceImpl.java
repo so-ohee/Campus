@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.*;
 
@@ -125,6 +126,26 @@ public class CampingServiceImpl implements CampingService {
 
         resultMap.put("campsite",campingList);
         resultMap.put("totalPage", campsites.getTotalPages());
+        resultMap.put("message",Message.FIND_CAMPSITE_SUCCESS);
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> searchCampsiteName(String word) throws Exception {
+        log.debug("CampingService searchCampsiteName call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        List<Camping> list = campingRepository.findByFacltNmContainingIgnoreCaseOrderByFacltNm(word);
+        List<Map<String, Object>> campingList = new ArrayList<>();
+        for(Camping c : list) {
+            Map<String, Object> campsite = new HashMap<>();
+            campsite.put("campingId", c.getCampingId());
+            campsite.put("facltNm", c.getFacltNm());
+
+            campingList.add(campsite);
+        }
+
+        resultMap.put("campsite",campingList);
         resultMap.put("message",Message.FIND_CAMPSITE_SUCCESS);
         return resultMap;
     }
