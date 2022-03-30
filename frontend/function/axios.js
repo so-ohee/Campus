@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const url = "https://j6c103.p.ssafy.io/api/";
+const django_url = 'https://j6c103.p.ssafy.io/django/api/'
 
 // ************************************ 회원 기능 ************************************
 // 로그인 (회원 정보 DB에 저징)
@@ -279,3 +280,11 @@ export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
 
       return await axios.post(`${url}survey`, data)
     }
+
+
+
+// ***************************** Django API *********************************************
+// 상세검색 결과
+export const filterResults = async (query) => {
+    return await axios.get(`${django_url}${query}`)
+}

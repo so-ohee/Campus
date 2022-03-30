@@ -3,8 +3,7 @@ import CampingCard from "../components/Common/CampingCard";
 import styles from "../styles/Recommend/Recommend.module.css";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import axios from "axios";
-
+import  { filterResults }  from "../function/axios";
 
 
 function Filter() {
@@ -13,12 +12,11 @@ function Filter() {
   const [page, setPage] = useState('')
   const [totalPage, setTotalPage] = useState('')
   const [pageList, setPageList] = useState([])
-  const url = 'https://j6c103.p.ssafy.io/django/api'
-  const query_edit = '/filter/' + router.asPath.substring(7,)
+  const query_edit = 'filter/' + router.asPath.substring(7,)
   const query = query_edit.substring(0,query_edit.lastIndexOf('=')+1)
 
   useEffect(() => {
-    axios.get(`${url}${query_edit}`)
+    filterResults(query_edit)
     .then((res) => {
       setCampings(res.data.results) 
       setPage(Number(res.data.page))
