@@ -32,8 +32,6 @@ function Detailreview(props) {
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid"));
     }
-
-    console.log(dummy);
     
     return (
         <div>

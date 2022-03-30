@@ -34,7 +34,6 @@ export async function bringUser(userUid) {
 
 // 프로필 사진 변경
 export async function changePic(userUid, formData) {
-    console.log(formData);
     const url2 = "https://j6c103.p.ssafy.io/api/user/";
 
     await axios({
@@ -119,31 +118,25 @@ export const sendArticle = async (userUid, category, title, content, campingId, 
 };
 
 // 게시글 작성 (자유, QnA)
-export const sendArticle2 = async (userUid, category, title, content, postfiles ) => {
+export async function sendArticle2(dataDto, files) {
+
+    const newForm = new FormData();
+    newForm.append("board", new Blob([JSON.stringify(dataDto)], { type: "application/json" }))
+    for (let i = 0; i < files.length; i++) {
+      newForm.append("files",files[i])
+    }
+
     const url2 = "https://j6c103.p.ssafy.io/api/board";
 
-    let data = {
-        userUid: userUid,
-        category: category,
-        title: title,
-        content: content,
-        campingId: null,
-        environment: null,
-        facility: null,
-        service: null,
-    }
-    axios
-    .post(url2,  JSON.stringify(data), {
+    await axios({
+        method: 'post',
+        url: url2,
+        data: newForm,
         headers: {
-            "Content-Type": `application/json`,
+            'Content-Type': 'multipart/form-data',
         },
-        proxy: url2
-        }, postfiles)
-        .then((res) => {
-            console.log("댓글 작성 완료");
-        }
-    );
-};
+    }).then((res) => console.log("게시글 작성 완료"));
+}
 
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
