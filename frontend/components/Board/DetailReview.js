@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/DetailReview.module.css";
 import CommentCard from "../Common/CommentCard";
-import { campingBoardMore, articleDelete, commentSearch } from "../../function/axios";
+import { campingBoardMore, articleDelete, commentSearch, sendComment } from "../../function/axios";
 
 function Detailreview(props) {
 
@@ -40,7 +40,12 @@ function Detailreview(props) {
         commentSearch(props.datas).then((res) => setDummy(res.data.comment));
     }, [])
     
-    // console.log(datas);
+    // 댓글 작성
+    function writeRecomment(props) {
+        sendComment(datas.boardId, props, localStorage.getItem("userUid"));
+    }
+
+    console.log(datas);
 
     return (
         <div>
@@ -119,7 +124,7 @@ function Detailreview(props) {
                 </div>
                 <hr />
                 {
-                    dummy === null ?
+                    dummy !== null ?
                         (
                             <>
                                 <div className={styles.detailreview_comment}>
@@ -148,6 +153,19 @@ function Detailreview(props) {
                             </div>
                         )
                 }
+
+                <div style={{height: "100px"}}>
+                    <input
+                        className={styles.detailreview_input}
+                        type="text"
+                        placeholder='댓글을 입력하세요...'
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                writeRecomment(e.target.value);
+                            }
+                        }}
+                    />
+                </div>
             </Container>
         </div>
     );
