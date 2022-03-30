@@ -18,6 +18,7 @@ function Filter() {
 
 
   useEffect(() => {
+    console.log(`${url}${router.asPath}`)
     axios.get(`${url}${router.asPath}`)
     .then((res) => {
       setCampings(res.data.results) 
