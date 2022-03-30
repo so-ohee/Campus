@@ -30,7 +30,7 @@ function Detailreview(props) {
 
     // 게시글 삭제
     const deleteArticle = () => {
-        articleDelete(datas.boardId).then(() => location.reload())
+        articleDelete(datas.boardId);
     }
 
     // 댓글 조회

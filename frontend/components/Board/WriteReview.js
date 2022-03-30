@@ -52,7 +52,7 @@ function Writereview(props) {
     useEffect(() => {
         const newform = {
             "userUid": localStorage.getItem("userUid"),
-            "category": "리뷰",
+            "category": "후기",
             "title": title,
             "content": content,
             "campingId": campingId,
