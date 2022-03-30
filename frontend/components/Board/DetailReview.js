@@ -124,7 +124,7 @@ function Detailreview(props) {
                 </div>
                 <hr />
                 {
-                    dummy !== null ?
+                    dummy !== undefined ?
                         (
                             <>
                                 <div className={styles.detailreview_comment}>
