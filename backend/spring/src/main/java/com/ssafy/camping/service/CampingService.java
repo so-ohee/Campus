@@ -12,4 +12,6 @@ public interface CampingService {
     List<CampingListDto> makeListCampsite (List<Integer> campingIds) throws Exception;
     //지역별 캠핑장 조회
     Map<String, Object> searchCampsite(String doNm, String sigunguNm, String facltNm, int page) throws Exception;
+    //캠핑장명 목록
+    Map<String, Object> searchCampsiteName(String word) throws Exception;
 }

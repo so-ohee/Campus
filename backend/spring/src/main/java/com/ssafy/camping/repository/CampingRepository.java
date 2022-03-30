@@ -28,4 +28,6 @@ public interface CampingRepository extends JpaRepository<Camping, Integer> {
     Page<Camping> findByDoNmAndFacltNmContainingIgnoreCase(String doNm, String facltNm, Pageable pageable);
 
     Page<Camping> findByDoNmAndSigunguNmAndFacltNmContainingIgnoreCase(String doNm, String sigunguNm, String facltNm, Pageable pageable);
+
+    List<Camping> findByFacltNmContainingIgnoreCaseOrderByFacltNm(String facltNm);
 }

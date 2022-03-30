@@ -82,4 +82,24 @@ public class CampingController {
         }
         return new ResponseEntity(resultMap, status);
     }
+
+    @ApiOperation(value = "캠핑장명 목록")
+    @GetMapping("{word}")
+    public ResponseEntity searchCampsiteName(@PathVariable String word) {
+        log.debug("CampingController searchCampsiteName call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = campingService.searchCampsiteName(word);
+            if(resultMap.get("message").equals(Message.FIND_CAMPSITE_SUCCESS)) //캠핑장 조회 성공
+                status = HttpStatus.OK;
+        } catch (Exception e) {
+            log.error(Message.FIND_CAMPSITE_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.FIND_CAMPSITE_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }
