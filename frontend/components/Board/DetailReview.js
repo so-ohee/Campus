@@ -7,12 +7,9 @@ import { campingBoardMore, articleDelete, commentSearch, sendComment } from "../
 
 function Detailreview(props) {
 
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-    };
-
     const submitSign = () => {
         props.propFunction("수정")
+        props.propData(datas.boardId)
     }
 
     const submitSign2 = () => {

@@ -123,6 +123,34 @@ export async function sendArticle(dataDto, files) {
     });
 }
 
+// 게시글 수정
+export async function modifyArticle(dataDto, files) {
+
+    const newForm = new FormData();
+    newForm.append("board", new Blob([JSON.stringify(dataDto)], { type: "application/json" }))
+    
+    if (files !== null) {
+        for (let i = 0; i < files.length; i++) {
+            newForm.append("files",files[i])
+        }
+    }
+    
+
+    const url2 = "https://j6c103.p.ssafy.io/api/board";
+
+    await axios({
+        method: 'put',
+        url: url2,
+        data: newForm,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    }).then((res) => {
+        console.log("게시글 작성 완료");
+        document.location.href = "/board";
+    });
+}
+
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
     axios.delete(`${url}` + `board` + `/` + `${boardId}`)

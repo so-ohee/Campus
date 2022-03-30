@@ -116,11 +116,11 @@ function Writereview(props) {
                             </Col>
                             <Col xs={8}>
                                 <ReactStars
-                                count={5}
-                                onChange={ratingChanged1}
-                                size={24}
-                                activeColor="#ffd700"
-                            />
+                                    count={5}
+                                    onChange={ratingChanged1}
+                                    size={24}
+                                    activeColor="#ffd700"
+                                />
                             </Col>
                         </Row>
                     </Col>
@@ -132,11 +132,11 @@ function Writereview(props) {
                             </Col>
                             <Col xs={8}>
                                 <ReactStars
-                                count={5}
-                                onChange={ratingChanged2}
-                                size={24}
-                                activeColor="#ffd700"
-                            />
+                                    count={5}
+                                    onChange={ratingChanged2}
+                                    size={24}
+                                    activeColor="#ffd700"
+                                />
                             </Col>
                         </Row>
                     </Col>
@@ -148,11 +148,11 @@ function Writereview(props) {
                             </Col>
                             <Col xs={8}>
                                 <ReactStars
-                                count={5}
-                                onChange={ratingChanged3}
-                                size={24}
-                                activeColor="#ffd700"
-                            />
+                                    count={5}
+                                    onChange={ratingChanged3}
+                                    size={24}
+                                    activeColor="#ffd700"
+                                />
                             </Col>
                         </Row>
                     </Col>
