@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "../../styles/Board/DetailReview.module.css";
 import CommentCard from "../Common/CommentCard";
-import { campingBoardMore, commentSearch } from "../../function/axios";
+import { campingBoardMore, commentSearch, sendComment } from "../../function/axios";
 
 function Detailreview(props) {
 
@@ -27,10 +27,21 @@ function Detailreview(props) {
     useEffect(() => {
         commentSearch(props.datas).then((res) => setDummy(res.data.comment));
     }, [])
+
+    // 댓글 작성
+    function writeRecomment(props) {
+        sendComment(datas.boardId, props, localStorage.getItem("userUid"));
+    }
     
     return (
         <div>
             <Container>
+                <div>
+                    <Row className={styles.detailreview_buttons}>
+                        <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>
+                    </Row>
+                </div>
+
                 <h1 className={styles.detailreview_h1}>{datas.title}</h1>
                 <div className={styles.detailreview_div}>
                     <Row>
@@ -62,7 +73,7 @@ function Detailreview(props) {
                 <hr />
                 
                 {
-                    dummy === null ?
+                    dummy !== null ?
                         (
                             <>
                                 <div className={styles.detailreview_comment}>
@@ -92,10 +103,17 @@ function Detailreview(props) {
                         )
                 }
                 
-                <div>
-                    <Row className={styles.detailreview_buttons}>
-                        <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>
-                    </Row>
+                <div style={{height: "100px"}}>
+                    <input
+                        className={styles.detailreview_input}
+                        type="text"
+                        placeholder='댓글을 입력하세요...'
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                writeRecomment(e.target.value);
+                            }
+                        }}
+                    />
                 </div>
             </Container>
         </div>
