@@ -41,13 +41,13 @@ function Writermain(props) {
                     </Row>
                 </div>
                 {
-                    page === "리뷰" && <WriteReview/>
+                    page === "리뷰" && <WriteReview props={page}/>
                 }
                 {
-                    page === "자유" && <WriteFree/>
+                    page === "자유" && <WriteFree props={page}/>
                 }
                 {
-                    page === "QnA" && <WriteQna/>
+                    page === "QnA" && <WriteQna props={page}/>
                 }
             </Container>
         </div>
