@@ -14,12 +14,11 @@ function Filter() {
   const [totalPage, setTotalPage] = useState('')
   const [pageList, setPageList] = useState([])
   const url = 'https://j6c103.p.ssafy.io/django/api'
-  const query = router.asPath.substring(0,router.asPath.lastIndexOf('=')+1)
-
+  const query_edit = '/filter/' + router.asPath.substring(7,)
+  const query = query_edit.substring(0,query_edit.lastIndexOf('=')+1)
 
   useEffect(() => {
-    console.log(`${url}${router.asPath}`)
-    axios.get(`${url}${router.asPath}`)
+    axios.get(`${url}${query_edit}`)
     .then((res) => {
       setCampings(res.data.results) 
       setPage(Number(res.data.page))
