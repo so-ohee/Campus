@@ -26,4 +26,6 @@ public interface BoardService {
     Map<String, Object> userListBoard (String userUid, int page) throws Exception;
     //목록 만들기
     Map<String, Object> makeListBoard (Page<Board> boards) throws Exception;
+    //게시글 검색
+    Map<String, Object> searchBoard(String word, int page) throws Exception;
 }

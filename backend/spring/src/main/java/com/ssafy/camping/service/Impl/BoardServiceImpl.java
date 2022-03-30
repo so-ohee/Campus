@@ -310,4 +310,14 @@ public class BoardServiceImpl implements BoardService {
 
         return resultMap;
     }
+
+    @Override
+    @Transactional
+    public Map<String, Object> searchBoard(String word, int page) throws Exception {
+        log.debug("BoardService searchBoard call");
+
+        Page<Board> boards = boardRepository.findByDeleteStateAndTitleContainingIgnoreCaseOrContentContainingIgnoreCase(0, word, word, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
+
+        return makeListBoard(boards);
+    }
 }

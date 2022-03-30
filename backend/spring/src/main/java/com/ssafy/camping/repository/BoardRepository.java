@@ -19,4 +19,6 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     Page<Board> findByUserUidAndDeleteState(String userUid, int deleteState, Pageable pageable);
 
     List<Board> findByUserUid(String userUid);
+
+    Page<Board> findByDeleteStateAndTitleContainingIgnoreCaseOrContentContainingIgnoreCase(int deleteState, String title, String content, Pageable pageable);
 }
