@@ -34,7 +34,6 @@ export async function bringUser(userUid) {
 
 // 프로필 사진 변경
 export async function changePic(userUid, formData) {
-    console.log(formData);
     const url2 = "https://j6c103.p.ssafy.io/api/user/";
 
     await axios({
@@ -91,63 +90,74 @@ export const campingBoardMore = async (boardId) => {
     return await axios.get(`${url}`+`board`+ `/` + `${boardId}`)
 }
 
-// 게시글 작성 (후기)
-export const sendArticle = async (userUid, category, title, content, campingId, environment, facility, service) => {
-    const url2 = "https://j6c103.p.ssafy.io/api/comment";
+// 캠핑장 이름 검색
+export const searchCamp = async (word) => {
+    return await axios.get(`${url}`+`camping`+ `/` + `${word}`)
+}
 
-    let data = {
-        userUid: userUid,
-        category: category,
-        title: title,
-        content: content,
-        campingId: campingId,
-        environment: environment,
-        facility: facility,
-        service: service,
-    }
-    axios
-    .post(url2,  JSON.stringify(data), {
-        headers: {
-            "Content-Type": `application/json`,
-        },
-        proxy: url2
-        })
-        .then((res) => {
-            console.log("댓글 작성 완료");
+// 게시글 작성
+export async function sendArticle(dataDto, files) {
+
+    const newForm = new FormData();
+    newForm.append("board", new Blob([JSON.stringify(dataDto)], { type: "application/json" }))
+    
+    if (files !== null) {
+        for (let i = 0; i < files.length; i++) {
+            newForm.append("files",files[i])
         }
-    );
-};
+    }
+    
 
-// 게시글 작성 (자유, QnA)
-export const sendArticle2 = async (userUid, category, title, content, postfiles ) => {
     const url2 = "https://j6c103.p.ssafy.io/api/board";
 
-    let data = {
-        userUid: userUid,
-        category: category,
-        title: title,
-        content: content,
-        campingId: null,
-        environment: null,
-        facility: null,
-        service: null,
-    }
-    axios
-    .post(url2,  JSON.stringify(data), {
+    await axios({
+        method: 'post',
+        url: url2,
+        data: newForm,
         headers: {
-            "Content-Type": `application/json`,
+            'Content-Type': 'multipart/form-data',
         },
-        proxy: url2
-        }, postfiles)
-        .then((res) => {
-            console.log("댓글 작성 완료");
+    }).then((res) => {
+        console.log("게시글 작성 완료");
+        document.location.href = "/board";
+    });
+}
+
+// 게시글 수정
+export async function modifyArticle(dataDto, files) {
+
+    const newForm = new FormData();
+    newForm.append("board", new Blob([JSON.stringify(dataDto)], { type: "application/json" }))
+    
+    if (files !== null) {
+        for (let i = 0; i < files.length; i++) {
+            newForm.append("files",files[i])
         }
-    );
-};
+    }
+    
+
+    const url2 = "https://j6c103.p.ssafy.io/api/board";
+
+    await axios({
+        method: 'put',
+        url: url2,
+        data: newForm,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    }).then((res) => {
+        console.log("게시글 수정 완료");
+        document.location.href = "/board";
+    });
+}
 
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
-    axios.delete(`${url}`+`board` + `/` + `${boardId}`)
+    axios.delete(`${url}` + `board` + `/` + `${boardId}`)
+        .then((res) => {
+            console.log("게시글 삭제");
+            document.location.href = "/board";
+        });
 }
 
 
@@ -276,9 +286,9 @@ export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
         userUid: uid,
         userX: x,
         userY: y
-      }
+    }
 
-      return await axios.post(`${url}survey`, data)
+        return await axios.post(`${url}survey`, data)
     }
 
 

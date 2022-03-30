@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/DetailReview.module.css";
+import ReactStars from "react-rating-stars-component";
 import CommentCard from "../Common/CommentCard";
 import { campingBoardMore, articleDelete, commentSearch, sendComment } from "../../function/axios";
 
 function Detailreview(props) {
 
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-    };
-
     const submitSign = () => {
         props.propFunction("수정")
+        props.propData(datas.boardId)
     }
 
     const submitSign2 = () => {
@@ -21,16 +19,20 @@ function Detailreview(props) {
     // 게시글 상세정보 받아오기
     const [datas, setDatas] = useState([]);
     const [pic, setPic] = useState([]);
+
     useEffect(() => {
-        campingBoardMore(props.datas).then((res) => setDatas(res.data.board));
+        campingBoardMore(props.datas).then((res) => {
+            setDatas(res.data.board)
+        });
     }, [])
+
     useEffect(() => {
         campingBoardMore(props.datas).then((res) => setPic(res.data.board.files[0].filePath));
     }, [])
 
     // 게시글 삭제
     const deleteArticle = () => {
-        articleDelete(datas.boardId).then(() => location.reload())
+        articleDelete(datas.boardId);
     }
 
     // 댓글 조회
@@ -44,8 +46,6 @@ function Detailreview(props) {
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid"));
     }
-
-    // console.log(datas);
 
     return (
         <div>
@@ -70,8 +70,12 @@ function Detailreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{datas.service}</p>
                                 </Col>
-                                <Col xs={7}>
-                                    <img src="/star.png" style={{width: "70%"}}></img>
+                                <Col xs={7} style={{marginTop: "-3%"}}>
+                                    <ReactStars 
+                                        value={datas.service}
+                                        size={24}
+                                        activeColor="#ffd700"
+                                    />
                                 </Col>
                             </Row>
                             <Row style={{width: "300px"}}>
@@ -81,8 +85,12 @@ function Detailreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{datas.environment}</p>
                                 </Col>
-                                <Col xs={7}>
-                                    <img src="/star.png" style={{width: "70%"}}></img>
+                                <Col xs={7} style={{marginTop: "-3%"}}>
+                                    <ReactStars
+                                        value={datas.environment}
+                                        size={24}
+                                        activeColor="#ffd700"
+                                    />
                                 </Col>
                             </Row>
                             <Row style={{width: "300px"}}>
@@ -92,8 +100,12 @@ function Detailreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{datas.facility}</p>
                                 </Col>
-                                <Col xs={7}>
-                                    <img src="/star.png" style={{width: "70%"}}></img>
+                                <Col xs={7} style={{marginTop: "-3%"}}>
+                                    <ReactStars
+                                        value={datas.facility}
+                                        size={24}
+                                        activeColor="#ffd700"
+                                    />
                                 </Col>
                             </Row>
                         </Col>
@@ -124,7 +136,7 @@ function Detailreview(props) {
                 </div>
                 <hr />
                 {
-                    dummy !== null ?
+                    dummy !== undefined ?
                         (
                             <>
                                 <div className={styles.detailreview_comment}>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import { Container, Nav } from 'react-bootstrap';
-import CampingExplain from '../../components/CampingPlace/[campingExplain].js';
-import CampingIntro from '../../components/CampingPlace/[campingIntro].js';
-import CampingMap from '../../components/CampingPlace/[campingMap].js';
-import CampingReview from '../../components/CampingPlace/[campingReview].js';
+import CampingExplain from '../../components/CampingPlace/CampingExplain.js';
+import CampingIntro from '../../components/CampingPlace/CampingIntro.js';
+import CampingMap from '../../components/CampingPlace/CampingMap.js';
+import CampingReview from '../../components/CampingPlace/CampingReview.js';
 import CampingUse from '../../components/CampingPlace/CampingUse.js';
 import styles from "../../styles/CampingPlace/CampingPlace.module.css";
 import { receiveCamping_in, receiveCamping_out } from "../../function/axios";

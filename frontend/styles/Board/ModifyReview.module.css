@@ -27,7 +27,7 @@
 .modifyreview_div {
     padding: 3%;
     background: darkseagreen;
-    height: 200px;
+    height: 240px;
 }
 
 .modifyreview_buttons {
@@ -38,4 +38,22 @@
 .modifyreview_button {
     margin-left: 2%;
     width: 8%;
+}
+
+.modifyreview_title2 {
+    margin-top: 3%;
+    font-weight: bold;
+    color: green;
+}
+
+.modifyreview_input {
+    width: 100%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.modifyreview_textarea {
+    padding: 1%;
+    width: 100%;
+    height: 500px;
 }

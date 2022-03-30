@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, Row, Tab } from 'react-bootstrap';
 import styles from "../../styles/Board/DetailReview.module.css";
 import CommentCard from "../Common/CommentCard";
-import { campingBoardMore, commentSearch, sendComment } from "../../function/axios";
+import { campingBoardMore, commentSearch, sendComment, articleDelete } from "../../function/axios";
 
 function Detailreview(props) {
 
@@ -28,12 +28,16 @@ function Detailreview(props) {
         commentSearch(props.datas).then((res) => setDummy(res.data.comment));
     }, [])
 
+    // 게시글 삭제
+    const deleteArticle = () => {
+        articleDelete(datas.boardId);
+    }
+
     // 댓글 작성
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid"));
     }
 
-    console.log(dummy);
     
     return (
         <div>
@@ -64,7 +68,7 @@ function Detailreview(props) {
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                                 <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>
-                                <Button variant="success" className={styles.detailreview_button2}>삭제</Button>
+                                <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
                             </Row>
                         </Col>
                     </Row>
