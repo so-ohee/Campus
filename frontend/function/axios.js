@@ -146,7 +146,7 @@ export async function modifyArticle(dataDto, files) {
             'Content-Type': 'multipart/form-data',
         },
     }).then((res) => {
-        console.log("게시글 작성 완료");
+        console.log("게시글 수정 완료");
         document.location.href = "/board";
     });
 }

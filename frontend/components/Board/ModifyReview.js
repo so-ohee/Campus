@@ -43,22 +43,24 @@ function Modifyreview(props) {
             "category": "후기",
             "title": title,
             "content": content,
-            "campingId": props.datas,
+            "campingId": campingId,
             "environment": environment,
             "facility": facility,
             "service": service,
         }
         setDataDto(newform);
-    }, [campingId, title, content, environment, facility, service])
+        setFiles(datas.files);
+    }, [campingId, title, content, environment, facility, service, files])
     
     useEffect(() => {
         campingBoardMore(props.datas).then((res) => {
             setDatas(res.data.board)
+            setCampingId(res.data.board.boardId)
         });
     }, [])
 
-    // console.log(props.datas, title, content, environment, facility, service);
-    console.log(datas)
+    // console.log(campingId, title, content, environment, facility, service, files);
+    console.log(files)
 
     return (
         <div>

@@ -30,7 +30,7 @@ function Writereview(props) {
     };
 
     const submitSign = () => {
-        props.propFunction("기본")
+        document.location.href = "/board";
     }
 
     const onChangeImg = async (e) => {
@@ -63,7 +63,7 @@ function Writereview(props) {
         setDataDto(newform);
     }, [campingId, title, content, environment, facility, service])
     
-    console.log(campingId)
+    console.log(files);
     
     return (
         <div>
