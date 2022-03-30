@@ -146,7 +146,7 @@ def survey(uid):
     campings = Camping.objects.filter(q).order_by('-blog_cnt')
 
     # map_x, map_y
-    distance_check = [0, 60, 120, 1000]
+    distance_check = [0, 60, 150, 1000]
     user_location = (survey.user_x, survey.user_y)
     campings_check = []
     for camping in campings:
@@ -179,7 +179,7 @@ def CBF(campingId):
 
 
 @api_view(('GET',))
-def search(request):
+def filter(request):
 
     q = Q()
 
