@@ -13,7 +13,7 @@ function Filter() {
   const [page, setPage] = useState('')
   const [totalPage, setTotalPage] = useState('')
   const [pageList, setPageList] = useState([])
-  const url = 'http://j6c103.p.ssafy.io:8000/api'
+  const url = 'https://j6c103.p.ssafy.io/django/api'
   const query = router.asPath.substring(0,router.asPath.lastIndexOf('=')+1)
 
 
