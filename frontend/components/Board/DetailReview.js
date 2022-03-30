@@ -20,8 +20,12 @@ function Detailreview(props) {
 
     // 게시글 상세정보 받아오기
     const [datas, setDatas] = useState([]);
+    const [pic, setPic] = useState([]);
     useEffect(() => {
         campingBoardMore(props.datas).then((res) => setDatas(res.data.board));
+    }, [])
+    useEffect(() => {
+        campingBoardMore(props.datas).then((res) => setPic(res.data.board.files[0].filePath));
     }, [])
 
     // 게시글 삭제
@@ -31,11 +35,12 @@ function Detailreview(props) {
 
     // 댓글 조회
     const [dummy, setDummy] = useState([]);
+    
     useEffect(() => {
         commentSearch(props.datas).then((res) => setDummy(res.data.comment));
     }, [])
-
-    console.log(datas);
+    
+    // console.log(datas);
 
     return (
         <div>
@@ -106,7 +111,7 @@ function Detailreview(props) {
                 </div>
                 
                 <div style={{textAlign: "-webkit-center", marginTop: "2%", marginBottom: "2%"}}>
-                    <img src={datas.files[0].filePath} style={{width: "500px", height: "350px"}} />
+                    <img src={pic} style={{width: "500px", height: "350px"}} />
                 </div>
 
                 <div className={styles.detailreview_detail}>
