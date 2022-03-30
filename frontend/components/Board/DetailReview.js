@@ -45,7 +45,7 @@ function Detailreview(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid"));
     }
 
-    console.log(datas);
+    // console.log(datas);
 
     return (
         <div>

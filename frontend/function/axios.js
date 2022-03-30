@@ -124,6 +124,25 @@ export const sendComment = async (boardId, comment, userUid) => {
 };
 
 // 댓글 수정
+export const modifyComment = async ( comment, commentId ) => {
+    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
+
+    let data = {
+        comment: comment,
+        commentId: commentId,
+    }
+    axios
+    .put(url2,  JSON.stringify(data), {
+        headers: {
+            "Content-Type": `application/json`,
+        },
+        proxy: url2
+        })
+        .then((res) => {
+            console.log("댓글 수정 완료");
+        }
+    );
+};
 
 // 댓글 삭제
 export const commentDelete = async (commentId) => {
