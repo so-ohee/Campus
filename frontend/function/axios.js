@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const url = "http://j6c103.p.ssafy.io:8080/";
+const url = "https://j6c103.p.ssafy.io/api/";
 
 // ************************************ 회원 기능 ************************************
 // 로그인 (회원 정보 DB에 저징)
 export const sendUserUid = async (userUid, displayName, photoURL) => {
-    const url2 = "http://j6c103.p.ssafy.io:8080/user";
+    const url2 = "https://j6c103.p.ssafy.io/api/user";
 
     let data = {
         name: displayName,
@@ -34,7 +34,7 @@ export async function bringUser(userUid) {
 // 프로필 사진 변경
 export async function changePic(userUid, formData) {
     console.log(formData);
-    const url2 = "http://j6c103.p.ssafy.io:8080/user/";
+    const url2 = "https://j6c103.p.ssafy.io/api/user/";
 
     await axios({
         method: 'put',
@@ -49,7 +49,7 @@ export async function changePic(userUid, formData) {
 // 아이디 변경
 export async function changeProfileName(name, userUid) {
 
-    const url2 = url + "http://j6c103.p.ssafy.io:8080/user/";
+    const url2 = url + "https://j6c103.p.ssafy.io/api/user/";
 
     let data = {
         name: name,
@@ -92,7 +92,7 @@ export const campingBoardMore = async (boardId) => {
 
 // 게시글 작성 (후기)
 export const sendArticle = async (userUid, category, title, content, campingId, environment, facility, service) => {
-    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
+    const url2 = "https://j6c103.p.ssafy.io/api/comment";
 
     let data = {
         userUid: userUid,
@@ -119,7 +119,7 @@ export const sendArticle = async (userUid, category, title, content, campingId, 
 
 // 게시글 작성 (자유, QnA)
 export const sendArticle2 = async (userUid, category, title, content, postfiles ) => {
-    const url2 = "http://j6c103.p.ssafy.io:8080/board";
+    const url2 = "https://j6c103.p.ssafy.io/api/board";
 
     let data = {
         userUid: userUid,
@@ -159,7 +159,7 @@ export const commentSearch = async (boardId) => {
 
 // 댓글 작성
 export const sendComment = async (boardId, comment, userUid) => {
-    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
+    const url2 = "https://j6c103.p.ssafy.io/api/comment";
 
     let data = {
         boardId: boardId,
@@ -182,7 +182,7 @@ export const sendComment = async (boardId, comment, userUid) => {
 
 // 댓글 수정
 export const modifyComment = async ( comment, commentId ) => {
-    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
+    const url2 = "https://j6c103.p.ssafy.io/api/comment";
 
     let data = {
         comment: comment,
