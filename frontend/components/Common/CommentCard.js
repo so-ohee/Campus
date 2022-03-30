@@ -10,7 +10,6 @@ function commentcard(params) {
         // console.log(commentId)
         commentDelete(commentId);
     }
-    console.log(params)
 
     return (
         <>
