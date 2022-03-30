@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Tab, Tabs } from 'react-bootstrap';
 import styles from "../styles/Search/Search.module.css";
 import AreaSearch from '../components/Search/AreaSearch.js';
@@ -6,6 +6,12 @@ import FliterSearch from '../components/Search/FliterSearch.js';
 
 function search() {
 
+    const [page, setPage] = useState("");
+    // 새로고침 또는 페이진 전환 시 초기 위치
+    useEffect(() => {
+        window.scrollTo(0, 500);
+    }, [page]);
+    
     return (
         
         <div>

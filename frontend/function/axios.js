@@ -102,8 +102,47 @@ export const commentSearch = async (boardId) => {
 }
 
 // 댓글 작성
+export const sendComment = async (boardId, comment, userUid) => {
+    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
+
+    let data = {
+        boardId: boardId,
+        comment: comment,
+        userUid: userUid,
+    }
+    axios
+    .post(url2,  JSON.stringify(data), {
+        headers: {
+            "Content-Type": `application/json`,
+        },
+        proxy: url2
+        })
+        .then((res) => {
+            console.log("댓글 작성 완료");
+        }
+    );
+};
 
 // 댓글 수정
+export const modifyComment = async ( comment, commentId ) => {
+    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
+
+    let data = {
+        comment: comment,
+        commentId: commentId,
+    }
+    axios
+    .put(url2,  JSON.stringify(data), {
+        headers: {
+            "Content-Type": `application/json`,
+        },
+        proxy: url2
+        })
+        .then((res) => {
+            console.log("댓글 수정 완료");
+        }
+    );
+};
 
 // 댓글 삭제
 export const commentDelete = async (commentId) => {
@@ -129,8 +168,6 @@ export const viewBoard = async (campingId) => {
 
 // 북마크
 export const BookMark = async (campingId, userUid) => {
-    // console.log(campingId);
-    // console.log(userUid);
     return await axios.get(`${url}`+`bookmark?campingId=${campingId}&userUid=${userUid}`)
 }
 
