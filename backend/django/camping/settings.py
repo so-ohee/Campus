@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['j6c103.p.ssafy.io',
                     '127.0.0.1',
+                    'localhost',
                 ]
 
 
