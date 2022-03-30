@@ -216,6 +216,7 @@ def filter(request):
     # animal
     animal = request.GET.get('animal')
     q4 = Q()
+    print(animal,'-----')
     if animal == None:
         pass
     elif int(animal) == 0:

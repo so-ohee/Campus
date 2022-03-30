@@ -69,12 +69,12 @@ function Filtersearch() {
         }else{
             const Q3 = ''
         }
-        if (q4.length !== ''){
+        if (q4 !== ''){
             const Q4 = '&animal=' + q4
         }else{
             const Q4 = ''
         }
-        if (q5.length !== ''){
+        if (q5 !== ''){
             const Q5 = '&order=' + q5
         }else{
             const Q5 = ''

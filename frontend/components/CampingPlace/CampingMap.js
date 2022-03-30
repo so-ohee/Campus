@@ -88,7 +88,7 @@ function CampingMap(props) {
     useEffect(() => {
       axios({
         method: 'get',
-        url: `https://dapi.kakao.com/v2/local/search/category.json?category_group_code=MT1&page=1&size=15&sort=distance&x=${x}&y=${y}&radius=10000`,
+        url: `https://dapi.kakao.com/v2/local/search/category.json?category_group_code=MT1&page=1&size=15&sort=distance&x=${datas1}&y=${datas2}&radius=10000`,
         headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
       })
         .then((res) => {
