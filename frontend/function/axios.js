@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const url = "http://localhost:8080/";
+const url = "http://j6c103.p.ssafy.io:8080/";
 
 // ************************************ 회원 기능 ************************************
 // 로그인 (회원 정보 DB에 저징)
 export const sendUserUid = async (userUid, displayName, photoURL) => {
-    const url2 = "http://localhost:8080/user";
+    const url2 = "http://j6c103.p.ssafy.io:8080/user";
 
     let data = {
         name: displayName,
@@ -34,7 +34,7 @@ export async function bringUser(userUid) {
 // 프로필 사진 변경
 export async function changePic(userUid, formData) {
     console.log(formData);
-    const url2 = "http://localhost:8080/user/";
+    const url2 = "http://j6c103.p.ssafy.io:8080/user/";
 
     await axios({
         method: 'put',
@@ -49,7 +49,7 @@ export async function changePic(userUid, formData) {
 // 아이디 변경
 export async function changeProfileName(name, userUid) {
 
-    const url2 = url + "http://localhost:8080/user/";
+    const url2 = url + "http://j6c103.p.ssafy.io:8080/user/";
 
     let data = {
         name: name,
@@ -90,10 +90,66 @@ export const campingBoardMore = async (boardId) => {
     return await axios.get(`${url}`+`board`+ `/` + `${boardId}`)
 }
 
+// 게시글 작성 (후기)
+export const sendArticle = async (userUid, category, title, content, campingId, environment, facility, service) => {
+    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
+
+    let data = {
+        userUid: userUid,
+        category: category,
+        title: title,
+        content: content,
+        campingId: campingId,
+        environment: environment,
+        facility: facility,
+        service: service,
+    }
+    axios
+    .post(url2,  JSON.stringify(data), {
+        headers: {
+            "Content-Type": `application/json`,
+        },
+        proxy: url2
+        })
+        .then((res) => {
+            console.log("댓글 작성 완료");
+        }
+    );
+};
+
+// 게시글 작성 (자유, QnA)
+export const sendArticle2 = async (userUid, category, title, content, postfiles ) => {
+    const url2 = "http://j6c103.p.ssafy.io:8080/board";
+
+    let data = {
+        userUid: userUid,
+        category: category,
+        title: title,
+        content: content,
+        campingId: null,
+        environment: null,
+        facility: null,
+        service: null,
+    }
+    axios
+    .post(url2,  JSON.stringify(data), {
+        headers: {
+            "Content-Type": `application/json`,
+        },
+        proxy: url2
+        }, postfiles)
+        .then((res) => {
+            console.log("댓글 작성 완료");
+        }
+    );
+};
+
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
     axios.delete(`${url}`+`board` + `/` + `${boardId}`)
 }
+
+
 
 // ************************************ 댓글 기능 ************************************
 // 댓글 조회
@@ -103,7 +159,7 @@ export const commentSearch = async (boardId) => {
 
 // 댓글 작성
 export const sendComment = async (boardId, comment, userUid) => {
-    const url2 = "http://localhost:8080/comment";
+    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
 
     let data = {
         boardId: boardId,
@@ -123,9 +179,10 @@ export const sendComment = async (boardId, comment, userUid) => {
     );
 };
 
+
 // 댓글 수정
 export const modifyComment = async ( comment, commentId ) => {
-    const url2 = "http://localhost:8080/comment";
+    const url2 = "http://j6c103.p.ssafy.io:8080/comment";
 
     let data = {
         comment: comment,
