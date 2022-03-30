@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/DetailReview.module.css";
 import CommentCard from "../Common/CommentCard";
-import { campingBoardMore, articleDelete, commentSearch } from "../../function/axios";
+import { campingBoardMore, articleDelete, commentSearch, sendComment } from "../../function/axios";
 
 function Detailreview(props) {
 
@@ -20,8 +20,12 @@ function Detailreview(props) {
 
     // 게시글 상세정보 받아오기
     const [datas, setDatas] = useState([]);
+    const [pic, setPic] = useState([]);
     useEffect(() => {
         campingBoardMore(props.datas).then((res) => setDatas(res.data.board));
+    }, [])
+    useEffect(() => {
+        campingBoardMore(props.datas).then((res) => setPic(res.data.board.files[0].filePath));
     }, [])
 
     // 게시글 삭제
@@ -31,9 +35,15 @@ function Detailreview(props) {
 
     // 댓글 조회
     const [dummy, setDummy] = useState([]);
+    
     useEffect(() => {
         commentSearch(props.datas).then((res) => setDummy(res.data.comment));
     }, [])
+    
+    // 댓글 작성
+    function writeRecomment(props) {
+        sendComment(datas.boardId, props, localStorage.getItem("userUid"));
+    }
 
     console.log(datas);
 
@@ -106,7 +116,7 @@ function Detailreview(props) {
                 </div>
                 
                 <div style={{textAlign: "-webkit-center", marginTop: "2%", marginBottom: "2%"}}>
-                    <img src={datas.files[0].filePath} style={{width: "500px", height: "350px"}} />
+                    <img src={pic} style={{width: "500px", height: "350px"}} />
                 </div>
 
                 <div className={styles.detailreview_detail}>
@@ -114,7 +124,7 @@ function Detailreview(props) {
                 </div>
                 <hr />
                 {
-                    dummy === null ?
+                    dummy !== null ?
                         (
                             <>
                                 <div className={styles.detailreview_comment}>
@@ -143,6 +153,19 @@ function Detailreview(props) {
                             </div>
                         )
                 }
+
+                <div style={{height: "100px"}}>
+                    <input
+                        className={styles.detailreview_input}
+                        type="text"
+                        placeholder='댓글을 입력하세요...'
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                writeRecomment(e.target.value);
+                            }
+                        }}
+                    />
+                </div>
             </Container>
         </div>
     );

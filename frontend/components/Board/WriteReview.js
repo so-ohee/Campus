@@ -47,7 +47,7 @@ function Writereview(props) {
 
             {/* 캠핑장 평점 */}
             <div style={{marginBottom: "5%"}}>
-                <h5 className={styles.writereview_campingname}>캠핑장 이름</h5>
+                <h5 className={styles.writereview_campingname}>캠핑장 평가</h5>
                 <Row>
                     <Col>
                         <Row>
