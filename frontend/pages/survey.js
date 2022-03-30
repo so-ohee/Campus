@@ -120,7 +120,7 @@ function survey() {
                         </ToggleButton>
                         ))}
                     </Row>
-                    {err && <span>※ 현재 위치를 확인할 수 없습니다. url창 왼쪽 느낌표를 눌러 확인해주세요.</span>} 
+                    {err && <span>※ 현재 위치를 확인할 수 없습니다. url창 왼쪽을 눌러 확인해주세요.</span>} 
                 </div>
                 <div className={styles.survey_div2}>
                     <Row>

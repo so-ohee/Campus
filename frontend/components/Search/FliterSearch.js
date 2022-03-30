@@ -7,6 +7,10 @@ import { useRouter } from 'next/router'
 function Filtersearch() {
     const router = useRouter()
 
+    const [lat, setLat] = useState(35.2040949)
+    const [long, setLong] = useState(126.8071876)
+    const [err, setErr] = useState(false)
+
     const [q1, setQ1] = useState([])
     const [q2, setQ2] = useState([])
     const [q3, setQ3] = useState([])
@@ -79,10 +83,37 @@ function Filtersearch() {
         }else{
             const Q5 = ''
         }
+        const Q6 = `&x=${long}&y=${lat}`
 
-        const url = ['/filter?', Q1, Q2, Q3, Q4, Q5, '&page=1'].join('')
+        const url = ['/filter?', Q1, Q2, Q3, Q4, Q5, Q6, '&page=1'].join('')
         router.push(url)
     }
+
+    useEffect(() => {
+        if (navigator.geolocation) { // GPS를 지원하면
+            navigator.geolocation.getCurrentPosition(function(position) {
+                setLat(position.coords.latitude)
+                setLong(position.coords.longitude)
+                // console.log('위도 : ' + lat + ' 경도 : ' + long)
+            }, function(error) {
+                console.error(error);
+                setErr(true)
+            }, {
+                enableHighAccuracy: false,
+                maximumAge: 0,
+                timeout: Infinity
+            });
+        }
+    }, []);
+
+    const checkDis = (e) => {
+        if (e === '1' && err){
+            alert('현재 위치를 확인할 수 없습니다. url창 왼쪽을 눌러 확인해주세요.')
+        }else{
+            setQ5(e)
+        }
+    }
+
 
     return (
         <Container className={styles.filtersearch_container}>
@@ -183,7 +214,7 @@ function Filtersearch() {
                         name="radio5"
                         value={radio.value}
                         checked={q5 === radio.value}
-                        onChange={(e) => setQ5(e.currentTarget.value)}
+                        onChange={(e) => checkDis(e.currentTarget.value)}
                     >
                         {radio.name}
                     </ToggleButton>
