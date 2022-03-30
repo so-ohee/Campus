@@ -3,33 +3,16 @@ import { Container, Col, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingReview.module.css";
 import { viewBoard } from "../../function/axios";
 
-// const dummy = [
-//     {
-//         name: "박주한",
-//         review: "리뷰 1입니다",
-//         date: "2022.03.09",
-//     },
-//     {
-//         name: "박소희",
-//         review: "리뷰 2입니다",
-//         date: "2022.03.08",
-//     },
-//     {
-//         name: "최다운",
-//         review: "리뷰 3입니다",
-//         date: "2022.03.10",
-//     },
-// ];
-
 function CampingReview(props) {
 
     // 댓글 조회
     const [dummy, setDummy] = useState([]);
+
     useEffect(() => {
-        viewBoard(props.campingId.campingId).then((res) => setDummy(res.data.board));
+        viewBoard(props.props.campingId).then((res) => setDummy(res.data.board));
     }, [])
 
-    console.log(dummy);
+    console.log(props);
 
     return (
         <>

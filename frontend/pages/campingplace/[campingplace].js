@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import { Container, Nav } from 'react-bootstrap';
-import CampingExplain from '../../components/CampingPlace/CampingExplain.js';
-import CampingIntro from '../../components/CampingPlace/CampingIntro.js';
-import CampingMap from '../../components/CampingPlace/CampingMap.js';
-import CampingReview from '../../components/CampingPlace/CampingReview.js';
+import CampingExplain from '../../components/CampingPlace/[campingExplain].js';
+import CampingIntro from '../../components/CampingPlace/[campingIntro].js';
+import CampingMap from '../../components/CampingPlace/[campingMap].js';
+import CampingReview from '../../components/CampingPlace/[campingReview].js';
 import CampingUse from '../../components/CampingPlace/CampingUse.js';
 import styles from "../../styles/CampingPlace/CampingPlace.module.css";
 import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 
-function Campingplace(props) {
+function Campingplace() {
 
   const [selected, setSelected] = useState("1");
+  const [campid, setCampid] = useState("");
   const [datas, setDatas] = useState("");
   const router = useRouter();
 
-  useEffect(() => {
-    receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
-  }, [])
+  // useEffect(() => {
+  //   setCampid(router.query.campingplace);
+  // }, [])
 
-  // console.log(window.location.pathname.replace("/campingplace/", ""))
+  useEffect(() => {
+      localStorage.setItem("campid", router.query.campingplace);
+      receiveCamping_out(localStorage.getItem("campid")).then((res) => setDatas(res.data.campsite));
+  }, [])
 
   return (
     
@@ -45,16 +49,16 @@ function Campingplace(props) {
           </div> 
         <div>
           {
-            selected === "1" && <CampingIntro campingId={datas} />
+            selected === "1" && <CampingIntro props={datas} />
           }
           {
-            selected === "2" && <CampingMap campingId={datas} />
+            selected === "2" && <CampingMap props={datas} />
           }
           {
-            selected === "3" && <CampingReview campingId={datas} />
+            selected === "3" && <CampingReview props={datas} />
           }
           {
-            selected === "4" && <CampingUse campingId={datas} />
+            selected === "4" && <CampingUse props={datas} />
           }
         </div>
       </Container>

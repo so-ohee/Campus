@@ -11,15 +11,13 @@ function CampingMap(props) {
     const [datas3, setDatas3] = useState("");
     const router = useRouter();
 
+    
     useEffect(() => {
-      receiveCamping_out(router.query.campingplace).then((res) => {
-        setDatas1(res.data.campsite.mapX);
-        setDatas2(res.data.campsite.mapY);
-        setDatas3(res.data.campsite.facltNm);
-        // console.log(res.data)
-      });
+        setDatas1(props.props.mapX);
+        setDatas2(props.props.mapY);
+        setDatas3(props.props.facltNm);
     }, [])
-  
+
     const x = datas1
     const y = datas2
     const campingName = datas3

@@ -11,9 +11,9 @@ function CampingExplain(props) {
     const [visit, setVisit] = useState("");
     const router = useRouter();
 
-    useEffect(() => {
-        receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
-    }, [])
+    // useEffect(() => {
+    //     receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
+    // }, [])
 
     function PressBookMark() {
         BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => setBookmark(res.data.bookmark));
@@ -22,8 +22,6 @@ function CampingExplain(props) {
     function PressVisit() {
         VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => setVisit(res.data.visit));
     }
-
-    console.log(visit);
         
     return (
         <>
@@ -31,22 +29,22 @@ function CampingExplain(props) {
                 <Row>
                     {/* 사진 */}
                     <div className={styles.capmingplace_main_pic_div}>
-                        <img className={styles.capmingplace_main_pic} src={datas.firstImageUrl} />
+                        <img className={styles.capmingplace_main_pic} src={props.props.firstImageUrl} />
                     </div>
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
                     <div className={styles.capmingplace_explain}>
                         <Row>
                             <Col xs={8}>
-                                <h2 style={{fontWeight: "bold"}}>{datas.facltNm}</h2>
-                                <p>{datas.addr1} {datas.addr2}</p>
-                                <p>{datas.tel}</p>
+                                <h2 style={{fontWeight: "bold"}}>{props.props.facltNm}</h2>
+                                <p>{props.props.addr1} {props.props.addr2}</p>
+                                <p>{props.props.tel}</p>
                                 <p style={{color: "lightgrey"}}>
                                     {/* {dummy[0].hashtag.map((element, index) => {
                                         return <span key={index}>#{element} </span>;
                                     })} */}
                                     {
-                                        datas.themaEnvrnCl !==null ? <a>#{datas.themaEnvrnCl}</a> : null
+                                        props.props.themaEnvrnCl !==null ? <a>#{props.props.themaEnvrnCl}</a> : null
                                     }
                                 </p>
                             </Col>
