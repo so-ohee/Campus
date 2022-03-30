@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/WriteReview.module.css";
-import { sendArticle2 } from "../../function/axios";
+import { sendArticle } from "../../function/axios";
 
 function Writeqna(props) {
 
@@ -23,7 +23,7 @@ function Writeqna(props) {
     }
     
     const modify = () => {
-        sendArticle2(dataDto, files);
+        sendArticle(dataDto, files);
     }
 
     useEffect(() => {

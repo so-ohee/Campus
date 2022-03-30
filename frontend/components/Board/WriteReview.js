@@ -1,48 +1,108 @@
-import React, { useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Dropdown, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/WriteReview.module.css";
 import ReactStars from "react-rating-stars-component";
+import { searchCamp, sendArticle } from "../../function/axios";
 
 function Writereview(props) {
 
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
+    const [campingId, setCampingId] = useState("");
+    const [name, setName] = useState(null);
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [files, setFiles] = useState(null);
+    const [service, setService] = useState(null);
+    const [environment, setEnvironment] = useState(null);
+    const [facility, setFacility] = useState("");
+    const [dataDto, setDataDto] = useState({});
+    const [dummy, setDummy] = useState([]);
+
+    const ratingChanged1 = (newRating) => {
+        setService(newRating);
+    };
+
+    const ratingChanged2 = (newRating) => {
+        setEnvironment(newRating);
+    };
+
+    const ratingChanged3 = (newRating) => {
+        setFacility(newRating);
     };
 
     const submitSign = () => {
         props.propFunction("기본")
     }
 
-    const [postfiles, setPostfiles] = useState({
-        file: [],
-        previewURL: "",
-    });
-
-    const uploadFile = (e) => {
-        e.stopPropagation();
-        let reader = new FileReader();
-        let file = e.target.files[0];
-        const filesInArr = Array.from(e.target.files);
-    
-        reader.onloadend = () => {
-            setPostfiles({
-                file: filesInArr,
-                previewURL: reader.result,
-            });
-        };
-        if (file) {
-            reader.readAsDataURL(file);
+    const onChangeImg = async (e) => {
+        e.preventDefault();
+        if (e.target.files) {
+            const uploadFile = e.target.files;
+            setFiles(uploadFile);
         }
-    };
+    }
+
+    const modify = () => {
+        sendArticle(dataDto, files);
+    }
+
+    useEffect(() => {
+        searchCamp(name).then((res) => setDummy(res.data.campsite));
+    }, [name])
+
+    useEffect(() => {
+        const newform = {
+            "userUid": localStorage.getItem("userUid"),
+            "category": "리뷰",
+            "title": title,
+            "content": content,
+            "campingId": campingId,
+            "environment": environment,
+            "facility": facility,
+            "service": service,
+        }
+        setDataDto(newform);
+    }, [campingId, title, content, environment, facility, service])
+    
+    console.log(campingId)
     
     return (
         <div>
             <h1 className={styles.writereview_h1}>캠핑장 리뷰 작성</h1>
-
+            
             {/* 캠핑장 이름 */}
             <div style={{marginBottom: "5%"}}>
                 <h5 className={styles.writereview_campingname}>캠핑장 이름</h5>
-                <input className={styles.writereview_input} />
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        <input
+                            className={styles.writereview_input}
+                            type="text"
+                            value={name}
+                            placeholder='캠핑장 이름을 입력하세요...'
+                            onChange={(e) => setName(e.target.value)}
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                    searchCamp(e.target.value)
+                                        .then((res) => setCampingId(res.data.campsite[0].campingId))
+                                        .catch((err) => {
+                                            console.log("다시 검색해주세요");
+                                        });
+                                }
+                            }}
+                        />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu style={{ width: "41%" }}>
+                        {
+                            dummy.map((element, index) => {
+                                return (
+                                    <Row key={index}>
+                                        <Dropdown.Item onClick={() => {setName(element.facltNm), setCampingId(element.campingId)}}>{element.facltNm}</Dropdown.Item>
+                                    </Row>
+                                )
+                            })
+                        }
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
 
             {/* 캠핑장 평점 */}
@@ -57,7 +117,7 @@ function Writereview(props) {
                             <Col xs={8}>
                                 <ReactStars
                                 count={5}
-                                onChange={ratingChanged}
+                                onChange={ratingChanged1}
                                 size={24}
                                 activeColor="#ffd700"
                             />
@@ -73,7 +133,7 @@ function Writereview(props) {
                             <Col xs={8}>
                                 <ReactStars
                                 count={5}
-                                onChange={ratingChanged}
+                                onChange={ratingChanged2}
                                 size={24}
                                 activeColor="#ffd700"
                             />
@@ -89,7 +149,7 @@ function Writereview(props) {
                             <Col xs={8}>
                                 <ReactStars
                                 count={5}
-                                onChange={ratingChanged}
+                                onChange={ratingChanged3}
                                 size={24}
                                 activeColor="#ffd700"
                             />
@@ -99,34 +159,36 @@ function Writereview(props) {
                 </Row>
             </div>
 
-            {/* 게시글 제목 */}
+            {/* 사진 업로드 */}
             <div style={{marginBottom: "5%"}}>
                 <h5 className={styles.writereview_title}>사진 업로드</h5>
-                {/* <Form.Group controlId="formFileSm" className="mb-3">
-                    <Form.Control nultiple="multiple" type="file" size="sm" />
-                </Form.Group> */}
-                <input
-                id="upload-file"
-                type="file"
-                multiple
-                onChange={uploadFile}
-                ></input>
+                <input type="file" id="profile-upload" accept="image/*" onChange={onChangeImg}/>
             </div>
 
             {/* 게시글 제목 */}
             <div style={{marginBottom: "2%"}}>
                 <h5 className={styles.writereview_title}>제목</h5>
-                <input className={styles.writereview_input2} />
+                <input
+                    className={styles.writereview_input2}
+                    type="text"
+                    placeholder='제목을 입력하세요...'
+                    onChange={(e) => setTitle(e.target.value)}
+                />
             </div>
 
             {/* 게시글 입력창 */}
             <div style={{marginBottom: "2%"}}>
-                <textarea className={styles.writereview_textarea} />
+                <textarea
+                    className={styles.writereview_textarea}
+                    type="text"
+                    placeholder='내용을 입력하세요...'
+                    onChange={(e) => setContent(e.target.value)}
+                />
             </div>
 
             <div>
                 <Row className={styles.writereview_buttons}>
-                    <Button variant="success" className={styles.writereview_button}>등록</Button>
+                    <Button variant="success" className={styles.writereview_button} onClick={modify}>작성</Button>
                     <Button variant="success" className={styles.writereview_button} onClick={submitSign}>뒤로가기</Button>
                 </Row>
             </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/WriteReview.module.css";
-import { sendArticle2 } from "../../function/axios";
+import { sendArticle } from "../../function/axios";
 
 function Writefree(props) {
 
@@ -23,7 +23,7 @@ function Writefree(props) {
     }
     
     const modify = () => {
-        sendArticle2(dataDto, files);
+        sendArticle(dataDto, files);
     }
 
     useEffect(() => {
@@ -44,7 +44,7 @@ function Writefree(props) {
         <div>
             <h1 className={styles.writereview_h1}>자유게시글 작성</h1>
 
-            {/* 게시글 제목 */}
+            {/* 사진 업로드 */}
             <div style={{marginBottom: "5%"}}>
                 <h5 className={styles.writereview_title}>사진 업로드</h5>
                 <input type="file" id="profile-upload" accept="image/*" onChange={onChangeImg}/>
