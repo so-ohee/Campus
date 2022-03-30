@@ -276,9 +276,7 @@ public class BoardServiceImpl implements BoardService {
         log.debug("BoardService userListBoard call");
 
         Page<Board> boards = boardRepository.findByUserUidAndDeleteState(userUid,0,PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
-        for(Board board : boards) {
-            System.out.println(board.getBoardId());
-        }
+
         return makeListBoard(boards);
     }
 
@@ -309,5 +307,15 @@ public class BoardServiceImpl implements BoardService {
         resultMap.put("board", list);
 
         return resultMap;
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> searchBoard(String word, int page) throws Exception {
+        log.debug("BoardService searchBoard call");
+
+        Page<Board> boards = boardRepository.findByDeleteStateAndTitleContainingIgnoreCaseOrContentContainingIgnoreCase(0, word, word, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
+
+        return makeListBoard(boards);
     }
 }
