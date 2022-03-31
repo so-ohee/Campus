@@ -22,19 +22,18 @@ function CampingExplain(props) {
     }
 
     console.log(props)
-    console.log(datas)
     
     return (
         <>
             <Container>
                 <Row>
                     {/* 사진 */}
-                    {/* <div className={styles.capmingplace_main_pic_div}>
-                        <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} />
-                    </div> */}
+                    <div className={styles.capmingplace_main_pic_div}>
+                        <img className={styles.capmingplace_main_pic} src={props.props.firstImageUrl} />
+                    </div>
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
-                    {/* <div className={styles.capmingplace_explain}>
+                    <div className={styles.capmingplace_explain}>
                         <Row>
                             <Col xs={8}>
                                 <h2 style={{fontWeight: "bold"}}>{props.props.facltNm}</h2>
@@ -77,7 +76,7 @@ function CampingExplain(props) {
                                 </Row>
                             </Col>
                         </Row>
-                    </div> */}
+                    </div>
                 </Row>
             </Container>
         </>
