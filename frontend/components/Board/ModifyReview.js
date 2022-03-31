@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import ReactStars from "react-rating-stars-component";
+import { Rating } from 'react-simple-star-rating'
 import styles from "../../styles/Board/ModifyReview.module.css";
 import { modifyArticle, campingBoardMore } from "../../function/axios";
 
@@ -18,15 +18,15 @@ function Modifyreview(props) {
     const [datas, setDatas] = useState([]);
 
     const ratingChanged1 = (newRating) => {
-        setService(newRating);
+        setService(newRating/20);
     };
 
     const ratingChanged2 = (newRating) => {
-        setEnvironment(newRating);
+        setEnvironment(newRating/20);
     };
 
     const ratingChanged3 = (newRating) => {
-        setFacility(newRating);
+        setFacility(newRating/20);
     };
 
     const submitSign = () => {
@@ -79,13 +79,12 @@ function Modifyreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{service}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        count={5}
-                                        value={datas.service}
-                                        onChange={ratingChanged1}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        onClick={ratingChanged1}
+                                        initialValue={datas.service}
+                                        ratingValue={service}
+                                        size={30}
                                     />
                                 </Col>
                             </Row>
@@ -96,13 +95,12 @@ function Modifyreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{environment}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        count={5}
-                                        value={datas.environment}
-                                        onChange={ratingChanged2}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        onClick={ratingChanged2}
+                                        initialValue={datas.environment}
+                                        ratingValue={environment}
+                                        size={30}
                                     />
                                 </Col>
                             </Row>
@@ -113,13 +111,12 @@ function Modifyreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{facility}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        count={5}
-                                        value={datas.facility}
-                                        onChange={ratingChanged3}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        onClick={ratingChanged3}
+                                        initialValue={datas.facility}
+                                        ratingValue={facility}
+                                        size={30}
                                     />
                                 </Col>
                             </Row>

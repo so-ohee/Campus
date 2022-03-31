@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/DetailReview.module.css";
-import ReactStars from "react-rating-stars-component";
+import { Rating } from 'react-simple-star-rating'
 import CommentCard from "../Common/CommentCard";
 import { campingBoardMore, articleDelete, commentSearch, sendComment } from "../../function/axios";
 
@@ -15,6 +15,7 @@ function Detailreview(props) {
     const submitSign2 = () => {
         props.propFunction("기본")
     }
+
 
     // 게시글 상세정보 받아오기
     const [datas, setDatas] = useState([]);
@@ -47,9 +48,12 @@ function Detailreview(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid"));
     }
 
+    // 별점 기능
+    const [rating, setRating] = useState(0); 
+
     return (
         <div>
-            <Container>
+            <Container>                
                 <div>
                     <Row className={styles.detailreview_buttons}>
                         <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>
@@ -70,11 +74,11 @@ function Detailreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{datas.service}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars 
-                                        value={datas.service}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        initialValue={datas.service}
+                                        size={30}
+                                        allowHover={false}
                                     />
                                 </Col>
                             </Row>
@@ -85,11 +89,11 @@ function Detailreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{datas.environment}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        value={datas.environment}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        initialValue={datas.environment}
+                                        size={30}
+                                        allowHover={false}
                                     />
                                 </Col>
                             </Row>
@@ -100,11 +104,12 @@ function Detailreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{datas.facility}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        value={datas.facility}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        initialValue={datas.facility}
+                                        size={30}
+                                        allowHover={false}
+                                        transition={false}
                                     />
                                 </Col>
                             </Row>
