@@ -7,7 +7,8 @@ import { searchCamp, sendArticle } from "../../function/axios";
 function Writereview(props) {
 
     const [campingId, setCampingId] = useState("");
-    const [name, setName] = useState(null);
+    const [name, setName] = useState("");
+    const [searchname, setSearchname] = useState(null);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [files, setFiles] = useState(null);
@@ -46,8 +47,8 @@ function Writereview(props) {
     }
 
     useEffect(() => {
-        searchCamp(name).then((res) => setDummy(res.data.campsite));
-    }, [name])
+        searchCamp(searchname).then((res) => setDummy(res.data.campsite));
+    }, [searchname])
 
     useEffect(() => {
         const newform = {
@@ -62,8 +63,6 @@ function Writereview(props) {
         }
         setDataDto(newform);
     }, [campingId, title, content, environment, facility, service])
-        
-    console.log(environment, facility, service);
 
     return (
         <div>
@@ -83,7 +82,7 @@ function Writereview(props) {
                             onKeyPress={(e) => {
                                 if (e.key === 'Enter') {
                                     searchCamp(e.target.value)
-                                        .then((res) => setCampingId(res.data.campsite[0].campingId))
+                                        .then((res) => {setSearchname(res.data.campsite[0].facltNm), setCampingId(res.data.campsite[0].campingId)})
                                         .catch((err) => {
                                             console.log("다시 검색해주세요");
                                         });
@@ -194,4 +193,3 @@ function Writereview(props) {
 }
 
 export default Writereview;
- 

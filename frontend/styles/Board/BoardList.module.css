@@ -8,11 +8,15 @@
 .boardlist_title_content {
     width: 99px;
     height: 37px;
-    margin-right: -0.9%;
-    padding-top: 0.6%;
+    padding-top: 0.4%;
     border: 2px solid grey;
     background: lightgrey;
     border-radius: 8%;
+}
+
+.boardlist_input {
+    width: 250px;
+    margin-right: 1%;
 }
 
 .boardlist_button {
