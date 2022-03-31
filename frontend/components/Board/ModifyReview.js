@@ -16,18 +16,6 @@ function Modifyreview(props) {
     const [dataDto, setDataDto] = useState({});
     const [datas, setDatas] = useState([]);
 
-    const ratingChanged1 = (newRating) => {
-        setService(newRating/20);
-    };
-
-    const ratingChanged2 = (newRating) => {
-        setEnvironment(newRating/20);
-    };
-
-    const ratingChanged3 = (newRating) => {
-        setFacility(newRating/20);
-    };
-
     const submitSign = () => {
         props.propFunction("상세")
     }
@@ -56,7 +44,6 @@ function Modifyreview(props) {
     useEffect(() => {
         campingBoardMore(props.datas.boardId).then((res) => {
             setDatas(res.data.board)
-            setCampingId(res.data.board.boardId)
         });
     }, [])
 
@@ -79,9 +66,9 @@ function Modifyreview(props) {
                                 </Col>
                                 <Col xs={7}>
                                     <Rating
-                                        onClick={ratingChanged1}
                                         initialValue={service}
                                         size={30}
+                                        allowHover={false}
                                     />
                                 </Col>
                             </Row>
@@ -94,9 +81,9 @@ function Modifyreview(props) {
                                 </Col>
                                 <Col xs={7}>
                                     <Rating
-                                        onClick={ratingChanged2}
                                         initialValue={environment}
                                         size={30}
+                                        allowHover={false}
                                     />
                                 </Col>
                             </Row>
@@ -109,9 +96,9 @@ function Modifyreview(props) {
                                 </Col>
                                 <Col xs={7}>
                                     <Rating
-                                        onClick={ratingChanged3}
                                         initialValue={facility}
                                         size={30}
+                                        allowHover={false}
                                     />
                                 </Col>
                             </Row>
