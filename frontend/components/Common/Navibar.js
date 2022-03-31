@@ -3,8 +3,11 @@ import { Container, Navbar, NavLink, NavDropdown } from "react-bootstrap";
 import Login from '../Firebase/Login';
 import styles from "../../styles/Common/Navibar.module.css";
 import { bringUser } from "../../function/axios";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 function Navibar() {
+  const router = useRouter()
   const [LoginmodalShow, LoginsetModalShow] = React.useState(false);
   const onLogOutClick = () => {
     localStorage.removeItem('userUid');
@@ -24,37 +27,52 @@ function Navibar() {
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
     }, [])
-  
+
+  const onBoard = () => {
+    router.push('/board')
+  }
+  const onSearch = () => {
+    router.push('/search')
+  }
+  const onNews = () => {
+    router.push('/news')
+  }
+  const onShopping = () => {
+    router.push('/shopping')
+  }
+
   return (
     <>
       <Navbar style={{backgroundColor: "white"}} expand="lg">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand style={{cursor:'pointer'}}>
+          <Link href="/">
             <img className={styles.navi_pic} src="../../logo.png" />
             {/* <img className={styles.navi_pic} src={process.env.NEXT_PUBLIC + "/logo.png" } /> */}
+            </Link>
           </Navbar.Brand>
           <div>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll" style={{ justifyContent: "right" }}>
-                <NavLink href="board">
+                <NavLink onClick={onBoard}>
                   <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "20%" }}>BOARD</p>
                 </NavLink>{" "}
               
                 <p style={{ marginTop: "3%" }}>/</p>
               
-                <NavLink href="search">
+                <NavLink onClick={onSearch}>
                   <p style={{ color: "black", fontWeight: "bold", width: "60px", marginTop: "22%" }}>SEARCH</p>
                 </NavLink>{" "}
               
                 <p style={{ marginTop: "3%" }}>/</p>
               
-                <NavLink href="news">
+                <NavLink onClick={onNews}>
                   <p style={{ color: "black", fontWeight: "bold", width: "45px", marginTop: "30%" }}>NEWS</p>
                 </NavLink>
               
                 <p style={{ marginTop: "3%" }}>/</p>
               
-                <NavLink href="shopping">
+                <NavLink onClick={onShopping}>
                   <p style={{ color: "black", fontWeight: "bold", width: "90px", marginTop: "20%" }}>SHOPPING</p>
                 </NavLink>
                   {

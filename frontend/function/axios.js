@@ -292,6 +292,10 @@ export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
     }
 
 
+export const isSurvey = async (uid) => {
+    return await axios.get(`${url}survey/${uid}`)
+}
+
 
 // ***************************** Django API *********************************************
 // 상세검색 결과
