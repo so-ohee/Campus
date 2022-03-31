@@ -1,77 +1,96 @@
-import { Container, Col, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import CampingCard from "../components/Common/CampingCard";
 import styles from "../styles/Recommend/Recommend.module.css";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import  { recommend1, recommend2 }  from "../function/axios";
 
-const dummy = [
-  {
-    title: "달천공원오토캠핑장",
-    address: "강원도 횡성군 갑천면 외갑천로 301",
-    hashtag: ["일출명소", "일몰명소", "봄꽃여행", "여름물놀이", "걷기길"],
-  },
-  {
-    title: "청풍호오토캠핑장",
-    address: "충청북도 제천시 청풍면 용곡길 211번길 2",
-    hashtag: ["짚라인", "체험형", "캠핑요리"],
-  },
-  {
-    title: "마음이 머무는 곳",
-    address: "강원도 화천군 사내면 포화로 653-76",
-    hashtag: ["아로마향초만들기", "천연염색", "캠핑요리"],
-  },
-];
 
-function Camp() {
+function Recommend() {
+  const router = useRouter()
+
+  const [campings1, setCampings1] = useState([])
+  const [campings2, setCampings2] = useState([])
+
+  useEffect(() => {
+    if (!localStorage.getItem("userUid")){
+      router.push('/')
+    }else{
+    recommend1(localStorage.getItem("userUid"))
+    .then((res) => {
+      console.log(res)
+      setCampings1(res.data.slice(0,6))
+    })
+    recommend2(localStorage.getItem("userUid"))
+    .then((res) => {
+      console.log(res)
+      setCampings2(res.data.slice(0,6))
+    })
+    }
+  }, []);
+
   return (
     <>
-      <Container>
-        <Row>
-          <Col style={{ textAlign: "center" }}>
-            <span>이 캠핑장 어떠신가요?</span>
-          </Col>
-        </Row>
-        <Row className="pt-5">
-          <Col sm className={styles.intro}>
-            <div className={styles.intro_background}>
-              <span className={styles.intro_text}>
-                더위를 식혀주는 계곡이 있는 캠핑장
-              </span>
-            </div>
-          </Col>
-          {dummy.map((element, index) => {
-            return (
-              <Col sm key={index}>
-                <CampingCard
-                  title={element.title}
-                  address={element.address}
-                  hashtag={element.hashtag}
-                />
-              </Col>
-            );
-          })}
-        </Row>
-        <Row className="pt-5">
-          <Col sm className={styles.intro}>
-            <div className={styles.intro_background}>
-              <span className={styles.intro_text}>
-                추위를 식혀주는 꽝꽝언 캠핑장
-              </span>
-            </div>
-          </Col>
-          {dummy.map((element, index) => {
-            return (
-              <Col sm key={index}>
-                <CampingCard
-                  title={element.title}
-                  address={element.address}
-                  hashtag={element.hashtag}
-                />
-              </Col>
-            );
-          })}
-        </Row>
-      </Container>
+    <h1>나와 비슷한 유저가 간 캠핑장</h1>
+    <Row>
+      {campings1.map((datas, index) => (
+          <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.camping_id)}>
+          {
+            datas.first_image_url == null ? 
+              <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
+              : <Card.Img variant="top" src={datas.first_image_url} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
+          }        
+          
+          <Card.Body>
+              <Card.Title style={{ fontSize: "24px" }}>{datas.faclt_nm}</Card.Title>
+              <Card.Subtitle
+                className="mb-2 text-muted"
+                style={{ fontSize: "14px" }}
+              >
+                  {datas.addr1}
+              </Card.Subtitle>
+              <Card.Text style={{ fontSize: "16px" }}>
+                  {
+                    datas.thema_envrn_cl !== null ? <a>#{`${datas.thema_envrn_cl}`.replaceAll(",", " #")}</a> : null
+                  }
+              </Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
+      </Row>
+
+    <br></br><br></br>
+    <h1>내가 간 캠핑장과 비슷한 캠핑장</h1>
+    <Row>
+      {campings2.map((datas, index) => (
+          <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.camping_id)}>
+          {
+            datas.first_image_url == null ? 
+              <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
+              : <Card.Img variant="top" src={datas.first_image_url} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
+          }        
+          
+          <Card.Body>
+              <Card.Title style={{ fontSize: "24px" }}>{datas.faclt_nm}</Card.Title>
+              <Card.Subtitle
+                className="mb-2 text-muted"
+                style={{ fontSize: "14px" }}
+              >
+                  {datas.addr1}
+              </Card.Subtitle>
+              <Card.Text style={{ fontSize: "16px" }}>
+                  {
+                    datas.thema_envrn_cl !== null ? <a>#{`${datas.thema_envrn_cl}`.replaceAll(",", " #")}</a> : null
+                  }
+              </Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
+      </Row>
+      {campings2.length == 0 && <h2>-내가 간 캠핑장이 없습니다-</h2>}
+
     </>
   );
 }
 
-export default Camp;
+export default Recommend;

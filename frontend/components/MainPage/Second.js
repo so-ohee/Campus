@@ -98,7 +98,7 @@ function Second() {
                                     {
                                         token && (
                                             // <p className={styles.second_servey} onClick={() => goServey()}>설문하러 가기... </p>
-                                            <a className={styles.second_h4} onClick={() => goRecommend()} > <h4>추천 받으러 가기</h4></a>
+                                            <a className={styles.second_h5} onClick={() => goRecommend()} > <h4>추천 받으러 가기</h4></a>
                                         )
                                     }
                                     

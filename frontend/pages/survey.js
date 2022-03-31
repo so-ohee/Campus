@@ -54,6 +54,9 @@ function survey() {
     }
 
     useEffect(() => {
+        if (!localStorage.getItem("userUid")){
+            router.push('/')
+          }
         if (navigator.geolocation) { // GPS를 지원하면
             navigator.geolocation.getCurrentPosition(function(position) {
                 setLat(position.coords.latitude)

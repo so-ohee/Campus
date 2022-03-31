@@ -302,3 +302,14 @@ export const isSurvey = async (uid) => {
 export const filterResults = async (query) => {
     return await axios.get(`${django_url}${query}`)
 }
+
+// recommend1
+export const recommend1 = async (uid) => {
+    return await axios.get(`${django_url}recommend1/${uid}`)
+}
+
+// recommend2
+export const recommend2 = async (uid) => {
+    return await axios.get(`${django_url}recommend2/${uid}`)
+}
+
