@@ -159,6 +159,11 @@ export const articleDelete = async (boardId) => {
         });
 }
 
+// 게시글 검색
+export const searchArticle = async (word) => {
+    return await axios.get(`${url}`+`board/search?word=` + `${word}`)
+}
+
 
 
 // ************************************ 댓글 기능 ************************************
