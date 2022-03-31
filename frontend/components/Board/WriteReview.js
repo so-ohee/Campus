@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Dropdown, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/WriteReview.module.css";
-import ReactStars from "react-rating-stars-component";
+import { Rating } from 'react-simple-star-rating'
 import { searchCamp, sendArticle } from "../../function/axios";
 
 function Writereview(props) {
@@ -13,20 +13,20 @@ function Writereview(props) {
     const [files, setFiles] = useState(null);
     const [service, setService] = useState(null);
     const [environment, setEnvironment] = useState(null);
-    const [facility, setFacility] = useState("");
+    const [facility, setFacility] = useState(null);
     const [dataDto, setDataDto] = useState({});
     const [dummy, setDummy] = useState([]);
-
+    
     const ratingChanged1 = (newRating) => {
-        setService(newRating);
+        setService(newRating/20);
     };
 
     const ratingChanged2 = (newRating) => {
-        setEnvironment(newRating);
+        setEnvironment(newRating/20);
     };
 
     const ratingChanged3 = (newRating) => {
-        setFacility(newRating);
+        setFacility(newRating/20);
     };
 
     const submitSign = () => {
@@ -62,9 +62,9 @@ function Writereview(props) {
         }
         setDataDto(newform);
     }, [campingId, title, content, environment, facility, service])
-    
-    console.log(files);
-    
+        
+    console.log(environment, facility, service);
+
     return (
         <div>
             <h1 className={styles.writereview_h1}>캠핑장 리뷰 작성</h1>
@@ -114,12 +114,11 @@ function Writereview(props) {
                             <Col xs={3} style={{marginTop: "2.5%"}}>
                                 <p className={styles.writereview_h6}>서비스</p>
                             </Col>
-                            <Col xs={8}>
-                                <ReactStars
-                                    count={5}
-                                    onChange={ratingChanged1}
-                                    size={24}
-                                    activeColor="#ffd700"
+                            <Col xs={8} style={{marginTop: "2.5%"}}>
+                                <a style={{marginRight: "3%", fontWeight: "bold"}}>{service}</a>
+                                <Rating
+                                    onClick={ratingChanged1}
+                                    size={30}
                                 />
                             </Col>
                         </Row>
@@ -130,12 +129,11 @@ function Writereview(props) {
                             <Col xs={3} style={{marginTop: "2.5%"}}>
                                 <p className={styles.writereview_h6}>환경</p>
                             </Col>
-                            <Col xs={8}>
-                                <ReactStars
-                                    count={5}
-                                    onChange={ratingChanged2}
-                                    size={24}
-                                    activeColor="#ffd700"
+                            <Col xs={8} style={{marginTop: "2.5%"}}>
+                                <a style={{marginRight: "3%", fontWeight: "bold"}}>{environment}</a>
+                                <Rating
+                                    onClick={ratingChanged2}
+                                    size={30}
                                 />
                             </Col>
                         </Row>
@@ -146,12 +144,11 @@ function Writereview(props) {
                             <Col xs={3} style={{marginTop: "2.5%"}}>
                                 <p className={styles.writereview_h6}>부대시설</p>
                             </Col>
-                            <Col xs={8}>
-                                <ReactStars
-                                    count={5}
-                                    onChange={ratingChanged3}
-                                    size={24}
-                                    activeColor="#ffd700"
+                            <Col xs={8} style={{marginTop: "2.5%"}}>
+                                <a style={{marginRight: "3%", fontWeight: "bold"}}>{facility}</a>
+                                <Rating
+                                    onClick={ratingChanged3}
+                                    size={30}
                                 />
                             </Col>
                         </Row>
