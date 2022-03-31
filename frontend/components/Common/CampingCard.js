@@ -6,11 +6,14 @@ import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 function CampingCard(params) {
 
   const router = useRouter()
-  const [ids, setIds] = useState("");
+  const [userids, setUserids] = useState("");
   const [datas, setDatas] = useState("");
 
   useEffect(() => {
-      receiveCamping_out(params.campingId).then((res) => setDatas(res.data.campsite));
+    receiveCamping_out(params.campingId).then((res) => setDatas(res.data.campsite));
+    if (localStorage.getItem("userUid")!==null) {
+      setUserids(localStorage.getItem("userUid"))
+    }
   }, [])
   
   const moveCamping = () => {

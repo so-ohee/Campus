@@ -6,17 +6,12 @@ import { receiveCamping_in, receiveCamping_out, BookMark, VisitCheck } from "../
 
 function CampingExplain(props) {
 
-    const [datas, setDatas] = useState([]);
+    const [datas, setDatas] = useState(props);
     const [bookmark, setBookmark] = useState("");
     const [visit, setVisit] = useState("");
     const [userid, setUserid] = useState("");
     const [campid, setCampid] = useState("");
     const router = useRouter();
-
-    useEffect(() => {
-        receiveCamping_in(localStorage.getItem("campid"))
-            .then((res) => setDatas(res.data))
-    }, [])
 
     function PressBookMark() {
         BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => (setBookmark(res.data.bookmark), console.log(res)));
@@ -26,7 +21,8 @@ function CampingExplain(props) {
         VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), console.log(res)});
     }
 
-    console.log(datas);
+    console.log(props)
+    console.log(datas)
     
     return (
         <>
@@ -34,7 +30,7 @@ function CampingExplain(props) {
                 <Row>
                     {/* 사진 */}
                     {/* <div className={styles.capmingplace_main_pic_div}>
-                        <img className={styles.capmingplace_main_pic} src={props.props.firstImageUrl} />
+                        <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} />
                     </div> */}
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}

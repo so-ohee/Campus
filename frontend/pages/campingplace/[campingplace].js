@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import { Container, Nav } from 'react-bootstrap';
 import CampingExplain from '../../components/CampingPlace/CampingExplain.js';
-import CampingExplain_Login from '../../components/CampingPlace/CampingExplain_Login.js';
 import CampingIntro from '../../components/CampingPlace/CampingIntro.js';
 import CampingMap from '../../components/CampingPlace/CampingMap.js';
 import CampingReview from '../../components/CampingPlace/CampingReview.js';
@@ -13,42 +12,23 @@ import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 function Campingplace() {
 
   const [selected, setSelected] = useState("1");
-  const [datas, setDatas] = useState([]);
-  const [datas2, setDatas2] = useState([]);
+  const [datas, setDatas] = useState("");
+  const [datas2, setDatas2] = useState("");
   const router = useRouter();
 
-  {
-    localStorage.getItem("userUid") !== null ? 
-      (
-        useEffect(() => {
-          receiveCamping_in(localStorage.getItem("campid"), localStorage.getItem("userUid"))
-          .then((res) => { setDatas(res.data.campsite), setDatas2(res.data) })
-          .catch((err) => console.log("데이터 왜 안 오냐..."))
-        }, [])
-      ) : 
-      (
-        useEffect(() => {
-          receiveCamping_out(localStorage.getItem("campid")).then((res) => setDatas(res.data.campsite))
-        }, [])
-      ) 
-  }
-  // useEffect(() => {
-  //   localStorage.getItem("userUid") !== null ?
-  //     (receiveCamping_in(localStorage.getItem("campid"), localStorage.getItem("userUid"))
-  //         .then((res) => { setDatas(res.data.campsite), setDatas2(res.data) })
-  //         .catch((err) => console.log("데이터 왜 안 오냐..."))) : 
-  //       (receiveCamping_out(localStorage.getItem("campid")).then((res) => setDatas(res.data.campsite)))
-  // }, [])
-
-  console.log(localStorage.getItem("userUid"))
+  useEffect(() => {
+    if (router.isReady) {
+      localStorage.setItem("campid", router.query.campingplace);
+      localStorage.getItem("userUid") == null ?
+        receiveCamping_out(localStorage.getItem("campid")).then((res) => setDatas(res.data.campsite))
+        : receiveCamping_in(localStorage.getItem("campid"), localStorage.getItem("userUid")).then((res) => { setDatas(res.data.campsite), setDatas2(res.data) })
+    }
+  }, [router.isReady])
 
   return (
-
+    
     <div>
-      {
-        localStorage.getItem("userUid") !== null ? <CampingExplain_Login props={datas2} /> : <CampingExplain props={datas} />
-      }
-      
+      <CampingExplain props={datas2} />
         <Container>
           {/* 선택바(캠핑장소개, 위치&주변정보, 리뷰, 이용안내) */}
           <div className={styles.campingexplain_selectbar}>
