@@ -9,15 +9,13 @@ function CampingExplain(props) {
     const [datas, setDatas] = useState([]);
     const [bookmark, setBookmark] = useState("");
     const [visit, setVisit] = useState("");
-    const [userid, setUserid] = useState("");
-    const [campid, setCampid] = useState("");
     const router = useRouter();
 
-    useEffect(() => {
-        receiveCamping_in(localStorage.getItem("campid"))
-            .then((res) => setDatas(res.data))
-    }, [])
-
+    // useEffect(() => {
+    //     receiveCamping_in(localStorage.getItem("campid"), localStorage.getItem("userUid"))
+    //         .then((res) => setDatas(res.data))
+    // }, [props])
+    
     function PressBookMark() {
         BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => (setBookmark(res.data.bookmark), console.log(res)));
     }
@@ -26,27 +24,27 @@ function CampingExplain(props) {
         VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), console.log(res)});
     }
 
-    console.log(datas);
-    
+    console.log(props)
+
     return (
         <>
             <Container>
                 <Row>
                     {/* 사진 */}
                     {/* <div className={styles.capmingplace_main_pic_div}>
-                        <img className={styles.capmingplace_main_pic} src={props.props.firstImageUrl} />
+                        <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} />
                     </div> */}
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
                     {/* <div className={styles.capmingplace_explain}>
                         <Row>
                             <Col xs={8}>
-                                <h2 style={{fontWeight: "bold"}}>{props.props.facltNm}</h2>
-                                <p>{props.props.addr1} {props.props.addr2}</p>
-                                <p>{props.props.tel}</p>
+                                <h2 style={{fontWeight: "bold"}}>{datas.campsite.facltNm}</h2>
+                                <p>{datas.campsite.addr1} {datas.campsite.addr2}</p>
+                                <p>{datas.campsite.tel}</p>
                                 <p style={{color: "lightgrey"}}>
                                     {
-                                        props.props.themaEnvrnCl !==null ? <a>#{props.props.themaEnvrnCl}</a> : null
+                                        datas.campsite.themaEnvrnCl !==null ? <a>#{datas.campsite.themaEnvrnCl}</a> : null
                                     }
                                 </p>
                             </Col>
@@ -55,7 +53,7 @@ function CampingExplain(props) {
                                     <Col>
                                         <div style={{ textAlign: "-webkit-center" }} >
                                             {
-                                                props.props.bookmark == false ? 
+                                                datas.bookmark == false ? 
                                                     <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../un_bookmark.png" />
                                                     : <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../bookmark.png" />
                                             }
@@ -65,7 +63,7 @@ function CampingExplain(props) {
                                     <Col>
                                         <div style={{ textAlign: "-webkit-center" }}>
                                             {
-                                                props.props.visit == false ? 
+                                                datas.visit == false ? 
                                                     <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../empty_marker.png" />
                                                     : <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../marker.png" />
                                             }
