@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import ReactStars from "react-rating-stars-component";
+import { Rating } from 'react-simple-star-rating'
 import styles from "../../styles/Board/ModifyReview.module.css";
 import { modifyArticle, campingBoardMore } from "../../function/axios";
 
@@ -8,25 +8,25 @@ function Modifyreview(props) {
 
     const [campingId, setCampingId] = useState("");
     const [name, setName] = useState(null);
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [files, setFiles] = useState(null);
-    const [service, setService] = useState(null);
-    const [environment, setEnvironment] = useState(null);
-    const [facility, setFacility] = useState("");
+    const [title, setTitle] = useState(props.datas.title);
+    const [content, setContent] = useState(props.datas.content);
+    const [files, setFiles] = useState(props.datas.files);
+    const [service, setService] = useState(props.datas.service);
+    const [environment, setEnvironment] = useState(props.datas.environment);
+    const [facility, setFacility] = useState(props.datas.facility);
     const [dataDto, setDataDto] = useState({});
     const [datas, setDatas] = useState([]);
 
     const ratingChanged1 = (newRating) => {
-        setService(newRating);
+        setService(newRating/20);
     };
 
     const ratingChanged2 = (newRating) => {
-        setEnvironment(newRating);
+        setEnvironment(newRating/20);
     };
 
     const ratingChanged3 = (newRating) => {
-        setFacility(newRating);
+        setFacility(newRating/20);
     };
 
     const submitSign = () => {
@@ -35,6 +35,14 @@ function Modifyreview(props) {
 
     const modify = () => {
         modifyArticle(dataDto, files);
+    }
+
+    const onChangeImg = async (e) => {
+        e.preventDefault();
+        if (e.target.files) {
+            const uploadFile = e.target.files;
+            setFiles(uploadFile);
+        }
     }
 
     useEffect(() => {
@@ -49,18 +57,17 @@ function Modifyreview(props) {
             "service": service,
         }
         setDataDto(newform);
-        setFiles(datas.files);
     }, [campingId, title, content, environment, facility, service, files])
     
     useEffect(() => {
-        campingBoardMore(props.datas).then((res) => {
+        campingBoardMore(props.datas.boardId).then((res) => {
             setDatas(res.data.board)
             setCampingId(res.data.board.boardId)
         });
     }, [])
 
-    // console.log(campingId, title, content, environment, facility, service, files);
-    console.log(files)
+    console.log(campingId, title, content, environment, facility, service, files);
+    console.log(props.datas.service)
 
     return (
         <div>
@@ -79,13 +86,11 @@ function Modifyreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{service}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        count={5}
-                                        value={datas.service}
-                                        onChange={ratingChanged1}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        onClick={ratingChanged1}
+                                        initialValue={service}
+                                        size={30}
                                     />
                                 </Col>
                             </Row>
@@ -96,13 +101,11 @@ function Modifyreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{environment}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        count={5}
-                                        value={datas.environment}
-                                        onChange={ratingChanged2}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        onClick={ratingChanged2}
+                                        initialValue={environment}
+                                        size={30}
                                     />
                                 </Col>
                             </Row>
@@ -113,13 +116,11 @@ function Modifyreview(props) {
                                 <Col xs={1}>
                                     <p style={{fontWeight: "bold", marginTop: "2%"}}>{facility}</p>
                                 </Col>
-                                <Col xs={7} style={{marginTop: "-3%"}}>
-                                    <ReactStars
-                                        count={5}
-                                        value={datas.facility}
-                                        onChange={ratingChanged3}
-                                        size={24}
-                                        activeColor="#ffd700"
+                                <Col xs={7}>
+                                    <Rating
+                                        onClick={ratingChanged3}
+                                        initialValue={facility}
+                                        size={30}
                                     />
                                 </Col>
                             </Row>
@@ -137,6 +138,12 @@ function Modifyreview(props) {
                             </Row>
                         </Col>
                     </Row>
+                </div>
+
+                {/* 사진 업로드 */}
+                <div style={{marginBottom: "5%"}}>
+                    <h5 className={styles.modifyreview_title2}>사진 업로드</h5>
+                    <input type="file" id="profile-upload" accept="image/*" onChange={onChangeImg}/>
                 </div>
 
                 {/* 게시글 제목 */}
@@ -161,7 +168,7 @@ function Modifyreview(props) {
                 </div>
 
                 <Row className={styles.modifyreview_buttons}>
-                    <Button variant="success" className={styles.modifyreview_button} onClick={modify}>작성</Button>
+                    <Button variant="success" className={styles.modifyreview_button} onClick={modify}>수정</Button>
                     <Button variant="success" className={styles.modifyreview_button} onClick={submitSign}>뒤로가기</Button>
                 </Row>
             </Container>
