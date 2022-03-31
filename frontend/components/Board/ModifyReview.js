@@ -6,8 +6,7 @@ import { modifyArticle, campingBoardMore } from "../../function/axios";
 
 function Modifyreview(props) {
 
-    const [campingId, setCampingId] = useState("");
-    const [name, setName] = useState(null);
+    const [boardId, setBoardId] = useState(props.datas.boardId);
     const [title, setTitle] = useState(props.datas.title);
     const [content, setContent] = useState(props.datas.content);
     const [files, setFiles] = useState(props.datas.files);
@@ -47,17 +46,12 @@ function Modifyreview(props) {
 
     useEffect(() => {
         const newform = {
-            "userUid": localStorage.getItem("userUid"),
-            "category": "후기",
+            "boardId": boardId,
             "title": title,
             "content": content,
-            "campingId": campingId,
-            "environment": environment,
-            "facility": facility,
-            "service": service,
         }
         setDataDto(newform);
-    }, [campingId, title, content, environment, facility, service, files])
+    }, [boardId, title, content, files])
     
     useEffect(() => {
         campingBoardMore(props.datas.boardId).then((res) => {
@@ -65,9 +59,6 @@ function Modifyreview(props) {
             setCampingId(res.data.board.boardId)
         });
     }, [])
-
-    console.log(campingId, title, content, environment, facility, service, files);
-    console.log(props.datas.service)
 
     return (
         <div>

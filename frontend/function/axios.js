@@ -135,7 +135,6 @@ export async function modifyArticle(dataDto, files) {
         }
     }
     
-
     const url2 = "https://j6c103.p.ssafy.io/api/board";
 
     await axios({
