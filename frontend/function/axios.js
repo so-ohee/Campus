@@ -135,7 +135,6 @@ export async function modifyArticle(dataDto, files) {
         }
     }
     
-
     const url2 = "https://j6c103.p.ssafy.io/api/board";
 
     await axios({
@@ -158,6 +157,11 @@ export const articleDelete = async (boardId) => {
             console.log("게시글 삭제");
             document.location.href = "/board";
         });
+}
+
+// 게시글 검색
+export const searchArticle = async (word) => {
+    return await axios.get(`${url}`+`board/search?word=` + `${word}`)
 }
 
 

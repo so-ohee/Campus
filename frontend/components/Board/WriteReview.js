@@ -62,8 +62,6 @@ function Writereview(props) {
         }
         setDataDto(newform);
     }, [campingId, title, content, environment, facility, service])
-        
-    console.log(environment, facility, service);
 
     return (
         <div>
