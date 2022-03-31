@@ -2,8 +2,11 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
 import { Col, Form, Row, Button } from 'react-bootstrap';
 import styles from "../../styles/Search/AreaSearch.module.css";
+import  { searchArea }  from "../../function/axios";
+import { useRouter } from 'next/router';
 
 function Areasearch() {
+    const router = useRouter();
 
     const [keyword, setKeyword] = useState('')
     const [addr1, setAddr1] = useState("전체");
@@ -54,7 +57,10 @@ function Areasearch() {
     };
 
     const onSearch = () => {
-        console.log(addr1,addr2,keyword)
+        // console.log(addr1,addr2,keyword)
+        searchArea(addr1,addr2,keyword,1)
+        .then((res) => console.log(res))
+        router.push(`/searcharea?addr1=${addr1}&addr2=${addr2}&keyword=${keyword}&page=1`)
     }
 
     return (

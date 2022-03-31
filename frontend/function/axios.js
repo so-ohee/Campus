@@ -280,6 +280,7 @@ export const ReviewList = async (campingId) => {
 
 
 // ******************************* 설문 조사 ******************************************
+// 설문 조사 등록
 export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
 
     let data = {
@@ -296,6 +297,7 @@ export const sendSurvey = async (q1,q2,q3,q4,uid,x,y) => {
     }
 
 
+// 설문 조사 여부 확인
 export const isSurvey = async (uid) => {
     return await axios.get(`${url}survey/${uid}`)
 }
@@ -317,3 +319,10 @@ export const recommend2 = async (uid) => {
     return await axios.get(`${django_url}recommend2/${uid}`)
 }
 
+
+
+// ***************************** 지역 검색 *********************************************
+// 지역검색
+export const searchArea = async (addr1,addr2,camping,page) => {
+    return await axios.get(`${url}camping/search?doNm=${addr1}&facltNm=${camping}&page=${page}&sigunguNm=${addr2}`)
+}
