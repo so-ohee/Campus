@@ -30,6 +30,13 @@
 .second_h4 {
     text-align-last: left;
     font-weight: bold;
+    /* cursor:pointer;  */
+    color:black;
+}
+
+.second_h5 {
+    text-align-last: left;
+    font-weight: bold;
     cursor:pointer; 
     color:black;
 }

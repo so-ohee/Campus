@@ -80,7 +80,7 @@ function Second() {
                                     {
                                         !token && (
                                             <>
-                                            <a className={styles.second_h4} onClick={handleShow} > <h4>추천 받으러 가기</h4></a>
+                                            <a className={styles.second_h5} onClick={handleShow} > <h4>추천 받으러 가기</h4></a>
                                             {/* <p className={styles.second_servey} style={{cursor:'pointer'}} onClick={handleShow}>추천받으러가기</p> */}
                                             <Modal show={show} onHide={handleClose} animation={false}>
                                                 <Modal.Header closeButton>
