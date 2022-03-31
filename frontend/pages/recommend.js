@@ -29,6 +29,10 @@ function Recommend() {
     }
   }, []);
 
+  const moveCamping = (camping_id) => {
+    router.push(`/campingplace/${camping_id}`)
+  }
+
   return (
     <>
     <h1>나와 비슷한 유저가 간 캠핑장</h1>
