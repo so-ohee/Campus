@@ -9,9 +9,6 @@ function CampingIntro(props) {
     const [datas, setDatas] = useState("");
     const router = useRouter();
 
-    // useEffect(() => {
-    //     receiveCamping_out(router.query.campingplace).then((res) => setDatas(res.data.campsite));
-    // }, [])
 
     return (
         <>
