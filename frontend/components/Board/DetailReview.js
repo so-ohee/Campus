@@ -9,7 +9,7 @@ function Detailreview(props) {
 
     const submitSign = () => {
         props.propFunction("수정")
-        props.propData(datas.boardId)
+        props.propData(datas)
     }
 
     const submitSign2 = () => {
@@ -47,9 +47,6 @@ function Detailreview(props) {
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid"));
     }
-
-    // 별점 기능
-    const [rating, setRating] = useState(0); 
 
     return (
         <div>

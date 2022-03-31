@@ -118,7 +118,6 @@ function Writereview(props) {
                                 <a style={{marginRight: "3%", fontWeight: "bold"}}>{service}</a>
                                 <Rating
                                     onClick={ratingChanged1}
-                                    ratingValue={service}
                                     size={30}
                                 />
                             </Col>
@@ -134,7 +133,6 @@ function Writereview(props) {
                                 <a style={{marginRight: "3%", fontWeight: "bold"}}>{environment}</a>
                                 <Rating
                                     onClick={ratingChanged2}
-                                    ratingValue={environment}
                                     size={30}
                                 />
                             </Col>
@@ -150,7 +148,6 @@ function Writereview(props) {
                                 <a style={{marginRight: "3%", fontWeight: "bold"}}>{facility}</a>
                                 <Rating
                                     onClick={ratingChanged3}
-                                    ratingValue={facility}
                                     size={30}
                                 />
                             </Col>

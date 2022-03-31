@@ -8,12 +8,12 @@ function Modifyreview(props) {
 
     const [campingId, setCampingId] = useState("");
     const [name, setName] = useState(null);
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [files, setFiles] = useState(null);
-    const [service, setService] = useState(null);
-    const [environment, setEnvironment] = useState(null);
-    const [facility, setFacility] = useState("");
+    const [title, setTitle] = useState(props.datas.title);
+    const [content, setContent] = useState(props.datas.content);
+    const [files, setFiles] = useState(props.datas.files);
+    const [service, setService] = useState(props.datas.service);
+    const [environment, setEnvironment] = useState(props.datas.environment);
+    const [facility, setFacility] = useState(props.datas.facility);
     const [dataDto, setDataDto] = useState({});
     const [datas, setDatas] = useState([]);
 
@@ -37,6 +37,14 @@ function Modifyreview(props) {
         modifyArticle(dataDto, files);
     }
 
+    const onChangeImg = async (e) => {
+        e.preventDefault();
+        if (e.target.files) {
+            const uploadFile = e.target.files;
+            setFiles(uploadFile);
+        }
+    }
+
     useEffect(() => {
         const newform = {
             "userUid": localStorage.getItem("userUid"),
@@ -49,18 +57,17 @@ function Modifyreview(props) {
             "service": service,
         }
         setDataDto(newform);
-        setFiles(datas.files);
     }, [campingId, title, content, environment, facility, service, files])
     
     useEffect(() => {
-        campingBoardMore(props.datas).then((res) => {
+        campingBoardMore(props.datas.boardId).then((res) => {
             setDatas(res.data.board)
             setCampingId(res.data.board.boardId)
         });
     }, [])
 
-    // console.log(campingId, title, content, environment, facility, service, files);
-    console.log(files)
+    console.log(campingId, title, content, environment, facility, service, files);
+    console.log(props.datas.service)
 
     return (
         <div>
@@ -82,8 +89,7 @@ function Modifyreview(props) {
                                 <Col xs={7}>
                                     <Rating
                                         onClick={ratingChanged1}
-                                        initialValue={datas.service}
-                                        ratingValue={service}
+                                        initialValue={service}
                                         size={30}
                                     />
                                 </Col>
@@ -98,8 +104,7 @@ function Modifyreview(props) {
                                 <Col xs={7}>
                                     <Rating
                                         onClick={ratingChanged2}
-                                        initialValue={datas.environment}
-                                        ratingValue={environment}
+                                        initialValue={environment}
                                         size={30}
                                     />
                                 </Col>
@@ -114,8 +119,7 @@ function Modifyreview(props) {
                                 <Col xs={7}>
                                     <Rating
                                         onClick={ratingChanged3}
-                                        initialValue={datas.facility}
-                                        ratingValue={facility}
+                                        initialValue={facility}
                                         size={30}
                                     />
                                 </Col>
@@ -134,6 +138,12 @@ function Modifyreview(props) {
                             </Row>
                         </Col>
                     </Row>
+                </div>
+
+                {/* 사진 업로드 */}
+                <div style={{marginBottom: "5%"}}>
+                    <h5 className={styles.modifyreview_title2}>사진 업로드</h5>
+                    <input type="file" id="profile-upload" accept="image/*" onChange={onChangeImg}/>
                 </div>
 
                 {/* 게시글 제목 */}
@@ -158,7 +168,7 @@ function Modifyreview(props) {
                 </div>
 
                 <Row className={styles.modifyreview_buttons}>
-                    <Button variant="success" className={styles.modifyreview_button} onClick={modify}>작성</Button>
+                    <Button variant="success" className={styles.modifyreview_button} onClick={modify}>수정</Button>
                     <Button variant="success" className={styles.modifyreview_button} onClick={submitSign}>뒤로가기</Button>
                 </Row>
             </Container>
