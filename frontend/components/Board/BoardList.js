@@ -7,7 +7,7 @@ import { campingBoard, searchArticle } from "../../function/axios";
 function Boardlist(props) {
 
     const [dummy, setDummy] = useState([]);
-    const [serachdummy, setSearchdummy] = useState([]);
+    const [serachdummy, setSearchdummy] = useState(null);
     const [title, setTitle] = useState("");
 
     const submitSign = () => {
@@ -41,8 +41,6 @@ function Boardlist(props) {
             </Pagination.Item>,
         );
     }
-
-    console.log(serachdummy);
 
     return (
         <div>
