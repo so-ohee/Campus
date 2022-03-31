@@ -12,23 +12,26 @@ import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
 function Campingplace() {
 
   const [selected, setSelected] = useState("1");
-  const [campid, setCampid] = useState("");
   const [datas, setDatas] = useState("");
+  const [datas2, setDatas2] = useState("");
   const router = useRouter();
 
-  // useEffect(() => {
-  //   setCampid(router.query.campingplace);
-  // }, [])
-
   useEffect(() => {
+    if (router.isReady) {
       localStorage.setItem("campid", router.query.campingplace);
-      receiveCamping_out(localStorage.getItem("campid")).then((res) => setDatas(res.data.campsite));
-  }, [])
+      localStorage.getItem("userUid") == null ?
+        receiveCamping_out(localStorage.getItem("campid")).then((res) => setDatas(res.data.campsite))
+        : receiveCamping_in(localStorage.getItem("campid"), localStorage.getItem("userUid")).then((res) => { setDatas(res.data.campsite), setDatas2(res.data) })
+    }
+  }, [router.isReady]) 
 
   return (
     
     <div>
-      <CampingExplain props={datas} />
+      {
+        localStorage.getItem("userUid") !== null ? <CampingExplain props={datas2} /> : <CampingExplain props={datas} />
+      }
+      
         <Container>
           {/* 선택바(캠핑장소개, 위치&주변정보, 리뷰, 이용안내) */}
           <div className={styles.campingexplain_selectbar}>

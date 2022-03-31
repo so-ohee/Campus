@@ -14,6 +14,7 @@ function CampingCard(params) {
   }, [])
   
   const moveCamping = () => {
+    localStorage.setItem("campid", params.campingId);
     router.push(`/campingplace/${params.campingId}`)
   }
 

@@ -22,7 +22,7 @@ function Bookmarkcamp() {
     
     useEffect(() => {
         BookMarkList(localStorage.getItem("userUid"))
-            .then((res) => setCampingplace(res.data.campsite));
+            .then((res) => {setCampingplace(res.data.campsite), console.log(res)});
     }, []);
     
     return (

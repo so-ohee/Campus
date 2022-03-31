@@ -269,8 +269,8 @@ export const VisitList = async (campingId) => {
 }
 
 // 북마크한 캠핑장 목록
-export const BookMarkList = async (campingId) => {
-    return await axios.get(`${url}`+`bookmark/user?userUid=${campingId}`)
+export const BookMarkList = async (userUid) => {
+    return await axios.get(`${url}`+`bookmark/user?userUid=${userUid}`)
 }
 
 // 내가 쓴 리뷰 목록

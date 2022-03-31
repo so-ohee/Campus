@@ -13,6 +13,7 @@ function Navibar() {
     localStorage.removeItem('userUid');
     localStorage.removeItem('ally-supports-cache');
     localStorage.removeItem('token');
+    localStorage.removeItem('campid');
     console.log(localStorage);
     document.location.href = "/";
   }
