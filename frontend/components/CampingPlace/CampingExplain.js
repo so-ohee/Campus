@@ -20,8 +20,6 @@ function CampingExplain(props) {
     function PressVisit() {
         VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), console.log(res)});
     }
-
-    console.log(props)
     
     return (
         <>

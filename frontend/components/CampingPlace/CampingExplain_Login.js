@@ -17,14 +17,12 @@ function CampingExplain(props) {
     // }, [props])
     
     function PressBookMark() {
-        BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => (setBookmark(res.data.bookmark), console.log(res)));
+        BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setBookmark(res.data.bookmark), document.location.reload(true)});
     }
 
     function PressVisit() {
-        VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), console.log(res)});
+        VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), document.location.reload(true)});
     }
-
-    console.log(props)
 
     return (
         <>
@@ -33,8 +31,8 @@ function CampingExplain(props) {
                 <Container>
                     <Row>
                         {/* 사진 */}
-                            <div className={styles.capmingplace_main_pic_div}>
-                                <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} />
+                        <div className={styles.capmingplace_main_pic_div}>
+                            <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} />
                         </div>
 
                         {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
@@ -55,7 +53,7 @@ function CampingExplain(props) {
                                         <Col>
                                             <div style={{ textAlign: "-webkit-center" }} >
                                                 {
-                                                    props.props.bookmark == false ? 
+                                                    props.props.bookmark !== false ? 
                                                         <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../un_bookmark.png" />
                                                         : <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../bookmark.png" />
                                                 }
@@ -65,7 +63,7 @@ function CampingExplain(props) {
                                         <Col>
                                             <div style={{ textAlign: "-webkit-center" }}>
                                                 {
-                                                    datas.visit == false ? 
+                                                    props.props.visit !== false ? 
                                                         <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../empty_marker.png" />
                                                         : <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../marker.png" />
                                                 }
