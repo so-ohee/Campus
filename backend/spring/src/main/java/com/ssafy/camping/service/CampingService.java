@@ -14,4 +14,6 @@ public interface CampingService {
     Map<String, Object> searchCampsite(String doNm, String sigunguNm, String facltNm, int page) throws Exception;
     //캠핑장명 목록
     Map<String, Object> searchCampsiteName(String word) throws Exception;
+    //캠핑장 사진 목록
+    Map<String, Object> getCampsiteImageList(Integer campingId) throws Exception;
 }

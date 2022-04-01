@@ -3,6 +3,7 @@ package com.ssafy.camping.service.Impl;
 import com.ssafy.camping.dto.Camping.CampingListDto;
 import com.ssafy.camping.entity.Bookmark;
 import com.ssafy.camping.entity.Camping;
+import com.ssafy.camping.entity.FileCamping;
 import com.ssafy.camping.entity.ViewLog;
 import com.ssafy.camping.repository.*;
 import com.ssafy.camping.service.CampingService;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import springfox.documentation.spring.web.json.Json;
 
+import java.io.File;
 import java.util.*;
 
 @Slf4j
@@ -27,6 +29,7 @@ public class CampingServiceImpl implements CampingService {
     private final BookmarkRepository bookmarkRepository;
     private final VisitRepository visitRepository;
     private final BoardRepository boardRepository;
+    private final FileCampingRepository fileCampingRepository;
 
     @Override
     public Map<String, Object> getCampsite(int campingId, String userUid) throws Exception {
@@ -146,6 +149,28 @@ public class CampingServiceImpl implements CampingService {
         }
 
         resultMap.put("campsite",campingList);
+        resultMap.put("message",Message.FIND_CAMPSITE_SUCCESS);
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> getCampsiteImageList(Integer campingId) throws Exception {
+        log.debug("CampingService getCampsiteImageList call");
+        Map<String, Object> resultMap = new HashMap<>();
+
+        Optional<Camping> campsite = campingRepository.findById(campingId);
+        if(!campsite.isPresent()) { //캠핑장이 존재하지 않을 경우
+            resultMap.put("message", Message.NOT_FOUND_CAMPSITE);
+            return resultMap;
+        }
+
+        List<FileCamping> list = fileCampingRepository.findByCamping(campsite.get());
+
+        List<String> imageList = new ArrayList<>();
+        for(FileCamping image : list)
+            imageList.add(image.getFilePath());
+
+        resultMap.put("imageList", imageList);
         resultMap.put("message",Message.FIND_CAMPSITE_SUCCESS);
         return resultMap;
     }
