@@ -81,9 +81,15 @@ function CampingMap(props) {
       if (err){
         alert('현재 위치를 확인할 수 없습니다. url창 왼쪽을 눌러 확인해주세요.')
       }else{
+        setNowX(x)
+        setNowY(y)
         setNowX(myX)
         setNowY(myY)
       }
+    }
+    function clickCamping() {
+      setNowX(x)
+      setNowY(y)
     }
   
   
@@ -173,13 +179,13 @@ function CampingMap(props) {
               lat: nowY,
               lng: nowX,
             }}
+            isPanto={true}
             style={{
               // 지도의 크기
               width: "100%",
               height: "600px",
             }}
-            level={6} // 지도의 확대 레벨
-            // onChange={(e) => console.log(e)}
+            level={5} // 지도의 확대 레벨
           >
             {
               martPositions.map((data, idx) => (
@@ -344,6 +350,10 @@ function CampingMap(props) {
         <button onClick={clickMyLocation}>
           내 위치
         </button>
+        <button onClick={clickCamping}>
+          캠핑장 위치
+        </button>
+
       </>
     )
   }

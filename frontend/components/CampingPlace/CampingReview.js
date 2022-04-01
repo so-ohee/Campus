@@ -2,15 +2,33 @@ import { useEffect, useState } from 'react';
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingReview.module.css";
 import { viewBoard } from "../../function/axios";
+import axios from "axios"
 
 function CampingReview(props) {
 
     // 댓글 조회
     const [dummy, setDummy] = useState([]);
 
+    // 블로그
+    const [blogs, setBlogs] = useState([])
+    const sigungu = props.props.sigunguNm
+    const campingName = props.props.facltNm
+
     useEffect(() => {
         viewBoard(props.props.campingId).then((res) => setDummy(res.data.board));
-    }, [])
+        axios({
+            method: 'get',
+            url: `https://dapi.kakao.com/v2/search/blog?query=${sigungu} ${campingName}&size=5`,
+            headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
+        })
+            .then((res) => {
+            console.log(res);
+            setBlogs(res.data.documents)
+            })
+            .catch((err) => {
+            console.log(err);
+        })
+    },[])
 
     console.log(props);
 
@@ -52,6 +70,21 @@ function CampingReview(props) {
                 </div>
                 
             </Container>
+
+            <div>
+                {blogs.map((element, index) => {
+                    return (
+                        <div key={index} onClick={() => window.open(element.url, '_blank')} style={{cursor:"pointer"}}>
+                            <img  src={element.thumbnail} />
+                            <div >
+                                {element.title.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"')}
+                            </div>
+                            {element.contents.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"')}
+                            <h5>{element.datetime.slice(0,10)}</h5>
+                        </div>
+                    );
+                })}
+            </div>
 
         </>
     );
