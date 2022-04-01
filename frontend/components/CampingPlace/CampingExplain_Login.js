@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingExplain.module.css";
-import { receiveCamping_in, receiveCamping_out, BookMark, VisitCheck } from "../../function/axios";
+import { BookMark, VisitCheck } from "../../function/axios";
+import WriteMain from '../Board/WriteMain';
 
 function CampingExplain(props) {
 
@@ -10,11 +11,6 @@ function CampingExplain(props) {
     const [bookmark, setBookmark] = useState("");
     const [visit, setVisit] = useState("");
     const router = useRouter();
-
-    // useEffect(() => {
-    //     receiveCamping_in(localStorage.getItem("campid"), localStorage.getItem("userUid"))
-    //         .then((res) => setDatas(res.data))
-    // }, [props])
     
     function PressBookMark() {
         BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setBookmark(res.data.bookmark), document.location.reload(true)});
@@ -22,6 +18,10 @@ function CampingExplain(props) {
 
     function PressVisit() {
         VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), document.location.reload(true)});
+    }
+
+    function WriteComment() {
+        router.push('/board')
     }
 
     return (
@@ -57,7 +57,7 @@ function CampingExplain(props) {
                                                         <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../un_bookmark.png" />
                                                         : <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../bookmark.png" />
                                                 }
-                                                <p className={styles.campingexplain_reserve}>북마크</p>
+                                                <p className={styles.campingexplain_reserve} onClick={() => PressBookMark()}>북마크</p>
                                             </div>
                                         </Col>
                                         <Col>
@@ -67,13 +67,13 @@ function CampingExplain(props) {
                                                         <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../empty_marker.png" />
                                                         : <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../marker.png" />
                                                 }
-                                                <p className={styles.campingexplain_visit}>방문여부</p>
+                                                <p className={styles.campingexplain_visit} onClick={() => PressVisit()}>방문여부</p>
                                             </div>
                                         </Col>
                                         <Col>
                                             <div style={{textAlign: "-webkit-center"}}>
-                                                <img className={styles.campingexplain_icon} src="../../comment.png" />
-                                                <p className={styles.campingexplain_rewiew}>리뷰작성</p>
+                                                <img className={styles.campingexplain_icon} onClick={() => WriteComment()} src="../../comment.png" />
+                                                <p className={styles.campingexplain_rewiew} onClick={() => WriteComment()}>리뷰작성</p>
                                             </div>
                                         </Col>
                                     </Row>

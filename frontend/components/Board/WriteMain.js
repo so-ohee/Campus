@@ -17,7 +17,7 @@ function Writermain(props) {
     const qna = () => {
         setPage("QnA");
     }
-    
+
     return (
         <div>
             <Container>
