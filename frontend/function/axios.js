@@ -319,6 +319,10 @@ export const recommend2 = async (uid) => {
     return await axios.get(`${django_url}recommend2/${uid}`)
 }
 
+// 비슷한 캠핑장
+export const similar = async (campingId) => {
+    return await axios.get(`${django_url}similar/${campingId}`)
+}
 
 
 // ***************************** 지역 검색 *********************************************

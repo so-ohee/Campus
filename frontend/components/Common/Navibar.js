@@ -41,6 +41,9 @@ function Navibar() {
   const onShopping = () => {
     router.push('/shopping')
   }
+  const onMyPage = () => {
+    router.push('/mypage')
+  }
 
   return (
     <>
@@ -94,7 +97,7 @@ function Navibar() {
                             <NavDropdown align="end" title={
                               <img className={styles.navi_profile_pic} src={ `${data.profile}` } />
                             } id="dropdown-menu-align-end">
-                              <NavDropdown.Item href="mypage">마이페이지</NavDropdown.Item>
+                              <NavDropdown.Item onClick={onMyPage}>마이페이지</NavDropdown.Item>
                               <NavDropdown.Item>정보 수정</NavDropdown.Item>
                               <NavDropdown.Item onClick={() => onLogOutClick()}>로그아웃</NavDropdown.Item>
                             </NavDropdown>

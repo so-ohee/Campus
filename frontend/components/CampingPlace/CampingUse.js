@@ -1,44 +1,48 @@
-import { Container, Col, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingUse.module.css";
+import { useEffect, useState } from 'react';
+import { similar } from "../../function/axios";
 
-function CampingUse() {
+
+function CampingUse(props) {
+
+    const [campings, setCampings] = useState([])
+
+    useEffect(() => {
+        similar(props.props.campingId).then((res) => setCampings(res.data));
+    },[])
+
+
     return (
         <>
-            <Container>
-                {/* 안전 및 시설 배치도(제목) */}
-                <div className={styles.campinguse_div}>
-                    <Row>
-                        <Col xs={1} style={{textAlignLast: "center"}}>
-                            <img className={styles.campinguse_arrow} src="../../arrow.png" />
-                        </Col>
-                        <Col xs={11}>
-                            <h4 className={styles.campinguse_h4}>안전 및 시설 배치도</h4>
-                        </Col>
-                    </Row>
-                </div>
-
-                {/* 안전 및 시설 배치도(사진) */}
-                <div className={styles.campinguse_div2}>
-                    <img src="../../logo.png" />
-                </div>
-
-                {/* 입장료 안내(제목) */}
-                <div className={styles.campinguse_div}>
-                    <Row>
-                        <Col xs={1} style={{textAlignLast: "center"}}>
-                            <img className={styles.campinguse_arrow} src="../../arrow.png" />
-                        </Col>
-                        <Col xs={11}>
-                            <h4 className={styles.campinguse_h4}>입장료 안내</h4>
-                        </Col>
-                    </Row>
-                </div>
-
-                {/* 안전 및 시설 배치도(사진) */}
-                <div className={styles.campinguse_div3}>
-                    <img src="../../logo.png" />
-                </div>
-            </Container>
+            <div>
+                <Row>
+                    {campings.map((datas, index) => (
+                    <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.camping_id)}>
+                        {
+                        datas.first_image_url == null ? 
+                            <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
+                            : <Card.Img variant="top" src={datas.first_image_url} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
+                        }        
+                        
+                        <Card.Body>
+                            <Card.Title style={{ fontSize: "24px" }}>{datas.faclt_nm}</Card.Title>
+                            <Card.Subtitle
+                            className="mb-2 text-muted"
+                            style={{ fontSize: "14px" }}
+                            >
+                                {datas.addr1}
+                            </Card.Subtitle>
+                            <Card.Text style={{ fontSize: "16px" }}>
+                                {
+                                datas.thema_envrn_cl !== null ? <a>#{`${datas.thema_envrn_cl}`.replaceAll(",", " #")}</a> : null
+                                }
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    ))}
+                </Row>
+            </div>
         </>
     );
 }
