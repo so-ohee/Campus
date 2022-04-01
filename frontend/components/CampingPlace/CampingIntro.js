@@ -12,13 +12,34 @@ function CampingIntro(props) {
     
     useEffect(() => {
         if (props.props){
-
-        
-            campingImage(props.props.campingId).then((res) => console.log(res));
+            campingImage(props.props.campingId).then((res) => {
+                if (res.data.imageList.length > 5){
+                    const lst = res.data.imageList
+                    const lst2 = []
+                    lst.map((link,index) => {
+                        if (index > 4){
+                            lst2.push(link.slice(0,link.indexOf('/',37))+'/thumb/thumb_1000_'+link.slice(link.indexOf('/',37)+1,))
+                        }
+                    })
+                    setImgList(lst2)
+                }
+                if (res.data.imageList.length <= 5 && props.props.firstImageUrl){
+                    setImgList([props.props.firstImageUrl])
+                }
+            });
         }
     }, [props.props])
-    console.log(props.props)
 
+    const handleError = (e) => {
+        if (props.props.firstImageUrl){
+            e.target.src = props.props.firstImageUrl
+        }else{
+            e.target.src = "../../logo.png"
+        }
+        
+      }
+    console.log(imgList)
+    // console.log(imgList.length)
     return (
         <>
             <Container>
@@ -27,36 +48,18 @@ function CampingIntro(props) {
                     {/* <div className={styles.capmingplace_main_pic_gather}>
                         <img className={styles.capmingplace_main_pic} src="../../logo.png" />
                     </div> */}
-
-                    <Carousel variant="dark" className={styles.capmingplace_main_pic_gather} >
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="https://gocamping.or.kr/upload/camp/7192/thumb/thumb_720_83416aIqXb6MXEKHt4K4ZSqG.jpg"
-                            alt="First slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="https://gocamping.or.kr/upload/camp/831/2144UEfwpEd9Go4amKQsuJu3.jpg"
-                            alt="Second slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="../../logo.png"
-                            alt="Third slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="../../logo.png"
-                            alt="Third slide"
-                            />
-                        </Carousel.Item>
+                    
+                    <Carousel variant="dark" className={styles.capmingplace_main_pic_gather} onChange={(e) => console.log(e)}>
+                        {imgList.map((datas, index) => (
+                            <Carousel.Item key={index}>
+                                <img
+                                style={{maxHeight:"800px"}}
+                                className="d-block w-100"
+                                src={datas}
+                                onError={handleError}
+                                />
+                            </Carousel.Item>
+                        ))}
                     </Carousel>
 
 
