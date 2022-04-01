@@ -1,5 +1,5 @@
 .areasearch_div1 {
-    height: 200px;
+    height: 180px;
     background: darkseagreen;
 }
 
@@ -11,28 +11,26 @@
 }
 
 .areasearch_col1 {
-    text-align: -webkit-right;
+    text-align: -webkit-center;
     padding-top: 3%;
 }
 
 .areasearch_col2 {
     text-align: -webkit-center;
-    padding-top: 3%;
+    text-align: left;
 }
 
 .areasearch_col3 {
-    text-align: -webkit-left;
-    padding-top: 3%;
+    text-align-last: center;
 }
 
 .areasearch_row {
     padding-top: 2%;
-    justify-content: center;
 }
 
 .areasearch_form {
-    width: 890px;
-    float: right;
+    margin-left: 62px;
+    width: 85%;
 }
 
 .areasearch_div2 {
