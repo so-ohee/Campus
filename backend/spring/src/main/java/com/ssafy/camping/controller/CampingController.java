@@ -105,7 +105,7 @@ public class CampingController {
 
     @ApiOperation(value = "캠핑장 사진 목록")
     @GetMapping("image")
-    @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true, dataType = "Integer", paramType = "query")
+    @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true, dataType = "int", paramType = "query")
     public ResponseEntity getCampsiteImageList(@RequestParam Integer campingId) {
         log.debug("CampingController getCampsiteImageList call");
 
