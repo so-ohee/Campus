@@ -30,15 +30,10 @@ function Mypage() {
                 localStorage.removeItem('token');
                 document.location.href = "/";
             });
-        // await deleteUser(auth.currentUser)
-        //     .then(() => console.log("성공"))
-        //     .catch((error) => {
-        //         console.log("실패")
-        // });
     }
 
     return (
-        <div>
+        <>
             <Container style={{ height: "1300px" }}>
                 <div className={styles.mypage_div1}>
                     <Row>
@@ -60,7 +55,7 @@ function Mypage() {
                 </div>
 
                 <div className={styles.mypage_div2}>
-                    <Tabs style={{width: "1320px"}} defaultActiveKey="Visited" id="uncontrolled-tab-example" className="mb-3">
+                    <Tabs style={{width: "100%"}} defaultActiveKey="Visited" id="uncontrolled-tab-example" className="mb-3">
                         <Tab eventKey="Visited" title="Visited">
                             <VisitedCamp />
                         </Tab>
@@ -73,7 +68,7 @@ function Mypage() {
                     </Tabs>
                 </div>
             </Container>
-        </div>
+        </>
     );
 }
 

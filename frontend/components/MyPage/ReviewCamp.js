@@ -10,7 +10,7 @@ function Reviewcamp() {
     const [dummy, setDummy] = useState([]);
 
     // Pagination
-    let active = 2;
+    let active = 1;
     let items = [];
     for (let number = 1; number <= 5; number++) {
         items.push(
@@ -35,21 +35,21 @@ function Reviewcamp() {
 
             <div className={styles.reviewcamp_main}>
                 <Container style={{ height: "700px", marginTop: "-0.7%" }}>
-                    {
-                        dummy === null ? 
+                    <table className={styles.reviewcamp_table}>
+                        <thead>
+                            <tr className={styles.reviewcamp_thead_tr}>
+                                <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
+                                <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
+                                <th style={{width: "700px", textAlignLast: "center"}}>제목</th>
+                                <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
+                                <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
+                            </tr>
+                        </thead>
+                        {
+                        dummy !== null ? 
                         (
                             dummy.map((element, index) => {
                                 return (
-                                    <table className={styles.reviewcamp_table}>
-                                        <thead>
-                                            <tr className={styles.reviewcamp_thead_tr}>
-                                                <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
-                                                <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
-                                                <th style={{width: "700px", textAlignLast: "center"}}>제목</th>
-                                                <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
-                                                <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
-                                            </tr>
-                                        </thead>
                                         <tbody key={index}>
                                         {
                                             element.category === "후기" && 
@@ -72,15 +72,15 @@ function Reviewcamp() {
                                                 </tr>
                                         }
                                         </tbody>     
-                                    </table>)
-                                })
+                                )})
                             ) : 
                             (
                                 <div className={styles.reviewcamp_comment}>
                                     <h1 style={{textAlign: "center"}}>작성한 리뷰가 없습니다</h1>
                                 </div>
                             )
-                    }
+                        }
+                    </table>
                 </Container>
             </div>
 
