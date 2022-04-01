@@ -102,4 +102,25 @@ public class CampingController {
         }
         return new ResponseEntity(resultMap, status);
     }
+
+    @ApiOperation(value = "캠핑장 사진 목록")
+    @GetMapping("image")
+    @ApiImplicitParam(name = "campingId", value = "캠핑장 고유 번호", required = true, dataType = "int", paramType = "query")
+    public ResponseEntity getCampsiteImageList(@RequestParam Integer campingId) {
+        log.debug("CampingController getCampsiteImageList call");
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        try {
+            resultMap = campingService.getCampsiteImageList(campingId);
+            if(resultMap.get("message").equals(Message.FIND_CAMPSITE_SUCCESS)) //캠핑장 조회 성공
+                status = HttpStatus.OK;
+        } catch (Exception e) {
+            log.error(Message.FIND_CAMPSITE_FAIL+" : {}", e.getMessage());
+
+            resultMap.put("message", Message.FIND_CAMPSITE_FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity(resultMap, status);
+    }
 }
