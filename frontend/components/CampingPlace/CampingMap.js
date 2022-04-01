@@ -6,21 +6,17 @@ import { useRouter } from 'next/router';
 
 function CampingMap(props) {
 
-    const [datas1, setDatas1] = useState("");
-    const [datas2, setDatas2] = useState("");
-    const [datas3, setDatas3] = useState("");
     const router = useRouter();
 
-    
-    useEffect(() => {
-        setDatas1(props.props.mapX);
-        setDatas2(props.props.mapY);
-        setDatas3(props.props.facltNm);
-    }, [])
+    const x = props.props.mapX
+    const y = props.props.mapY
+    const campingName = props.props.facltNm
 
-    const x = datas1
-    const y = datas2
-    const campingName = datas3
+    const [myX, setMyX] = useState('')
+    const [myY, setMyY] = useState('')
+    const [err, setErr] = useState(false)
+    const [nowX, setNowX] = useState(x)
+    const [nowY, setNowY] = useState(y)
 
     const markerImageSrc = "/mapicon.png"
     const falseList = {0:false,1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false,9:false,10:false,11:false,12:false,13:false,14:false,15:false}
@@ -81,12 +77,20 @@ function CampingMap(props) {
         setHospitalPositions([])
       }
     }
+    function clickMyLocation() {
+      if (err){
+        alert('현재 위치를 확인할 수 없습니다. url창 왼쪽을 눌러 확인해주세요.')
+      }else{
+        setNowX(myX)
+        setNowY(myY)
+      }
+    }
   
   
     useEffect(() => {
       axios({
         method: 'get',
-        url: `https://dapi.kakao.com/v2/local/search/category.json?category_group_code=MT1&page=1&size=15&sort=distance&x=${datas1}&y=${datas2}&radius=10000`,
+        url: `https://dapi.kakao.com/v2/local/search/category.json?category_group_code=MT1&page=1&size=15&sort=distance&x=${x}&y=${y}&radius=10000`,
         headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
       })
         .then((res) => {
@@ -140,6 +144,22 @@ function CampingMap(props) {
           console.log(err);
         })
 
+      
+        if (navigator.geolocation) { // GPS를 지원하면
+          navigator.geolocation.getCurrentPosition(function(position) {
+              setMyY(position.coords.latitude)
+              setMyX(position.coords.longitude)
+              // console.log('위도 : ' + lat + ' 경도 : ' + long)
+          }, function(error) {
+              console.error(error);
+              setErr(true)
+          }, {
+              enableHighAccuracy: false,
+              maximumAge: 0,
+              timeout: Infinity
+          });
+      }
+
       },[])
     
     
@@ -150,15 +170,16 @@ function CampingMap(props) {
             id={`map`}
             center={{
               // 지도의 중심좌표
-              lat: y,
-              lng: x,
+              lat: nowY,
+              lng: nowX,
             }}
             style={{
               // 지도의 크기
               width: "100%",
               height: "600px",
             }}
-            level={5} // 지도의 확대 레벨
+            level={6} // 지도의 확대 레벨
+            // onChange={(e) => console.log(e)}
           >
             {
               martPositions.map((data, idx) => (
@@ -319,6 +340,9 @@ function CampingMap(props) {
         </button>
         <button onClick={clickHospital}>
           병원
+        </button>
+        <button onClick={clickMyLocation}>
+          내 위치
         </button>
       </>
     )
