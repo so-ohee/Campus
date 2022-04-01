@@ -1,17 +1,19 @@
 // import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import React, { useState } from 'react';
-import { Col, Form, Row, Button, FormControl } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Col, Form, Row, Button, Container } from 'react-bootstrap';
 import styles from "../../styles/Search/AreaSearch.module.css";
 import  { searchArea }  from "../../function/axios";
 import { useRouter } from 'next/router';
+import CampingCard from "../Common/CampingCard";
 
 function Areasearch() {
-    const router = useRouter();
 
+    const router = useRouter();
     const [keyword, setKeyword] = useState('')
     const [addr1, setAddr1] = useState("전체");
     const [addr2, setAddr2] = useState("전체");
     const [addr2List, setAddr2List] = useState(['전체'])
+    const [datas, setDatas] = useState([]);
 
     const addr1List = [
         '전체',
@@ -55,8 +57,6 @@ function Areasearch() {
         ['전체', '서귀포시', '제주시'],
     ]
 
-
-
     const handleChange = (event) => {
         setAddr1(event.target.value);
         setAddr2("전체");
@@ -67,106 +67,64 @@ function Areasearch() {
     };
 
     const onSearch = () => {
+        document.location.reload(true)
         searchArea(addr1,addr2,keyword,1)
-        .then((res) => console.log(res))
-        router.push(`/searcharea?addr1=${addr1}&addr2=${addr2}&keyword=${keyword}&page=1`)
+        .then((res) => setDatas(res.data.campsite))
+        // router.push(`/searcharea?addr1=${addr1}&addr2=${addr2}&keyword=${keyword}&page=1`)
     }
+
+    console.log(datas);
 
     return (
         <>
             <div className={styles.areasearch_div1}>
                 <Row>
-                    <Col className={styles.areasearch_col1}>
-                    <Form.Select 
-                        style={{width:100}}
-                        value={addr1}
-                        onChange={handleChange}
-                    >
+                    <Col xs={6} className={styles.areasearch_col1}>
+                    <Form.Select style={{width:"80%"}} value={addr1} onChange={handleChange}>
                         {addr1List.map((datas, index) => (
-                            <option 
-                                key={index}
-                                value={datas}
-                            >
-                                {datas}
-                            </option>
+                            <option key={index} value={datas}>{datas}</option>
                         ))}
                     </Form.Select>
                     </Col>
-                    <Col className={styles.areasearch_col1}>
-                        <Form.Select
-                            style={{width:100}} 
-                            value={addr2}
-                            onChange={handleChange2}
-                        >
+                    <Col xs={6} className={styles.areasearch_col1}>
+                        <Form.Select style={{width:"80%"}} value={addr2} onChange={handleChange2}>
                             {addr2List.map((datas, index) => (
-                                <option 
-                                    key={index}
-                                    value={datas}
-                                >
-                                    {datas}
-                                </option>
+                                <option key={index}  value={datas}>{datas}</option>
                             ))}
                         </Form.Select>
                     </Col>
-                        {/* <div className={styles.areasearch_div2}>
-                            <FormControl variant="standard" sx={{ width: 200 }}>
-                                <InputLabel style={{ paddingLeft: "10%"}} id="demo-simple-select-standard-label">지역1</InputLabel>
-                                <Select
-                                labelId="demo-simple-select-standard-label"
-                                id="demo-simple-select-standard"
-                                value={addr1}
-                                onChange={handleChange}
-                                label="area"
-                                >
-                                {addr1List.map((datas, index) => (
-                                    <MenuItem 
-                                        key={index}
-                                        value={datas}
-                                    >
-                                        {datas}
-                                    </MenuItem>
-                                ))}
-                                </Select>
-                            </FormControl>
-                        </div> */}
-                    
-                    
-                        {/* <div className={styles.areasearch_div2}>
-                            <FormControl variant="standard" sx={{ width: 200 }}>
-                                <InputLabel style={{ paddingLeft: "10%"}} id="demo-simple-select-standard-label">지역2</InputLabel>
-                                <Select
-                                labelId="demo-simple-select-standard-label"
-                                id="demo-simple-select-standard"
-                                value={addr2}
-                                onChange={handleChange2}
-                                label="area"
-                                >
-                                {addr2List.map((datas, index) => (
-                                    <MenuItem 
-                                        key={index}
-                                        value={datas}
-                                    >
-                                        {datas}
-                                    </MenuItem>
-                                ))}
-                                </Select>
-                            </FormControl>
-                        </div> */}
-                    
                 </Row>    
                 <Row className={styles.areasearch_row}>
+                    <Col xs={10} className={styles.areasearch_col2}>
                     <Form.Group className={styles.areasearch_form}>
-                        <Form.Control 
-                            onChange={(e) => setKeyword(e.target.value)}
-                            placeholder="검색어를 입력해주세요." />
+                        <Form.Control style={{width:"120%"}} onChange={(e) => setKeyword(e.target.value)} placeholder="검색어를 입력해주세요." />
                     </Form.Group>
+                    </Col>
+                    <Col xs={2} className={styles.areasearch_col3}>
+                        <Button onClick={() => onSearch()}>검색</Button>
+                    </Col>
                 </Row>
-                <Button
-                    onClick={() => onSearch()}
-                >
-                    검색
-                </Button>
             </div>
+
+            <Container>
+                <Row>
+                    {
+                        datas && (datas.map((element, index) => {
+                            return (
+                                <Col sm key={index} style={{marginTop: "3%"}}>
+                                    <CampingCard
+                                        campingId={element.campingId}
+                                        firstImageUrl={element.firstImageUrl}
+                                        title={element.facltNm}
+                                        address={element.addr1}
+                                        hashtag={element.themaEnvrnCl}
+                                    />
+                                </Col>
+                            );
+                        }))
+                    }
+                </Row>
+            </Container>
         </>
     );
 }

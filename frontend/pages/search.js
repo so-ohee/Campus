@@ -21,7 +21,7 @@ function search() {
                 </div>
 
                 <div className={styles.search_div2}>
-                    <Tabs style={{width: "1320px"}} defaultActiveKey="filter" id="uncontrolled-tab-example" className="mb-3">
+                    <Tabs style={{width: "1320px"}} defaultActiveKey="area" id="uncontrolled-tab-example" className="mb-3">
                         <Tab eventKey="area" title="지역">
                             <AreaSearch />
                         </Tab>

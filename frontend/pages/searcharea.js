@@ -1,10 +1,7 @@
-import { Container, Col, Row, Card, Pagination, Button } from "react-bootstrap";
-import CampingCard from "../components/Common/CampingCard";
-import styles from "../styles/Recommend/Recommend.module.css";
+import { Row, Card, Pagination, Button } from "react-bootstrap";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import  { searchArea }  from "../function/axios";
-
 
 function SearchArea() {
   const router = useRouter();
@@ -13,12 +10,10 @@ function SearchArea() {
   const [page, setPage] = useState('')
   const [totalPage, setTotalPage] = useState('')
   const [pageList, setPageList] = useState([])
-//   const query_edit = 'filter/' + router.asPath.substring(7,)
   const query = router.asPath.substring(0,router.asPath.lastIndexOf('=')+1)
 
   useEffect(() => {
     if (router.isReady){
-        // console.log(router)
         searchArea(datas.addr1,datas.addr2,datas.keyword,datas.page)
         .then((res) => {
                 console.log(res)
@@ -28,11 +23,6 @@ function SearchArea() {
                   setTotalPage(Number(res.data.totalPage))
                   makeList(datas.page,res.data.totalPage)
               }
-                
-                // setCampings(res.data.campsite) 
-                // setPage(Number(datas.page))
-                // setTotalPage(Number(res.data.totalPage))
-                // makeList(datas.page,res.data.totalPage)
             }
         )}
   }, [router.isReady, router.asPath]);
@@ -53,34 +43,34 @@ function SearchArea() {
   return (
     <>
     {campings.length ? <p>검색결과입니다.</p> : <p>검색결과가 없습니다.</p>}
-     <div>
-       <Row>
-        {campings.map((datas, index) => (
-          <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.campingId)}>
-            {
-              datas.firstImageUrl == null ? 
-                <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
-                : <Card.Img variant="top" src={datas.firstImageUrl} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
-            }        
-            
-            <Card.Body>
-                <Card.Title style={{ fontSize: "24px" }}>{datas.facltNm}</Card.Title>
-                <Card.Subtitle
-                  className="mb-2 text-muted"
-                  style={{ fontSize: "14px" }}
-                >
-                    {datas.addr1}
-                </Card.Subtitle>
-                <Card.Text style={{ fontSize: "16px" }}>
-                    {
-                      datas.themaEnvrnCl !== null ? <a>#{`${datas.themaEnvrnCl}`.replaceAll(",", " #")}</a> : null
-                    }
-                </Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
-        </Row>
-      </div>
+      <div>
+        <Row>
+          {campings.map((datas, index) => (
+            <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.campingId)}>
+              {
+                datas.firstImageUrl == null ? 
+                  <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
+                  : <Card.Img variant="top" src={datas.firstImageUrl} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
+              }        
+              
+              <Card.Body>
+                  <Card.Title style={{ fontSize: "24px" }}>{datas.facltNm}</Card.Title>
+                  <Card.Subtitle
+                    className="mb-2 text-muted"
+                    style={{ fontSize: "14px" }}
+                  >
+                      {datas.addr1}
+                  </Card.Subtitle>
+                  <Card.Text style={{ fontSize: "16px" }}>
+                      {
+                        datas.themaEnvrnCl !== null ? <a>#{`${datas.themaEnvrnCl}`.replaceAll(",", " #")}</a> : null
+                      }
+                  </Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+          </Row>
+        </div>
       
       <br></br>
       <Pagination >
@@ -111,8 +101,6 @@ function SearchArea() {
           onClick={() => router.push(`${query}${Math.min(totalPage,pageList[0]+5)}`)}
         />
       </Pagination>
-
-
     </>
   );
 }
