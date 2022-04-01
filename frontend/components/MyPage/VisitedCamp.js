@@ -35,7 +35,7 @@ function Visitedcamp() {
                 <Container>
                     <Row>
                         {
-                            campingplace === null ? 
+                            campingplace !== null ? 
                                 (
                                     campingplace.map((element, index) => {
                                     return (

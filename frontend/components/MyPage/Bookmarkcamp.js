@@ -35,25 +35,25 @@ function Bookmarkcamp() {
                 <Container>
                     <Row>
                     {
-                            campingplace === null ? 
-                                (
-                                    campingplace.map((element, index) => {
-                                    return (
-                                    <Col sm key={index} style={{marginBottom: "5%"}}>
-                                            <CampingCard
-                                                campingId={element.campingId}
-                                                title={element.facltNm}
-                                                address={element.addr1}
-                                                hashtag={element.themaEnvrnCl}
-                                            />
-                                    </Col>
-                                );
-                            })) : 
-                                (
-                                    <div className={styles.bookmarkcamp_comment}>
-                                        <h1 style={{textAlign: "center"}}>북마크한 캠핑장이 없습니다</h1>
-                                    </div>
-                                )
+                        campingplace !== null ? 
+                            (
+                                campingplace.map((element, index) => {
+                                return (
+                                <Col sm key={index} style={{marginBottom: "5%"}}>
+                                        <CampingCard
+                                            campingId={element.campingId}
+                                            title={element.facltNm}
+                                            address={element.addr1}
+                                            hashtag={element.themaEnvrnCl}
+                                        />
+                                </Col>
+                            );
+                        })) : 
+                            (
+                                <div className={styles.bookmarkcamp_comment}>
+                                    <h1 style={{textAlign: "center"}}>북마크한 캠핑장이 없습니다</h1>
+                                </div>
+                            )
                         }
                     </Row>
                     
