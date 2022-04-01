@@ -22,10 +22,17 @@ function SearchArea() {
         searchArea(datas.addr1,datas.addr2,datas.keyword,datas.page)
         .then((res) => {
                 console.log(res)
-                setCampings(res.data.campsite) 
-                setPage(Number(datas.page))
-                setTotalPage(Number(res.data.totalPage))
-                makeList(datas.page,res.data.totalPage)
+                if (res.data.campsite){
+                  setCampings(res.data.campsite) 
+                  setPage(Number(datas.page))
+                  setTotalPage(Number(res.data.totalPage))
+                  makeList(datas.page,res.data.totalPage)
+              }
+                
+                // setCampings(res.data.campsite) 
+                // setPage(Number(datas.page))
+                // setTotalPage(Number(res.data.totalPage))
+                // makeList(datas.page,res.data.totalPage)
             }
         )}
   }, [router.isReady, router.asPath]);
@@ -45,7 +52,7 @@ function SearchArea() {
 
   return (
     <>
-     검색결과입니다.
+    {campings.length ? <p>검색결과입니다.</p> : <p>검색결과가 없습니다.</p>}
      <div>
        <Row>
         {campings.map((datas, index) => (
