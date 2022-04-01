@@ -1,9 +1,10 @@
 .capmingplace_main_pic_gather {
     text-align-last: center;
-    width: 1320px;
-    height: 300px;
+    /* width: 1320px; */
+    /* height: 300px; */
     margin-top: 5%;
     border: 1px solid black;
+    padding: 0%;
 }
 
 .capmingplace_main_explain2 {

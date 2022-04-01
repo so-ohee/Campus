@@ -53,7 +53,7 @@ function Campingplace() {
                 <Nav.Link className={styles.nav_link} onClick={() => setSelected("3")} eventKey="link-3">캠핑장 리뷰</Nav.Link>
               </Nav.Item>
               <Nav.Item className={styles.nav_item}>
-                <Nav.Link className={styles.nav_link} onClick={() => setSelected("4")} eventKey="link-4">캠핑장 이용안내</Nav.Link>
+                <Nav.Link className={styles.nav_link} onClick={() => setSelected("4")} eventKey="link-4">비슷한 캠핑장</Nav.Link>
               </Nav.Item>
             </Nav>
           </div> 

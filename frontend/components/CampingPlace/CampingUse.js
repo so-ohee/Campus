@@ -2,9 +2,11 @@ import { Card, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingUse.module.css";
 import { useEffect, useState } from 'react';
 import { similar } from "../../function/axios";
+// import { useRouter } from 'next/router';
 
 
 function CampingUse(props) {
+    // const router = useRouter();
 
     const [campings, setCampings] = useState([])
 
@@ -12,7 +14,12 @@ function CampingUse(props) {
         similar(props.props.campingId).then((res) => setCampings(res.data));
     },[])
 
-
+    const moveCamping = (camping_id) => {
+        // router.push(`/campingplace/${camping_id}`)
+        // router로 할 시, 페이지가 바뀌지 않음
+        location.href=`/campingplace/${camping_id}`
+      }
+    
     return (
         <>
             <div>

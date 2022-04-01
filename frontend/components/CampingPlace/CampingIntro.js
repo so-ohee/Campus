@@ -1,23 +1,59 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Carousel } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingIntro.module.css";
-import { receiveCamping_in, receiveCamping_out } from "../../function/axios";
+import { campingImage } from "../../function/axios";
 
 function CampingIntro(props) {
 
     const [datas, setDatas] = useState("");
     const router = useRouter();
-
+    const [imgList, setImgList] = useState(["../../logo.png"])
+    
+    useEffect(() => {
+        campingImage(props.props.campingId).then((res) => console.log(res));
+    }, [])
 
     return (
         <>
             <Container>
                 <Row>
                     {/* 캠핑장 사진 모음 */}
-                    <div className={styles.capmingplace_main_pic_gather}>
+                    {/* <div className={styles.capmingplace_main_pic_gather}>
                         <img className={styles.capmingplace_main_pic} src="../../logo.png" />
-                    </div>
+                    </div> */}
+
+                    <Carousel variant="dark" className={styles.capmingplace_main_pic_gather} >
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100"
+                            src="https://gocamping.or.kr/upload/camp/7192/thumb/thumb_720_83416aIqXb6MXEKHt4K4ZSqG.jpg"
+                            alt="First slide"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100"
+                            src="https://gocamping.or.kr/upload/camp/831/2144UEfwpEd9Go4amKQsuJu3.jpg"
+                            alt="Second slide"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100"
+                            src="../../logo.png"
+                            alt="Third slide"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100"
+                            src="../../logo.png"
+                            alt="Third slide"
+                            />
+                        </Carousel.Item>
+                    </Carousel>
+
 
                     {/* 캠핑장 설명 */}
                     <div className={styles.capmingplace_main_explain2}>

@@ -261,6 +261,10 @@ export const Newscamp = async () => {
     return await axios.get(`${url}`+`news`)
 }
 
+// 캠핑장 사진 불러오기
+export const campingImage = async (campingId) => {
+    return await axios.get(`${url}image?campingId=${campingId}`)
+}
 
 // ************************************ 마이페이지 기능 ************************************
 // 방문한 캠핑장 목록
