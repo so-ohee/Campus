@@ -11,8 +11,13 @@ function CampingIntro(props) {
     const [imgList, setImgList] = useState(["../../logo.png"])
     
     useEffect(() => {
-        campingImage(props.props.campingId).then((res) => console.log(res));
-    }, [])
+        if (props.props){
+
+        
+            campingImage(props.props.campingId).then((res) => console.log(res));
+        }
+    }, [props.props])
+    console.log(props.props)
 
     return (
         <>
