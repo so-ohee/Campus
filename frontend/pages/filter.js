@@ -38,29 +38,42 @@ function Filter() {
         router.push(`/campingplace/${camping_id}`)
     }
 
+    console.log(campings);
+
     return (
         <>
-            <Container>
-                <Row>
-                    {
-                        campings.map((element, index) => {
-                            return (
-                                <Col sm key={index} style={{marginTop: "3%"}}>
-                                    <CampingCard
-                                        campingId={element.camping_id}
-                                        firstImageUrl={element.first_image_url}
-                                        title={element.faclt_nm}
-                                        address={element.addr1}
-                                        hashtag={element.thema_envrn_cl}
-                                    />
-                                </Col>
-                            );
-                        })
-                    }
-                </Row>
+        <Container>
+            {
+                campings !== null ?
+                  <Row>
+                        {
+                            campings.map((element, index) => {
+                                return (
+                                    <Col sm key={index} style={{marginTop: "3%"}}>
+                                        <CampingCard
+                                            campingId={element.camping_id}
+                                            firstImageUrl={element.first_image_url}
+                                            title={element.faclt_nm}
+                                            address={element.addr1}
+                                            hashtag={element.thema_envrn_cl}
+                                        />
+                                    </Col>
+                                );
+                            })
+                        }
+                  </Row> 
+                  : 
+                  <div style={{ height: "600px", textAlign: "-webkit-center", marginTop: "5%" }}>
+                      <img className={styles.navi_pic} src="../../NoResult.png" style={{width: "30%", marginBottom: "2%"}}/>
+                      <h2 style={{ fontWeight: "bold" }}>검색 결과가 없습니다.</h2>
+                      <h4>검색하신 검색어를 다시 확인해주세요.</h4>
+                  </div>
+            }
             </Container>
             
-            <Container style={{marginTop: "2%", marginBottom: "2%"}}>
+            <Container style={{ marginTop: "2%", marginBottom: "2%" }}>
+            {
+                campings !== null ?
                 <Pagination style={{justifyContent: "center"}}>
                     <Pagination.First 
                         disabled={page === 1}
@@ -88,7 +101,10 @@ function Filter() {
                         disabled={page === totalPage}
                         onClick={() => router.push(`${query}${Math.min(totalPage,pageList[0]+5)}`)}
                     />
-                </Pagination>
+                  </Pagination>
+                  : 
+                  null
+            }
             </Container>
         </>
     );
