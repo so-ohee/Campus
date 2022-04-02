@@ -37,9 +37,8 @@ function CampingIntro(props) {
             e.target.src = "../../logo.png"
         }
         
-      }
-    console.log(imgList)
-    // console.log(imgList.length)
+    }
+    
     return (
         <>
             <Container>

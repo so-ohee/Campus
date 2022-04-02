@@ -67,13 +67,12 @@ function Areasearch() {
     };
 
     const onSearch = () => {
-        document.location.reload(true)
         searchArea(addr1,addr2,keyword,1)
         .then((res) => setDatas(res.data.campsite))
         // router.push(`/searcharea?addr1=${addr1}&addr2=${addr2}&keyword=${keyword}&page=1`)
     }
 
-    console.log(datas);
+    // console.log(datas);
 
     return (
         <>
@@ -107,9 +106,9 @@ function Areasearch() {
             </div>
 
             <Container>
-                <Row>
-                    {
-                        datas && (datas.map((element, index) => {
+                <Row style={{textAlignLast: "center"}}>
+                {
+                        datas.map((element, index) => {
                             return (
                                 <Col sm key={index} style={{marginTop: "3%"}}>
                                     <CampingCard
@@ -121,7 +120,7 @@ function Areasearch() {
                                     />
                                 </Col>
                             );
-                        }))
+                        })
                     }
                 </Row>
             </Container>
