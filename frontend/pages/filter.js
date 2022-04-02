@@ -45,29 +45,29 @@ function Filter() {
         <Container>
             {
                 campings !== null ?
-                  <Row>
-                        {
-                            campings.map((element, index) => {
-                                return (
-                                    <Col sm key={index} style={{marginTop: "3%"}}>
-                                        <CampingCard
-                                            campingId={element.camping_id}
-                                            firstImageUrl={element.first_image_url}
-                                            title={element.faclt_nm}
-                                            address={element.addr1}
-                                            hashtag={element.thema_envrn_cl}
-                                        />
-                                    </Col>
-                                );
-                            })
-                        }
-                  </Row> 
-                  : 
-                  <div style={{ height: "600px", textAlign: "-webkit-center", marginTop: "5%" }}>
-                      <img className={styles.navi_pic} src="../../NoResult.png" style={{width: "30%", marginBottom: "2%"}}/>
-                      <h2 style={{ fontWeight: "bold" }}>검색 결과가 없습니다.</h2>
-                      <h4>검색하신 검색어를 다시 확인해주세요.</h4>
-                  </div>
+                    <Row>
+                            {
+                                campings.map((element, index) => {
+                                    return (
+                                        <Col sm key={index} style={{marginTop: "3%"}}>
+                                            <CampingCard
+                                                campingId={element.camping_id}
+                                                firstImageUrl={element.first_image_url}
+                                                title={element.faclt_nm}
+                                                address={element.addr1}
+                                                hashtag={element.thema_envrn_cl}
+                                            />
+                                        </Col>
+                                    );
+                                })
+                            }
+                    </Row> 
+                    : 
+                    <div style={{ height: "600px", textAlign: "-webkit-center", marginTop: "5%" }}>
+                        <img className={styles.navi_pic} src="../../NoResult.png" style={{width: "30%", marginBottom: "2%"}}/>
+                        <h2 style={{ fontWeight: "bold" }}>검색 결과가 없습니다.</h2>
+                        <h4>검색하신 검색어를 다시 확인해주세요.</h4>
+                    </div>
             }
             </Container>
             
@@ -84,14 +84,14 @@ function Filter() {
                         onClick={() => router.push(`${query}${page-1}`)}
                     />
                     {pageList.map((page_, idx) => (
-                      <Pagination.Item
-                          key={idx}
-                          id={`page-${idx}`}
-                          active={page_ === page}
-                          onClick={() => router.push(`${query}${page_}`)}
-                      >
-                          {page_}
-                      </Pagination.Item>
+                        <Pagination.Item
+                            key={idx}
+                            id={`page-${idx}`}
+                            active={page_ === page}
+                            onClick={() => router.push(`${query}${page_}`)}
+                        >
+                            {page_}
+                        </Pagination.Item>
                     ))}
                     <Pagination.Next 
                         disabled={page === totalPage}

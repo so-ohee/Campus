@@ -181,7 +181,6 @@ function Boardlist(props) {
                                 ) : null
                             )
                     }
-                        
                 </table>
             </Container>
             <Pagination className={styles.boardlist_pagination}>{items}</Pagination>
