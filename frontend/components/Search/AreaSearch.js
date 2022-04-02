@@ -108,20 +108,20 @@ function Areasearch() {
             <Container>
                 <Row style={{textAlignLast: "center"}}>
                 {
-                        datas.map((element, index) => {
-                            return (
-                                <Col sm key={index} style={{marginTop: "3%"}}>
-                                    <CampingCard
-                                        campingId={element.campingId}
-                                        firstImageUrl={element.firstImageUrl}
-                                        title={element.facltNm}
-                                        address={element.addr1}
-                                        hashtag={element.themaEnvrnCl}
-                                    />
-                                </Col>
-                            );
-                        })
-                    }
+                    datas.map((element, index) => {
+                        return (
+                            <Col sm key={index} style={{marginTop: "3%"}}>
+                                <CampingCard
+                                    campingId={element.campingId}
+                                    firstImageUrl={element.firstImageUrl}
+                                    title={element.facltNm}
+                                    address={element.addr1}
+                                    hashtag={element.themaEnvrnCl}
+                                />
+                            </Col>
+                        );
+                    })
+                }
                 </Row>
             </Container>
         </>
