@@ -26,7 +26,7 @@
 }
 
 .boardlist_table {
-    width: 1320px;
+    width: 100%;
     text-align: -webkit-center;
     border-bottom: 1px solid black;
     margin-bottom: 2%;
@@ -45,4 +45,34 @@
 .boardlist_pagination {
     justify-content: center;
     margin-bottom: 5%;
+}
+
+.boardlist_div {
+    height: 90%;
+    width: 5%;
+    margin-right: 0.1%;
+    border: 1px solid green;
+    text-align-last: center;
+    border-radius: 10%;
+    padding-top: 0.4%;
+}
+
+.boardlist_div:focus {
+    height: 90%;
+    width: 5%;
+    margin-right: 0.1%;
+    border: 1px solid white;
+    text-align-last: center;
+    border-radius: 10%;
+    padding-top: 0.4%;
+}
+
+.boardlist_div:focus {
+    height: 90%;
+    width: 5%;
+    margin-right: 0.1%;
+    border: 1px solid white;
+    text-align-last: center;
+    border-radius: 10%;
+    padding-top: 0.4%;
 }
