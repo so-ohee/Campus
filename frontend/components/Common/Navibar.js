@@ -98,7 +98,6 @@ function Navibar() {
                               <img className={styles.navi_profile_pic} src={ `${data.profile}` } />
                             } id="dropdown-menu-align-end">
                               <NavDropdown.Item onClick={onMyPage}>마이페이지</NavDropdown.Item>
-                              <NavDropdown.Item>정보 수정</NavDropdown.Item>
                               <NavDropdown.Item onClick={() => onLogOutClick()}>로그아웃</NavDropdown.Item>
                             </NavDropdown>
                         </div> 
