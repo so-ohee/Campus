@@ -51,6 +51,8 @@ function Detailreview() {
         );
     }
 
+    console.log(datas)
+
     return (
         <div>
             <Container>                
@@ -124,10 +126,17 @@ function Detailreview() {
                                     : <p>{datas.name} {datas.updateTime} 수정</p>
                                 }
                             </Row>
-                            <Row style={{justifyContent: "right", marginTop: "15%", marginRight: "3%"}}>
-                                <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailreview)}>수정</Button>
-                                <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
-                            </Row>
+
+                            {
+                                localStorage.getItem("userUid") == datas.userUid ?
+                                    (
+                                        <Row style={{ justifyContent: "right", marginTop: "15%", marginRight: "3%" }}>
+                                            <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailreview)}>수정</Button>
+                                            <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
+                                        </Row>
+                                    ) : null
+                            }
+                            
                         </Col>
                     </Row>
                 </div>
