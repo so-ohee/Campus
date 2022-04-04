@@ -7,7 +7,6 @@ function commentcard(params) {
 
     const [state, setState] = useState(false);
     function deleteComment(commentId) {
-        // console.log(commentId)
         commentDelete(commentId);
     }
 
@@ -70,7 +69,10 @@ function commentcard(params) {
                                                 placeholder='댓글을 입력하세요...'
                                                 onKeyPress={(e) => {
                                                     if (e.key === 'Enter') {
-                                                        modifyComment(e.target.value, params.commentId).then(() => setState(!state));
+                                                        modifyComment(e.target.value, params.commentId).then(() => {
+                                                            setState(!state)
+
+                                                        });
                                                     }
                                                 }}
                                             />

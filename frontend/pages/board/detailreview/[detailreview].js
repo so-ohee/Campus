@@ -11,13 +11,15 @@ function Detailreview() {
 
     const router = useRouter();
 
-    const submitSign = () => {
-        props.propFunction("수정")
-        props.propData(datas)
+    const submitSign = (boardId) => {
+        // props.propFunction("수정")
+        router.push(`/board/modifyreview/${boardId}`);
+        // props.propData(datas)
     }
 
+    // 게시판으로 가기
     const submitSign2 = () => {
-        history.push('/board');
+        router.push('/board')
     }
 
     // 게시글 상세정보 받아오기
@@ -35,7 +37,7 @@ function Detailreview() {
             // 댓글 조회
             commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment));
         }
-    }, [router.isReady, dummy])
+    }, [router.isReady])
 
     // 게시글 삭제
     const deleteArticle = () => {
@@ -123,7 +125,7 @@ function Detailreview() {
                                 }
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "15%", marginRight: "3%"}}>
-                                <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>
+                                <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailreview)}>수정</Button>
                                 <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
                             </Row>
                         </Col>

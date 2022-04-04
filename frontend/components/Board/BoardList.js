@@ -18,17 +18,16 @@ function Boardlist(props) {
     }
 
     const submitSign2 = (boardId) => {
-        // props.propFunction("상세")
         router.push(`board/detailreview/${boardId}`);
-        
     }
 
     function submitData(datas) {
         props.propData(datas)
     }
 
-    const submitSign3 = () => {
+    const submitSign3 = (boardId) => {
         props.propFunction("자유상세")
+        router.push(`board/detailqnafree/${boardId}`);
     }
 
     function categorymain() {
