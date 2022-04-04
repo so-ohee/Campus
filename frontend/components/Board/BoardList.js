@@ -80,7 +80,16 @@ function Boardlist(props) {
                             }
                         }}
                     />
-                    <Button variant="success" style={{width: "100px"}} onClick={submitSign}>리뷰 작성</Button>
+                    {
+                        localStorage.getItem("Useruid") !== undefined ?
+                            (
+                                <Button variant="success" style={{width: "100px"}} onClick={submitSign}>리뷰 작성</Button>
+                            ) : 
+                            (
+                                null
+                            )
+                    }
+                    
                 </Row>
 
                 <Tabs
