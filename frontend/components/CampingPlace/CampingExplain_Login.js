@@ -57,7 +57,7 @@ function CampingExplain(props) {
                                     <h2 style={{fontWeight: "bold"}}>{props.props.campsite.facltNm}</h2>
                                     <p>{props.props.campsite.addr1} {props.props.campsite.addr2}</p>
                                     <p>{props.props.campsite.tel}</p>
-                                    <p style={{color: "lightgrey"}}>
+                                    <p style={{color: "skyblue"}}>
                                         {
                                             props.props.campsite.themaEnvrnCl !==null ? <a>#{props.props.campsite.themaEnvrnCl}</a> : null
                                         }
