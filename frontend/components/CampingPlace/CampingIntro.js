@@ -38,8 +38,7 @@ function CampingIntro(props) {
         }
         
       }
-    console.log(imgList)
-    // console.log(imgList.length)
+
     return (
         <>
             <Container>
@@ -49,7 +48,7 @@ function CampingIntro(props) {
                         <img className={styles.capmingplace_main_pic} src="../../logo.png" />
                     </div> */}
                     
-                    <Carousel variant="dark" className={styles.capmingplace_main_pic_gather} onChange={(e) => console.log(e)}>
+                    <Carousel variant="dark" className={styles.capmingplace_main_pic_gather} >
                         {imgList.map((datas, index) => (
                             <Carousel.Item key={index}>
                                 <img
