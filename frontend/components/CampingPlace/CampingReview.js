@@ -36,7 +36,7 @@ function CampingReview(props) {
             <Container>
                 <div className={styles.campingreview_div}>
                     {
-                        dummy === null ? 
+                        dummy !== undefined ? 
                             (
                                 dummy.map((element, index) => {
                                     return (
