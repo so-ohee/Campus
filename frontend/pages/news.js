@@ -29,8 +29,6 @@ function news() {
         );
     }
 
-    console.log(dummy);
-
     return (
         <div>
             <Container>

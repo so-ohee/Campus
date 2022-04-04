@@ -16,12 +16,12 @@ function Filtersearch() {
     const [q3, setQ3] = useState([])
     const [q4, setQ4] = useState('')
     const [q5, setQ5] = useState('0')
-  
+
     const radios1 = [
-      { name: '일반야영장', value: '0' },
-      { name: '자동차야영장', value: '1' },
-      { name: '카라반', value: '2' },
-      { name: '글램핑', value: '3' },
+        { name: '일반야영장', value: '0' },
+        { name: '자동차야영장', value: '1' },
+        { name: '카라반', value: '2' },
+        { name: '글램핑', value: '3' },
     ]
     const radios2 = [
         { name: '산', value: '0' },
@@ -32,7 +32,7 @@ function Filtersearch() {
         { name: '도심', value: '5' },
         { name: '섬', value: '6' },
         { name: '호수', value: '7' },
-      ]
+    ]
     const radios3 = [
         { name: '놀이터', value: '0' },
         { name: '편의점', value: '1' },
@@ -46,12 +46,12 @@ function Filtersearch() {
         { name: '대형견', value: '0' },
         { name: '소형견', value: '1' },
         { name: '상관 없음', value: '2' },
-      ]
+    ]
     const radios5 = [
         { name: '인기순', value: '0' },
         { name: '가까운순', value: '1' },
         { name: '가나다순', value: '2' },
-      ]
+    ]
 
     const handleChange1 = (val) => setQ1(val);
     const handleChange2 = (val) => setQ2(val);

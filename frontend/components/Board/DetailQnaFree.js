@@ -103,8 +103,10 @@ function Detailreview(props) {
                             </>
                         ) :
                         (
-                            <div className={styles.detailreview_comment}>
-                                <h1 style={{textAlign: "center"}}>댓글이 없습니다</h1>
+                            <div className={styles.detailreview_comment2}>
+                                <img className={styles.navi_pic} src="../../NoResult.png" style={{width: "30%", marginBottom: "2%"}}/>
+                                <h2 style={{ fontWeight: "bold" }}>댓글이 없습니다.</h2>
+                                <h4>캠핑장에 대한 댓글을 입력해주세요.</h4>
                             </div>
                         )
                 }

@@ -85,6 +85,11 @@ export const campingBoard = async () => {
     return await axios.get(`${url}`+ `board`)
 }
 
+// 게시판 목록 출력 (카테고리볗)
+export const campingBoard_cate = async (category) => {
+    return await axios.get(`${url}`+ `board?category=` + `${category}`)
+}
+
 // 게시판 목록 출력 (상세조회)
 export const campingBoardMore = async (boardId) => {
     return await axios.get(`${url}`+`board`+ `/` + `${boardId}`)

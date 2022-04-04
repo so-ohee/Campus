@@ -2,13 +2,14 @@ import React, { useEffect, useState }  from 'react';
 import { Button, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import styles from "../../styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
-import { campingBoard, searchArticle } from "../../function/axios";
+import { campingBoard, searchArticle, campingBoard_cate } from "../../function/axios";
 
 function Boardlist(props) {
 
     const [dummy, setDummy] = useState([]);
     const [serachdummy, setSearchdummy] = useState(null);
     const [title, setTitle] = useState("");
+    const [key, setKey] = useState('전체');
 
     const submitSign = () => {
         props.propFunction("작성")
@@ -25,6 +26,14 @@ function Boardlist(props) {
 
     const submitSign3 = () => {
         props.propFunction("자유상세")
+    }
+
+    function categorymain() {
+        campingBoard().then((res) => setDummy(res.data.board));
+    }
+
+    function categorysearch(category) {
+        campingBoard_cate(category).then((res) => setDummy(res.data.board));
     }
 
     useEffect(() => {
@@ -51,48 +60,52 @@ function Boardlist(props) {
                     <div className={styles.boardlist_title_content}>
                         <p style={{ textAlignLast: "center" }}>제목</p>
                     </div>
-                    {/* <Form.Group style={{width:"300px", float: "right"}} controlId="formBasicPassword">
-                        <Form.Control type="password" placeholder="Password" />
-                    </Form.Group> */}
                     <input
-                            className={styles.boardlist_input}
-                            type="text"
-                            value={title}
-                            placeholder='캠핑장 이름을 입력하세요...'
-                            onChange={(e) => setTitle(e.target.value)}
-                            onKeyPress={(e) => {
-                                if (e.key === 'Enter') {
-                                    searchArticle(e.target.value)
-                                        .then((res) => setSearchdummy(res.data.board))
-                                        .catch((err) => {
-                                            console.log("다시 검색해주세요");
-                                        });
-                                }
-                            }}
-                        />
+                        className={styles.boardlist_input}
+                        type="text"
+                        value={title}
+                        placeholder='캠핑장 이름을 입력하세요...'
+                        onChange={(e) => setTitle(e.target.value)}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                searchArticle(e.target.value)
+                                    .then((res) => setSearchdummy(res.data.board))
+                                    .catch((err) => {
+                                        console.log("다시 검색해주세요");
+                                    });
+                            }
+                        }}
+                    />
                     <Button variant="success" style={{width: "100px"}} onClick={submitSign}>리뷰 작성</Button>
                 </Row>
 
-                <Tabs style={{width: "500px"}} defaultActiveKey="전체" id="uncontrolled-tab-example" className="mb-3">
+                <Tabs
+                    style={{ width: "500px" }}
+                    defaultActiveKey="전체"
+                    id="uncontrolled-tab-example"
+                    activeKey={key}
+                    onSelect={(k) => {
+                        if (k === "전체") {
+                            setKey(k);
+                            categorymain();
+                        } else {
+                            setKey(k);
+                            categorysearch(k);
+                        }  
+                    }}
+                    className="mb-3">
                     <Tab eventKey="전체" title="전체">
-                        
                     </Tab>
                     <Tab eventKey="후기" title="후기">
-                        
                     </Tab>
                     <Tab eventKey="Q&A" title="Q&A">
-                        
                     </Tab>
                     <Tab eventKey="자유" title="자유">
-                        
-                    </Tab>
-                    <Tab eventKey="뉴스" title="뉴스">
-                        
                     </Tab>
                 </Tabs>
             </Container>
 
-            <Container style={{height: "700px", marginTop: "-0.7%"}}>
+            <Container style={{height: "600px", marginTop: "-0.7%"}}>
                 <table className={styles.boardlist_table}>
                     <thead>
                         <tr className={styles.boardlist_thead_tr}>
@@ -168,7 +181,6 @@ function Boardlist(props) {
                                 ) : null
                             )
                     }
-                        
                 </table>
             </Container>
             <Pagination className={styles.boardlist_pagination}>{items}</Pagination>

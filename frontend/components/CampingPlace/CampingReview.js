@@ -30,8 +30,6 @@ function CampingReview(props) {
         })
     },[])
 
-    console.log(props);
-
     return (
         <>
             <Container>
