@@ -38,7 +38,7 @@ function CampingCard(params) {
                   >
                       {datas.addr1} {datas.addr2}
                   </Card.Subtitle>
-                  <Card.Text style={{ fontSize: "16px", color: "blue" }}>
+                  <Card.Text style={{ fontSize: "16px", color: "skyblue" }}>
                       {
                         datas.themaEnvrnCl !==null ? <a>#{`${datas.themaEnvrnCl}`.replaceAll(",", " #")}</a> : null
                       }
