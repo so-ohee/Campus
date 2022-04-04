@@ -51,8 +51,6 @@ function Detailreview() {
         );
     }
 
-    console.log(dummy)
-
     return (
         <div>
             <Container>                

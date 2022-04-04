@@ -43,7 +43,6 @@ function Detailreview() {
             commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment))
         );
     }
-
     
     return (
         <div>

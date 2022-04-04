@@ -46,7 +46,7 @@ function Reviewcamp() {
                             </tr>
                         </thead>
                         {
-                        dummy !== null ? 
+                        dummy !== undefined ? 
                         (
                             dummy.map((element, index) => {
                                 return (
