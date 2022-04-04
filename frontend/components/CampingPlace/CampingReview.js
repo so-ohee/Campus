@@ -81,9 +81,9 @@ function CampingReview(props) {
                                 </div>
                                 <div className='ms-1 mt-1'>
                                     <h5 className="fw-bold" onClick={() => window.open(element.url, '_blank')} style={{cursor:"pointer"}}>
-                                        {element.title.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"')}
+                                        {element.title.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"').replace(/&#39;/ig,"'").replace(/&lt;/ig,'<').replace(/&gt;/ig,'>')}
                                     </h5>
-                                    {element.contents.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"')}
+                                    {element.contents.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"').replace(/&#39;/ig,"'").replace(/&lt;/ig,'<').replace(/&gt;/ig,'>')}
                                     <h5 className="mt-2 mb-0">{element.datetime.slice(0,10)}</h5>
                                 </div>
                             </div>
