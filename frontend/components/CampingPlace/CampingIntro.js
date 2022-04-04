@@ -73,11 +73,6 @@ function CampingIntro(props) {
                     <div>
                         <h2 style={{fontWeight: "bold"}}>캠핑장 시설 정보</h2>
                     </div>
-                    <div className={styles.capmingplace_main_explain3}>
-                        <div>
-                            캠핑장 아이콘 들어가는 곳
-                        </div>
-                    </div>
 
                     {/* 캠핑장 정보(표) */}
                     <div className={styles.capmingplace_main_explaingraph}>
