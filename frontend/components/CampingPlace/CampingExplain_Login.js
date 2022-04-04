@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Col, Row } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingExplain.module.css";
 import { BookMark, VisitCheck } from "../../function/axios";
@@ -8,21 +8,30 @@ import WriteMain from '../Board/WriteMain';
 function CampingExplain(props) {
 
     const [datas, setDatas] = useState("");
-    const [bookmark, setBookmark] = useState("");
+    const [bookmark, setBookmark] = useState('');
     const [visit, setVisit] = useState("");
     const router = useRouter();
     
     function PressBookMark() {
-        BookMark(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setBookmark(res.data.bookmark), document.location.reload(true)});
+        BookMark(router.query.campingplace, localStorage.getItem("userUid"))
+        setBookmark(!bookmark)
+        // .then((res) => {setBookmark(res.data.bookmark), document.location.reload(true)});
     }
 
     function PressVisit() {
-        VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), document.location.reload(true)});
+        VisitCheck(router.query.campingplace, localStorage.getItem("userUid"))
+        setVisit(!visit)
+        // .then((res) => {setVisit(res.data.visit), document.location.reload(true)});
     }
 
     function WriteComment() {
         router.push('/board')
     }
+
+    useEffect(() => {
+        setBookmark(props.props.bookmark)
+        setVisit(props.props.visit)
+    }, [props])
 
     return (
         <>
@@ -53,7 +62,7 @@ function CampingExplain(props) {
                                         <Col>
                                             <div style={{ textAlign: "-webkit-center" }} >
                                                 {
-                                                    props.props.bookmark !== false ? 
+                                                    bookmark !== true ? 
                                                         <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../un_bookmark.png" />
                                                         : <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../bookmark.png" />
                                                 }
@@ -63,7 +72,7 @@ function CampingExplain(props) {
                                         <Col>
                                             <div style={{ textAlign: "-webkit-center" }}>
                                                 {
-                                                    props.props.visit !== false ? 
+                                                    visit !== true ? 
                                                         <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../empty_marker.png" />
                                                         : <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../marker.png" />
                                                 }

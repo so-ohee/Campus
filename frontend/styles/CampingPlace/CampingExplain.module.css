@@ -21,6 +21,7 @@
     width: 35px;
     height: 35px;
     margin-bottom: 10%;
+    cursor: pointer;
 }
 
 .campingexplain_icon2 {
@@ -37,6 +38,7 @@
     color: white;
     font-weight: bold;
     padding-top: 4%;
+    cursor: pointer;
 }
 
 .campingexplain_visit {
@@ -47,6 +49,7 @@
     color: white;
     font-weight: bold;
     padding-top: 4%;
+    cursor: pointer;
 }
 
 .campingexplain_rewiew {
@@ -57,6 +60,7 @@
     color: white;
     font-weight: bold;
     padding-top: 4%;
+    cursor: pointer;
 }
 
 .campingexplain_selectbar {
