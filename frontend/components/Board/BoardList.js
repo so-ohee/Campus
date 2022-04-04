@@ -83,7 +83,7 @@ function Boardlist(props) {
                     {
                         localStorage.getItem("Useruid") !== undefined ?
                             (
-                                <Button variant="success" style={{width: "100px"}} onClick={submitSign}>리뷰 작성</Button>
+                                <Button variant="success" style={{width: "100px"}} onClick={submitSign}>작성</Button>
                             ) : 
                             (
                                 null
