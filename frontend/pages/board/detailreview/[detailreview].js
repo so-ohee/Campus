@@ -16,8 +16,9 @@ function Detailreview() {
         props.propData(datas)
     }
 
+    // 게시판으로 가기
     const submitSign2 = () => {
-        history.push('/board');
+        router.push('/board')
     }
 
     // 게시글 상세정보 받아오기
@@ -35,7 +36,7 @@ function Detailreview() {
             // 댓글 조회
             commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment));
         }
-    }, [router.isReady, dummy])
+    }, [router.isReady])
 
     // 게시글 삭제
     const deleteArticle = () => {
