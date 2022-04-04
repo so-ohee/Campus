@@ -11,6 +11,7 @@ function Boardlist(props) {
     const [serachdummy, setSearchdummy] = useState(null);
     const [title, setTitle] = useState("");
     const [key, setKey] = useState('전체');
+    const [userid, setUserid] = useState("");
     const router = useRouter();
 
     // 페이지네이션
@@ -46,7 +47,7 @@ function Boardlist(props) {
 
     function categorysearch(category, page) {
         campingBoard_cate(category, page).then((res) => {
-            console.log(res)
+            // console.log(res)
             setPage(1)
             setDummy(res.data.board)
             makeList(1,res.data.totalPage)
@@ -57,11 +58,12 @@ function Boardlist(props) {
     useEffect(() => {
         if (router.isReady) {
             campingBoard(1).then((res) => {
-                console.log(res)   
+                // console.log(res)   
                 setDummy(res.data.board)
                 makeList(1,res.data.totalPage)
                 setTotalPage(res.data.totalPage)
             });
+            setUserid(localStorage.getItem('userUid'))
         }
     }, [router.isReady])
     
@@ -91,7 +93,7 @@ function Boardlist(props) {
             })
         }
     }
-    console.log(totalPage)
+
     // Pagination
     const makeList = (p, t) => {
         let lst = []
@@ -127,7 +129,16 @@ function Boardlist(props) {
                             }
                         }}
                     />
-                    <Button variant="success" style={{width: "100px"}} onClick={submitSign}>리뷰 작성</Button>
+                    {
+                        userid !== undefined ?
+                            (
+                                <Button variant="success" style={{width: "100px"}} onClick={submitSign}>작성</Button>
+                            ) : 
+                            (
+                                null
+                            )
+                    }
+                    
                 </Row>
 
                 <Tabs
