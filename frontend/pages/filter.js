@@ -38,7 +38,7 @@ function Filter() {
         router.push(`/campingplace/${camping_id}`)
     }
 
-    console.log(campings);
+    // console.log(campings);
 
     return (
         <>

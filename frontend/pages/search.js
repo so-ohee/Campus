@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Tab, Tabs } from 'react-bootstrap';
 import styles from "../styles/Search/Search.module.css";
 import AreaSearch from '../components/Search/AreaSearch.js';

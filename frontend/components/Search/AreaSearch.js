@@ -1,6 +1,6 @@
 // import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Col, Form, Row, Button, Container } from 'react-bootstrap';
+import { Col, Form, Row, Button, Container, Pagination } from 'react-bootstrap';
 import styles from "../../styles/Search/AreaSearch.module.css";
 import  { searchArea }  from "../../function/axios";
 import { useRouter } from 'next/router';
@@ -14,6 +14,9 @@ function Areasearch() {
     const [addr2, setAddr2] = useState("전체");
     const [addr2List, setAddr2List] = useState(['전체'])
     const [datas, setDatas] = useState([]);
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState('')
+    const [pageList, setPageList] = useState([])
 
     const addr1List = [
         '전체',
@@ -66,17 +69,27 @@ function Areasearch() {
         setAddr2(event.target.value);
     };
 
-    const onSearch = () => {
-        searchArea(addr1,addr2,keyword,1)
+    const onSearch = (p) => {
+        setPage(p)
+        searchArea(addr1,addr2,keyword,p)
         .then((res) => {
-            console.log(res)
             if (res.data.campsite){
                 setDatas(res.data.campsite)
+                setTotalPage(res.data.totalPage)
+                makeList(p,res.data.totalPage)
             }else{
                 setDatas([])
             }
         })
-        // router.push(`/searcharea?addr1=${addr1}&addr2=${addr2}&keyword=${keyword}&page=1`)
+    }
+
+    const makeList = (p, t) => {
+        let lst = []
+        const start = parseInt((p-1)/5)*5+1
+        for (let i = start; i < Math.min(start+5,t+1); i++) {
+            lst.push(i)
+        }
+        setPageList(lst)
     }
 
     return (
@@ -101,11 +114,16 @@ function Areasearch() {
                 <Row className={styles.areasearch_row}>
                     <Col xs={10} className={styles.areasearch_col2}>
                     <Form.Group className={styles.areasearch_form}>
-                        <Form.Control style={{width:"120%"}} onChange={(e) => setKeyword(e.target.value)} placeholder="검색어를 입력해주세요." />
+                        <Form.Control 
+                            style={{width:"120%"}} 
+                            onChange={(e) => setKeyword(e.target.value)} 
+                            placeholder="검색어를 입력해주세요." 
+                            onKeyPress={(e) => {if(e.key=='Enter'){onSearch(1)}}}
+                        />
                     </Form.Group>
                     </Col>
                     <Col xs={2} className={styles.areasearch_col3}>
-                        <Button onClick={() => onSearch()}>검색</Button>
+                        <Button onClick={() => onSearch(1)}>검색</Button>
                     </Col>
                 </Row>
             </div>
@@ -128,6 +146,42 @@ function Areasearch() {
                     })
                 }
                 </Row>
+            </Container>
+
+            <Container style={{ marginTop: "2%", marginBottom: "2%" }}>
+            {
+                datas.length > 0 ?
+                <Pagination style={{justifyContent: "center"}}>
+                    <Pagination.First 
+                        disabled={page === 1}
+                        onClick={() => onSearch(Math.max(1,pageList[0]-5))}
+                    />
+                    <Pagination.Prev 
+                        disabled={page === 1}
+                        onClick={() => onSearch(page-1)}
+                    />
+                    {pageList.map((page_, idx) => (
+                        <Pagination.Item
+                            key={idx}
+                            id={`page-${idx}`}
+                            active={page_ === page}
+                            onClick={() => onSearch(page_)}
+                        >
+                            {page_}
+                        </Pagination.Item>
+                    ))}
+                    <Pagination.Next 
+                        disabled={page === totalPage}
+                        onClick={() => onSearch(page+1)}
+                    />
+                    <Pagination.Last 
+                        disabled={page === totalPage}
+                        onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
+                    />
+                  </Pagination>
+                  : 
+                  null
+            }
             </Container>
         </>
     );
