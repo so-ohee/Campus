@@ -51,7 +51,7 @@ function Detailreview() {
         );
     }
 
-    console.log(datas)
+    console.log(dummy)
 
     return (
         <div>
@@ -175,6 +175,7 @@ function Detailreview() {
                                         return (
                                             <Row sm key={index} style={{textAlignLast: "center"}}>
                                                 <CommentCard
+                                                    userUid={element.userUid}
                                                     commentId={element.commentId}
                                                     src={element.profile}
                                                     name={element.name}

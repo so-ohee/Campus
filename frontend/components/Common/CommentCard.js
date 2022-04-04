@@ -10,6 +10,8 @@ function commentcard(params) {
         commentDelete(commentId);
     }
 
+    console.log(params)
+
     return (
         <>
             {
@@ -35,14 +37,20 @@ function commentcard(params) {
                                         </Col>
                                     </Row>
                                 </Col>
-                                <Col className={styles.commentcard_col} xs={2}>
-                                    <Row style={{justifyContent: "center"}}>
-                                        <Button variant="success" className={styles.commentcard_button1} onClick={() => setState(!state)}>수정</Button>
-                                    </Row>
-                                    <Row style={{justifyContent: "center"}}>
-                                        <Button variant="success" className={styles.commentcard_button2} onClick={() => deleteComment(params.commentId)}>삭제</Button>
-                                    </Row>
-                                </Col>
+                                {
+                                    localStorage.getItem("userUid") == params.userUid ?
+                                        (
+                                            <Col className={styles.commentcard_col} xs={2}>
+                                                <Row style={{justifyContent: "center"}}>
+                                                    <Button variant="success" className={styles.commentcard_button1} onClick={() => setState(!state)}>수정</Button>
+                                                </Row>
+                                                <Row style={{justifyContent: "center"}}>
+                                                    <Button variant="success" className={styles.commentcard_button2} onClick={() => deleteComment(params.commentId)}>삭제</Button>
+                                                </Row>
+                                            </Col>
+                                        ) : null
+                                }
+                                
                             </Row>
                         </Container>
                     ) : 
@@ -79,11 +87,16 @@ function commentcard(params) {
                                         </Col>
                                     </Row>
                                 </Col>
-                                <Col className={styles.commentcard_col} xs={2}>
-                                    <Row style={{justifyContent: "center"}}>
-                                        <Button variant="success" className={styles.commentcard_button2} onClick={() => deleteComment(params.commentId)}>삭제</Button>
-                                    </Row>
-                                </Col>
+                                {
+                                    localStorage.getItem("userUid") == params.userUid ?
+                                        (
+                                            <Col className={styles.commentcard_col} xs={2}>
+                                                <Row style={{ justifyContent: "center" }}>
+                                                    <Button variant="success" className={styles.commentcard_button2} onClick={() => deleteComment(params.commentId)}>삭제</Button>
+                                                </Row>
+                                            </Col>
+                                        ) : null
+                                }
                             </Row>
                         </Container>
                     )
