@@ -35,7 +35,7 @@ function Detailreview() {
             // 댓글 조회
             commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment));
         }
-    }, [router.isReady])
+    }, [router.isReady, dummy])
 
     // 게시글 삭제
     const deleteArticle = () => {
@@ -44,16 +44,14 @@ function Detailreview() {
 
     // 댓글 작성
     function writeRecomment(props) {
-        sendComment(datas.boardId, props, localStorage.getItem("userUid"));
-        document.location.reload(true)        
+        sendComment(datas.boardId, props, localStorage.getItem("userUid")).then(() => 
+            commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment))
+        );
     }
 
     return (
         <div>
-            {
-                datas && 
-                (
-                    <Container>                
+            <Container>                
                 <div>
                     <Row className={styles.detailreview_buttons}>
                         <Button variant="success" className={styles.detailreview_button} onClick={submitSign2}>뒤로가기</Button>
@@ -186,12 +184,7 @@ function Detailreview() {
                             </div>
                         )
                 }
-
-                
             </Container>
-                )
-            }
-            
         </div>
     );
 }
