@@ -24,14 +24,16 @@ function Detailreview() {
 
     // 게시글 상세정보 받아오기
     const [datas, setDatas] = useState([]);
-    const [pic, setPic] = useState([]);
+    const [pic, setPic] = useState("");
     const [dummy, setDummy] = useState([]);
     let history = useHistory();
 
     useEffect(() => {
         if (router.isReady) {
             campingBoardMore(router.query.detailreview).then((res) => {
-                setPic(res.data.board.files[0].filePath)
+                {
+                    res.data.board.files.length !== 0 ? setPic(res.data.board.files[0].filePath) : null
+                }
                 setDatas(res.data.board)
             });
             // 댓글 조회
@@ -50,6 +52,8 @@ function Detailreview() {
             commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment))
         );
     }
+
+    console.log(pic)
 
     return (
         <div>
@@ -139,10 +143,15 @@ function Detailreview() {
                     </Row>
                 </div>
                 
-                <div style={{textAlign: "-webkit-center", marginTop: "2%", marginBottom: "2%"}}>
-                    <img src={pic} style={{width: "500px", height: "350px"}} />
-                </div>
-
+                {
+                    pic !== "" ? 
+                        (
+                            <div style={{textAlign: "-webkit-center", marginTop: "2%", marginBottom: "2%"}}>
+                                <img src={pic} style={{width: "500px", height: "350px"}} />
+                            </div>
+                        ) : null
+                }
+                
                 <div className={styles.detailreview_detail}>
                     {datas.content}
                 </div>
