@@ -6,8 +6,11 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
 import { sendUserUid } from "../../function/axios";
+import { useRouter } from 'next/router';
 
 function Login(props) {
+
+    const router = useRouter();
 
     const onSocialClick = async (event) => {
         const {
@@ -28,7 +31,7 @@ function Login(props) {
             localStorage.setItem("token", data.user.accessToken);
             // user Uid DB 전송하기
             sendUserUid(data.user.uid, data.user.displayName, data.user.photoURL);
-            location.reload();
+            router.push('/')
         }
     };
 

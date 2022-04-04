@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 function Detailreview() {
 
     const router = useRouter();
+    const [userid, setUserid] = useState("");
     const [dummy, setDummy] = useState([]);
     
     const ratingChanged = (newRating) => {
@@ -43,6 +44,10 @@ function Detailreview() {
             commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment))
         );
     }
+
+    useEffect(() => {
+        setUserid(localStorage.getItem('userUid'))
+    }, [])
     
     return (
         <div>
@@ -72,7 +77,7 @@ function Detailreview() {
                                 }
                             </Row>
                             {
-                                localStorage.getItem("userUid") == datas.userUid ?
+                                userid == datas.userUid ?
                                     (
                                         <Row style={{ justifyContent: "right", marginTop: "5%" }}>
                                             <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailqnafree)}>수정</Button>
