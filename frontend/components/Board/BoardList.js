@@ -11,6 +11,7 @@ function Boardlist(props) {
     const [serachdummy, setSearchdummy] = useState(null);
     const [title, setTitle] = useState("");
     const [key, setKey] = useState('전체');
+    const [userid, setUserid] = useState("");
     const router = useRouter();
 
     const submitSign = () => {
@@ -41,6 +42,7 @@ function Boardlist(props) {
     useEffect(() => {
         if (router.isReady) {
             campingBoard().then((res) => setDummy(res.data.board));
+            setUserid(localStorage.getItem('userUid'))
         }
     }, [router.isReady])
     
@@ -81,7 +83,7 @@ function Boardlist(props) {
                         }}
                     />
                     {
-                        localStorage.getItem("Useruid") !== undefined ?
+                        userid !== undefined ?
                             (
                                 <Button variant="success" style={{width: "100px"}} onClick={submitSign}>작성</Button>
                             ) : 

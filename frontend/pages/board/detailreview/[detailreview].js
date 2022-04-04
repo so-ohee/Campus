@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 function Detailreview() {
 
     const router = useRouter();
+    const [userid, setUserid] = useState("");
 
     const submitSign = (boardId) => {
         // props.propFunction("수정")
@@ -38,6 +39,7 @@ function Detailreview() {
             });
             // 댓글 조회
             commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment));
+            setUserid(localStorage.getItem('userUid'))
         }
     }, [router.isReady])
 
@@ -130,7 +132,7 @@ function Detailreview() {
                             </Row>
 
                             {
-                                localStorage.getItem("userUid") == datas.userUid ?
+                                userid == datas.userUid ?
                                     (
                                         <Row style={{ justifyContent: "right", marginTop: "15%", marginRight: "3%" }}>
                                             <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailreview)}>수정</Button>

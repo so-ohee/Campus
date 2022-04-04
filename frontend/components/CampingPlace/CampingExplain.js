@@ -20,6 +20,10 @@ function CampingExplain(props) {
     function PressVisit() {
         VisitCheck(router.query.campingplace, localStorage.getItem("userUid")).then((res) => {setVisit(res.data.visit), console.log(res)});
     }
+
+    useEffect(() => {
+        setUserid(localStorage.getItem('userUid'))
+    }, [])
     
     return (
         <>
@@ -43,36 +47,35 @@ function CampingExplain(props) {
                                     }
                                 </p>
                             </Col>
-                            <Col xs={4} >
-                                <Row>
-                                    <Col>
-                                        <div style={{ textAlign: "-webkit-center" }} >
-                                            {
-                                                props.props.bookmark == false ? 
-                                                    <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../un_bookmark.png" />
-                                                    : <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../bookmark.png" />
-                                            }
-                                            <p className={styles.campingexplain_reserve}>북마크</p>
-                                        </div>
-                                    </Col>
-                                    <Col>
-                                        <div style={{ textAlign: "-webkit-center" }}>
-                                            {
-                                                props.props.visit == false ? 
-                                                    <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../empty_marker.png" />
-                                                    : <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../marker.png" />
-                                            }
-                                            <p className={styles.campingexplain_visit}>방문여부</p>
-                                        </div>
-                                    </Col>
-                                    <Col>
-                                        <div style={{textAlign: "-webkit-center"}}>
-                                            <img className={styles.campingexplain_icon} src="../../comment.png" />
-                                            <p className={styles.campingexplain_rewiew}>리뷰작성</p>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Col>
+                                (
+                                <Col xs={4} >
+                                    <Row>
+                                        <Col>
+                                            <div style={{ textAlign: "-webkit-center" }} > props.props.bookmark == false ? 
+                                                        <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../un_bookmark.png" />
+                                                        : <img className={styles.campingexplain_icon} onClick={() => PressBookMark()} src="../../bookmark.png" />
+                                                <p className={styles.campingexplain_reserve}>북마크</p>
+                                            </div>
+                                        </Col>
+                                        <Col>
+                                            <div style={{ textAlign: "-webkit-center" }}>
+                                                {
+                                                    props.props.visit == false ? 
+                                                        <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../empty_marker.png" />
+                                                        : <img className={styles.campingexplain_icon} onClick={() => PressVisit()} src="../../marker.png" />
+                                                }
+                                                <p className={styles.campingexplain_visit}>방문여부</p>
+                                            </div>
+                                        </Col>
+                                        <Col>
+                                            <div style={{textAlign: "-webkit-center"}}>
+                                                <img className={styles.campingexplain_icon} src="../../comment.png" />
+                                                <p className={styles.campingexplain_rewiew}>리뷰작성</p>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            )                         
                         </Row>
                     </div>
                 </Row>
