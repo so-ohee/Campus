@@ -5,7 +5,7 @@ import CommentCard from "../../../components/Common/CommentCard";
 import { campingBoardMore, commentSearch, sendComment, articleDelete } from "../../../function/axios";
 import { useRouter } from 'next/router';
 
-function Detailreview(props) {
+function Detailreview() {
 
     const router = useRouter();
     const [dummy, setDummy] = useState([]);
@@ -13,8 +13,8 @@ function Detailreview(props) {
     const ratingChanged = (newRating) => {
         console.log(newRating);
     };
-    const submitSign = () => {
-        props.propFunction("수정")
+    const submitSign = (boardId) => {
+        router.push(`/board/modifyreview/${boardId}`);
     }
 
     // 게시판으로 가기
@@ -73,7 +73,7 @@ function Detailreview(props) {
                                 }
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
-                                <Button variant="success" className={styles.detailreview_button1} onClick={submitSign}>수정</Button>
+                                <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailqnafree)}>수정</Button>
                                 <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
                             </Row>
                         </Col>
