@@ -35,27 +35,31 @@ function Modifyreview() {
     }
 
     useEffect(() => {
-        const newform = {
-            "boardId": boardId,
-            "title": title,
-            "content": content,
+        if (router.isReady) {
+            const newform = {
+                "boardId": boardId,
+                "title": title,
+                "content": content,
+            }
+            setDataDto(newform);
         }
-        setDataDto(newform);
-    }, [boardId, title, content, files])
+    }, [router.isReady, boardId, title, content, files])
     
     useEffect(() => {
-        campingBoardMore(router.query.modifyreview).then((res) => {
-            console.log(res.data.board);
-            setBoardId(res.data.board.boardId)
-            setTitle(res.data.board.title)
-            setContent(res.data.board.content)
-            setFiles(res.data.board.profile)
-            setService(res.data.board.service)
-            setEnvironment(res.data.board.environment)
-            setFacility(res.data.board.facility)
-            setDatas(res.data.board)
-        });
-    }, [])
+        if (router.isReady) {
+            campingBoardMore(router.query.modifyreview).then((res) => {
+                console.log(res.data.board);
+                setBoardId(res.data.board.boardId)
+                setTitle(res.data.board.title)
+                setContent(res.data.board.content)
+                setFiles(res.data.board.profile)
+                setService(res.data.board.service)
+                setEnvironment(res.data.board.environment)
+                setFacility(res.data.board.facility)
+                setDatas(res.data.board)
+            });
+        }
+    }, [router.isReady])
 
     return (
         <div>

@@ -33,8 +33,8 @@ function Detailreview() {
     }, [router.isReady])
 
     // 게시글 삭제
-    const deleteArticle = () => {
-        articleDelete(datas.boardId);
+    const deleteArticle = (boardId) => {
+        articleDelete(boardId);
     }
 
     // 댓글 작성
@@ -74,7 +74,7 @@ function Detailreview() {
                             </Row>
                             <Row style={{justifyContent: "right", marginTop: "5%"}}>
                                 <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailqnafree)}>수정</Button>
-                                <Button variant="success" className={styles.detailreview_button2} onClick={deleteArticle}>삭제</Button>
+                                <Button variant="success" className={styles.detailreview_button2} onClick={() => deleteArticle(router.query.detailqnafree)}>삭제</Button>
                             </Row>
                         </Col>
                     </Row>
