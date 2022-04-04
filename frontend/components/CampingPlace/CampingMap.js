@@ -100,7 +100,7 @@ function CampingMap(props) {
         headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setMartList(res.data.documents)
           setMartPositions(res.data.documents)
         })
@@ -114,7 +114,7 @@ function CampingMap(props) {
         headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setCsList(res.data.documents)
           setCsPositions(res.data.documents)
         })
@@ -128,7 +128,7 @@ function CampingMap(props) {
         headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setFoodList(res.data.documents)
           setFoodPositions(res.data.documents)
         })
@@ -142,7 +142,7 @@ function CampingMap(props) {
         headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setHospitalList(res.data.documents)
           setHospitalPositions(res.data.documents)
         })
