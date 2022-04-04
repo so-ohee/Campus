@@ -72,10 +72,15 @@ function Detailreview() {
                                     : <p>{datas.name} {datas.updateTime} 수정</p>
                                 }
                             </Row>
-                            <Row style={{justifyContent: "right", marginTop: "5%"}}>
-                                <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailqnafree)}>수정</Button>
-                                <Button variant="success" className={styles.detailreview_button2} onClick={() => deleteArticle(router.query.detailqnafree)}>삭제</Button>
-                            </Row>
+                            {
+                                localStorage.getItem("userUid") == datas.userUid ?
+                                    (
+                                        <Row style={{ justifyContent: "right", marginTop: "5%" }}>
+                                            <Button variant="success" className={styles.detailreview_button1} onClick={() => submitSign(router.query.detailqnafree)}>수정</Button>
+                                            <Button variant="success" className={styles.detailreview_button2} onClick={() => deleteArticle(router.query.detailqnafree)}>삭제</Button>
+                                        </Row>
+                                    ) : null
+                            }
                         </Col>
                     </Row>
                 </div>
@@ -96,6 +101,7 @@ function Detailreview() {
                                         return (
                                             <Row sm key={index} style={{textAlignLast: "center"}}>
                                                 <CommentCard
+                                                    userUid={element.userUid}
                                                     commentId={element.commentId}
                                                     src={element.profile}
                                                     name={element.name}
