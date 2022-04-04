@@ -48,7 +48,6 @@ function Modifyreview() {
     useEffect(() => {
         if (router.isReady) {
             campingBoardMore(router.query.modifyreview).then((res) => {
-                console.log(res.data.board);
                 setBoardId(res.data.board.boardId)
                 setTitle(res.data.board.title)
                 setContent(res.data.board.content)
