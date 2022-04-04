@@ -81,13 +81,13 @@ export const viewCamping = async () => {
 };
 
 // 게시판 목록 출력 (전체)
-export const campingBoard = async () => {
-    return await axios.get(`${url}`+ `board`)
+export const campingBoard = async (page) => {
+    return await axios.get(`${url}board?page=${page}`)
 }
 
 // 게시판 목록 출력 (카테고리볗)
-export const campingBoard_cate = async (category) => {
-    return await axios.get(`${url}`+ `board?category=` + `${category}`)
+export const campingBoard_cate = async (category, page) => {
+    return await axios.get(`${url}board?category=${category}&page=${page}`)
 }
 
 // 게시판 목록 출력 (상세조회)

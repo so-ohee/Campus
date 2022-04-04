@@ -13,6 +13,11 @@ function Boardlist(props) {
     const [key, setKey] = useState('전체');
     const router = useRouter();
 
+    // 페이지네이션
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState('')
+    const [pageList, setPageList] = useState([])
+
     const submitSign = () => {
         props.propFunction("작성")
     }
@@ -31,28 +36,70 @@ function Boardlist(props) {
     }
 
     function categorymain() {
-        campingBoard().then((res) => setDummy(res.data.board));
+        campingBoard(1).then((res) => {
+            setPage(1)
+            setDummy(res.data.board)
+            makeList(1,res.data.totalPage)
+            setTotalPage(res.data.totalPage)
+        });
     }
 
-    function categorysearch(category) {
-        campingBoard_cate(category).then((res) => setDummy(res.data.board));
+    function categorysearch(category, page) {
+        campingBoard_cate(category, page).then((res) => {
+            console.log(res)
+            setPage(1)
+            setDummy(res.data.board)
+            makeList(1,res.data.totalPage)
+            setTotalPage(res.data.totalPage)
+        });
     }
 
     useEffect(() => {
         if (router.isReady) {
-            campingBoard().then((res) => setDummy(res.data.board));
+            campingBoard(1).then((res) => {
+                console.log(res)   
+                setDummy(res.data.board)
+                makeList(1,res.data.totalPage)
+                setTotalPage(res.data.totalPage)
+            });
         }
     }, [router.isReady])
     
+    const onSearch = (p) => {
+        setPage(p)
+        if (key === '전체'){
+            campingBoard(p)
+            .then((res) => {
+                if (res.data.board){
+                    setDummy(res.data.board)
+                    setTotalPage(res.data.totalPage)
+                    makeList(p,res.data.totalPage)
+                }else{
+                    setDummy([])
+                }
+            })
+        }else{
+            campingBoard_cate(key, p)
+            .then((res) => {
+                if (res.data.board){
+                    setDummy(res.data.board)
+                    setTotalPage(res.data.totalPage)
+                    makeList(p,res.data.totalPage)
+                }else{
+                    setDummy([])
+                }
+            })
+        }
+    }
+    console.log(totalPage)
     // Pagination
-    let active = 2;
-    let items = [];
-    for (let number = 1; number <= 5; number++) {
-        items.push(
-            <Pagination.Item key={number} active={number === active}>
-            {number}
-            </Pagination.Item>,
-        );
+    const makeList = (p, t) => {
+        let lst = []
+        const start = parseInt((p-1)/5)*5+1
+        for (let i = start; i < Math.min(start+5,t+1); i++) {
+            lst.push(i)
+        }
+        setPageList(lst)
     }
 
     return (
@@ -94,7 +141,7 @@ function Boardlist(props) {
                             categorymain();
                         } else {
                             setKey(k);
-                            categorysearch(k);
+                            categorysearch(k,1);
                         }  
                     }}
                     className="mb-3">
@@ -187,7 +234,35 @@ function Boardlist(props) {
                     }
                 </table>
             </Container>
-            <Pagination className={styles.boardlist_pagination}>{items}</Pagination>
+
+            <Pagination className={styles.boardlist_pagination}>
+                    <Pagination.First 
+                        disabled={page === 1}
+                        onClick={() => onSearch(Math.max(1,pageList[0]-5))}
+                    />
+                    <Pagination.Prev 
+                        disabled={page === 1}
+                        onClick={() => onSearch(page-1)}
+                    />
+                    {pageList.map((page_, idx) => (
+                        <Pagination.Item
+                            key={idx}
+                            id={`page-${idx}`}
+                            active={page_ === page}
+                            onClick={() => onSearch(page_)}
+                        >
+                            {page_}
+                        </Pagination.Item>
+                    ))}
+                    <Pagination.Next 
+                        disabled={page === totalPage || totalPage === undefined}
+                        onClick={() => onSearch(page+1)}
+                    />
+                    <Pagination.Last 
+                        disabled={page === totalPage || totalPage === undefined}
+                        onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
+                    />
+                  </Pagination>
         </div>
     );
 }

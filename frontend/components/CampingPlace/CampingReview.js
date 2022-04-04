@@ -23,7 +23,7 @@ function CampingReview(props) {
             headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
         })
             .then((res) => {
-            // console.log(res);
+            console.log(res);
             setBlogs(res.data.documents)
             })
             .catch((err) => {
@@ -76,9 +76,11 @@ function CampingReview(props) {
                     return (
                         <div key={index}>
                             <div className="d-flex ">
-                                <div  style={{ width: "130px", height:"130px"}} >
-                                <img  src={element.thumbnail} onClick={() => window.open(element.url, '_blank')} style={{cursor:"pointer"}}/>
-                                </div>
+                                { element.thumbnail !== "" ?
+                                    <div  style={{ width: "130px", height:"130px"}} >
+                                    <img  src={element.thumbnail} onClick={() => window.open(element.url, '_blank')} style={{cursor:"pointer"}}/>
+                                    </div>
+                                : null}
                                 <div className='ms-1 mt-1'>
                                     <h5 className="fw-bold" onClick={() => window.open(element.url, '_blank')} style={{cursor:"pointer"}}>
                                         {element.title.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"').replace(/&#39;/ig,"'").replace(/&lt;/ig,'<').replace(/&gt;/ig,'>')}
