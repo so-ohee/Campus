@@ -10,6 +10,7 @@ function CampingExplain(props) {
     const [datas, setDatas] = useState("");
     const [bookmark, setBookmark] = useState('');
     const [visit, setVisit] = useState("");
+    const [review, setReview] = useState("")
     const router = useRouter();
     
     function PressBookMark() {
@@ -19,8 +20,12 @@ function CampingExplain(props) {
     }
 
     function PressVisit() {
+        if (review){
+            alert('리뷰를 쓴 캠핑장은 방문여부를 해제할 수 없어요!')
+        }else{
         VisitCheck(router.query.campingplace, localStorage.getItem("userUid"))
         setVisit(!visit)
+        }
         // .then((res) => {setVisit(res.data.visit), document.location.reload(true)});
     }
 
@@ -31,6 +36,7 @@ function CampingExplain(props) {
     useEffect(() => {
         setBookmark(props.props.bookmark)
         setVisit(props.props.visit)
+        setReview(props.props.review)
     }, [props])
 
     return (
