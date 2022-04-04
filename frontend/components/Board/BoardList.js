@@ -55,6 +55,8 @@ function Boardlist(props) {
         );
     }
 
+    console.log(dummy);
+
     return (
         <div>
             <Container >
@@ -123,7 +125,7 @@ function Boardlist(props) {
                     {
                         serachdummy == null ?
                             (
-                                dummy !== null ? 
+                                dummy !== undefined ? 
                                 (
                                     dummy.map((element, index) => {
                                         return (
