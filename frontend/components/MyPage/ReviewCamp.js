@@ -25,8 +25,6 @@ function Reviewcamp() {
             .then((res) => setDummy(res.data.board));
     }, []);
 
-    console.log(dummy)
-
     return (
         <>
             <div className={styles.reviewcamp_div1}>
