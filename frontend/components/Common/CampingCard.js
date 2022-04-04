@@ -14,7 +14,7 @@ function CampingCard(params) {
     if (localStorage.getItem("userUid")!==null) {
       setUserids(localStorage.getItem("userUid"))
     }
-  }, [])
+  }, [params])
   
   const moveCamping = () => {
     localStorage.setItem("campid", params.campingId);

@@ -68,11 +68,16 @@ function Areasearch() {
 
     const onSearch = () => {
         searchArea(addr1,addr2,keyword,1)
-        .then((res) => setDatas(res.data.campsite))
+        .then((res) => {
+            console.log(res)
+            if (res.data.campsite){
+                setDatas(res.data.campsite)
+            }else{
+                setDatas([])
+            }
+        })
         // router.push(`/searcharea?addr1=${addr1}&addr2=${addr2}&keyword=${keyword}&page=1`)
     }
-
-    // console.log(datas);
 
     return (
         <>
