@@ -31,14 +31,14 @@ function CampingCard(params) {
               }        
               
               <Card.Body>
-                  <Card.Title style={{ fontSize: "24px", fontWeight: "bold" }}>{datas.facltNm}</Card.Title>
+                  <Card.Title style={{ fontSize: "140%", fontWeight: "bold" }}>{datas.facltNm}</Card.Title>
                   <Card.Subtitle
                     className="mb-2 text-muted"
-                    style={{ fontSize: "14px" }}
+                    style={{ fontSize: "90%" }}
                   >
                       {datas.addr1} {datas.addr2}
                   </Card.Subtitle>
-                  <Card.Text style={{ fontSize: "16px", color: "skyblue" }}>
+                  <Card.Text style={{ fontSize: "100%", color: "skyblue" }}>
                       {
                         datas.themaEnvrnCl !==null ? <a>#{`${datas.themaEnvrnCl}`.replaceAll(",", " #")}</a> : null
                       }
