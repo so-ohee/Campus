@@ -102,7 +102,7 @@ function Boardlist(props) {
                     </Tab>
                     <Tab eventKey="후기" title="후기">
                     </Tab>
-                    <Tab eventKey="Q&A" title="Q&A">
+                    <Tab eventKey="Q%26A" title="Q&A">
                     </Tab>
                     <Tab eventKey="자유" title="자유">
                     </Tab>
@@ -123,7 +123,7 @@ function Boardlist(props) {
                     {
                         serachdummy == null ?
                             (
-                                dummy !== null ? 
+                                dummy !== undefined ? 
                                 (
                                     dummy.map((element, index) => {
                                         return (
