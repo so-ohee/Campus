@@ -3,6 +3,7 @@ import { Button, Container, Form, Row, Tab, Tabs} from 'react-bootstrap';
 import styles from "../../styles/Board/BoardList.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 import { campingBoard, searchArticle, campingBoard_cate } from "../../function/axios";
+import { useRouter } from 'next/router';
 
 function Boardlist(props) {
 
@@ -10,13 +11,15 @@ function Boardlist(props) {
     const [serachdummy, setSearchdummy] = useState(null);
     const [title, setTitle] = useState("");
     const [key, setKey] = useState('전체');
+    const router = useRouter();
 
     const submitSign = () => {
         props.propFunction("작성")
     }
 
-    const submitSign2 = () => {
-        props.propFunction("상세")
+    const submitSign2 = (boardId) => {
+        // props.propFunction("상세")
+        router.push(`board/detailreview/${boardId}`);
         
     }
 
@@ -37,8 +40,10 @@ function Boardlist(props) {
     }
 
     useEffect(() => {
-        campingBoard().then((res) => setDummy(res.data.board));
-    }, [])
+        if (router.isReady) {
+            campingBoard().then((res) => setDummy(res.data.board));
+        }
+    }, [router.isReady])
     
     // Pagination
     let active = 2;
@@ -126,7 +131,7 @@ function Boardlist(props) {
                                             <tbody key={index}>
                                                 {
                                                     element.category === "후기" && 
-                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
+                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
@@ -136,7 +141,7 @@ function Boardlist(props) {
                                                 }
                                                 {
                                                     element.category !== "후기" && 
-                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
+                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
