@@ -1,7 +1,8 @@
-import { Card, Row } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingUse.module.css";
 import { useEffect, useState } from 'react';
 import { similar } from "../../function/axios";
+import CampingCard from "../../components/Common/CampingCard";
 // import { useRouter } from 'next/router';
 
 
@@ -23,7 +24,7 @@ function CampingUse(props) {
     return (
         <>
             <div>
-                <Row>
+                {/* <Row>
                     {campings.map((datas, index) => (
                     <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.camping_id)}>
                         {
@@ -48,7 +49,25 @@ function CampingUse(props) {
                         </Card.Body>
                     </Card>
                     ))}
-                </Row>
+                </Row> */}
+
+                <Row>
+                    {
+                        campings.map((element, index) => {
+                            return (
+                                <Col sm key={index} style={{marginTop: "3%"}} onClick={() => moveCamping(element.camping_id)}>
+                                    <CampingCard
+                                        campingId={element.camping_id}
+                                        firstImageUrl={element.first_image_url}
+                                        title={element.faclt_nm}
+                                        address={element.addr1}
+                                        hashtag={element.thema_envrn_cl}
+                                    />
+                                </Col>
+                            );
+                        })
+                    }
+                </Row> 
             </div>
         </>
     );
