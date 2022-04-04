@@ -128,8 +128,8 @@ function Areasearch() {
                 </Row>
             </div>
 
-            <Container>
-                <Row style={{textAlignLast: "center"}}>
+            <Container style={{height: "850px"}}>
+                <Row style={{textAlignLast: "center", textAlign: "-webkit-center"}}>
                 {
                     datas.map((element, index) => {
                         return (
@@ -178,9 +178,9 @@ function Areasearch() {
                         disabled={page === totalPage}
                         onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
                     />
-                  </Pagination>
-                  : 
-                  null
+                </Pagination >
+                : 
+                null
             }
             </Container>
         </>

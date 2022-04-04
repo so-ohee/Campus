@@ -15,7 +15,7 @@ function search() {
     return (
         
         <div>
-            <Container style={{ height: "1200px" }}>
+            <Container style={{ height: "1300px" }}>
                 <div className={styles.search_div1}>
                     <h1 style={{fontWeight: "bold"}}>캠핑장 검색</h1>
                 </div>
