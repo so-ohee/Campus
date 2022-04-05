@@ -10,6 +10,7 @@ function Detailreview() {
     const router = useRouter();
     const [userid, setUserid] = useState("");
     const [dummy, setDummy] = useState([]);
+    const [change, setChange] = useState(false);
     
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -31,7 +32,7 @@ function Detailreview() {
             // 댓글 조회
             commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment))
         }
-    }, [router.isReady])
+    }, [router.isReady, change])
 
     // 게시글 삭제
     const deleteArticle = (boardId) => {
@@ -41,7 +42,7 @@ function Detailreview() {
     // 댓글 작성
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid")).then(() =>
-            commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment))
+            commentSearch(router.query.detailqnafree)
         );
     }
 
@@ -49,6 +50,8 @@ function Detailreview() {
         setUserid(localStorage.getItem('userUid'))
     }, [])
     
+    console.log(dummy);
+
     return (
         <div>
             <Container>
@@ -92,7 +95,20 @@ function Detailreview() {
                     {datas.content}
                 </div>
                 <hr />
-                
+                <div style={{height: "100px"}}>
+                    <input
+                        className={styles.detailreview_input}
+                        type="text"
+                        placeholder='댓글을 입력하세요...'
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                writeRecomment(e.target.value);
+                                commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment), setChange(!change))
+                            }
+                        }}
+                    />
+                </div>
+
                 {
                     dummy !== undefined ?
                         (
@@ -127,18 +143,7 @@ function Detailreview() {
                         )
                 }
                 
-                <div style={{height: "100px"}}>
-                    <input
-                        className={styles.detailreview_input}
-                        type="text"
-                        placeholder='댓글을 입력하세요...'
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                                writeRecomment(e.target.value);
-                            }
-                        }}
-                    />
-                </div>
+                
             </Container>
         </div>
     );

@@ -27,7 +27,7 @@ function Detailreview() {
     const [datas, setDatas] = useState([]);
     const [pic, setPic] = useState("");
     const [dummy, setDummy] = useState([]);
-    let history = useHistory();
+    const [change, setChange] = useState(false);
 
     useEffect(() => {
         if (router.isReady) {
@@ -41,7 +41,7 @@ function Detailreview() {
             commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment));
             setUserid(localStorage.getItem('userUid'))
         }
-    }, [router.isReady])
+    }, [router.isReady, change])
 
     // 게시글 삭제
     const deleteArticle = () => {
@@ -51,7 +51,7 @@ function Detailreview() {
     // 댓글 작성
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid")).then(() => 
-            commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment))
+            commentSearch(router.query.detailreview)
         );
     }
 
@@ -165,6 +165,7 @@ function Detailreview() {
                         onKeyPress={(e) => {
                             if (e.key === 'Enter') {
                                 writeRecomment(e.target.value);
+                                commentSearch(router.query.detailreview).then((res) => setChange(!change))
                             }
                         }}
                     />
