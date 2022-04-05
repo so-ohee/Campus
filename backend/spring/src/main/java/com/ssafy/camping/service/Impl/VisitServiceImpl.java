@@ -77,7 +77,7 @@ public class VisitServiceImpl implements VisitService {
 
         Map<String, Object> resultMap = new HashMap<>();
         //리뷰 작성이 되어있으면 방문 취소 불가
-        if(boardRepository.existsByCampingIdAndUserUid(campingId,userUid)) {
+        if(boardRepository.existsByCampingIdAndUserUidAndDeleteState(campingId,userUid,0)) {
             resultMap.put("message", Message.DELETE_VISIT_FAIL);
         } else {
             visitRepository.deleteByCampingIdAndUserUid(campingId,userUid);
