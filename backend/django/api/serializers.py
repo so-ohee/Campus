@@ -17,3 +17,8 @@ class VisitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Visit
         fields = '__all__'
+
+class CampingMapSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Camping
+        fields = ['camping_id', 'faclt_nm', 'map_x', 'map_y']

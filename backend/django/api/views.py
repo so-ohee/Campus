@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, renderer_classes
 from django.shortcuts import render
-from .serializers import CampingAllSerializer, CampingSerializer , VisitSerializer
+from .serializers import CampingAllSerializer, CampingMapSerializer, CampingSerializer , VisitSerializer
 from .models import Camping, Visit, Survey
 from django.db.models import Q
 import random
@@ -267,6 +267,21 @@ def filter(request):
 
 
 
+@api_view(('GET',))
+def visit(request, uid):
+    
+    visited = Visit.objects.filter(user_uid=uid)
+    campings = []
+    for i in visited:
+        campings.append(Camping.objects.get(pk=i.camping_id))
+    
+    serializer = CampingMapSerializer(campings, many=True)
+
+    return Response(serializer.data)
+
+
+
+
 # 함수 정의
 def jaccard(a,b):
     '''
@@ -296,38 +311,3 @@ def choice_random(lst, n):
 
 
 
-@api_view(('GET',))
-def test(request):
-    # dataframe 변환
-    # camp = Camping.objects.all()
-    # df = pd.DataFrame(camp)
-    # print(df)
-
-
-    # 캠핑장 하나만 가져오기
-    # camp = Camping.objects.get(pk=704)
-    # serializer = CampingSerializer(camp)
-
-
-    # 필터링하고 랜덤으로 5개 뽑아서 가져오기
-    campings = Camping.objects.filter(
-        Q(do_nm='경기도'), 
-        Q(induty__contains='일반야영장'),
-        Q(lct_cl__contains='산')|Q(lct_cl__contains='바다'),
-        ).order_by("-blog_cnt")[:100]
-
-    campings_random = choice_random(campings, 5)
-    serializer = CampingSerializer(campings_random, many=True)
-
-    # survey test
-    # serializer = CampingSerializer(survey('l6uEzsFywoOiNTu1FweAzXO85pG3'), many=True)
-
-    # a = (127.1878004, 38.1656895)
-    # b = (126.93915, 37.7689833)
-    # print(haversine(a,b, unit = 'km'))
-
-    # aa = request.GET.getlist('aa')
-    # print(aa)
-
-
-    return Response(serializer.data)

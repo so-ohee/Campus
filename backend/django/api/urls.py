@@ -8,5 +8,5 @@ urlpatterns = [
     path('recommend2/<uid>', views.recommend2),
     path('similar/<campingId>', views.similar),
     path('filter/', views.filter),
-    path('test/', views.test),
+    path('visit/<uid>', views.visit),
 ]
