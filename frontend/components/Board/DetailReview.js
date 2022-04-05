@@ -7,6 +7,8 @@ import { campingBoardMore, articleDelete, commentSearch, sendComment } from "../
 
 function Detailreview(props) {
 
+    const [page, setPage] = useState('');
+
     const submitSign = () => {
         props.propFunction("수정")
         props.propData(datas)
@@ -47,6 +49,11 @@ function Detailreview(props) {
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid"));
     }
+
+    // 새로고침 또는 페이진 전환 시 초기 위치
+    useEffect(() => {
+        window.scrollTo(0, 500);
+    }, [page]);
 
     return (
         <div>

@@ -11,7 +11,8 @@ function Detailreview() {
     const [userid, setUserid] = useState("");
     const [dummy, setDummy] = useState([]);
     const [change, setChange] = useState(false);
-    
+    const [page, setPage] = useState("");
+
     const ratingChanged = (newRating) => {
         console.log(newRating);
     };
@@ -50,7 +51,10 @@ function Detailreview() {
         setUserid(localStorage.getItem('userUid'))
     }, [])
     
-    console.log(dummy);
+    // 새로고침 또는 페이진 전환 시 초기 위치
+    useEffect(() => {
+        window.scrollTo(0, 500);
+    }, []);
 
     return (
         <div>
