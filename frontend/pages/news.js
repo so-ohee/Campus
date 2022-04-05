@@ -33,25 +33,6 @@ function news() {
         <div>
             <Container>
                 <h1 className={styles.news_h1}>캠핑 뉴스</h1>
-                <Row className={styles.news_row}>
-                    <Col xs={9}>
-                        <Dropdown>
-                            <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                검색유형
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="#/action-1">제목</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">기사 내용</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Col>
-                    <Col xs={3}>
-                        <Form.Group style={{width:"300px", float: "right"}} controlId="formBasicPassword">
-                            <Form.Control placeholder="검색..." />
-                        </Form.Group>
-                    </Col>
-                </Row>
             </Container>
 
             <Container style={{height: "1000px", marginTop: "1%"}}>
