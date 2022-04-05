@@ -111,6 +111,18 @@ function Boardlist(props) {
 
     return (
         <div>
+            <Container style={{marginTop: "2%", textAlign: "-webkit-right"}}>
+                {
+                    userid !== undefined ?
+                        (
+                            <Button variant="success" style={{width: "100px"}} onClick={submitSign}>작성</Button>
+                        ) : 
+                        (
+                            null
+                        )
+                }
+            </Container>
+
             <Container >
                 <h1 className={styles.boardlist_h1}>게시판</h1>
 
@@ -134,15 +146,7 @@ function Boardlist(props) {
                             }
                         }}
                     />
-                    {
-                        userid !== undefined ?
-                            (
-                                <Button variant="success" style={{width: "100px"}} onClick={submitSign}>작성</Button>
-                            ) : 
-                            (
-                                null
-                            )
-                    }
+                    
                     
                 </Row>
 
@@ -224,7 +228,7 @@ function Boardlist(props) {
                                             <tbody key={index}>
                                                 {
                                                     element.category === "후기" && 
-                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(), submitData(element.boardId)}}>
+                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
@@ -234,7 +238,7 @@ function Boardlist(props) {
                                                 }
                                                 {
                                                     element.category !== "후기" && 
-                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(), submitData(element.boardId)}}>
+                                                        <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
