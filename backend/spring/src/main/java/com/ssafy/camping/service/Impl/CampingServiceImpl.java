@@ -52,7 +52,7 @@ public class CampingServiceImpl implements CampingService {
 
             resultMap.put("visit",visitRepository.existsByCampingIdAndUserUid(campingId, userUid)); //방문여부
             resultMap.put("bookmark",bookmarkRepository.existsByCampingIdAndUserUid(campingId, userUid)); //북마크여부
-            resultMap.put("review", boardRepository.existsByCampingIdAndUserUid(campingId, userUid)); //리뷰여부
+            resultMap.put("review", boardRepository.existsByCampingIdAndUserUidAndDeleteState(campingId, userUid, 0)); //리뷰여부
         }
 
         resultMap.put("campsite",campsite.get()); //캠핑장 정보
