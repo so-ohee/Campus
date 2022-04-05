@@ -49,7 +49,7 @@ export async function changePic(userUid, formData) {
 // 아이디 변경
 export async function changeProfileName(name, userUid) {
 
-    const url2 = url + "user/";
+    const url2 = "https://j6c103.p.ssafy.io/api/user/";
 
     let data = {
         name: name,
