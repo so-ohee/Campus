@@ -78,30 +78,30 @@ function CampingIntro(props) {
                     <div className={styles.capmingplace_main_explaingraph}>
                         <Row className={styles.capmingplace_main_explaingraph_row}>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>캠핑장 환경</p>
+                                <h6 style={{fontWeight: "bold"}}>캠핑장 환경</h6>
                             </Col>
                             <Col>
-                                <p>{props.props.lctCl}</p>
+                                <h6>{props.props.lctCl}</h6>
                             </Col>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>주요시설</p>
+                                <h6 style={{fontWeight: "bold"}}>주요시설</h6>
                             </Col>
                             <Col>
-                                <p>{props.props.posblFcltyCl}</p>
+                                <h6>{props.props.posblFcltyCl}</h6>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>캠핑장 유형</p>
+                                <h6 style={{fontWeight: "bold"}}>캠핑장 유형</h6>
                             </Col>
                             <Col>
-                                <p>{props.props.induty}</p>
+                                <h6>{props.props.induty}</h6>
                             </Col>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>바닥형태</p>
+                                <h6 style={{fontWeight: "bold"}}>바닥형태</h6>
                             </Col>
                             <Col>
-                                <p>
+                                <h6>
                                     {
                                         props.props.siteBottomCl1 == 0 ? 
                                             (
@@ -116,35 +116,49 @@ function CampingIntro(props) {
                                                     ) : "파쇄석 ("+`${props.props.siteBottomCl2}`+")"
                                             ) : "잔디 ("+`${props.props.siteBottomCl1}`+")"
                                     }
-                                </p>
+                                </h6>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>운영기간</p>
+                                <h6 style={{fontWeight: "bold"}}>운영기간</h6>
                             </Col>
                             <Col>
-                                <p>{props.props.operPdCl}</p>
+                                <h6>{props.props.operPdCl}</h6>
                             </Col>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>반려동물</p>
+                                <h6 style={{fontWeight: "bold"}}>반려동물</h6>
                             </Col>
                             <Col>
-                                <p>출입 {props.props.animalCmgCl}</p>
+                                <h6>출입 {props.props.animalCmgCl}</h6>
                             </Col>
                         </Row>
                         <Row className={styles.capmingplace_main_explaingraph_row2}>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>운영일</p>
+                                <h6 style={{fontWeight: "bold"}}>운영일</h6>
                             </Col>
                             <Col>
-                                <p>{props.props.operDeCl}</p>
+                                <h6>{props.props.operDeCl}</h6>
                             </Col>
                             <Col>
-                                <p style={{fontWeight: "bold"}}>화로대</p>
+                                <h6 style={{fontWeight: "bold"}}>화로대</h6>
                             </Col>
                             <Col>
-                                <p>{props.props.brazierCl}</p>
+                                <h6>{props.props.brazierCl}</h6>
+                            </Col>
+                        </Row>
+                        <Row className={styles.capmingplace_main_explaingraph_row2}>
+                            <Col>
+                                <h6 style={{fontWeight: "bold"}}>주변시설</h6>
+                            </Col>
+                            <Col>
+                                <h6>{props.props.sbrsCl}</h6>
+                            </Col>
+                            <Col>
+                                <h6 style={{fontWeight: "bold"}}>내부시설</h6>
+                            </Col>
+                            <Col>
+                                <h6>{props.props.eqpmnLendCl}</h6>
                             </Col>
                         </Row>
                     </div>

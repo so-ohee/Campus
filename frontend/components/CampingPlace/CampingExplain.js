@@ -46,6 +46,35 @@ function CampingExplain(props) {
                                         props.props.themaEnvrnCl !==null ? <a>#{props.props.themaEnvrnCl}</a> : null
                                     }
                                 </p>
+                                {
+                                    props.props.resveCl !== null ? <h6>[{props.props.resveCl}]</h6> : null                                        
+                                }
+                                <Row>
+                                    <Col xs={2}>
+                                        <h6>숙소 사이트 </h6>
+                                    </Col>
+                                    {
+                                        props.props.homepage !== null ?
+                                            (
+                                                <Col xs={10}>
+                                                    <h6 style={{color: "blue"}} onClick={() => window.open(`${props.props.homepage}`, '_blank')}>{props.props.homepage}</h6>
+                                                </Col>
+                                        ): null
+                                    }
+                                </Row>
+                                <Row>
+                                    <Col xs={2}>
+                                        <h6>예약 사이트 </h6>
+                                    </Col>
+                                    {
+                                        props.props.resveUrl !== null ?
+                                        (
+                                            <Col xs={10}>
+                                                <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.resveUrl}`, '_blank')}>{props.props.resveUrl}</h6>
+                                            </Col>
+                                        ): null
+                                    }
+                                </Row>
                             </Col>
                             <Col xs={4} >
                                 {
