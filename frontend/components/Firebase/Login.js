@@ -31,7 +31,10 @@ function Login(props) {
             localStorage.setItem("token", data.user.accessToken);
             // user Uid DB 전송하기
             sendUserUid(data.user.uid, data.user.displayName, data.user.photoURL);
-            router.push('/')
+            
+            // 라우터로 할 시, 처음에 프로필 사진 안보임
+            // router.push('/')
+            location.href='/'
         }
     };
 
@@ -54,7 +57,7 @@ function Login(props) {
                     <img className={styles.login_pic} src="../../logo.png" />
                 </div>
                 <div className={styles.login_pic_div}>
-                    <img className={styles.login_google_pic} name="google" onClick={onSocialClick}  src="../../googlelogin.png" />
+                    <img className={styles.login_google_pic} style={{cursor:'pointer'}} name="google" onClick={onSocialClick}  src="../../googlelogin.png" />
                 </div>
             </Modal.Body>
             <Modal.Footer>

@@ -83,7 +83,7 @@ function Navibar() {
                     
                     !token && (
                         <div>
-                          <p style={{ color: "black", fontWeight: "bold", width: "135px", marginTop: "12%" }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>
+                          <p style={{ color: "black", fontWeight: "bold", width: "135px", marginTop: "12%", cursor:'pointer' }} onClick={() => LoginsetModalShow(true)}>LOGIN & SIGNUP</p>
                           <Login
                             show={LoginmodalShow}
                             onHide={() => LoginsetModalShow(false)}
