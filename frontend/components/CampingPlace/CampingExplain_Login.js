@@ -38,7 +38,7 @@ function CampingExplain(props) {
         setVisit(props.props.visit)
         setReview(props.props.review)
     }, [props])
-
+    console.log(props)
     return (
         <>
             {

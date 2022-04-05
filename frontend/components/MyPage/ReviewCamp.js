@@ -9,21 +9,43 @@ function Reviewcamp() {
 
     const [dummy, setDummy] = useState([]);
 
-    // Pagination
-    let active = 1;
-    let items = [];
-    for (let number = 1; number <= 5; number++) {
-        items.push(
-            <Pagination.Item key={number} active={number === active}>
-            {number}
-            </Pagination.Item>,
-        );
-    }
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState('')
+    const [pageList, setPageList] = useState([])
+
     
     useEffect(() => {
-        ReviewList(localStorage.getItem("userUid"))
-            .then((res) => setDummy(res.data.board));
+        ReviewList(localStorage.getItem("userUid"), 1)
+            .then((res) => {
+                setDummy(res.data.board)
+                setTotalPage(res.data.totalPage)
+                makeList(1,res.data.totalPage)
+            });
     }, []);
+
+    const onSearch = (p) => {
+        setPage(p)
+        ReviewList(localStorage.getItem("userUid"),p)
+        .then((res) => {
+            console.log(res)
+            if (res.data.board){
+                setDummy(res.data.board)
+                setTotalPage(res.data.totalPage)
+                makeList(p,res.data.totalPage)
+            }else{
+                setDummy([])
+            }
+        })
+    }
+
+    const makeList = (p, t) => {
+        let lst = []
+        const start = parseInt((p-1)/5)*5+1
+        for (let i = start; i < Math.min(start+5,t+1); i++) {
+            lst.push(i)
+        }
+        setPageList(lst)
+    }
 
     return (
         <>
@@ -82,7 +104,37 @@ function Reviewcamp() {
                 </Container>
             </div>
 
-            <Pagination className={styles.reviewcamp_pagination}>{items}</Pagination>
+
+            
+            <Pagination className={styles.reviewcamp_pagination}>
+                    <Pagination.First 
+                        disabled={page === 1}
+                        onClick={() => onSearch(Math.max(1,pageList[0]-5))}
+                    />
+                    <Pagination.Prev 
+                        disabled={page === 1}
+                        onClick={() => onSearch(page-1)}
+                    />
+                    {pageList.map((page_, idx) => (
+                        <Pagination.Item
+                            key={idx}
+                            id={`page-${idx}`}
+                            active={page_ === page}
+                            onClick={() => onSearch(page_)}
+                        >
+                            {page_}
+                        </Pagination.Item>
+                    ))}
+                    <Pagination.Next 
+                        disabled={page === totalPage || totalPage === undefined}
+                        onClick={() => onSearch(page+1)}
+                    />
+                    <Pagination.Last 
+                        disabled={page === totalPage || totalPage === undefined}
+                        onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
+                    />
+                  </Pagination>
+            {/* <Pagination className={styles.reviewcamp_pagination}>{items}</Pagination> */}
         </>
     );
 }

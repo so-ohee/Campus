@@ -273,18 +273,18 @@ export const campingImage = async (campingId) => {
 
 // ************************************ 마이페이지 기능 ************************************
 // 방문한 캠핑장 목록
-export const VisitList = async (campingId) => {
-    return await axios.get(`${url}`+`visit/user?userUid=${campingId}`)
+export const VisitList = async (userUid, page) => {
+    return await axios.get(`${url}`+`visit/user?page=${page}&userUid=${userUid}`)
 }
 
 // 북마크한 캠핑장 목록
-export const BookMarkList = async (userUid) => {
-    return await axios.get(`${url}`+`bookmark/user?userUid=${userUid}`)
+export const BookMarkList = async (userUid, page) => {
+    return await axios.get(`${url}`+`bookmark/user?page=${page}&userUid=${userUid}`)
 }
 
 // 내가 쓴 리뷰 목록
-export const ReviewList = async (campingId) => {
-    return await axios.get(`${url}`+`board/user?userUid=${campingId}`)
+export const ReviewList = async (campingId, page) => {
+    return await axios.get(`${url}`+`board/user?page=${page}&userUid=${campingId}`)
 }
 
 
