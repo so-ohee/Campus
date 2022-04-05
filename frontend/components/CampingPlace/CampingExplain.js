@@ -57,7 +57,7 @@ function CampingExplain(props) {
                                         props.props.homepage !== null ?
                                             (
                                                 <Col xs={10}>
-                                                    <h6 style={{color: "blue"}} onClick={() => window.open(`${props.props.homepage}`, '_blank')}>{props.props.homepage}</h6>
+                                                    <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.homepage}`, '_blank')}>{props.props.homepage}</h6>
                                                 </Col>
                                         ): null
                                     }
