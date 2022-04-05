@@ -18,10 +18,10 @@ function Filter() {
     useEffect(() => {
         filterResults(query_edit)
         .then((res) => {
-          setCampings(res.data.results) 
-          setPage(Number(res.data.page))
-          setTotalPage(Number(res.data.totalPage))
-          makeList(res.data.page,res.data.totalPage)
+            setCampings(res.data.results) 
+            setPage(Number(res.data.page))
+            setTotalPage(Number(res.data.totalPage))
+            makeList(res.data.page,res.data.totalPage)
         })
     }, [router.asPath]);
 
@@ -38,7 +38,10 @@ function Filter() {
         router.push(`/campingplace/${camping_id}`)
     }
 
-    // console.log(campings);
+    // 새로고침 또는 페이진 전환 시 초기 위치
+    useEffect(() => {
+        window.scrollTo(0, 500);
+    }, [page]);
 
     return (
         <>

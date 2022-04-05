@@ -8,6 +8,7 @@ import "firebase/compat/storage";
 // 초기화면
 
 function Home() {
+  
   return (
     <>
         <div>
