@@ -12,6 +12,7 @@ function survey() {
     const [lat, setLat] = useState(35.2040949)
     const [long, setLong] = useState(126.8071876)
     const [err, setErr] = useState(false)
+    const [page, setPage] = useState('')
 
     const [q1, setQ1] = useState('')
     const [q2, setQ2] = useState('')
@@ -72,6 +73,12 @@ function survey() {
             });
         }
     }, []);
+
+    // 새로고침 또는 페이진 전환 시 초기 위치
+    useEffect(() => {
+        window.scrollTo(0, 500);
+    }, [page]);
+
 
     return (
         <>

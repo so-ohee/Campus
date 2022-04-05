@@ -8,8 +8,6 @@ function ShoppingCard(params) {
 
     const [dummy, setDummy] = useState("");
     
-    console.log(params);
-
     return (
         <>
             <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", marginBottom: "10%" }}>

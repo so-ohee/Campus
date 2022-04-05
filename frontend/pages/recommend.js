@@ -1,4 +1,4 @@
-import { Card, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import CampingCard from "../components/Common/CampingCard";
 import styles from "../styles/Recommend/Recommend.module.css";
 import { useRouter } from 'next/router';
@@ -11,6 +11,7 @@ function Recommend() {
 
   const [campings1, setCampings1] = useState([])
   const [campings2, setCampings2] = useState([])
+  const [page, setPage] = useState('')
 
   useEffect(() => {
     if (!localStorage.getItem("userUid")){
@@ -29,68 +30,64 @@ function Recommend() {
     }
   }, []);
 
-  const moveCamping = (camping_id) => {
-    router.push(`/campingplace/${camping_id}`)
+  function movesurvey() {
+    router.push(`/survey`)
   }
+
+  // 새로고침 또는 페이진 전환 시 초기 위치
+  useEffect(() => {
+    window.scrollTo(0, 500);
+  }, [page]);
+
 
   return (
     <>
-    <h1>나와 비슷한 유저가 간 캠핑장</h1>
-    <Row>
-      {campings1.map((datas, index) => (
-          <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.camping_id)}>
-          {
-            datas.first_image_url == null ? 
-              <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
-              : <Card.Img variant="top" src={datas.first_image_url} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
-          }        
-          
-          <Card.Body>
-              <Card.Title style={{ fontSize: "24px" }}>{datas.faclt_nm}</Card.Title>
-              <Card.Subtitle
-                className="mb-2 text-muted"
-                style={{ fontSize: "14px" }}
-              >
-                  {datas.addr1}
-              </Card.Subtitle>
-              <Card.Text style={{ fontSize: "16px" }}>
-                  {
-                    datas.thema_envrn_cl !== null ? <a>#{`${datas.thema_envrn_cl}`.replaceAll(",", " #")}</a> : null
-                  }
-              </Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
-      </Row>
+      <Container style={{marginTop: "2%", textAlign: "-webkit-right"}}>
+        <Button variant="success" style={{width: "100px"}} onClick={() => movesurvey()}>재설문</Button>
+      </Container>
 
-    <br></br><br></br>
-    <h1>내가 간 캠핑장과 비슷한 캠핑장</h1>
-    <Row>
-      {campings2.map((datas, index) => (
-          <Card style={{ width: "21rem", height: "23rem", borderRadius: "5%", padding:'0px' }} key={index} onClick={() => moveCamping(datas.camping_id)}>
+      <Container style={{marginBottom: "4%"}}>
+        <h1 style={{textAlignLast: "center", fontWeight: "bold", paddingTop: "3%", marginBottom: "1%"}}>나와 비슷한 유저가 간 캠핑장</h1>
+        <Row style={{ textAlign: "-webkit-center" }}>
           {
-            datas.first_image_url == null ? 
-              <Card.Img variant="top" src="../../logo.png" style={{ width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%" }} />
-              : <Card.Img variant="top" src={datas.first_image_url} style={{width: "100%", height: "50%", borderRadius: "5% 5% 0% 0%"}} />
-          }        
-          
-          <Card.Body>
-              <Card.Title style={{ fontSize: "24px" }}>{datas.faclt_nm}</Card.Title>
-              <Card.Subtitle
-                className="mb-2 text-muted"
-                style={{ fontSize: "14px" }}
-              >
-                  {datas.addr1}
-              </Card.Subtitle>
-              <Card.Text style={{ fontSize: "16px" }}>
-                  {
-                    datas.thema_envrn_cl !== null ? <a>#{`${datas.thema_envrn_cl}`.replaceAll(",", " #")}</a> : null
-                  }
-              </Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
-      </Row>
+            campings1.map((datas, index) => {
+              return (
+                <Col sm key={index} style={{ marginTop: "3%" }}>
+                  <CampingCard
+                    campingId={datas.camping_id}
+                    title={datas.faclt_nm}
+                    address={datas.addr1}
+                    hashtag={datas.thema_envrn_cl}
+                  />
+                </Col>
+              )
+            })
+          }
+        </Row>
+      </Container>
+
+      <hr />
+
+      <Container style={{marginTop: "1%", marginBottom: "4%"}}>
+        <h1 style={{textAlignLast: "center", fontWeight: "bold", paddingTop: "3%", marginBottom: "1%"}}>내가 간 캠핑장과 비슷한 캠핑장</h1>
+        <Row style={{ textAlign: "-webkit-center" }}>
+          {
+            campings2.map((datas, index) => {
+              return (
+                <Col sm key={index} style={{ marginTop: "3%" }}>
+                  <CampingCard
+                    campingId={datas.camping_id}
+                    title={datas.faclt_nm}
+                    address={datas.addr1}
+                    hashtag={datas.thema_envrn_cl}
+                  />
+                </Col>
+              )
+            })
+          }
+        </Row>
+      </Container>
+    
       {campings2.length == 0 && <h2>-내가 간 캠핑장이 없습니다-</h2>}
 
     </>
