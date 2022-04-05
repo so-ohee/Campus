@@ -31,7 +31,6 @@ function Login(props) {
             sendUserUid(data.user.uid, data.user.displayName, data.user.photoURL);
             
             // 라우터로 할 시, 처음에 프로필 사진 안보임
-            // router.push('/')
             location.href='/'
         }
     };
