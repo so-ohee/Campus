@@ -29,9 +29,12 @@ function Detailreview() {
     const [dummy, setDummy] = useState([]);
     const [change, setChange] = useState(false);
 
+    console.log(router.query.detailreview);
+
     useEffect(() => {
         if (router.isReady) {
             campingBoardMore(router.query.detailreview).then((res) => {
+                console.log(res)
                 {
                     res.data.board.files.length !== 0 ? setPic(res.data.board.files[0].filePath) : null
                 }
@@ -41,7 +44,7 @@ function Detailreview() {
             commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment));
             setUserid(localStorage.getItem('userUid'))
         }
-    }, [router.isReady, change])
+    }, [router.isReady, change, router])
 
     // 게시글 삭제
     const deleteArticle = () => {
