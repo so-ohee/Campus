@@ -2,12 +2,14 @@ import React from 'react';
 import CampingCard from "../Common/CampingCard";
 import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { VisitList } from "../../function/axios";
+import { VisitList, visit } from "../../function/axios";
 import styles from "../../styles/MyPage/VisitedCamp.module.css";
 import { Map, MapMarker } from "react-kakao-maps-sdk"
+import { useRouter } from 'next/router';
 
 function Visitedcamp() {
 
+    const router = useRouter();
     const [campingplace, setCampingplace] = useState([]);
 
     const [page, setPage] = useState(1)
@@ -16,6 +18,8 @@ function Visitedcamp() {
 
     // 지도
     const [isOpen, setIsOpen] = useState(false)
+    const [campings, setCampings] = useState([])
+    let lst = []
 
     
     useEffect(() => {
@@ -25,6 +29,14 @@ function Visitedcamp() {
                 setTotalPage(res.data.totalPage)
                 makeList(1,res.data.totalPage)
             });
+        visit(localStorage.getItem("userUid"))
+            .then((res) => {
+                setCampings(res.data)
+                for (let i = 0; i < res.data.length; i++) {
+                    lst.push(false)
+                }
+                setIsOpen(lst)
+            })
     }, []);
 
 
@@ -51,7 +63,6 @@ function Visitedcamp() {
         }
         setPageList(lst)
     }
-
 
     return (
         <>
@@ -120,8 +131,8 @@ function Visitedcamp() {
                     <Map // 지도를 표시할 Container
                         center={{
                             // 지도의 중심좌표
-                            lat: 36,
-                            lng: 127,
+                            lat: 35.8,
+                            lng: 127.2,
                         }}
                         style={{
                             // 지도의 크기
@@ -130,22 +141,32 @@ function Visitedcamp() {
                         }}
                         level={13} // 지도의 확대 레벨
                     >
+                    {
+                        campings.map((data, idx) => (
                         <MapMarker 
+                            key={idx}
                             position={{
-                                lat: 36,
-                                lng: 127,
-                            }}
+                                lat: data.map_y,
+                                lng: data.map_x,
+                              }}
                             clickable={true}
-                            // onClick={() => window.open(`https://map.kakao.com/link/to/${campingName},${y},${x}`, '_blank')}
+                            onClick={() => router.push(`/campingplace/${data.camping_id}`)}
                             onMouseOver={
-                                () => setIsOpen(true)
+                                () => setIsOpen({
+                                    ...isOpen,
+                                    [idx] : true
+                                })
                             }
                             onMouseOut={
-                                () => setIsOpen(false)
+                                () => setIsOpen({
+                                    ...isOpen,
+                                    [idx] : false
+                                })
                             }
                         >
-                            {isOpen && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>123</div>}
+                            {isOpen[idx] && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{data.faclt_nm}</div>}
                         </MapMarker>
+                    ))}
                     </Map>
                 </div>
         </>
