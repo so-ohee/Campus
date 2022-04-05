@@ -74,7 +74,7 @@ function Visitedcamp() {
                 <Map // 지도를 표시할 Container
                     center={{
                         // 지도의 중심좌표
-                        lat: 36.8,
+                        lat: 36.3,
                         lng: 127.8,
                     }}
                     style={{
