@@ -39,6 +39,8 @@ function CampingExplain(props) {
         setReview(props.props.review)
     }, [props])
     
+
+    console.log(props.props.campsite)
     return (
         <>
             {
@@ -57,11 +59,42 @@ function CampingExplain(props) {
                                     <h2 style={{fontWeight: "bold"}}>{props.props.campsite.facltNm}</h2>
                                     <p>{props.props.campsite.addr1} {props.props.campsite.addr2}</p>
                                     <p>{props.props.campsite.tel}</p>
-                                    <p style={{color: "skyblue"}}>
+                                    <p style={{color: "darkgreen"}}>
                                         {
                                             props.props.campsite.themaEnvrnCl !==null ? <a>#{props.props.campsite.themaEnvrnCl}</a> : null
                                         }
-                                    </p>
+                                        </p>
+                                        {
+                                            props.props.campsite.resveCl !== null ?
+                                                <h6>[{props.props.campsite.resveCl}]</h6> : null
+                                        }
+                                        
+                                    <Row>
+                                        <Col xs={2}>
+                                            <h6>숙소 사이트 </h6>
+                                        </Col>
+                                        {
+                                            props.props.campsite.homepage !== null ?
+                                                (
+                                                    <Col xs={10}>
+                                                        <h6 style={{color: "blue"}} onClick={() => window.open(`${props.props.campsite.homepage}`, '_blank')}>{props.props.campsite.homepage}</h6>
+                                                    </Col>
+                                                ) : null
+                                        }
+                                    </Row>
+                                    <Row>
+                                        <Col xs={2}>
+                                            <h6>예약 사이트 </h6>
+                                            </Col>
+                                            {
+                                                props.props.campsite.resveUr !== null ?
+                                                    (
+                                                        <Col xs={10}>
+                                                            <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.campsite.resveUrl}`, '_blank')}>{props.props.campsite.resveUrl}</h6>
+                                                        </Col>
+                                                    ) : null
+                                            }
+                                    </Row>
                                 </Col>
                                 <Col xs={4} >
                                     <Row>
