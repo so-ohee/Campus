@@ -16,4 +16,5 @@
 
 .login_google_pic {
     width: 70%;
+    cursor: pointer;
 }

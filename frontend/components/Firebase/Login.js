@@ -55,7 +55,7 @@ function Login(props) {
                     <img className={styles.login_pic} src="../../logo.png" />
                 </div>
                 <div className={styles.login_pic_div}>
-                    <img className={styles.login_google_pic} style={{cursor:'pointer'}} name="google" onClick={onSocialClick}  src="../../googlelogin.png" />
+                    <img className={styles.login_google_pic} name="google" onClick={onSocialClick}  src="../../googlelogin.png" />
                 </div>
             </Modal.Body>
             <Modal.Footer>
