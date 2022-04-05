@@ -4,9 +4,11 @@ import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { ReviewList } from "../../function/axios";
 import styles from "../../styles/MyPage/ReviewCamp.module.css";
+import { useRouter } from 'next/router';
 
 function Reviewcamp() {
 
+    const router = useRouter();
     const [dummy, setDummy] = useState([]);
 
     const [page, setPage] = useState(1)
@@ -46,7 +48,7 @@ function Reviewcamp() {
         }
         setPageList(lst)
     }
-
+    console.log(dummy)
     return (
         <>
             <div className={styles.reviewcamp_div1}>
@@ -76,7 +78,7 @@ function Reviewcamp() {
                                                 <tr className={styles.reviewcamp_tbody_tr}>
                                                     <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td onClick={() => router.push(`/board/detailreview/${element.boardId}`)} style={{ width: "640px", paddingLeft: "3%", cursor:'pointer' }}>{element.title}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                     <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>
@@ -86,7 +88,7 @@ function Reviewcamp() {
                                                 <tr className={styles.reviewcamp_tbody_tr}>
                                                     <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                    <td onClick={() => router.push(`/board/detailqnafree/${element.boardId}`)} style={{ width: "640px", paddingLeft: "3%", cursor:'pointer' }}>{element.title}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                     <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>
