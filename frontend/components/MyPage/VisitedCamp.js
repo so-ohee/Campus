@@ -76,7 +76,7 @@ function Visitedcamp() {
                             })) : 
                                 (
                                     <div className={styles.visitedcamp_comment}>
-                                        <h1 style={{textAlign: "center"}}>방문한 캠핑장이 없습니다</h1>
+                                        <h1 style={{textAlign: "center"}}>방문한 캠핑장이 없습니다.</h1>
                                     </div>
                                 )
                         }

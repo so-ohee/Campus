@@ -93,14 +93,17 @@ function Reviewcamp() {
                                         }
                                         </tbody>     
                                 )})
-                            ) : 
-                            (
-                                <div className={styles.reviewcamp_comment}>
-                                    <h1 style={{textAlign: "center"}}>작성한 리뷰가 없습니다</h1>
-                                </div>
-                            )
+                            ) : null
                         }
                     </table>
+                    { dummy === undefined ? 
+                        <div className={styles.reviewcamp_comment}>
+                            <h1 style={{textAlign: "center"}}>작성한 리뷰가 없습니다.</h1>
+                        </div>
+                    : null
+                    }
+                        
+                    
                 </Container>
             </div>
 

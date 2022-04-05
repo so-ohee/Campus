@@ -74,7 +74,7 @@ function Bookmarkcamp() {
                         })) : 
                             (
                                 <div className={styles.bookmarkcamp_comment}>
-                                    <h1 style={{textAlign: "center"}}>북마크한 캠핑장이 없습니다</h1>
+                                    <h1 style={{textAlign: "center"}}>북마크한 캠핑장이 없습니다.</h1>
                                 </div>
                             )
                         }
