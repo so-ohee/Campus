@@ -32,6 +32,11 @@ function Campingplace() {
     setUserids(localStorage.getItem("userUid"));
   }, [])
 
+  // 새로고침 또는 페이진 전환 시 초기 위치
+  useEffect(() => {
+    window.scrollTo(0, 500);
+  }, []);
+
   return (
     
     <div>
