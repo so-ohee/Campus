@@ -310,7 +310,6 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    @Transactional
     public Map<String, Object> searchBoard(String word, int page) throws Exception {
         log.debug("BoardService searchBoard call");
 
