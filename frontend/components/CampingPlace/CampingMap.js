@@ -81,8 +81,8 @@ function CampingMap(props) {
       if (err){
         alert('현재 위치를 확인할 수 없습니다. url창 왼쪽을 눌러 확인해주세요.')
       }else{
-        setNowX(x)
-        setNowY(y)
+        // setNowX(x)
+        // setNowY(y)
         setNowX(myX)
         setNowY(myY)
       }

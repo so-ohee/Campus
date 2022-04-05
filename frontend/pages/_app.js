@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }) {
       <Script
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6aa07b0f5d18874d44c830b57f8392a0&libraries=services,clusterer&autoload=false"
         type="text/javascript"
+        strategy="beforeInteractive"
       />
 
         <Layout>

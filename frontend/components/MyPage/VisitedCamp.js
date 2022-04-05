@@ -4,6 +4,7 @@ import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { VisitList } from "../../function/axios";
 import styles from "../../styles/MyPage/VisitedCamp.module.css";
+import { Map, MapMarker } from "react-kakao-maps-sdk"
 
 function Visitedcamp() {
 
@@ -114,6 +115,22 @@ function Visitedcamp() {
                         onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
                     />
                   </Pagination>
+
+                  <div className="my-5">
+                    <Map // 지도를 표시할 Container
+                        center={{
+                            // 지도의 중심좌표
+                            lat: 36,
+                            lng: 127,
+                        }}
+                        style={{
+                            // 지도의 크기
+                            width: "100%",
+                            height: "600px",
+                        }}
+                        level={13} // 지도의 확대 레벨
+                        />
+                    </div>
         </>
     );
 }
