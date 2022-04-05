@@ -45,10 +45,13 @@ function Filter() {
 
     return (
         <>
-        <Container>
+            <Container>
+                <h1 style={{textAlignLast: "center", fontWeight: "bold", paddingTop: "3%", marginBottom: "1%"}}>필터링 검색 결과</h1>
+            </Container>
+            <Container>
             {
                 campings !== null ?
-                    <Row>
+                    <Row style={{textAlign: "-webkit-center"}}>
                             {
                                 campings.map((element, index) => {
                                     return (
