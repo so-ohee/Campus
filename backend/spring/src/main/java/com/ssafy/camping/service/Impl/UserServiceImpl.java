@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user.get());
 
         // 작성한 게시글 삭제 처리
-        List<Board> boardList = boardRepository.findByUserUid(userUid);
+        List<Board> boardList = boardRepository.findByUserUidAndDeleteState(userUid, 0);
         for(Board b : boardList) {
             boardService.deleteBoard(b.getBoardId());
         }
