@@ -18,8 +18,6 @@ function Shopping() {
         Shoppingcamp().then((res) => setDummy(res.data.items));
     }, []);
 
-    console.log(dummy);
-
     return (
         <Container style={{height: "1750px", marginTop: "2%", marginBottom: "2%"}}>
             <h1 className={styles.shopping_h1}>캠핑 용품 쇼핑</h1>

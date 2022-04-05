@@ -167,7 +167,7 @@ function Boardlist(props) {
                 </Tabs>
             </Container>
 
-            <Container style={{height: "600px", marginTop: "-0.7%"}}>
+            <Container style={{ height: "600px", marginTop: "-0.7%" }}>
                 <table className={styles.boardlist_table}>
                     <thead>
                         <tr className={styles.boardlist_thead_tr}>
@@ -243,6 +243,7 @@ function Boardlist(props) {
                                 ) : null
                             )
                     }
+                    
                 </table>
             </Container>
 

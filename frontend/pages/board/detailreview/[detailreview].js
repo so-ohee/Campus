@@ -55,8 +55,6 @@ function Detailreview() {
         );
     }
 
-    console.log(pic)
-
     return (
         <div>
             <Container>                
