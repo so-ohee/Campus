@@ -35,7 +35,7 @@ function Mypage() {
 
     return (
         <>
-            <Container style={{ height: "1350px" }}>
+            <Container style={{ height: "1900px" }}>
                 <div className={styles.mypage_div1}>
                     <Row>
                         <Col xs={2}>

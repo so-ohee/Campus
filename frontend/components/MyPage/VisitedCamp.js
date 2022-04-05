@@ -69,6 +69,52 @@ function Visitedcamp() {
             <div className={styles.visitedcamp_div1}>
                 <h2 style={{fontWeight: "bold"}}>방문한 캠핑장</h2>
             </div>
+            
+            <div style={{textAlign: "-webkit-center", marginTop: "3%", marginBottom: "3%"}}>
+                <Map // 지도를 표시할 Container
+                    center={{
+                        // 지도의 중심좌표
+                        lat: 36.8,
+                        lng: 127.8,
+                    }}
+                    style={{
+                        // 지도의 크기
+                        width: "92%",
+                        height: "500px",
+                        borderRadius: "2%"
+                    }}
+                    level={13} // 지도의 확대 레벨
+                >
+                {
+                    campings.map((data, idx) => (
+                    <MapMarker 
+                        key={idx}
+                        position={{
+                            lat: data.map_y,
+                            lng: data.map_x,
+                        }}
+                        clickable={true}
+                        onClick={() => router.push(`/campingplace/${data.camping_id}`)}
+                        onMouseOver={
+                            () => setIsOpen({
+                                ...isOpen,
+                                [idx] : true
+                            })
+                        }
+                        onMouseOut={
+                            () => setIsOpen({
+                                ...isOpen,
+                                [idx] : false
+                            })
+                        }
+                    >
+                        {isOpen[idx] && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{data.faclt_nm}</div>}
+                    </MapMarker>
+                ))}
+                </Map>
+            </div>
+
+            <hr />
 
             <div className={styles.visitedcamp_main}>
                 <Container>
@@ -125,50 +171,8 @@ function Visitedcamp() {
                         disabled={page === totalPage || totalPage === undefined}
                         onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
                     />
-                  </Pagination>
-
-                  <div>
-                    <Map // 지도를 표시할 Container
-                        center={{
-                            // 지도의 중심좌표
-                            lat: 35.8,
-                            lng: 127.2,
-                        }}
-                        style={{
-                            // 지도의 크기
-                            width: "100%",
-                            height: "600px",
-                        }}
-                        level={13} // 지도의 확대 레벨
-                    >
-                    {
-                        campings.map((data, idx) => (
-                        <MapMarker 
-                            key={idx}
-                            position={{
-                                lat: data.map_y,
-                                lng: data.map_x,
-                              }}
-                            clickable={true}
-                            onClick={() => router.push(`/campingplace/${data.camping_id}`)}
-                            onMouseOver={
-                                () => setIsOpen({
-                                    ...isOpen,
-                                    [idx] : true
-                                })
-                            }
-                            onMouseOut={
-                                () => setIsOpen({
-                                    ...isOpen,
-                                    [idx] : false
-                                })
-                            }
-                        >
-                            {isOpen[idx] && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{data.faclt_nm}</div>}
-                        </MapMarker>
-                    ))}
-                    </Map>
-                </div>
+                </Pagination>
+                
         </>
     );
 }
