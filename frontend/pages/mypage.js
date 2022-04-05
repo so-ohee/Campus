@@ -32,6 +32,8 @@ function Mypage() {
             });
     }
 
+    console.log(data)
+
     return (
         <>
             <Container style={{ height: "1300px" }}>
@@ -46,6 +48,7 @@ function Mypage() {
                         <Col xs={3} style={{textAlignLast: "right"}}>
                             <Button variant='outline-success' style={{ marginRight: "1%" }} onClick={() => setModalShow(true)}>회원정보 수정</Button>
                             <ModifyModal
+                                props={data}
                                 show={modalShow}
                                 onHide={() => setModalShow(false)}
                             />
@@ -80,6 +83,7 @@ function ModifyModal(props) {
 
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setUserid(res.data.user.userUid));
+        bringUser(localStorage.getItem("userUid")).then((res) => console.log(res.data.user.userUid));
     }, [])
 
     const onChangeImg = (e) => {
@@ -87,7 +91,6 @@ function ModifyModal(props) {
         
         if (e.target.files) {
             const uploadFile = e.target.files[0];
-            // console.log(uploadFile);
             const formData = new FormData()
             formData.append('file', uploadFile)
             setDatas(formData);
@@ -96,7 +99,6 @@ function ModifyModal(props) {
     };
 
     const changeImg = () => {
-        console.log(datas);
         changePic(userid, datas);
     }
 
@@ -108,6 +110,7 @@ function ModifyModal(props) {
         changeProfileName(name, userid).then(() => location.reload());
     }
 
+    console.log(name)
     return (
         <Modal
             {...props}
@@ -128,7 +131,6 @@ function ModifyModal(props) {
                         </Col>
                         <Col xs={6}>
                             <form>
-                                <label htmlFor="profile-upload" />
                                 <input type="file" id="profile-upload" accept="image/*" onChange={onChangeImg}/>
                             </form>
                         </Col>
