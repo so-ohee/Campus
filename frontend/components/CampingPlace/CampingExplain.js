@@ -24,8 +24,6 @@ function CampingExplain(props) {
     useEffect(() => {
         setUserid(localStorage.getItem('userUid'))
     }, [])
-
-    console.log(props.props)
     
     return (
         <>
