@@ -14,6 +14,8 @@ function Visitedcamp() {
     const [totalPage, setTotalPage] = useState('')
     const [pageList, setPageList] = useState([])
 
+    // 지도
+    const [isOpen, setIsOpen] = useState(false)
 
     
     useEffect(() => {
@@ -114,7 +116,7 @@ function Visitedcamp() {
                     />
                   </Pagination>
 
-                  <div className="my-5">
+                  <div>
                     <Map // 지도를 표시할 Container
                         center={{
                             // 지도의 중심좌표
@@ -127,8 +129,25 @@ function Visitedcamp() {
                             height: "600px",
                         }}
                         level={13} // 지도의 확대 레벨
-                        />
-                    </div>
+                    >
+                        <MapMarker 
+                            position={{
+                                lat: 36,
+                                lng: 127,
+                            }}
+                            clickable={true}
+                            // onClick={() => window.open(`https://map.kakao.com/link/to/${campingName},${y},${x}`, '_blank')}
+                            onMouseOver={
+                                () => setIsOpen(true)
+                            }
+                            onMouseOut={
+                                () => setIsOpen(false)
+                            }
+                        >
+                            {isOpen && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>123</div>}
+                        </MapMarker>
+                    </Map>
+                </div>
         </>
     );
 }
