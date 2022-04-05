@@ -54,7 +54,7 @@ function Reviewcamp() {
             </div>
 
             <div className={styles.reviewcamp_main}>
-                <Container style={{ height: "700px", marginTop: "-0.7%" }}>
+                <Container style={{ height: "550px", marginTop: "-0.7%" }}>
                     <table className={styles.reviewcamp_table}>
                         <thead>
                             <tr className={styles.reviewcamp_thead_tr}>
@@ -102,42 +102,37 @@ function Reviewcamp() {
                         </div>
                     : null
                     }
-                        
-                    
                 </Container>
             </div>
-
-
             
             <Pagination className={styles.reviewcamp_pagination}>
-                    <Pagination.First 
-                        disabled={page === 1}
-                        onClick={() => onSearch(Math.max(1,pageList[0]-5))}
-                    />
-                    <Pagination.Prev 
-                        disabled={page === 1}
-                        onClick={() => onSearch(page-1)}
-                    />
-                    {pageList.map((page_, idx) => (
-                        <Pagination.Item
-                            key={idx}
-                            id={`page-${idx}`}
-                            active={page_ === page}
-                            onClick={() => onSearch(page_)}
-                        >
-                            {page_}
-                        </Pagination.Item>
-                    ))}
-                    <Pagination.Next 
-                        disabled={page === totalPage || totalPage === undefined}
-                        onClick={() => onSearch(page+1)}
-                    />
-                    <Pagination.Last 
-                        disabled={page === totalPage || totalPage === undefined}
-                        onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
-                    />
-                  </Pagination>
-            {/* <Pagination className={styles.reviewcamp_pagination}>{items}</Pagination> */}
+                <Pagination.First 
+                    disabled={page === 1}
+                    onClick={() => onSearch(Math.max(1,pageList[0]-5))}
+                />
+                <Pagination.Prev 
+                    disabled={page === 1}
+                    onClick={() => onSearch(page-1)}
+                />
+                {pageList.map((page_, idx) => (
+                    <Pagination.Item
+                        key={idx}
+                        id={`page-${idx}`}
+                        active={page_ === page}
+                        onClick={() => onSearch(page_)}
+                    >
+                        {page_}
+                    </Pagination.Item>
+                ))}
+                <Pagination.Next 
+                    disabled={page === totalPage || totalPage === undefined}
+                    onClick={() => onSearch(page+1)}
+                />
+                <Pagination.Last 
+                    disabled={page === totalPage || totalPage === undefined}
+                    onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
+                />
+            </Pagination>
         </>
     );
 }

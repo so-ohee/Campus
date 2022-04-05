@@ -4,28 +4,32 @@ import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { BookMarkList } from "../../function/axios";
 import styles from "../../styles/MyPage/Bookmarkcamp.module.css";
+import { useRouter } from 'next/router';
 
 function Bookmarkcamp() {
 
     const [campingplace, setCampingplace] = useState([]);
-
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState('')
     const [pageList, setPageList] = useState([])
+    const [userid, setUserid] = useState('');
+    const router = useRouter();
 
-    
     useEffect(() => {
-        BookMarkList(localStorage.getItem("userUid"), 1)
-            .then((res) => {
-                setCampingplace(res.data.campsite)
-                setTotalPage(res.data.totalPage)
-                makeList(1,res.data.totalPage)
-            });
-    }, []);
+        if (router.isReady) {
+            setUserid(localStorage.getItem("userUid"))
+            BookMarkList(userid, 1)
+                .then((res) => {
+                    setCampingplace(res.data.campsite)
+                    setTotalPage(res.data.totalPage)
+                    makeList(1, res.data.totalPage)
+                });
+        }
+    }, [router.isReady, userid]);
 
     const onSearch = (p) => {
         setPage(p)
-        BookMarkList(localStorage.getItem("userUid"),p)
+        BookMarkList(userid,p)
         .then((res) => {
             console.log(res)
             if (res.data.campsite){
@@ -47,7 +51,6 @@ function Bookmarkcamp() {
         setPageList(lst)
     }
 
-    
     return (
         <>
             <div className={styles.bookmarkcamp_div1}>
@@ -83,36 +86,34 @@ function Bookmarkcamp() {
                 </Container>
             </div>
             
-
             <Pagination className={styles.bookmarkcamp_pagination}>
-                    <Pagination.First 
-                        disabled={page === 1}
-                        onClick={() => onSearch(Math.max(1,pageList[0]-5))}
-                    />
-                    <Pagination.Prev 
-                        disabled={page === 1}
-                        onClick={() => onSearch(page-1)}
-                    />
-                    {pageList.map((page_, idx) => (
-                        <Pagination.Item
-                            key={idx}
-                            id={`page-${idx}`}
-                            active={page_ === page}
-                            onClick={() => onSearch(page_)}
-                        >
-                            {page_}
-                        </Pagination.Item>
-                    ))}
-                    <Pagination.Next 
-                        disabled={page === totalPage || totalPage === undefined}
-                        onClick={() => onSearch(page+1)}
-                    />
-                    <Pagination.Last 
-                        disabled={page === totalPage || totalPage === undefined}
-                        onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
-                    />
-                  </Pagination>
-            {/* <Pagination className={styles.bookmarkcamp_pagination}>{items}</Pagination> */}
+                <Pagination.First 
+                    disabled={page === 1}
+                    onClick={() => onSearch(Math.max(1,pageList[0]-5))}
+                />
+                <Pagination.Prev 
+                    disabled={page === 1}
+                    onClick={() => onSearch(page-1)}
+                />
+                {pageList.map((page_, idx) => (
+                    <Pagination.Item
+                        key={idx}
+                        id={`page-${idx}`}
+                        active={page_ === page}
+                        onClick={() => onSearch(page_)}
+                    >
+                        {page_}
+                    </Pagination.Item>
+                ))}
+                <Pagination.Next 
+                    disabled={page === totalPage || totalPage === undefined}
+                    onClick={() => onSearch(page+1)}
+                />
+                <Pagination.Last 
+                    disabled={page === totalPage || totalPage === undefined}
+                    onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
+                />
+            </Pagination>
         </>
     );
 }

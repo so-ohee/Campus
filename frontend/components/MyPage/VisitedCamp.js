@@ -82,11 +82,9 @@ function Visitedcamp() {
                                 )
                         }
                     </Row>
-                    
                 </Container>
             </div>
             
-           
             <Pagination className={styles.visitedcamp_pagination}>
                     <Pagination.First 
                         disabled={page === 1}

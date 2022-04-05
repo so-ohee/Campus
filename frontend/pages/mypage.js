@@ -12,6 +12,7 @@ function Mypage() {
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
     const [page, setPage] = useState("");
+    
     // 새로고침 또는 페이진 전환 시 초기 위치
     useEffect(() => {
         window.scrollTo(0, 500);
@@ -34,7 +35,7 @@ function Mypage() {
 
     return (
         <>
-            <Container style={{ height: "1300px" }}>
+            <Container style={{ height: "1350px" }}>
                 <div className={styles.mypage_div1}>
                     <Row>
                         <Col xs={2}>
@@ -46,6 +47,7 @@ function Mypage() {
                         <Col xs={3} style={{textAlignLast: "right"}}>
                             <Button variant='outline-success' style={{ marginRight: "1%" }} onClick={() => setModalShow(true)}>회원정보 수정</Button>
                             <ModifyModal
+                                props={data}
                                 show={modalShow}
                                 onHide={() => setModalShow(false)}
                             />
@@ -87,7 +89,6 @@ function ModifyModal(props) {
         
         if (e.target.files) {
             const uploadFile = e.target.files[0];
-            // console.log(uploadFile);
             const formData = new FormData()
             formData.append('file', uploadFile)
             setDatas(formData);
@@ -96,7 +97,6 @@ function ModifyModal(props) {
     };
 
     const changeImg = () => {
-        console.log(datas);
         changePic(userid, datas);
     }
 
@@ -128,7 +128,6 @@ function ModifyModal(props) {
                         </Col>
                         <Col xs={6}>
                             <form>
-                                <label htmlFor="profile-upload" />
                                 <input type="file" id="profile-upload" accept="image/*" onChange={onChangeImg}/>
                             </form>
                         </Col>

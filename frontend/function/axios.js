@@ -49,7 +49,7 @@ export async function changePic(userUid, formData) {
 // 아이디 변경
 export async function changeProfileName(name, userUid) {
 
-    const url2 = url + "https://j6c103.p.ssafy.io/api/user/";
+    const url2 = "https://j6c103.p.ssafy.io/api/user/";
 
     let data = {
         name: name,
@@ -250,8 +250,6 @@ export const BookMark = async (campingId, userUid) => {
 
 // 방문체크
 export const VisitCheck = async (campingId, userUid) => {
-    console.log(campingId);
-    console.log(userUid);
     return await axios.get(`${url}`+`visit?campingId=${campingId}&userUid=${userUid}`)
 }
 
