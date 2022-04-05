@@ -128,7 +128,13 @@ function Areasearch() {
                 </Row>
             </div>
 
-            <Container style={{height: "850px"}}>
+            <Container style={{ height: "850px" }}>
+                <Row style={{ justifyContent: "center" }}>
+                    {
+                        datas == "" ? <img src="../../Camping.png" style={{width: "60%", marginTop: "4%"}}/> : null
+                    }
+                </Row>
+
                 <Row style={{textAlignLast: "center", textAlign: "-webkit-center"}}>
                 {
                     datas.map((element, index) => {
