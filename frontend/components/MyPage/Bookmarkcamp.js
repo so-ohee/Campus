@@ -4,6 +4,7 @@ import { Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { BookMarkList } from "../../function/axios";
 import styles from "../../styles/MyPage/Bookmarkcamp.module.css";
+import { useRouter } from 'next/router';
 
 function Bookmarkcamp() {
 
@@ -11,19 +12,24 @@ function Bookmarkcamp() {
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState('')
     const [pageList, setPageList] = useState([])
-    
+    const [userid, setUserid] = useState('');
+    const router = useRouter();
+
     useEffect(() => {
-        BookMarkList(localStorage.getItem("userUid"), 1)
-            .then((res) => {
-                setCampingplace(res.data.campsite)
-                setTotalPage(res.data.totalPage)
-                makeList(1,res.data.totalPage)
-            });
-    }, []);
+        if (router.isReady) {
+            setUserid(localStorage.getItem("userUid"))
+            BookMarkList(userid, 1)
+                .then((res) => {
+                    setCampingplace(res.data.campsite)
+                    setTotalPage(res.data.totalPage)
+                    makeList(1, res.data.totalPage)
+                });
+        }
+    }, [router.isReady, userid]);
 
     const onSearch = (p) => {
         setPage(p)
-        BookMarkList(localStorage.getItem("userUid"),p)
+        BookMarkList(userid,p)
         .then((res) => {
             console.log(res)
             if (res.data.campsite){
@@ -44,7 +50,7 @@ function Bookmarkcamp() {
         }
         setPageList(lst)
     }
-    
+
     return (
         <>
             <div className={styles.bookmarkcamp_div1}>

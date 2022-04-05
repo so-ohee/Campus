@@ -250,8 +250,6 @@ export const BookMark = async (campingId, userUid) => {
 
 // 방문체크
 export const VisitCheck = async (campingId, userUid) => {
-    console.log(campingId);
-    console.log(userUid);
     return await axios.get(`${url}`+`visit?campingId=${campingId}&userUid=${userUid}`)
 }
 

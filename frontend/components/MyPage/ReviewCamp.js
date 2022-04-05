@@ -54,7 +54,7 @@ function Reviewcamp() {
             </div>
 
             <div className={styles.reviewcamp_main}>
-                <Container style={{ height: "700px", marginTop: "-0.7%" }}>
+                <Container style={{ height: "550px", marginTop: "-0.7%" }}>
                     <table className={styles.reviewcamp_table}>
                         <thead>
                             <tr className={styles.reviewcamp_thead_tr}>

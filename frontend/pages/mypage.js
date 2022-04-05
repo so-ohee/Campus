@@ -12,6 +12,7 @@ function Mypage() {
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
     const [page, setPage] = useState("");
+    
     // 새로고침 또는 페이진 전환 시 초기 위치
     useEffect(() => {
         window.scrollTo(0, 500);
@@ -32,11 +33,9 @@ function Mypage() {
             });
     }
 
-    console.log(data)
-
     return (
         <>
-            <Container style={{ height: "1300px" }}>
+            <Container style={{ height: "1350px" }}>
                 <div className={styles.mypage_div1}>
                     <Row>
                         <Col xs={2}>
@@ -83,7 +82,6 @@ function ModifyModal(props) {
 
     useEffect(() => {
         bringUser(localStorage.getItem("userUid")).then((res) => setUserid(res.data.user.userUid));
-        bringUser(localStorage.getItem("userUid")).then((res) => console.log(res.data.user.userUid));
     }, [])
 
     const onChangeImg = (e) => {
@@ -110,7 +108,6 @@ function ModifyModal(props) {
         changeProfileName(name, userid).then(() => location.reload());
     }
 
-    console.log(name)
     return (
         <Modal
             {...props}

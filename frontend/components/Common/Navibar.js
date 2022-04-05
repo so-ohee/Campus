@@ -52,7 +52,6 @@ function Navibar() {
           <Navbar.Brand style={{cursor:'pointer'}}>
           <Link href="/">
             <img className={styles.navi_pic} src="../../logo.png" />
-            {/* <img className={styles.navi_pic} src={process.env.NEXT_PUBLIC + "/logo.png" } /> */}
             </Link>
           </Navbar.Brand>
           <div>
@@ -97,7 +96,7 @@ function Navibar() {
                             <NavDropdown align="end" title={
                               <img className={styles.navi_profile_pic} src={ `${data.profile}` } />
                             } id="dropdown-menu-align-end">
-                              <NavDropdown.Item onClick={onMyPage}>마이페이지</NavDropdown.Item>
+                              <NavDropdown.Item onClick={() => onMyPage()}>마이페이지</NavDropdown.Item>
                               <NavDropdown.Item onClick={() => onLogOutClick()}>로그아웃</NavDropdown.Item>
                             </NavDropdown>
                         </div> 
