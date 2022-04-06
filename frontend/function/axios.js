@@ -336,6 +336,11 @@ export const visit = async (uid) => {
     return await axios.get(`${django_url}visit/${uid}`)
 }
 
+// 지도 검색
+export const mapsearch = async (x1,y1,x2,y2) => {
+    return await axios.get(`${django_url}mapsearch/${x1}/${y1}/${x2}/${y2}`)
+}
+
 
 // ***************************** 지역 검색 *********************************************
 // 지역검색
