@@ -29,7 +29,9 @@ function CampingReview(props) {
             .catch((err) => {
             console.log(err);
         })
-    },[])
+    }, [])
+    
+    console.log(dummy)
 
     return (
         <>
