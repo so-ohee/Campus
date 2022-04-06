@@ -11,6 +11,7 @@ function CampingExplain(props) {
     const [visit, setVisit] = useState("");
     const [userid, setUserid] = useState("");
     const [campid, setCampid] = useState("");
+    const [img, setImg] = useState('')
     const router = useRouter();
 
     function PressBookMark() {
@@ -29,15 +30,24 @@ function CampingExplain(props) {
         e.target.src = "../../logo.png"
     }
     
+    useEffect(() => {
+        if (props.props.addr1){
+            if (props.props.firstImageUrl === null){
+                setImg("../../logo.png")
+            }else{
+                setImg(props.props.firstImageUrl)
+            }
+        }
+    },[props])
+
     return (
         <>
             <Container>
                 <Row>
                     {/* 사진 */}
-                    {/* <div className={styles.capmingplace_main_pic_div}>
-                            {props.props.campsite.firstImageUrl ? <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} onError={handleError}/>
-                            : <img className={styles.capmingplace_main_pic} src="../../logo.png" />}
-                    </div> */}
+                    <div className={styles.capmingplace_main_pic_div}>
+                        <img className={styles.capmingplace_main_pic} src={img} onError={handleError}/>
+                    </div>
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
                     <div className={styles.capmingplace_explain}>
