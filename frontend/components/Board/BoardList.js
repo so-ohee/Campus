@@ -112,7 +112,7 @@ function Boardlist(props) {
         <div>
             <Container style={{marginTop: "2%", textAlign: "-webkit-right"}}>
                 {
-                    userid !== undefined ?
+                    userid !== null ?
                         (
                             <Button variant="success" style={{width: "100px"}} onClick={submitSign}>작성</Button>
                         ) : 
