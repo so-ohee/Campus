@@ -48,7 +48,7 @@ function Reviewcamp() {
         }
         setPageList(lst)
     }
-    console.log(dummy)
+    // console.log(dummy)
     return (
         <>
             <div className={styles.reviewcamp_div1}>

@@ -254,14 +254,14 @@ export const VisitCheck = async (campingId, userUid) => {
 }
 
 // 캠핑 관련 쇼핑
-export const Shoppingcamp = async () => {
-    return await axios.get(`${url}`+`shop`)
+export const Shoppingcamp = async (page) => {
+    return await axios.get(`${url}`+`shop?page=${page}`)
 }
 
 
 // 캠핑 관련 뉴스 목록
-export const Newscamp = async () => {
-    return await axios.get(`${url}`+`news`)
+export const Newscamp = async (page) => {
+    return await axios.get(`${url}`+`news?page=${page}`)
 }
 
 // 캠핑장 사진 불러오기
