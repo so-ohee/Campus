@@ -30,6 +30,7 @@
 .campingreview_review {
     margin-top: 1%;
     margin-left: 8%;
+    cursor: pointer;
 }
 
 .campingreview_comment {

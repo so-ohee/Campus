@@ -3,11 +3,19 @@ import { Container, Col, Row, Pagination } from "react-bootstrap";
 import styles from "../../styles/CampingPlace/CampingReview.module.css";
 import { viewBoard } from "../../function/axios";
 import axios from "axios"
+import { useRouter } from 'next/router';
 
 function CampingReview(props) {
 
+    const router = useRouter();
+
     // 댓글 조회
     const [dummy, setDummy] = useState([]);
+
+    // 페이지네이션
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState('')
+    const [pageList, setPageList] = useState([])
 
     // 블로그
     const [blogs, setBlogs] = useState([])
@@ -18,6 +26,8 @@ function CampingReview(props) {
     useEffect(() => {
         viewBoard(props.props.campingId,1).then((res) => {
             console.log.apply(res)
+            setTotalPage(res.data.totalPage)
+            makeList(1, res.data.totalPage)
             setDummy(res.data.board)
         });
         axios({
@@ -26,16 +36,38 @@ function CampingReview(props) {
             headers: { Authorization: 'KakaoAK 755938934fdfd53eecb5a27918ac35e9' },
         })
             .then((res) => {
-            console.log(res);
+            // console.log(res);
             setBlogs(res.data.documents)
             })
             .catch((err) => {
             console.log(err);
         })
     }, [])
-    
-    console.log(dummy)
 
+    const onSearch = (p) => {
+        setPage(p)
+        viewBoard(props.props.campingId,p)
+        .then((res) => {
+            console.log(res)
+            if (res.data.board){
+                setDummy(res.data.board)
+                setTotalPage(res.data.totalPage)
+                makeList(p,res.data.totalPage)
+            }else{
+                setDummy([])
+            }
+        })
+    }
+
+    const makeList = (p, t) => {
+        let lst = []
+        const start = parseInt((p-1)/5)*5+1
+        for (let i = start; i < Math.min(start+5,t+1); i++) {
+            lst.push(i)
+        }
+        setPageList(lst)
+    }
+    
     return (
         <>
             <Container>
@@ -59,7 +91,7 @@ function CampingReview(props) {
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <h5 className={styles.campingreview_review}>{element.title}</h5>
+                                                <h5 className={styles.campingreview_review} onClick={() => router.push(`/board/detailreview/${element.boardId}`)}>{element.title}</h5>
                                             </Row>
                                         </div>
                                     );
@@ -71,6 +103,37 @@ function CampingReview(props) {
                                 </div>
                             )
                     }
+
+                    
+                    <Pagination>
+                        <Pagination.First 
+                            disabled={page === 1}
+                            onClick={() => onSearch(Math.max(1,pageList[0]-5))}
+                        />
+                        <Pagination.Prev 
+                            disabled={page === 1}
+                            onClick={() => onSearch(page-1)}
+                        />
+                        {pageList.map((page_, idx) => (
+                            <Pagination.Item
+                                key={idx}
+                                id={`page-${idx}`}
+                                active={page_ === page}
+                                onClick={() => onSearch(page_)}
+                            >
+                                {page_}
+                            </Pagination.Item>
+                        ))}
+                        <Pagination.Next 
+                            disabled={page === totalPage || totalPage === undefined}
+                            onClick={() => onSearch(page+1)}
+                        />
+                        <Pagination.Last 
+                            disabled={page === totalPage || totalPage === undefined}
+                            onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
+                        />
+                    </Pagination>
+
                 </div>
                 
             </Container>
