@@ -19,6 +19,7 @@ function Visitedcamp() {
     // 지도
     const [isOpen, setIsOpen] = useState(false)
     const [campings, setCampings] = useState([])
+    const [falseList, setFalseList] = useState()
     let lst = []
 
     
@@ -36,6 +37,7 @@ function Visitedcamp() {
                     lst.push(false)
                 }
                 setIsOpen(lst)
+                setFalseList(lst)
             })
     }, []);
 
@@ -97,15 +99,12 @@ function Visitedcamp() {
                         onClick={() => router.push(`/campingplace/${data.camping_id}`)}
                         onMouseOver={
                             () => setIsOpen({
-                                ...isOpen,
+                                ...falseList,
                                 [idx] : true
                             })
                         }
                         onMouseOut={
-                            () => setIsOpen({
-                                ...isOpen,
-                                [idx] : false
-                            })
+                            () => setIsOpen(falseList)
                         }
                     >
                         {isOpen[idx] && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{data.faclt_nm}</div>}

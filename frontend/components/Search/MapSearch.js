@@ -13,14 +13,13 @@ function Mapsearch() {
     const [campingplace, setCampingplace] = useState([]);
 
     // 지도
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState([])
+    const [falseList, setFalseList] = useState()
     const [campings, setCampings] = useState([])
     const [map, setMap] = useState();
     const [info, setInfo] = useState();
     const [lat, setLat] = useState(35.2040949)
     const [long, setLong] = useState(126.8071876)
-    let lst = []
-
 
     
     useEffect(() => {
@@ -66,6 +65,7 @@ function Mapsearch() {
                     lst.push(false)
                 }
                 setIsOpen(lst)
+                setFalseList(lst)
             })
         }
     }, [info]);
@@ -96,15 +96,12 @@ function Mapsearch() {
                         onClick={() => router.push(`/campingplace/${data.camping_id}`)}
                         onMouseOver={
                             () => setIsOpen({
-                                ...isOpen,
+                                ...falseList,
                                 [idx] : true
                             })
                         }
                         onMouseOut={
-                            () => setIsOpen({
-                                ...isOpen,
-                                [idx] : false
-                            })
+                            () => setIsOpen(falseList)
                         }
                     >
                         {isOpen[idx] && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{data.faclt_nm}</div>}
