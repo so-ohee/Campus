@@ -104,8 +104,7 @@ function CampingReview(props) {
                             )
                     }
 
-                    
-                    <Pagination>
+                    <Pagination style={{justifyContent: "center"}}>
                         <Pagination.First 
                             disabled={page === 1}
                             onClick={() => onSearch(Math.max(1,pageList[0]-5))}
@@ -133,7 +132,6 @@ function CampingReview(props) {
                             onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
                         />
                     </Pagination>
-
                 </div>
                 
             </Container>
@@ -145,16 +143,26 @@ function CampingReview(props) {
                         <div key={index}>
                             <div className="d-flex ">
                                 { element.thumbnail !== "" ?
-                                    <div  style={{ width: "130px", height:"130px"}} >
-                                    <img  src={element.thumbnail} onClick={() => window.open(element.url, '_blank')} style={{cursor:"pointer"}}/>
+                                    <div style={{ width: "130px", height:"130px"}} >
+                                        <img
+                                            src={element.thumbnail}
+                                            onClick={() => window.open(element.url, '_blank')}
+                                            style={{ cursor: "pointer", borderRadius: "5%" }}
+                                        />
                                     </div>
                                 : null}
                                 <div className='ms-1 mt-1'>
-                                    <h5 className="fw-bold" onClick={() => window.open(element.url, '_blank')} style={{cursor:"pointer"}}>
+                                    <h5
+                                        style={{ marginLeft: "2%", fontWeight: "bold", cursor: "pointer" }}
+                                        onClick={() => window.open(element.url, '_blank')}>
                                         {element.title.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"').replace(/&#39;/ig,"'").replace(/&lt;/ig,'<').replace(/&gt;/ig,'>')}
                                     </h5>
-                                    {element.contents.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"').replace(/&#39;/ig,"'").replace(/&lt;/ig,'<').replace(/&gt;/ig,'>')}
-                                    <h5 className="mt-2 mb-0">{element.datetime.slice(0,10)}</h5>
+                                    <h6 style={{ marginLeft: "2%" }}>
+                                        {element.contents.replace(/(<([^>]+)>)/ig,"").replace(/&#34;/ig,'"').replace(/&#39;/ig,"'").replace(/&lt;/ig,'<').replace(/&gt;/ig,'>')}
+                                    </h6>
+                                    <h5 style={{ marginTop: "1%", marginLeft: "2%" }}>
+                                        {element.datetime.slice(0, 10)}
+                                    </h5>
                                 </div>
                             </div>
                         <hr></hr>
