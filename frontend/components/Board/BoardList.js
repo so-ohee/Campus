@@ -32,7 +32,6 @@ function Boardlist(props) {
     }
 
     const submitSign3 = (boardId) => {
-        props.propFunction("자유상세")
         router.push(`board/detailqnafree/${boardId}`);
     }
 
