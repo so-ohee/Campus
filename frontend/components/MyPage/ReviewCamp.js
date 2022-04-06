@@ -52,7 +52,7 @@ function Reviewcamp() {
     return (
         <>
             <div className={styles.reviewcamp_div1}>
-                <h2 style={{fontWeight: "bold"}}>리뷰 쓴 캠핑장</h2>
+                <h2 style={{fontWeight: "bold"}}>작성한 게시물</h2>
             </div>
 
             <div className={styles.reviewcamp_main}>
