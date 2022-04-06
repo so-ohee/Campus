@@ -70,7 +70,7 @@ function Shopping() {
                     </Row>
             </Container>
 
-            <Pagination className={styles.reviewcamp_pagination}>
+            <Pagination className={styles.shoppingcard_pagination}>
                 <Pagination.First 
                     disabled={page === 1}
                     onClick={() => onSearch(Math.max(1,pageList[0]-5))}

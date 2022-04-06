@@ -3,11 +3,12 @@ import { Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import styles from "../styles/News/News.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 import { Newscamp } from "../function/axios";
+import { useRouter } from 'next/router';
 
 function news() {
 
     const [dummy, setDummy] = useState([]);
-
+    const router = useRouter();
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState('')
     const [pageList, setPageList] = useState([])
@@ -18,12 +19,14 @@ function news() {
     }, [page]);
 
     useEffect(() => {
-        Newscamp(1).then((res) => {
-            setDummy(res.data.news)
-            setTotalPage(res.data.totalPage)
-            makeList(1,res.data.totalPage)
-        });
-    }, [])
+        if (router.isReady) {
+            Newscamp(1).then((res) => {
+                setDummy(res.data.news)
+                setTotalPage(res.data.totalPage)
+                makeList(1, res.data.totalPage)
+            });
+        }
+    }, [router.isReady])
     
     const onSearch = (p) => {
         setPage(p)
@@ -87,7 +90,7 @@ function news() {
                 </table>
             </Container>
 
-            <Pagination className={styles.reviewcamp_pagination}>
+            <Pagination className={styles.news_pagination}>
                 <Pagination.First 
                     disabled={page === 1}
                     onClick={() => onSearch(Math.max(1,pageList[0]-5))}

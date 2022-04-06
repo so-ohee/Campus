@@ -7,3 +7,8 @@
 .shoppingcard_link {
     font: blue;
 }
+
+.shoppingcard_pagination {
+    justify-content: center;
+    margin-bottom: 2%;
+}
