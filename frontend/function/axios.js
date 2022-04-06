@@ -239,8 +239,8 @@ export const receiveCamping_out = async (campingId) => {
 }
 
 // 캠핑장 상세보기 내, 후기 목록
-export const viewBoard = async (campingId) => {
-    return await axios.get(`${url}`+`board/review?campingId=${campingId}`)
+export const viewBoard = async (campingId, page) => {
+    return await axios.get(`${url}`+`board/review?campingId=${campingId}&page=${page}`)
 }
 
 // 북마크

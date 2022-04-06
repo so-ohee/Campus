@@ -16,7 +16,10 @@ function CampingReview(props) {
     const [blogPage, setBlogPage] = useState(1)
 
     useEffect(() => {
-        viewBoard(props.props.campingId).then((res) => setDummy(res.data.board));
+        viewBoard(props.props.campingId,1).then((res) => {
+            console.log.apply(res)
+            setDummy(res.data.board)
+        });
         axios({
             method: 'get',
             url: `https://dapi.kakao.com/v2/search/blog?query=${sigungu} ${campingName}&size=10`,
