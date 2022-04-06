@@ -333,6 +333,35 @@ function CampingMap(props) {
         >
             {isOpen && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{campingName}</div>}
         </MapMarker>
+        <MapMarker 
+            position={{
+                lat: myY,
+                lng: myX,
+            }}
+            image={{
+              src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markers_sprites2.png",
+              size: {
+                width: 33,
+                height: 36,
+              },
+              options: {
+                offset: {
+                  x: 12,
+                  y: 36,
+                },
+                spriteSize: {
+                  width: 126,
+                  height: 146,
+                },
+                spriteOrigin: {
+                  x: 43,
+                  y: 0,
+                },
+              }
+            }}
+        >
+          {/* <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>내 위치</div> */}
+        </MapMarker>
 
           </Map>
         </div>
