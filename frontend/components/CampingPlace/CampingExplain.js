@@ -34,10 +34,10 @@ function CampingExplain(props) {
             <Container>
                 <Row>
                     {/* 사진 */}
-                    <div className={styles.capmingplace_main_pic_div}>
+                    {/* <div className={styles.capmingplace_main_pic_div}>
                             {props.props.campsite.firstImageUrl ? <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} onError={handleError}/>
                             : <img className={styles.capmingplace_main_pic} src="../../logo.png" />}
-                    </div>
+                    </div> */}
 
                     {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}
                     <div className={styles.capmingplace_explain}>
