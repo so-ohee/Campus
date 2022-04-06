@@ -38,6 +38,10 @@ function CampingExplain(props) {
         setVisit(props.props.visit)
         setReview(props.props.review)
     }, [props])
+
+    const handleError = (e) => {
+        e.target.src = "../../logo.png"
+    }
     
     return (
         <>
@@ -47,7 +51,8 @@ function CampingExplain(props) {
                     <Row>
                         {/* 사진 */}
                         <div className={styles.capmingplace_main_pic_div}>
-                            <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} />
+                            {props.props.campsite.firstImageUrl ? <img className={styles.capmingplace_main_pic} src={props.props.campsite.firstImageUrl} onError={handleError}/>
+                            : <img className={styles.capmingplace_main_pic} src="../../logo.png" />}
                         </div>
 
                         {/* 캠피장 기본 설명, 찜하기, 방문여부, 리뷰작성 */}

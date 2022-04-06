@@ -30,13 +30,16 @@ function CampingIntro(props) {
         }
     }, [props.props])
 
-    const handleError = (e) => {
-        if (props.props.firstImageUrl){
-            e.target.src = props.props.firstImageUrl
-        }else{
-            e.target.src = "../../logo.png"
-        }
+    // const handleError = (e) => {
+    //     if (props.props.firstImageUrl){
+    //         e.target.src = props.props.firstImageUrl
+    //     }else{
+    //         e.target.src = "../../logo.png"
+    //     }
         
+    // }
+    const handleError = (e) => {
+        e.target.src = "../../logo.png"
     }
     
     return (
