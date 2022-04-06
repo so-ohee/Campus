@@ -29,8 +29,6 @@ function Detailreview() {
     const [dummy, setDummy] = useState([]);
     const [change, setChange] = useState(false);
 
-    console.log(router.query.detailreview);
-
     useEffect(() => {
         if (router.isReady) {
             campingBoardMore(router.query.detailreview).then((res) => {
