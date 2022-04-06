@@ -224,7 +224,7 @@ public class BoardServiceImpl implements BoardService {
         log.debug("BoardService listCampsiteBoard call");
 
         Map<String, Object> resultMap = new HashMap<>();
-        Page<Board> boards = boardRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "boardId")));
+        Page<Board> boards = boardRepository.findByCampingIdAndDeleteState(campingId, 0, PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "boardId")));
         if(boards.isEmpty()) {
             resultMap.put("message", Message.NOT_FOUND_BOARD);
             return resultMap;
