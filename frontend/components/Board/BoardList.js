@@ -32,7 +32,6 @@ function Boardlist(props) {
     }
 
     const submitSign3 = (boardId) => {
-        props.propFunction("자유상세")
         router.push(`board/detailqnafree/${boardId}`);
     }
 
@@ -182,9 +181,10 @@ function Boardlist(props) {
                         <tr className={styles.boardlist_thead_tr}>
                             <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
                             <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
-                            <th style={{width: "700px", textAlignLast: "center"}}>제목</th>
+                            <th style={{width: "600px", textAlignLast: "center"}}>제목</th>
                             <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
                             <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
+                            <th style={{width: "100px", textAlignLast: "center"}}>조회수</th>
                         </tr>
                     </thead>
                     {
@@ -200,9 +200,10 @@ function Boardlist(props) {
                                                         <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                            <td style={{ width: "640px", paddingLeft: "3%"}}>{element.title}</td>
+                                                            <td style={{ width: "540px", paddingLeft: "3%"}}>{element.title}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
                                                 }
                                                 {
@@ -210,9 +211,10 @@ function Boardlist(props) {
                                                         <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                            <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                            <td style={{ width: "540px", paddingLeft: "3%" }}>{element.title}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
                                                 }
                                             </tbody>
@@ -231,9 +233,10 @@ function Boardlist(props) {
                                                         <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                            <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                            <td style={{ width: "540px", paddingLeft: "3%" }}>{element.title}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
                                                 }
                                                 {
@@ -241,9 +244,10 @@ function Boardlist(props) {
                                                         <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(element.boardId), submitData(element.boardId)}}>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                            <td style={{ width: "640px", paddingLeft: "3%" }}>{element.title}</td>
+                                                            <td style={{ width: "540px", paddingLeft: "3%" }}>{element.title}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
+                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
                                                 }
                                             </tbody>
