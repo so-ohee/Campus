@@ -72,67 +72,68 @@ function Mapsearch() {
 
     return (
         <>
-        <div style={{marginTop: "3%", marginBottom: "3%"}}>
-            <Map // 지도를 표시할 Container
-            center={{ lat: lat, lng: long }}
-            style={{
-                // 지도의 크기
-                width: "100%",
-                height: "600px",
-                borderRadius: "2%",
-            }}
-            level={8} // 지도의 확대 레벨
-            onCreate={(map) => setMap(map)}
-            >
-                {
-                    campings.map((data, idx) => (
-                    <MapMarker 
-                        key={idx}
-                        position={{
-                            lat: data.map_y,
-                            lng: data.map_x,
-                        }}
-                        clickable={true}
-                        onClick={() => router.push(`/campingplace/${data.camping_id}`)}
-                        onMouseOver={
-                            () => setIsOpen({
-                                ...falseList,
-                                [idx] : true
+            <div style={{ marginTop: "3%", marginBottom: "3%" }}>
+                <Container style={{textAlignLast: "right", marginBottom: "1%"}}>
+                    {map && (
+                        <button onClick={() => {
+                            setInfo({
+                                center: {
+                                lat: map.getCenter().getLat(),
+                                lng: map.getCenter().getLng(),
+                                },
+                                level: map.getLevel(),
+                                typeId: map.getMapTypeId(),
+                                swLatLng: {
+                                lat: map.getBounds().getSouthWest().getLat(),
+                                lng: map.getBounds().getSouthWest().getLng(),
+                                },
+                                neLatLng: {
+                                lat: map.getBounds().getNorthEast().getLat(),
+                                lng: map.getBounds().getNorthEast().getLng(),
+                                },
                             })
-                        }
-                        onMouseOut={
-                            () => setIsOpen(falseList)
-                        }
-                    >
-                        {isOpen[idx] && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{data.faclt_nm}</div>}
-                    </MapMarker>
-                ))}
-            </Map>
-            
-            {map && (
-            <button  onClick={() => {
-              setInfo({
-                center: {
-                  lat: map.getCenter().getLat(),
-                  lng: map.getCenter().getLng(),
-                },
-                level: map.getLevel(),
-                typeId: map.getMapTypeId(),
-                swLatLng: {
-                  lat: map.getBounds().getSouthWest().getLat(),
-                  lng: map.getBounds().getSouthWest().getLng(),
-                },
-                neLatLng: {
-                  lat: map.getBounds().getNorthEast().getLat(),
-                  lng: map.getBounds().getNorthEast().getLng(),
-                },
-              })
-            }}>
-              여기서 검색
-            </button>
-            )}
-            
-        </div>
+                        }}>
+                        현위치 검색
+                        </button>
+                    )}
+                </Container>
+                
+                <Map // 지도를 표시할 Container
+                center={{ lat: lat, lng: long }}
+                style={{
+                    // 지도의 크기
+                    width: "100%",
+                    height: "600px",
+                    borderRadius: "2%",
+                }}
+                level={8} // 지도의 확대 레벨
+                onCreate={(map) => setMap(map)}
+                >
+                    {
+                        campings.map((data, idx) => (
+                        <MapMarker 
+                            key={idx}
+                            position={{
+                                lat: data.map_y,
+                                lng: data.map_x,
+                            }}
+                            clickable={true}
+                            onClick={() => router.push(`/campingplace/${data.camping_id}`)}
+                            onMouseOver={
+                                () => setIsOpen({
+                                    ...falseList,
+                                    [idx] : true
+                                })
+                            }
+                            onMouseOut={
+                                () => setIsOpen(falseList)
+                            }
+                        >
+                            {isOpen[idx] && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>{data.faclt_nm}</div>}
+                        </MapMarker>
+                    ))}
+                </Map>
+            </div>
         </>
     );
 }

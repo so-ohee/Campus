@@ -29,12 +29,9 @@ function Detailreview() {
     const [dummy, setDummy] = useState([]);
     const [change, setChange] = useState(false);
 
-    console.log(router.query.detailreview);
-
     useEffect(() => {
         if (router.isReady) {
             campingBoardMore(router.query.detailreview).then((res) => {
-                console.log(res)
                 {
                     res.data.board.files.length !== 0 ? setPic(res.data.board.files[0].filePath) : null
                 }
