@@ -9,4 +9,5 @@ urlpatterns = [
     path('similar/<campingId>', views.similar),
     path('filter/', views.filter),
     path('visit/<uid>', views.visit),
+    path('mapsearch/<x1>/<y1>/<x2>/<y2>', views.mapsearch),
 ]

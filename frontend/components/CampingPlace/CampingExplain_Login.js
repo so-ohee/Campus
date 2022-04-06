@@ -59,7 +59,7 @@ function CampingExplain(props) {
                                     <p>{props.props.campsite.tel}</p>
                                     <p style={{color: "darkgreen"}}>
                                         {
-                                            props.props.campsite.themaEnvrnCl !==null ? <a>#{props.props.campsite.themaEnvrnCl}</a> : null
+                                            props.props.campsite.themaEnvrnCl !==null ? <a>#{props.props.campsite.themaEnvrnCl.replaceAll(",", " #")}</a> : null
                                         }
                                         </p>
                                         {

@@ -184,6 +184,7 @@ function CampingMap(props) {
               // 지도의 크기
               width: "100%",
               height: "600px",
+              borderRadius: "2%"
             }}
             level={5} // 지도의 확대 레벨
           >

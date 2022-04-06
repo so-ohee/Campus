@@ -280,6 +280,23 @@ def visit(request, uid):
     return Response(serializer.data)
 
 
+@api_view(('GET',))
+def mapsearch(request, x1, y1, x2, y2):
+    
+    campings = []
+
+    campings_all = Camping.objects.all().order_by('-blog_cnt')
+    for camp in campings_all:
+        if camp.map_x >= float(x1) and camp.map_x <= float(x2) and camp.map_y >= float(y1) and camp.map_y <= float(y2):
+            campings.append(camp)
+        if len(campings) > 50:
+            break
+    
+    serializer = CampingMapSerializer(campings, many=True)
+
+    return Response(serializer.data)
+
+
 
 
 # 함수 정의

@@ -3,6 +3,7 @@ import { Container, Tab, Tabs } from 'react-bootstrap';
 import styles from "../styles/Search/Search.module.css";
 import AreaSearch from '../components/Search/AreaSearch.js';
 import FliterSearch from '../components/Search/FliterSearch.js';
+import MapSearch from '../components/Search/MapSearch.js';
 
 function search() {
 
@@ -21,12 +22,15 @@ function search() {
                 </div>
 
                 <div className={styles.search_div2}>
-                    <Tabs style={{width: "1320px"}} defaultActiveKey="area" id="uncontrolled-tab-example" className="mb-3">
+                    <Tabs style={{width: "1320px"}} defaultActiveKey="map" id="uncontrolled-tab-example" className="mb-3">
                         <Tab eventKey="area" title="지역">
                             <AreaSearch />
                         </Tab>
                         <Tab eventKey="filter" title="필터링">
                             <FliterSearch />
+                        </Tab>
+                        <Tab eventKey="map" title="지도">
+                            <MapSearch />
                         </Tab>
                     </Tabs>
                 </div>
