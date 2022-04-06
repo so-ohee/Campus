@@ -88,7 +88,7 @@ function Recommend() {
         </Row>
       </Container>
     
-      {campings2.length == 0 && <h2>-내가 간 캠핑장이 없습니다-</h2>}
+      {campings2.length == 0 && <h2 style={{textAlignLast: "center"}}>내가 간 캠핑장이 없습니다.</h2>}
 
     </>
   );
