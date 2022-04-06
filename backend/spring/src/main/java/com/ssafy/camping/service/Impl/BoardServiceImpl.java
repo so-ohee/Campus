@@ -91,7 +91,7 @@ public class BoardServiceImpl implements BoardService {
         }
 
         board.get().setTitle(boardDto.getTitle());
-        board.get().setContent(boardDto.getTitle());
+        board.get().setContent(boardDto.getContent());
         board.get().setUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         boardRepository.save(board.get());
 
