@@ -132,6 +132,9 @@ public class BoardServiceImpl implements BoardService {
             List<FileBoard> files = board.get().getFiles();
             fileService.boardFileDelete(files);
         }
+        
+        //댓글 삭제
+        commentRepository.deleteByBoardId(boardId);
 
         //카테고리가 후기인 경우
         if(board.get().getCategory().equals("후기")){
@@ -141,9 +144,6 @@ public class BoardServiceImpl implements BoardService {
         } else {
             boardRepository.deleteById(boardId);
         }
-
-        //댓글 삭제
-        commentRepository.deleteByBoardId(boardId);
 
         resultMap.put("message", Message.DELETE_BOARD_SUCCESS);
         return resultMap;
