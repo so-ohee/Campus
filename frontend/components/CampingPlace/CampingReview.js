@@ -4,6 +4,7 @@ import styles from "../../styles/CampingPlace/CampingReview.module.css";
 import { viewBoard } from "../../function/axios";
 import axios from "axios"
 import { useRouter } from 'next/router';
+import { Rating } from 'react-simple-star-rating';
 
 function CampingReview(props) {
 
@@ -11,6 +12,7 @@ function CampingReview(props) {
 
     // 댓글 조회
     const [dummy, setDummy] = useState([]);
+    const [rating, setRating] = useState("");
 
     // 페이지네이션
     const [page, setPage] = useState(1)
@@ -51,6 +53,7 @@ function CampingReview(props) {
             console.log(res)
             if (res.data.board){
                 setDummy(res.data.board)
+                setRating(res.data.board.rating)
                 setTotalPage(res.data.totalPage)
                 makeList(p,res.data.totalPage)
             }else{
@@ -67,6 +70,8 @@ function CampingReview(props) {
         }
         setPageList(lst)
     }
+
+    console.log(dummy)
     
     return (
         <>
@@ -83,8 +88,14 @@ function CampingReview(props) {
                                                     <img className={styles.campingreview_profile} src={element.profile} />
                                                 </Col>
                                                 <Col xs={8}>
-                                                    <img className={styles.campingreview_star} src="../../star.png" />
-                                                    <h5>{element.name}</h5>
+                                                    {/* <img className={styles.campingreview_star} src="../../star.png" /> */}
+                                                    <Rating
+                                                        initialValue={`${element.rating}`/1}
+                                                        size={30}
+                                                        allowHover={false}
+                                                        transition={false}
+                                                    />
+                                                    <h5 style={{marginLeft: "1%"}}>{element.name}</h5>
                                                 </Col>
                                                 <Col xs={3} style={{textAlignLast: "right"}}>
                                                     <h5>{element.createTime}</h5>
