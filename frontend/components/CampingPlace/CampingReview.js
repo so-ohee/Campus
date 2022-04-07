@@ -110,39 +110,43 @@ function CampingReview(props) {
                             ) : 
                             (
                                 <div className={styles.campingreview_comment}>
-                                    <h1 style={{textAlign: "center"}}>댓글이 없습니다</h1>
+                                    <h1 style={{textAlign: "center"}}>리뷰가 없습니다.</h1>
                                 </div>
                             )
                     }
-
-                    <Pagination style={{justifyContent: "center"}}>
-                        <Pagination.First 
-                            disabled={page === 1}
-                            onClick={() => onSearch(Math.max(1,pageList[0]-5))}
-                        />
-                        <Pagination.Prev 
-                            disabled={page === 1}
-                            onClick={() => onSearch(page-1)}
-                        />
-                        {pageList.map((page_, idx) => (
-                            <Pagination.Item
-                                key={idx}
-                                id={`page-${idx}`}
-                                active={page_ === page}
-                                onClick={() => onSearch(page_)}
-                            >
-                                {page_}
-                            </Pagination.Item>
-                        ))}
-                        <Pagination.Next 
-                            disabled={page === totalPage || totalPage === undefined}
-                            onClick={() => onSearch(page+1)}
-                        />
-                        <Pagination.Last 
-                            disabled={page === totalPage || totalPage === undefined}
-                            onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
-                        />
-                    </Pagination>
+                    {
+                        dummy !== undefined ?
+                            (
+                            <Pagination style={{justifyContent: "center"}}>
+                                <Pagination.First 
+                                    disabled={page === 1}
+                                    onClick={() => onSearch(Math.max(1,pageList[0]-5))}
+                                />
+                                <Pagination.Prev 
+                                    disabled={page === 1}
+                                    onClick={() => onSearch(page-1)}
+                                />
+                                {pageList.map((page_, idx) => (
+                                    <Pagination.Item
+                                        key={idx}
+                                        id={`page-${idx}`}
+                                        active={page_ === page}
+                                        onClick={() => onSearch(page_)}
+                                    >
+                                        {page_}
+                                    </Pagination.Item>
+                                ))}
+                                <Pagination.Next 
+                                    disabled={page === totalPage || totalPage === undefined}
+                                    onClick={() => onSearch(page+1)}
+                                />
+                                <Pagination.Last 
+                                    disabled={page === totalPage || totalPage === undefined}
+                                    onClick={() => onSearch(Math.min(totalPage,pageList[0]+5))}
+                                />
+                            </Pagination>
+                            ) : null
+                    }
                 </div>
                 
             </Container>
