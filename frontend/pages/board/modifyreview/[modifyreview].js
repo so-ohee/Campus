@@ -137,7 +137,6 @@ function Modifyreview() {
                                         </Row>
                                     ) : null
                             }
-                            
                         </Col>
                         <Col xs={3}>
                             <Row>
@@ -167,6 +166,7 @@ function Modifyreview() {
                         className={styles.modifyreview_input}
                         type="text"
                         placeholder='제목을 입력하세요...'
+                        value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
@@ -177,6 +177,7 @@ function Modifyreview() {
                         className={styles.modifyreview_textarea}
                         type="text"
                         placeholder='내용을 입력하세요...'
+                        value={content}
                         onChange={(e) => setContent(e.target.value)}
                     />
                 </div>
