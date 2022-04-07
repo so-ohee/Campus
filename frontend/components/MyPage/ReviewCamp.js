@@ -78,7 +78,7 @@ function Reviewcamp() {
                                                 <tr className={styles.reviewcamp_tbody_tr}>
                                                     <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td onClick={() => router.push(`/board/detailreview/${element.boardId}`)} style={{ width: "640px", paddingLeft: "3%", cursor:'pointer' }}>{element.title}</td>
+                                                    <td onClick={() => router.push(`/mypage/detailreview/${element.boardId}`)} style={{ width: "640px", paddingLeft: "3%", cursor:'pointer' }}>{element.title}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                     <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>
@@ -88,7 +88,7 @@ function Reviewcamp() {
                                                 <tr className={styles.reviewcamp_tbody_tr}>
                                                     <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
-                                                    <td onClick={() => router.push(`/board/detailqnafree/${element.boardId}`)} style={{ width: "640px", paddingLeft: "3%", cursor:'pointer' }}>{element.title}</td>
+                                                    <td onClick={() => router.push(`/mypage/detailqnafree/${element.boardId}`)} style={{ width: "640px", paddingLeft: "3%", cursor:'pointer' }}>{element.title}</td>
                                                     <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
                                                     <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                 </tr>

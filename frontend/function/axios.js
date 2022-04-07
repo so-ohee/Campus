@@ -160,10 +160,10 @@ export async function modifyArticle(dataDto, files) {
 // 게시글 삭제
 export const articleDelete = async (boardId) => {
     axios.delete(`${url}` + `board` + `/` + `${boardId}`)
-        .then((res) => {
-            console.log("게시글 삭제");
-            document.location.href = "/board";
-        });
+        // .then((res) => {
+        //     console.log("게시글 삭제");
+        //     document.location.href = "/board";
+        // });
 }
 
 // 게시글 검색
