@@ -16,6 +16,14 @@ function Mypage() {
     const [userid, setUserid] = useState("");
     const router = useRouter();
     
+
+    // 회원탈퇴 모달
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
     // 새로고침 또는 페이진 전환 시 초기 위치
     useEffect(() => {
         window.scrollTo(0, 500);
@@ -61,7 +69,7 @@ function Mypage() {
                                             show={modalShow}
                                             onHide={() => setModalShow(false)}
                                         />
-                                        <Button variant='outline-danger' onClick={() => deleteMember()}>회원탈퇴</Button>
+                                        <Button variant='outline-danger' onClick={handleShow}>회원탈퇴</Button>
                                     </Col>
                                 ) : null
                         }
@@ -83,6 +91,21 @@ function Mypage() {
                     </Tabs>
                 </div>
             </Container>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>회원탈퇴</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>정말 회원탈퇴를 하시겠습니까?</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={() => deleteMember()}>
+                    예
+                </Button>
+                <Button variant="secondary" onClick={handleClose}>
+                    아니오
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }
