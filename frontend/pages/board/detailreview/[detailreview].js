@@ -60,7 +60,6 @@ function Detailreview() {
         window.scrollTo(0, 500);
     }, []);
 
-    console.log(datas)
     return (
         <div>
             <Container>                

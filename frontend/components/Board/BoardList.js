@@ -58,8 +58,6 @@ function Boardlist(props) {
         router.push(`/mypage/${userUid}`)
     }
 
-    console.log(dummy)
-
     useEffect(() => {
         if (router.isReady) {
             campingBoard(1).then((res) => {
@@ -207,7 +205,7 @@ function Boardlist(props) {
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{index+((page-1)*10)+1}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "540px", paddingLeft: "3%", cursor: "pointer"}} onClick={() => {submitSign2(element.boardId), submitData(element.boardId)}}>{element.title}</td>
-                                                            <td style={{ width: "150px", textAlignLast: "center" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
+                                                            <td style={{ width: "150px", textAlignLast: "center", cursor: "pointer" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
@@ -218,7 +216,7 @@ function Boardlist(props) {
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{index+((page-1)*10)+1}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "540px", paddingLeft: "3%", cursor: "pointer" }} onClick={() => {submitSign3(element.boardId), submitData(element.boardId)}}>{element.title}</td>
-                                                            <td style={{ width: "150px", textAlignLast: "center" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
+                                                            <td style={{ width: "150px", textAlignLast: "center", cursor: "pointer" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
@@ -240,7 +238,7 @@ function Boardlist(props) {
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{index+((page-1)*10)+1}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "540px", paddingLeft: "3%", cursor: "pointer" }} onClick={() => {submitSign2(element.boardId), submitData(element.boardId)}}>{element.title}</td>
-                                                            <td style={{ width: "150px", textAlignLast: "center" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
+                                                            <td style={{ width: "150px", textAlignLast: "center", cursor: "pointer" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
@@ -251,7 +249,7 @@ function Boardlist(props) {
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{index+((page-1)*10)+1}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "540px", paddingLeft: "3%", cursor: "pointer" }} onClick={() => {submitSign3(element.boardId), submitData(element.boardId)}}>{element.title}</td>
-                                                            <td style={{ width: "150px", textAlignLast: "center" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
+                                                            <td style={{ width: "150px", textAlignLast: "center", cursor: "pointer" }} onClick={() => mypage(element.userUid)}>{element.name}</td>
                                                             <td style={{ width: "200px", textAlignLast: "center" }}>{element.createTime}</td>
                                                             <td style={{ width: "100px", textAlignLast: "center" }}>{element.hit}</td>
                                                         </tr>
