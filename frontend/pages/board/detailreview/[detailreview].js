@@ -60,6 +60,7 @@ function Detailreview() {
         window.scrollTo(0, 500);
     }, []);
 
+    console.log(datas)
     return (
         <div>
             <Container>                
@@ -188,6 +189,7 @@ function Detailreview() {
                                         return (
                                             <Row sm key={index} style={{textAlignLast: "center"}}>
                                                 <CommentCard
+                                                    boardId={datas.boardId}
                                                     userUid={element.userUid}
                                                     commentId={element.commentId}
                                                     src={element.profile}

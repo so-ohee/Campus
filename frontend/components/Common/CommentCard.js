@@ -1,11 +1,13 @@
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "../../styles/Common/CommentCard.module.css";
-import { commentDelete, modifyComment } from "../../function/axios"
-import { useState } from 'react';
+import { commentDelete, modifyComment, commentSearch } from "../../function/axios"
+import { useEffect, useState } from 'react';
 
 function commentcard(params) {
 
     const [state, setState] = useState(false);
+    const [content, setContent] = useState(params.content);
+
     function deleteComment(commentId) {
         commentDelete(commentId);
     }
@@ -69,7 +71,7 @@ function commentcard(params) {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <input
+                                        <input
                                                 className={styles.commentcard_input}
                                                 type="text"
                                                 placeholder='댓글을 입력하세요...'
@@ -77,7 +79,6 @@ function commentcard(params) {
                                                     if (e.key === 'Enter') {
                                                         modifyComment(e.target.value, params.commentId).then(() => {
                                                             setState(!state)
-
                                                         });
                                                     }
                                                 }}

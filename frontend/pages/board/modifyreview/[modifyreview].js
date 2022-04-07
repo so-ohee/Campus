@@ -65,8 +65,6 @@ function Modifyreview() {
         }
     }, [router.isReady])
 
-    console.log(datas)
-
     return (
         <div>
             <Container>
