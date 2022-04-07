@@ -58,7 +58,7 @@ function Login(props) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
+                <Button variant='success' onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
