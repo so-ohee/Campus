@@ -72,7 +72,7 @@ function CampingExplain(props) {
                                         props.props.homepage !== null ?
                                             (
                                                 <Col xs={10}>
-                                                    <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.homepage}`, '_blank')}>{props.props.homepage}</h6>
+                                                    <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.homepage}`, '_blank')}>바로가기</h6>
                                                 </Col>
                                         ): null
                                     }
@@ -85,7 +85,7 @@ function CampingExplain(props) {
                                         props.props.resveUrl !== null ?
                                         (
                                             <Col xs={10}>
-                                                <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.resveUrl}`, '_blank')}>{props.props.resveUrl}</h6>
+                                                <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.resveUrl}`, '_blank')}>바로가기</h6>
                                             </Col>
                                         ): null
                                     }
