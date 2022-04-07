@@ -62,7 +62,7 @@ function Second() {
                                 {
                                     !token && (
                                         <>
-                                        <a className={styles.second_h5} onClick={handleShow} > <h4>추천 받으러 가기</h4></a>
+                                        <h4 className={styles.second_h5} onClick={handleShow} > 추천 받으러 가기</h4>
                                         <Modal show={show} onHide={handleClose} animation={false}>
                                             <Modal.Header closeButton>
                                             <Modal.Title>로그인 해주세요!</Modal.Title>
@@ -78,7 +78,7 @@ function Second() {
                                 }
                                 {
                                     token && (
-                                        <a className={styles.second_h5} onClick={() => goRecommend()} > <h4>추천 받으러 가기</h4></a>
+                                        <h4 className={styles.second_h5} onClick={() => goRecommend()} >추천 받으러 가기</h4>
                                     )
                                 }
                             </div>

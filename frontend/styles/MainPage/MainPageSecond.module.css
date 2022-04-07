@@ -40,9 +40,11 @@
 }
 
 .second_h5 {
+    font-size: 130%;
     text-align-last: left;
     font-weight: bold;
     cursor:pointer; 
+    text-decoration: underline;
     color:black;
     text-align-last: center;
 }
