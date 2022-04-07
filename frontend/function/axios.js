@@ -43,7 +43,7 @@ export async function changePic(userUid, formData) {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
-    }).then((res) => console.log(res));
+    }).then((res) => location.reload());
 }
 
 // 아이디 변경
@@ -69,7 +69,7 @@ export async function changeProfileName(name, userUid) {
 
 // 회원탈퇴
 export const memberDelete = async (userUid) => {
-    axios.delete(`${url}`+ `user` + `/` + `${userUid}`)
+    axios.delete(`${url}` + `user` + `/` + `${userUid}`)
 }
 
 

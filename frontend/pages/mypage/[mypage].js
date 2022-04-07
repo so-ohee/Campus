@@ -39,13 +39,13 @@ function Mypage() {
     const deleteMember = async () => {
         memberDelete(router.query.mypage)
             .then(() => {
-                deleteUser(auth.currentUser)
                 localStorage.removeItem('userUid');
                 localStorage.removeItem('campid');
                 localStorage.removeItem('ally-supports-cache');
                 localStorage.removeItem('token');
                 document.location.href = "/";
             });
+        deleteUser(auth.currentUser).then(() => document.location.href = "/")
     }
 
     return (
