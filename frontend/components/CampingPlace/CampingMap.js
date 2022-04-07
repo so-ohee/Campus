@@ -21,6 +21,7 @@ function CampingMap(props) {
     const markerImageSrc = "/mapicon.png"
     const falseList = {0:false,1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false,9:false,10:false,11:false,12:false,13:false,14:false,15:false}
     const [isOpen, setIsOpen] = useState(false)
+    const [isOpenMy, setIsOpenMy] = useState(false)
     const [isOpen1, setIsOpen1] = useState(falseList)
     const [isOpen2, setIsOpen2] = useState(falseList)
     const [isOpen3, setIsOpen3] = useState(falseList)
@@ -359,8 +360,14 @@ function CampingMap(props) {
                 },
               }
             }}
+            onMouseOver={
+              () => setIsOpenMy(true)
+            }
+            onMouseOut={
+              () => setIsOpenMy(false)
+            }
         >
-          {/* <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>내 위치</div> */}
+          { isOpenMy && <div className="fw-bold" style={{ padding: "5px", color: "#000" }}>내 위치</div> }
         </MapMarker>
 
           </Map>
