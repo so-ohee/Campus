@@ -21,7 +21,9 @@ function Modifyreview(props) {
     }
 
     const modify = () => {
-        modifyArticle(dataDto, files);
+        modifyArticle(dataDto, files)
+        .then((res) => console.log(res))
+        console.log('---')
     }
 
     const onChangeImg = async (e) => {

@@ -23,7 +23,14 @@ function Modifyreview() {
     }
 
     const modify = () => {
-        modifyArticle(dataDto, files);
+        modifyArticle(dataDto, files)
+        .then((res) => {
+            if (datas.category === '후기'){
+                router.push(`/board/detailreview/${res.data.boardId}`)
+            }else {
+                router.push(`/board/detailqnafree/${res.data.boardId}`)
+            }
+        })
     }
 
     const onChangeImg = async (e) => {
