@@ -66,6 +66,11 @@ function Detailreview() {
     const onChange = (e) => {
         setTxt(e.target.value)
     };
+
+    function mypage(userUid) {
+        router.push(`/mypage/${userUid}`)
+    }
+
     return (
         <div>
             <Container>                
@@ -131,12 +136,12 @@ function Detailreview() {
                         </Col>
                         <Col xs={3}>
                             <Row>
-                                <p>{datas.name} {datas.createTime} 작성</p>
+                            <p style={{fontWeight: "bold",cursor: "pointer" }} onClick={() => mypage(datas.userUid)}>{datas.name}</p> <p>{datas.createTime} 작성</p>
                             </Row>
                             <Row>
                                 {
                                     datas.updateTime === null ? <p>수정되지 않은 글입니다.</p>
-                                    : <p>{datas.name} {datas.updateTime} 수정</p>
+                                    : <p>{datas.updateTime} 수정</p>
                                 }
                             </Row>
 
