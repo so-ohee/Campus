@@ -33,7 +33,7 @@ function commentcard(params) {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <p className={styles.commentcard_h6_2}>{content}</p>
+                                            <p className={styles.commentcard_h6_2}>{params.content}</p>
                                         </Col>
                                     </Row>
                                 </Col>
