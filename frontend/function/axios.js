@@ -69,7 +69,7 @@ export async function changeProfileName(name, userUid) {
 
 // 회원탈퇴
 export const memberDelete = async (userUid) => {
-    axios.delete(`${url}`+ `user` + `/` + `${userUid}`)
+    axios.delete(`${url}` + `user` + `/` + `${userUid}`)
 }
 
 

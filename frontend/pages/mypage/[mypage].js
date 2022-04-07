@@ -31,11 +31,11 @@ function Mypage() {
     const deleteMember = async () => {
         memberDelete(router.query.mypage)
             .then(() => {
-                deleteUser(auth.currentUser)
                 localStorage.removeItem('userUid');
                 localStorage.removeItem('campid');
                 localStorage.removeItem('ally-supports-cache');
                 localStorage.removeItem('token');
+                deleteUser(auth.currentUser)
                 document.location.href = "/";
             });
     }
