@@ -27,7 +27,7 @@ function CampingReview(props) {
 
     useEffect(() => {
         viewBoard(props.props.campingId,1).then((res) => {
-            console.log.apply(res)
+            // console.log.apply(res)
             setTotalPage(res.data.totalPage)
             makeList(1, res.data.totalPage)
             setDummy(res.data.board)
@@ -50,7 +50,7 @@ function CampingReview(props) {
         setPage(p)
         viewBoard(props.props.campingId,p)
         .then((res) => {
-            console.log(res)
+            // console.log(res)
             if (res.data.board){
                 setDummy(res.data.board)
                 setRating(res.data.board.rating)
@@ -95,7 +95,7 @@ function CampingReview(props) {
                                                         allowHover={false}
                                                         transition={false}
                                                     />
-                                                    <h5 style={{marginLeft: "1%"}}>{element.name}</h5>
+                                                    <h5 style={{marginLeft: "1%", cursor:'pointer'}} onClick={() => router.push(`/mypage/${element.userUid}`)}>{element.name}</h5>
                                                 </Col>
                                                 <Col xs={3} style={{textAlignLast: "right"}}>
                                                     <h5>{element.createTime}</h5>

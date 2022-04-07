@@ -390,7 +390,8 @@ function CampingMap(props) {
         <button onClick={clickCamping}>
           캠핑장 위치
         </button>
-
+            <div></div>
+            <br></br>
       </>
     )
   }
