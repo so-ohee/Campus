@@ -74,7 +74,7 @@ function Detailreview() {
                     <Row>
                         <Col xs={9}>
                             <Row>
-                                <h3 style={{fontWeight: "bold"}}>{datas.facltNm}</h3>
+                                <h3 style={{fontWeight: "bold", cursor:'pointer'}} onClick={() => router.push(`/campingplace/${datas.campingId}`)}>{datas.facltNm}</h3>
                             </Row>
                             <Row style={{width: "300px", marginTop: "1%"}}>
                                 <Col xs={4}>
