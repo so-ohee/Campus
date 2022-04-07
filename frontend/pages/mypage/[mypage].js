@@ -33,6 +33,7 @@ function Mypage() {
             .then(() => {
                 deleteUser(auth.currentUser)
                 localStorage.removeItem('userUid');
+                localStorage.removeItem('campid');
                 localStorage.removeItem('ally-supports-cache');
                 localStorage.removeItem('token');
                 document.location.href = "/";

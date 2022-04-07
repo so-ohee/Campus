@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 function Navibar() {
   const router = useRouter()
   const [LoginmodalShow, LoginsetModalShow] = React.useState(false);
+  const [userid, setUserid] = useState("");
   const onLogOutClick = () => {
     localStorage.removeItem('userUid');
     localStorage.removeItem('ally-supports-cache');
@@ -25,9 +26,13 @@ function Navibar() {
 
   const [data, setData] = useState("");
 
-    useEffect(() => {
+  useEffect(() => {
+      if (router.isReady) {
         bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
-    }, [])
+      }
+  }, [router.isReady])
+  
+  console.log(data)
 
   const onBoard = () => {
     router.push('/board')
