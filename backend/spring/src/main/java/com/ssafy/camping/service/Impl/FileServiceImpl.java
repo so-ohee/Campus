@@ -27,7 +27,8 @@ public class FileServiceImpl implements FileService {
             String originFileName = mfile.getOriginalFilename();
             String extension = originFileName.substring(originFileName.length()-3);
 
-            if(!(extension.equals("jpg") || extension.equals("png") || extension.equals("JPG") || extension.equals("PNG")))
+            if(!(extension.equals("jpg") || extension.equals("png") || extension.equals("JPG") || extension.equals("PNG")
+                    || extension.equals("jpeg") || extension.equals("JPEG")))
                 return false;
         }
         return true;

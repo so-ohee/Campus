@@ -38,6 +38,12 @@ public class BoardServiceImpl implements BoardService {
         log.debug("BoardService registerBoard call");
         Map<String, Object> resultMap = new HashMap<>();
 
+        //파일이 존재할 경우 게시글 파일 확장자 확인
+        if(files != null && !fileService.fileExtensionCheck(files)) {
+            resultMap.put("message", Message.FILE_EXTENSION_EXCEPTION);
+            return resultMap;
+        }
+
         //게시글 저장
         Board board = Board.builder()
                 .userUid(boardDto.getUserUid())
@@ -63,12 +69,6 @@ public class BoardServiceImpl implements BoardService {
 
         //파일이 존재할 경우 게시글 파일 저장
         if(files != null){
-            //파일 확장자 검사
-            if(!fileService.fileExtensionCheck(files)) {
-                resultMap.put("message", Message.FILE_EXTENSION_EXCEPTION);
-                return resultMap;
-            }
-            //파일 저장
             fileService.boardFileSave(board,files);
         }
         
@@ -84,6 +84,13 @@ public class BoardServiceImpl implements BoardService {
         log.debug("BoardService modifyBoard call");
 
         Map<String, Object> resultMap = new HashMap<>();
+
+        //파일이 존재할 경우 게시글 파일 확장자 확인
+        if(files != null && !fileService.fileExtensionCheck(files)) {
+            resultMap.put("message", Message.FILE_EXTENSION_EXCEPTION);
+            return resultMap;
+        }
+
         Optional<Board> board = boardRepository.findById(boardDto.getBoardId());
         if(!board.isPresent() || board.get().getDeleteState()==1) {
             resultMap.put("message", Message.NOT_FOUND_BOARD);
@@ -97,11 +104,6 @@ public class BoardServiceImpl implements BoardService {
 
         //파일이 존재할 경우 게시글 파일 수정
         if(files != null){
-            //파일 확장자 검사
-            if(!fileService.fileExtensionCheck(files)) {
-                resultMap.put("message", Message.FILE_EXTENSION_EXCEPTION);
-                return resultMap;
-            }
             //기존 파일 삭제
             List<FileBoard> originFiles = board.get().getFiles();
             fileService.boardFileDelete(originFiles);
@@ -132,7 +134,7 @@ public class BoardServiceImpl implements BoardService {
             List<FileBoard> files = board.get().getFiles();
             fileService.boardFileDelete(files);
         }
-        
+
         //댓글 삭제
         commentRepository.deleteByBoardId(boardId);
 
