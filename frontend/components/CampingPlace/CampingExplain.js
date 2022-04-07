@@ -66,26 +66,26 @@ function CampingExplain(props) {
                                 }
                                 <Row>
                                     <Col xs={2}>
-                                        <h6>숙소 사이트 </h6>
+                                        <h6 className='fw-bold'>숙소 사이트 </h6>
                                     </Col>
                                     {
                                         props.props.homepage !== null ?
                                             (
                                                 <Col xs={10}>
-                                                    <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.homepage}`, '_blank')}>바로가기</h6>
+                                                    <h6 style={{color: "gray", cursor:'pointer'}} onClick={() => window.open(`${props.props.homepage}`, '_blank')}>바로가기</h6>
                                                 </Col>
                                         ): null
                                     }
                                 </Row>
                                 <Row>
                                     <Col xs={2}>
-                                        <h6>예약 사이트 </h6>
+                                        <h6 className='fw-bold'>예약 사이트 </h6>
                                     </Col>
                                     {
                                         props.props.resveUrl !== null ?
                                         (
                                             <Col xs={10}>
-                                                <h6 style={{color: "blue", cursor:'pointer'}} onClick={() => window.open(`${props.props.resveUrl}`, '_blank')}>바로가기</h6>
+                                                <h6 style={{color: "gray", cursor:'pointer'}} onClick={() => window.open(`${props.props.resveUrl}`, '_blank')}>바로가기</h6>
                                             </Col>
                                         ): null
                                     }
