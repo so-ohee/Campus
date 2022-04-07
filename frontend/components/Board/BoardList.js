@@ -179,12 +179,12 @@ function Boardlist(props) {
                 <table className={styles.boardlist_table}>
                     <thead>
                         <tr className={styles.boardlist_thead_tr}>
-                            <th style={{width: "100px", textAlignLast: "center"}}>번호</th>
-                            <th style={{width: "100px", textAlignLast: "center"}}>카테고리</th>
-                            <th style={{width: "600px", textAlignLast: "center"}}>제목</th>
-                            <th style={{width: "120px", textAlignLast: "center"}}>작성자</th>
-                            <th style={{width: "120px", textAlignLast: "center"}}>작성일</th>
-                            <th style={{width: "100px", textAlignLast: "center"}}>조회수</th>
+                            <th style={{width: "100px", textAlignLast: "center"}}><font color="white">번호</font></th>
+                            <th style={{width: "100px", textAlignLast: "center"}}><font color="white">카테고리</font></th>
+                            <th style={{width: "600px", textAlignLast: "center"}}><font color="white">제목</font></th>
+                            <th style={{width: "120px", textAlignLast: "center"}}><font color="white">작성자</font></th>
+                            <th style={{width: "120px", textAlignLast: "center"}}><font color="white">작성일</font></th>
+                            <th style={{width: "100px", textAlignLast: "center"}}><font color="white">조회수</font></th>
                         </tr>
                     </thead>
                     {
