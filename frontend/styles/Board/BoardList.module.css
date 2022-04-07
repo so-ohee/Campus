@@ -40,7 +40,6 @@
 .boardlist_tbody_tr {
     height: 50px;
     border-bottom: 1px solid lightgrey;
-    cursor: pointer;
 }
 
 .boardlist_pagination {

@@ -17,7 +17,7 @@ function Reviewcamp() {
 
     
     useEffect(() => {
-        ReviewList(localStorage.getItem("userUid"), 1)
+        ReviewList(router.query.mypage, 1)
             .then((res) => {
                 setDummy(res.data.board)
                 setTotalPage(res.data.totalPage)
@@ -27,7 +27,7 @@ function Reviewcamp() {
 
     const onSearch = (p) => {
         setPage(p)
-        ReviewList(localStorage.getItem("userUid"),p)
+        ReviewList(router.query.mypage,p)
         .then((res) => {
             console.log(res)
             if (res.data.board){
