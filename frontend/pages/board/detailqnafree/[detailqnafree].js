@@ -43,9 +43,11 @@ function Detailreview() {
 
     // 댓글 작성
     function writeRecomment(props) {
-        sendComment(datas.boardId, props, localStorage.getItem("userUid")).then(() =>
-            commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment), setChange(!change))
-        );
+        sendComment(datas.boardId, props, localStorage.getItem("userUid"))
+        // .then(() =>
+            // commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment), setChange(!change))
+        // );
+        location.reload()
     }
 
     useEffect(() => {

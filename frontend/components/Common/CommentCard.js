@@ -33,7 +33,7 @@ function commentcard(params) {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <p className={styles.commentcard_h6_2}>{params.content}</p>
+                                            <p className={styles.commentcard_h6_2}>{content}</p>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -93,7 +93,7 @@ function commentcard(params) {
                                         (
                                             <Col className={styles.commentcard_col} xs={2}>
                                                 <Row style={{ justifyContent: "center" }}>
-                                                    <Button variant="success" className={styles.commentcard_button2} onClick={() => deleteComment(params.commentId)}>삭제</Button>
+                                                    <Button variant="success" className={styles.commentcard_button2} onClick={() => {setState(!state), setContent(params.content)}}>취소</Button>
                                                 </Row>
                                             </Col>
                                         ) : null
