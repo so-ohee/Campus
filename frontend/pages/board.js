@@ -4,11 +4,14 @@ import WriteMain from '../components/Board/WriteMain.js';
 import ModifyReview from '../components/Board/ModifyReview.js';
 import DetailReview from '../components/Board/DetailReview.js';
 import DetailQnaFree from '../components/Board/DetailQnaFree.js';
+import { useRouter } from 'next/router';
+
 
 function Board(props) {
 
     const [page, setPage] = useState("기본");
     const [datas, setDatas] = useState("");
+    const router = useRouter();
 
     // 어떤 기능인지 받아옴
     const highFunction = (text) => {
@@ -29,6 +32,12 @@ function Board(props) {
     useEffect(() => {
         window.scrollTo(0, 500);
     }, [page]);
+
+    useEffect(() => {
+        if (router.isReady && router.query.review){
+            setPage('작성')
+        }
+    },[router.isReady])
 
     return (
         <>

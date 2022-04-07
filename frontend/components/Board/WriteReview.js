@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Dropdown, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/WriteReview.module.css";
 import { Rating } from 'react-simple-star-rating'
-import { searchCamp, sendArticle } from "../../function/axios";
+import { searchCamp, sendArticle, receiveCamping_out } from "../../function/axios";
+import { useRouter } from 'next/router';
 
 function Writereview(props) {
+
+    const router = useRouter();
 
     const [campingId, setCampingId] = useState("");
     const [name, setName] = useState("");
@@ -63,6 +66,12 @@ function Writereview(props) {
         }
         setDataDto(newform);
     }, [campingId, title, content, environment, facility, service])
+
+    useEffect(() => {
+        // console.log(router.query)
+        setCampingId(router.query.review)
+        receiveCamping_out(router.query.review).then((res) => setName(res.data.campsite.facltNm))
+    },[])
 
     return (
         <div>

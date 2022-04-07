@@ -11,6 +11,7 @@ function CampingExplain(props) {
     const [bookmark, setBookmark] = useState('');
     const [visit, setVisit] = useState("");
     const [review, setReview] = useState("")
+    const [campingId, setCampingId] = useState()
     const router = useRouter();
     
     function PressBookMark() {
@@ -30,19 +31,22 @@ function CampingExplain(props) {
     }
 
     function WriteComment() {
-        router.push('/board')
+        router.push(`/board?review=${campingId}`)
     }
 
     useEffect(() => {
         setBookmark(props.props.bookmark)
         setVisit(props.props.visit)
         setReview(props.props.review)
+        if (props.props.campsite){
+            setCampingId(props.props.campsite.campingId)
+        }
     }, [props])
 
     const handleError = (e) => {
         e.target.src = "../../logo.png"
     }
-    
+
     return (
         <>
             {

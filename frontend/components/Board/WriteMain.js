@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Col, Container, Dropdown, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/WriteReview.module.css";
 import WriteReview from '../Board/WriteReview';
@@ -20,7 +20,8 @@ function Writermain(props) {
         setPage("QnA");
     }
     const submitSign = () => {
-        location.reload();
+        // location.reload();
+        document.location.href = "/board"
     }
 
     return (
