@@ -99,7 +99,7 @@ public class BoardServiceImpl implements BoardService {
 
         board.get().setTitle(boardDto.getTitle());
         board.get().setContent(boardDto.getContent());
-        board.get().setUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        board.get().setUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA).format(new Date()));
         boardRepository.save(board.get());
 
         //파일이 존재할 경우 게시글 파일 수정
