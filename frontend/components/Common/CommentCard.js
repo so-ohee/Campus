@@ -75,6 +75,8 @@ function commentcard(params) {
                                                 className={styles.commentcard_input}
                                                 type="text"
                                                 placeholder='댓글을 입력하세요...'
+                                                value={content}
+                                                onChange={(e) => setContent(e.target.value)}
                                                 onKeyPress={(e) => {
                                                     if (e.key === 'Enter') {
                                                         modifyComment(e.target.value, params.commentId).then(() => {
