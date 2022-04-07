@@ -62,10 +62,10 @@ function news() {
                 <table className={styles.news_table}>
                     <thead>
                         <tr className={styles.news_thead_tr}>
-                            <th style={{width: "50px", textAlignLast: "center"}}>번호</th>
-                            <th style={{width: "300px", textAlignLast: "center"}}>제목</th>
-                            <th style={{width: "820px", textAlignLast: "center"}}>내용</th>
-                            <th style={{width: "150px", textAlignLast: "center"}}>일자</th>
+                            <th style={{width: "50px", textAlignLast: "center"}}><font color="white">번호</font></th>
+                            <th style={{width: "300px", textAlignLast: "center"}}><font color="white">제목</font></th>
+                            <th style={{width: "820px", textAlignLast: "center"}}><font color="white">내용</font></th>
+                            <th style={{width: "150px", textAlignLast: "center"}}><font color="white">일자</font></th>
                         </tr>
                     </thead>
                     {
