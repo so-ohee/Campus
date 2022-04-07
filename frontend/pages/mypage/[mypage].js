@@ -13,6 +13,7 @@ function Mypage() {
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
     const [page, setPage] = useState("");
+    const [userid, setUserid] = useState("");
     const router = useRouter();
     
     // 새로고침 또는 페이진 전환 시 초기 위치
@@ -21,8 +22,11 @@ function Mypage() {
     }, [page]);
     
     useEffect(() => {
-        bringUser(router.query.mypage).then((res) => setData(res.data.user));
-    }, [])
+        if (router.isReady) {
+            setUserid(localStorage.getItem("userUid"));
+            bringUser(router.query.mypage).then((res) => setData(res.data.user));
+        }
+    }, [router.isReady])
 
     const deleteMember = async () => {
         memberDelete(router.query.mypage)
@@ -47,7 +51,7 @@ function Mypage() {
                             <h2 style={{ fontWeight: "bold" }}>{ data.name }</h2>
                         </Col>
                         {
-                            localStorage.getItem("userUid") == router.query.mypage ?
+                            userid == router.query.mypage ?
                                 (
                                     <Col xs={3} style={{textAlignLast: "right"}}>
                                         <Button variant='outline-success' style={{ marginRight: "1%" }} onClick={() => setModalShow(true)}>회원정보 수정</Button>
