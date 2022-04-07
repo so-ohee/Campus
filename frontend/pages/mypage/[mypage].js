@@ -46,15 +46,21 @@ function Mypage() {
                         <Col xs={7} style={{alignSelf: "center"}}>
                             <h2 style={{ fontWeight: "bold" }}>{ data.name }</h2>
                         </Col>
-                        <Col xs={3} style={{textAlignLast: "right"}}>
-                            <Button variant='outline-success' style={{ marginRight: "1%" }} onClick={() => setModalShow(true)}>회원정보 수정</Button>
-                            <ModifyModal
-                                props={data}
-                                show={modalShow}
-                                onHide={() => setModalShow(false)}
-                            />
-                            <Button variant='outline-danger' onClick={() => deleteMember()}>회원탈퇴</Button>
-                        </Col>
+                        {
+                            localStorage.getItem("userUid") == router.query.mypage ?
+                                (
+                                    <Col xs={3} style={{textAlignLast: "right"}}>
+                                        <Button variant='outline-success' style={{ marginRight: "1%" }} onClick={() => setModalShow(true)}>회원정보 수정</Button>
+                                        <ModifyModal
+                                            props={data}
+                                            show={modalShow}
+                                            onHide={() => setModalShow(false)}
+                                        />
+                                        <Button variant='outline-danger' onClick={() => deleteMember()}>회원탈퇴</Button>
+                                    </Col>
+                                ) : null
+                        }
+                        
                     </Row>
                 </div>
 
