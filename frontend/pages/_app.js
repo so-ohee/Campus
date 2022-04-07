@@ -2,9 +2,10 @@ import Head from "next/head";
 import Layout from "./Layout";
 
 // css
-import "/styles/globals.css";
+// import "/styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Script from "next/script"
+import '../styles/customTheme.scss'
 
 function MyApp({ Component, pageProps }) {
 
