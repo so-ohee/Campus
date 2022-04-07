@@ -1,6 +1,6 @@
 import React from 'react';
 import CampingCard from "../Common/CampingCard";
-import { Col, Container, Pagination, Row } from 'react-bootstrap';
+import { Button, Col, Container, Pagination, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { VisitList, visit, mapsearch } from "../../function/axios";
 import styles from "../../styles/MyPage/VisitedCamp.module.css";
@@ -75,7 +75,7 @@ function Mapsearch() {
             <div style={{ marginTop: "3%", marginBottom: "3%" }}>
                 <Container style={{textAlignLast: "right", marginBottom: "1%"}}>
                     {map && (
-                        <button onClick={() => {
+                        <Button variant='success' onClick={() => {
                             setInfo({
                                 center: {
                                 lat: map.getCenter().getLat(),
@@ -94,7 +94,7 @@ function Mapsearch() {
                             })
                         }}>
                         현위치 검색
-                        </button>
+                        </Button>
                     )}
                 </Container>
                 
