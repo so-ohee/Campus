@@ -68,9 +68,10 @@ function Writereview(props) {
     }, [campingId, title, content, environment, facility, service])
 
     useEffect(() => {
-        // console.log(router.query)
-        setCampingId(router.query.review)
-        receiveCamping_out(router.query.review).then((res) => setName(res.data.campsite.facltNm))
+        if (router.asPath !== '/board'){
+            setCampingId(router.query.review)
+            receiveCamping_out(router.query.review).then((res) => setName(res.data.campsite.facltNm))
+        }
     },[])
 
     return (
