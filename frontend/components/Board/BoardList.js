@@ -198,7 +198,8 @@ function Boardlist(props) {
                                                 {
                                                     element.category === "후기" && 
                                                         <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign2(element.boardId), submitData(element.boardId)}}>
-                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                            {/* <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td> */}
+                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{index+((page-1)*10)+1}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "540px", paddingLeft: "3%"}}>{element.title}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
@@ -209,7 +210,8 @@ function Boardlist(props) {
                                                 {
                                                     element.category !== "후기" && 
                                                         <tr className={styles.boardlist_tbody_tr} onClick={() => {submitSign3(element.boardId), submitData(element.boardId)}}>
-                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td>
+                                                            {/* <td style={{ width: "100px", textAlignLast: "center" }}>{element.boardId}</td> */}
+                                                            <td style={{ width: "100px", textAlignLast: "center" }}>{index+((page-1)*10)+1}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.category}</td>
                                                             <td style={{ width: "540px", paddingLeft: "3%" }}>{element.title}</td>
                                                             <td style={{ width: "150px", textAlignLast: "center" }}>{element.name}</td>
