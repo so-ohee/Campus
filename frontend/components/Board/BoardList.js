@@ -127,7 +127,7 @@ function Boardlist(props) {
 
                 <Row style={{ justifyContent: "right" }}>
                     <div className={styles.boardlist_title_content}>
-                        <p style={{ textAlignLast: "center" }}>제목</p>
+                        <p style={{ textAlignLast: "center", fontWeight: "bold" }}><font color="white">제목</font></p>
                     </div>
                     <input
                         className={styles.boardlist_input}
