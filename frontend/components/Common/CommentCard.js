@@ -18,7 +18,6 @@ function commentcard(params) {
         router.push(`/mypage/${userUid}`)
     }
 
-    console.log(params)
     return (
         <>
             {
