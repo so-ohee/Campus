@@ -2,16 +2,23 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import styles from "../../styles/Common/CommentCard.module.css";
 import { commentDelete, modifyComment, commentSearch } from "../../function/axios"
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 function commentcard(params) {
 
     const [state, setState] = useState(false);
     const [content, setContent] = useState(params.content);
+    const router = useRouter();
 
     function deleteComment(commentId) {
         commentDelete(commentId);
     }
-    // console.log(state)
+
+    function mypage(userUid) {
+        router.push(`/mypage/${userUid}`)
+    }
+
+    console.log(params)
     return (
         <>
             {
@@ -25,7 +32,7 @@ function commentcard(params) {
                                 <Col className={styles.commentcard_col} xs={8}>
                                     <Row>
                                         <Col xs={2}>
-                                            <h5 className={styles.commentcard_h5}>{params.name}</h5>
+                                            <h5 className={styles.commentcard_h5_2} onClick={() => mypage(params.userUid)}>{params.name}</h5>
                                         </Col>
                                         <Col xs={10}>
                                             <p className={styles.commentcard_h6}>{params.date}</p>

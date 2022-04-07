@@ -16,6 +16,12 @@
     text-align-last: left;
 }
 
+.commentcard_h5_2 {
+    font-weight: bold;
+    text-align-last: left;
+    cursor: pointer;
+}
+
 .commentcard_h6 {
     text-align-last: left;
     font-weight: bold;
