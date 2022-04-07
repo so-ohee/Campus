@@ -6,12 +6,14 @@ import ReviewCamp from '../../components/MyPage/ReviewCamp.js';
 import Bookmarkcamp from '../../components/MyPage/Bookmarkcamp.js';
 import { bringUser, changePic, changeProfileName, memberDelete } from "../../function/axios";
 import { getAuth, deleteUser } from "firebase/auth";
+import { useRouter } from 'next/router';
 
 function Mypage() {
     const [data, setData] = useState("");
     const [modalShow, setModalShow] = React.useState(false);
     const auth = getAuth();
     const [page, setPage] = useState("");
+    const router = useRouter();
     
     // 새로고침 또는 페이진 전환 시 초기 위치
     useEffect(() => {
@@ -19,11 +21,11 @@ function Mypage() {
     }, [page]);
     
     useEffect(() => {
-        bringUser(localStorage.getItem("userUid")).then((res) => setData(res.data.user));
+        bringUser(router.query.mypage).then((res) => setData(res.data.user));
     }, [])
 
     const deleteMember = async () => {
-        memberDelete(localStorage.getItem("userUid"))
+        memberDelete(router.query.mypage)
             .then(() => {
                 deleteUser(auth.currentUser)
                 localStorage.removeItem('userUid');
