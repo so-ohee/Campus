@@ -123,7 +123,7 @@ function Areasearch() {
                     </Form.Group>
                     </Col>
                     <Col xs={2} className={styles.areasearch_col3}>
-                        <Button onClick={() => onSearch(1)}>검색</Button>
+                        <Button variant='success' onClick={() => onSearch(1)}>검색</Button>
                     </Col>
                 </Row>
             </div>
