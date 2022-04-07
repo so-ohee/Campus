@@ -46,7 +46,8 @@ function Writereview(props) {
     }
 
     const modify = () => {
-        sendArticle(dataDto, files);
+        sendArticle(dataDto, files)
+        .then((res) => router.push(`/board/detailreview/${res.data.boardId}`))
     }
 
     useEffect(() => {

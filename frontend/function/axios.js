@@ -115,17 +115,18 @@ export async function sendArticle(dataDto, files) {
 
     const url2 = "https://j6c103.p.ssafy.io/api/board";
 
-    await axios({
+    return await axios({
         method: 'post',
         url: url2,
         data: newForm,
         headers: {
             'Content-Type': 'multipart/form-data',
         },
-    }).then((res) => {
-        console.log("게시글 작성 완료");
-        document.location.href = "/board";
-    });
+    })
+    // .then((res) => {
+    //     console.log("게시글 작성 완료");
+    //     document.location.href = "/board";
+    // });
 }
 
 // 게시글 수정

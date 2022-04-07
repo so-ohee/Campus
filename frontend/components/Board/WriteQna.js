@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button, Row } from 'react-bootstrap';
 import styles from "../../styles/Board/WriteReview.module.css";
 import { sendArticle } from "../../function/axios";
+import { useRouter } from 'next/router'
 
 function Writeqna(props) {
+
+    const router = useRouter()
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -23,7 +26,8 @@ function Writeqna(props) {
     }
     
     const modify = () => {
-        sendArticle(dataDto, files);
+        sendArticle(dataDto, files)
+        .then((res) => router.push(`/board/detailqnafree/${res.data.boardId}`))
     }
 
     useEffect(() => {

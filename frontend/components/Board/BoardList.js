@@ -137,12 +137,19 @@ function Boardlist(props) {
                         className={styles.boardlist_input}
                         type="text"
                         value={title}
-                        placeholder='캠핑장 이름을 입력하세요...'
+                        placeholder='글 제목을 입력하세요.'
                         onChange={(e) => setTitle(e.target.value)}
                         onKeyPress={(e) => {
                             if (e.key === 'Enter') {
                                 searchArticle(e.target.value)
-                                    .then((res) => setSearchdummy(res.data.board))
+                                    .then((res) => {
+                                        if (res.data.board){
+                                            setSearchdummy(res.data.board)
+                                        }else{
+                                            setSearchdummy([])
+                                        }
+                                        console.log(res)
+                                    })
                                     .catch((err) => {
                                         console.log("다시 검색해주세요");
                                     });
