@@ -24,13 +24,13 @@ function Visitedcamp() {
 
     
     useEffect(() => {
-        VisitList(localStorage.getItem("userUid"),1)
+        VisitList(router.query.mypage,1)
             .then((res) => {
                 setCampingplace(res.data.campsite)
                 setTotalPage(res.data.totalPage)
                 makeList(1,res.data.totalPage)
             });
-        visit(localStorage.getItem("userUid"))
+        visit(router.query.mypage)
             .then((res) => {
                 setCampings(res.data)
                 for (let i = 0; i < res.data.length; i++) {
@@ -44,7 +44,7 @@ function Visitedcamp() {
 
     const onSearch = (p) => {
         setPage(p)
-        VisitList(localStorage.getItem("userUid"),p)
+        VisitList(router.query.mypage,p)
         .then((res) => {
             console.log(res)
             if (res.data.campsite){

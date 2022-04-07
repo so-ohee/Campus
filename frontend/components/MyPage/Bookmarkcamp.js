@@ -17,7 +17,7 @@ function Bookmarkcamp() {
 
     useEffect(() => {
         if (router.isReady) {
-            setUserid(localStorage.getItem("userUid"))
+            setUserid(router.query.mypage)
             BookMarkList(userid, 1)
                 .then((res) => {
                     setCampingplace(res.data.campsite)
