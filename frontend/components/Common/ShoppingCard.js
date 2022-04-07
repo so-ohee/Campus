@@ -19,8 +19,8 @@ function ShoppingCard(params) {
                     <Card.Text style={{ fontSize: "16px", textAlign: "-webkit-left" }}>
                         <a>가격 : {params.price}</a>
                     </Card.Text>
-                    <Card.Text style={{ fontSize: "16px", marginTop: "-5%", textAlign: "-webkit-left" }}>
-                        <a className={styles.shoppingcard_link} onClick={() => window.open(`${params.link}`, '_black')}>{params.link}</a>
+                    <Card.Text style={{ fontSize: "16px", marginTop: "2%", textAlign: "-webkit-left", verticalAlign: "bottom" }}>
+                        <a className={styles.shoppingcard_link} onClick={() => window.open(`${params.link}`, '_black')}>바로가기</a>
                     </Card.Text>
                 </Card.Body>
             </Card>
