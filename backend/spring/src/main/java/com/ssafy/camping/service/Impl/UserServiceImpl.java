@@ -4,8 +4,10 @@ import com.ssafy.camping.dto.User.ModifyUserReqDto;
 import com.ssafy.camping.dto.User.UserReqDto;
 import com.ssafy.camping.dto.User.UserResDto;
 import com.ssafy.camping.entity.Board;
+import com.ssafy.camping.entity.Comment;
 import com.ssafy.camping.entity.User;
 import com.ssafy.camping.repository.BoardRepository;
+import com.ssafy.camping.repository.CommentRepository;
 import com.ssafy.camping.repository.SurveyRepository;
 import com.ssafy.camping.repository.UserRepository;
 import com.ssafy.camping.service.BoardService;
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService {
     private final BoardService boardService;
     private final BoardRepository boardRepository;
     private final FileService fileService;
+    private final CommentRepository commentRepository;
 
     @Override
     public Map<String, Object> register(UserReqDto userReqDto) throws Exception{
@@ -108,6 +111,12 @@ public class UserServiceImpl implements UserService {
         List<Board> boardList = boardRepository.findByUserUidAndDeleteState(userUid, 0);
         for(Board b : boardList) {
             boardService.deleteBoard(b.getBoardId());
+        }
+
+        // 내가 작성한 댓글 삭제
+        List<Comment> commentList = commentRepository.findByUserUid(userUid);
+        for(Comment c : commentList) {
+            commentRepository.deleteById(c.getCommentId());
         }
 
         resultMap.put("message", Message.USER_WITHDRAWAL_SUCCESS);
