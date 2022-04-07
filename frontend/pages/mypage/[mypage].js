@@ -43,9 +43,9 @@ function Mypage() {
                 localStorage.removeItem('campid');
                 localStorage.removeItem('ally-supports-cache');
                 localStorage.removeItem('token');
-                deleteUser(auth.currentUser)
                 document.location.href = "/";
             });
+        deleteUser(auth.currentUser).then(() => document.location.href = "/")
     }
 
     return (
