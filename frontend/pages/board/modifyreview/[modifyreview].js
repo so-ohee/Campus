@@ -65,6 +65,8 @@ function Modifyreview() {
         }
     }, [router.isReady])
 
+    console.log(datas)
+
     return (
         <div>
             <Container>
@@ -75,51 +77,67 @@ function Modifyreview() {
                             <Row>
                                 <h3 style={{fontWeight: "bold"}}>{datas.facltNm}</h3>
                             </Row>
-                            <Row style={{width: "300px", marginTop: "1%"}}>
-                                <Col xs={4}>
-                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>서비스</p>
-                                </Col>
-                                <Col xs={1}>
-                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>{service}</p>
-                                </Col>
-                                <Col xs={7}>
-                                    <Rating
-                                        initialValue={service}
-                                        size={30}
-                                        allowHover={false}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row style={{width: "300px"}}>
-                                <Col xs={4}>
-                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>환경</p>
-                                </Col>
-                                <Col xs={1}>
-                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>{environment}</p>
-                                </Col>
-                                <Col xs={7}>
-                                    <Rating
-                                        initialValue={environment}
-                                        size={30}
-                                        allowHover={false}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row style={{width: "300px"}}>
-                                <Col xs={4}>
-                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>부대시설</p>
-                                </Col>
-                                <Col xs={1}>
-                                    <p style={{fontWeight: "bold", marginTop: "2%"}}>{facility}</p>
-                                </Col>
-                                <Col xs={7}>
-                                    <Rating
-                                        initialValue={facility}
-                                        size={30}
-                                        allowHover={false}
-                                    />
-                                </Col>
-                            </Row>
+                            {
+                                datas.facltNm !== undefined ?
+                                    (
+                                        <Row style={{width: "300px", marginTop: "1%"}}>
+                                            <Col xs={4}>
+                                                <p style={{fontWeight: "bold", marginTop: "2%"}}>서비스</p>
+                                            </Col>
+                                            <Col xs={1}>
+                                                <p style={{fontWeight: "bold", marginTop: "2%"}}>{service}</p>
+                                            </Col>
+                                            <Col xs={7}>
+                                                <Rating
+                                                    initialValue={service}
+                                                    size={30}
+                                                    allowHover={false}
+                                                />
+                                            </Col>
+                                        </Row>
+                                    ) : null
+                            }
+                            {
+                                datas.facltNm !== undefined ?
+                                    (
+                                        <Row style={{width: "300px"}}>
+                                            <Col xs={4}>
+                                                <p style={{fontWeight: "bold", marginTop: "2%"}}>환경</p>
+                                            </Col>
+                                            <Col xs={1}>
+                                                <p style={{fontWeight: "bold", marginTop: "2%"}}>{environment}</p>
+                                            </Col>
+                                            <Col xs={7}>
+                                                <Rating
+                                                    initialValue={environment}
+                                                    size={30}
+                                                    allowHover={false}
+                                                />
+                                            </Col>
+                                        </Row>
+                                    ) : null
+                            }
+                            {
+                                datas.facltNm !== undefined ?
+                                    (
+                                        <Row style={{width: "300px"}}>
+                                            <Col xs={4}>
+                                                <p style={{fontWeight: "bold", marginTop: "2%"}}>부대시설</p>
+                                            </Col>
+                                            <Col xs={1}>
+                                                <p style={{fontWeight: "bold", marginTop: "2%"}}>{facility}</p>
+                                            </Col>
+                                            <Col xs={7}>
+                                                <Rating
+                                                    initialValue={facility}
+                                                    size={30}
+                                                    allowHover={false}
+                                                />
+                                            </Col>
+                                        </Row>
+                                    ) : null
+                            }
+                            
                         </Col>
                         <Col xs={3}>
                             <Row>
