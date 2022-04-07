@@ -75,7 +75,7 @@ function news() {
                                 return (
                                     <tbody key={index}>
                                         { 
-                                            <tr className={styles.news_tbody_tr} onClick={() => window.open(`${element.link}`, '_black')}>
+                                            <tr className={styles.news_tbody_tr} style={{cursor:'pointer'}} onClick={() => window.open(`${element.link}`, '_black')}>
                                                 <td style={{ width: "50px", textAlignLast: "center" }}>{index+1+(page-1)*10}</td>
                                                 <td style={{ width: "300px", paddingLeft: "3%" }}>{element.title}</td>
                                                 <td style={{ width: "870px", textAlignLast: "left", paddingLeft: "3%", paddingRight: "3%" }}>{element.description}</td>
