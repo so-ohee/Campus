@@ -11,7 +11,7 @@ function commentcard(params) {
     function deleteComment(commentId) {
         commentDelete(commentId);
     }
-
+    // console.log(state)
     return (
         <>
             {

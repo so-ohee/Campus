@@ -11,6 +11,7 @@ function Detailreview() {
 
     const router = useRouter();
     const [userid, setUserid] = useState("");
+    const [txt, setTxt] = useState('')
 
     const submitSign = (boardId) => {
         // props.propFunction("수정")
@@ -51,8 +52,9 @@ function Detailreview() {
     // 댓글 작성
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid")).then(() => 
-            commentSearch(router.query.detailreview)
+            commentSearch(router.query.detailreview).then((res) => setDummy(res.data.comment), setChange(!change))
         );
+
     }
 
     // 새로고침 또는 페이진 전환 시 초기 위치
@@ -60,7 +62,9 @@ function Detailreview() {
         window.scrollTo(0, 500);
     }, []);
 
-    console.log(datas)
+    const onChange = (e) => {
+        setTxt(e.target.value)
+    };
     return (
         <div>
             <Container>                
@@ -168,10 +172,12 @@ function Detailreview() {
                         className={styles.detailreview_input}
                         type="text"
                         placeholder='댓글을 입력하세요...'
+                        value={txt}
+                        onChange={onChange}
                         onKeyPress={(e) => {
                             if (e.key === 'Enter') {
                                 writeRecomment(e.target.value);
-                                commentSearch(router.query.detailreview).then((res) =>  setDummy(res.data.comment), setChange(!change))
+                                setTxt('')
                             }
                         }}
                     />

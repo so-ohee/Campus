@@ -12,6 +12,7 @@ function Detailreview() {
     const [dummy, setDummy] = useState([]);
     const [change, setChange] = useState(false);
     const [page, setPage] = useState("");
+    const [txt, setTxt] = useState('')
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -43,7 +44,7 @@ function Detailreview() {
     // 댓글 작성
     function writeRecomment(props) {
         sendComment(datas.boardId, props, localStorage.getItem("userUid")).then(() =>
-            commentSearch(router.query.detailqnafree)
+            commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment), setChange(!change))
         );
     }
 
@@ -55,6 +56,10 @@ function Detailreview() {
     useEffect(() => {
         window.scrollTo(0, 500);
     }, []);
+
+    const onChange = (e) => {
+        setTxt(e.target.value)
+    };
 
     return (
         <div>
@@ -104,10 +109,12 @@ function Detailreview() {
                         className={styles.detailreview_input}
                         type="text"
                         placeholder='댓글을 입력하세요...'
+                        value={txt}
+                        onChange={onChange}
                         onKeyPress={(e) => {
                             if (e.key === 'Enter') {
                                 writeRecomment(e.target.value);
-                                commentSearch(router.query.detailqnafree).then((res) => setDummy(res.data.comment), setChange(!change))
+                                setTxt('')
                             }
                         }}
                     />
