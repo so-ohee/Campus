@@ -171,7 +171,7 @@ function Detailreview() {
                         onKeyPress={(e) => {
                             if (e.key === 'Enter') {
                                 writeRecomment(e.target.value);
-                                commentSearch(router.query.detailreview).then((res) => setChange(!change))
+                                commentSearch(router.query.detailreview).then((res) =>  setDummy(res.data.comment), setChange(!change))
                             }
                         }}
                     />
