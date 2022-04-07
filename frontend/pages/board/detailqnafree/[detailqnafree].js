@@ -110,21 +110,26 @@ function Detailreview() {
                     {datas.content}
                 </div>
                 <hr />
-                <div style={{height: "100px"}}>
-                    <input
-                        className={styles.detailreview_input}
-                        type="text"
-                        placeholder='댓글을 입력하세요...'
-                        value={txt}
-                        onChange={onChange}
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                                writeRecomment(e.target.value);
-                                setTxt('')
-                            }
-                        }}
-                    />
-                </div>
+                {
+                    userid ?
+                    (
+                        <div style={{height: "100px"}}>
+                            <input
+                                className={styles.detailreview_input}
+                                type="text"
+                                placeholder='댓글을 입력하세요...'
+                                value={txt}
+                                onChange={onChange}
+                                onKeyPress={(e) => {
+                                    if (e.key === 'Enter') {
+                                        writeRecomment(e.target.value);
+                                        setTxt('')
+                                    }
+                                }}
+                            />
+                        </div>
+                    ) : null
+                }
 
                 {
                     dummy !== undefined ?

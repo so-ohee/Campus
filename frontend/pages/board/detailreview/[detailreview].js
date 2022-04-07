@@ -159,7 +159,7 @@ function Detailreview() {
                     </Row>
                 </div>
                 
-                {
+                {   
                     pic !== "" ? 
                         (
                             <div style={{textAlign: "-webkit-center", marginTop: "2%", marginBottom: "2%"}}>
@@ -172,22 +172,28 @@ function Detailreview() {
                     {datas.content}
                 </div>
                 <hr />
-                        
-                <div style={{height: "100px", textAlign: "-webkit-center"}}>
-                    <input
-                        className={styles.detailreview_input}
-                        type="text"
-                        placeholder='댓글을 입력하세요...'
-                        value={txt}
-                        onChange={onChange}
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                                writeRecomment(e.target.value);
-                                setTxt('')
-                            }
-                        }}
-                    />
-                </div>
+                
+                {
+                    userid ?
+                    (
+                        <div style={{height: "100px", textAlign: "-webkit-center"}}>
+                            <input
+                                className={styles.detailreview_input}
+                                type="text"
+                                placeholder='댓글을 입력하세요...'
+                                value={txt}
+                                onChange={onChange}
+                                onKeyPress={(e) => {
+                                    if (e.key === 'Enter') {
+                                        writeRecomment(e.target.value);
+                                        setTxt('')
+                                    }
+                                }}
+                            />
+                        </div>
+                    ) : null
+                }
+                
                 
                 {
                     dummy !== undefined ?
