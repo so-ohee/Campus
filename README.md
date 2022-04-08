@@ -31,7 +31,6 @@
   - MySQL
   - AWS EC2
   - Jenkins CI/CD
-* [참조 리소스](#참고사이트)
 * 배포 환경
   - URL: http://j6c103.p.ssafy.io:3000/
 
