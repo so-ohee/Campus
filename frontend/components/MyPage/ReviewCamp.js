@@ -23,7 +23,7 @@ function Reviewcamp() {
                 setTotalPage(res.data.totalPage)
                 makeList(1,res.data.totalPage)
             });
-    }, []);
+    }, [router.query]);
 
     const onSearch = (p) => {
         setPage(p)

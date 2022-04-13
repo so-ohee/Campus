@@ -18,14 +18,14 @@ function Bookmarkcamp() {
     useEffect(() => {
         if (router.isReady) {
             setUserid(router.query.mypage)
-            BookMarkList(userid, 1)
+            BookMarkList(router.query.mypage, 1)
                 .then((res) => {
                     setCampingplace(res.data.campsite)
                     setTotalPage(res.data.totalPage)
                     makeList(1, res.data.totalPage)
                 });
         }
-    }, [router.isReady, userid]);
+    }, [router.isReady, router.query]);
 
     const onSearch = (p) => {
         setPage(p)

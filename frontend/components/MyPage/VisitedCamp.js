@@ -39,7 +39,8 @@ function Visitedcamp() {
                 setIsOpen(lst)
                 setFalseList(lst)
             })
-    }, []);
+        // console.log(router.query)
+    }, [router.query]);
 
 
     const onSearch = (p) => {

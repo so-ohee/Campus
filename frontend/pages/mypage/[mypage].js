@@ -34,7 +34,7 @@ function Mypage() {
             setUserid(localStorage.getItem("userUid"));
             bringUser(router.query.mypage).then((res) => setData(res.data.user));
         }
-    }, [router.isReady])
+    }, [router.isReady, router.query])
 
     const deleteMember = async () => {
         memberDelete(router.query.mypage)

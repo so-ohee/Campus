@@ -47,6 +47,7 @@ function Navibar() {
     router.push('/shopping')
   }
   const onMyPage = () => {
+    console.log(router,'---')
     router.push(`/mypage/${localStorage.getItem("userUid")}`)
   }
 
